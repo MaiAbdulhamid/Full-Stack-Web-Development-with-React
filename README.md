@@ -1,19 +1,15 @@
 # Full-Stack Web Development with React
  Full-Stack Web Development with React, Coursera Specialization
  
-## Course 1:
-<details>
-<summary>Front-End Web UI Frameworks and Tools: Bootstrap 4</summary>
- 
- 
+## Course 1: Front-End Web UI Frameworks and Tools: Bootstrap 4
+
  ### This course is divided into 4 modules, Each module takes 1 week.
  
+ ### Week 1 :
  
  <details>
- <summary>Week 1</summary>
+ <summary>Full Stack Web Development: The Big Picture</summary>
  
-  ## Full Stack Web Development: The Big Picture
-
   ### 1. What is Full-Stack Web Development?
   
   - **The frond end**: is where we are delivering the content to the user, typically, in a browser where they use accesses the information, and this is where we use technologies like HTML, CSS and JavaScript to render the content for to the user.
@@ -28,8 +24,10 @@
     - [The Myth of the Full-stack Developer](https://www.andyshora.com/full-stack-developers.html)
     - [What is the 3-Tier Architecture?](http://www.tonymarston.net/php-mysql/3-tier-architecture.html)
     - [Multitier architecture](https://en.wikipedia.org/wiki/Multitier_architecture).
-   
-  ## Setting up your Development Environment: Git and Node
+ </details>
+ 
+ <details>
+ <summary>Setting up your Development Environment: Git and Node</summary>
   
   ### 2. Setting up Git
   
@@ -98,8 +96,11 @@
   - So when you make a change and then save the file, the modified code is immediately loaded into your browser. So you can immediately see the change being reflected in your browser window.
   - Add `.gitignore` file, and the first line of that file, we will type as node_modules. So what this means is that the node_modules folder is going to be excluded from our git commit.
   
-  ## Introduction to Bootstrap
-  
+ </details>
+ 
+ <details>
+ <summary>Introduction to Bootstrap</summary>
+
   ### 8. Front-end Web UI Frameworks
   
   - Front-end Web UI Frameworks are becoming their go-to approach for designing and implementing their recent websites.
@@ -153,9 +154,12 @@
   - [Top Frontend Frameworks](https://www.keycdn.com/blog/frontend-frameworks).
   - [The 5 Most Popular Front-end Frameworks Compared](https://www.sitepoint.com/most-popular-frontend-frameworks-compared/).
   
-  ## Responsive Design and Bootstrap Grid System
+  </details>
+  
+  <details>
+  <summary>Responsive Design and Bootstrap Grid System</summary>
  
-  ## 11. Responsive Design
+  ### 11. Responsive Design
   
   - An approach that will automatically adapt your website to the size of the screen on which it is being viewed.
   - It will automatically adapt to the viewport of the user's device.
@@ -166,7 +170,7 @@
     - The third part is what is a CSS media queries from your CSS code. You can query the size of the media and then appropriately adjust your CSS classes to fit the size of the device's screen. 
   - So doing media queries, your web UI framework is able to establish what kind of device you're rendering your website on. And correspondingly adjust the CSS classes to fit that particular devices screen size.
   
-  ## 12. Bootstrap Grid System
+  ### 12. Bootstrap Grid System
   - This `meta` tag :
   ```<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">```
   
@@ -196,98 +200,178 @@
   
   ### 14. Exercise: Responsive Design and Bootstrap Grid System Part 2
   - In this exercise, we saw the use of custom CSS classes, and also used some of the classes for justifying the content horizontally and vertically in our rows.
+  </details>
   
+  ### week 2:
   
- </details>
- 
  <details>
+ <summary>Navigation and Navigation Bar</summary>
  
- <summary>Week 2</summary>
- 
-  ## Setting up your Development Environment: Git and Node
-  
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
-</details>
-
-
-## Course 2:
-<details>
-<summary>Front-End Web UI Frameworks and Tools: Bootstrap 4</summary>
+ <details>
+ <summary>User Input: Buttons and Forms</summary>
  
+  ### Second
+  
+ </details>
  
+ <details>
+ <summary>Displaying Content: Tables and Cards</summary>
+ 
+  ### Second
+  
+ </details>
+  
+
+## Course 2: Front-End Web UI Frameworks and Tools: Bootstrap 4
+
  ### This course is divided into 4 modules, Each module takes 1 week.
  
+ ### week 1 :
  
  <details>
- <summary>Week 1</summary>
+ <summary>What is Full-Stack Web Development?</summary>
  
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
  <details>
+ <summary>What is Full-Stack Web Development?</summary>
  
- <summary>Week 2</summary>
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
-</details>
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ ### week 2 :
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+## Course 3: Front-End Web UI Frameworks and Tools: Bootstrap 4
 
-## Course 3:
-<details>
-<summary>Front-End Web UI Frameworks and Tools: Bootstrap 4</summary>
- 
- 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
+ ### week 1 :
  
  <details>
- <summary>Week 1</summary>
+ <summary>What is Full-Stack Web Development?</summary>
  
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
  <details>
+ <summary>What is Full-Stack Web Development?</summary>
  
- <summary>Week 2</summary>
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
-</details>
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ ### week 2 :
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ ## Course 2: Front-End Web UI Frameworks and Tools: Bootstrap 4
 
-## Course 4:
-<details>
-<summary>Front-End Web UI Frameworks and Tools: Bootstrap 4</summary>
- 
- 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
+ ### week 1 :
  
  <details>
- <summary>Week 1</summary>
+ <summary>What is Full-Stack Web Development?</summary>
  
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
  <details>
+ <summary>What is Full-Stack Web Development?</summary>
  
- <summary>Week 2</summary>
-  ### What is Full-Stack Web Development?
   ### Second
   
  </details>
  
-</details>
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ ### week 2 :
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>What is Full-Stack Web Development?</summary>
+ 
+  ### Second
+  
+ </details>
