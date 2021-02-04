@@ -195,7 +195,8 @@
   - In this exercise we looked at the use of the container, row, and column classes in order to design our web page a little bit nicer.
   
   ### 14. Exercise: Responsive Design and Bootstrap Grid System Part 2
-  - In this exercise, we saw the use of custom CSS classes, and also used some of the classes for justifying the content horizontally and vertically in our rows. 
+  - In this exercise, we saw the use of custom CSS classes, and also used some of the classes for justifying the content horizontally and vertically in our rows.
+  
   
  </details>
  
