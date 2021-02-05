@@ -15,15 +15,16 @@
   - **The frond end**: is where we are delivering the content to the user, typically, in a browser where they use accesses the information, and this is where we use technologies like HTML, CSS and JavaScript to render the content for to the user.
   - This information delivery is supported behind the scenes by a back end support which is typically implemented these days using technologies like PHP, Java, ASP.NET, Ruby, Python or NodeJS.
   - The three tier architecture for Web Development:
-   - The presentation layer, which is concerned with delivering the to the user, So, this is usually the UI-related concerns that are dealt with at the presentation layer(front-end).
-   - The Business Logic Layer, on the other hand, is concerned more about the data, the data validation, the dynamic content processing, and generating the content to be delivered to the user(servers). 
-   - This is backed up behind the scenes with the data persistence layer or the data access layer. So, this is concerned with how we store and interact with the data, typically, in the form of a database and access this data through an API(Databases). 
+  - The presentation layer, which is concerned with delivering the to the user, So, this is usually the UI-related concerns that are dealt with at the presentation layer(front-end).
+  - The Business Logic Layer, on the other hand, is concerned more about the data, the data validation, the dynamic content processing, and generating the content to be delivered to the user(servers). 
+  - This is backed up behind the scenes with the data persistence layer or the data access layer. So, this is concerned with how we store and interact with the data, typically, in the form of a database and access this data through an API(Databases). 
   - Additional Links:
     - [What is a Full Stack developer](https://www.laurencegellert.com/2012/08/what-is-a-full-stack-developer/)
     - [What is a Full-stack Web Developer After All](https://edward-designer.com/web/full-stack-web-developer/)
     - [The Myth of the Full-stack Developer](https://www.andyshora.com/full-stack-developers.html)
     - [What is the 3-Tier Architecture?](http://www.tonymarston.net/php-mysql/3-tier-architecture.html)
     - [Multitier architecture](https://en.wikipedia.org/wiki/Multitier_architecture).
+    
  </details>
  
  <details>
@@ -200,33 +201,185 @@
   
   ### 14. Exercise: Responsive Design and Bootstrap Grid System Part 2
   - In this exercise, we saw the use of custom CSS classes, and also used some of the classes for justifying the content horizontally and vertically in our rows.
-  </details>
   
+  </details>
+ 
+  <details>
+  <summary>Assignment 1</summary>
+  
+  ### 15. Assignment
+  
+  - [Grid system](https://getbootstrap.com/docs/4.0/layout/grid/).
+  - [Display property](https://getbootstrap.com/docs/4.0/utilities/display/).
+  - [Full Page Screen Capture](https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl).
+ 
+  </details>
+ 
   ### week 2:
   
  <details>
  <summary>Navigation and Navigation Bar</summary>
  
-  ### Second
+  ### 1. Navigation and Navigation Bar
+  - The information architecture begins with the structure of the system, with respect to the way the information is organized, labelled. 
+  - Navigation is provided through the content or through this information.
+  - when you're designing a website, it is important to understand the need to design the information navigation structures within your website.
+  - Indicating the location of the user within the hierarchy of your website is very useful to provide a user-friendly way of navigating your websites.
+  - You should not have too many choices in your navigation bar.
+  - The breadcrumbs sort of indicate some kind of a navigational hierarchy within which you're currently In your website. 
+
+  ### 2. Exercise: Navbar and Breadcrumbs
+  - Adding `navbar` to `git-test` project.
+  - `navbar` -> That class allows me to create a navigation bar.
+  - `navbar-dark` -> Make navigation bar to be dark in color, with a darker background.
+  - `navbar-light` -> Which is a lighter color navigation bar.
+  - `navbar-expand-sm` ->  That class means that for small and extra small screens, this navbars will become a toggle-able navbar.
+  - `bg-primary` -> Is that primary color that is defined in your bootstrap. 
+  - `fixed-top` ->  It fixes the navigation bar to the top of the browser window where this web page is being rendered.
+  - `navbar-nav` -> This is the class that will help me to define the set of links that will be included in my navigation bar. 
+  - `mr-auto` -> This is a utility class that is available in bootstrap that allows me to specify the right margin (the content will be pushed as left as possible within the navigation bar).
+  - To make Link items in the `nav ul`:
+  ```
+    <li class="nav-item">
+     <a class="nav-link" href="#">
+       Home
+     </a>
+   </li>
+  ```
+  
+  ### 3. Icon Fonts
+  - Icon fonts are a set of symbols or glyphs that can be used in your website design.
+  - These can be used just like regular fonts, just like regular text fonts that you use in your website.
+  - Their advantage is that you can style them and then expand and contract them and use all typical stylings that you use on your text, for your icons also.
+  - They are seen as a popular lightweight replacement for simple graphics that you can use in your web pages. 
+  - [Font Awesome](https://fontawesome.com/start), is a very popular icon font.
+  
+  ### 4. Exercise: Icon Fonts
+  - `$ npm install font-awesome@4.7.0` -> To install fontawesome.
+  - `$ npm install bootstrap-social@5.1.1` -> To install bootstrap-social
+  - Import fontawesome and bootsrtap:
+  ```
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+  ```
+  - `<span class="fa fa-iconName fa-lg"></span>` -> Use icons in the navbar Links and footer.
   
  </details>
  
  <details>
  <summary>User Input: Buttons and Forms</summary>
  
-  ### Second
+  ### 5. User Input
+  - User interaction needs to be supported on websites using many different approaches including buttons, forms, text boxes, check boxes, and many others.
+  - The button behavior depends upon where it is positioned in bootstrap.
+  - Hyperlinks could also be hijacked to be styled and presented in the form of a button.
+  - [The Difference Between Anchors, Inputs and Buttons](https://davidwalsh.name/html5-buttons).
+  
+  ### 6. Exercise: Buttons
+  - Dowload `contactus.html` page.
+  - Add `btn` To this page.
+  - We define the button bar using the `btn-group` class.
+  - Add the three buttons using the `a` tag. 
+  - In this case, the three buttons are hyperlinks that cause an action and have an `href` associated with them.
+  - So we decided to use the `a` tag instead of the `button` tag.
+  - Note how the `a` tags have been styled using the btn class.
+  - [Button group](https://getbootstrap.com/docs/4.0/components/button-group/)
+  
+  ### 7. Exercise: Forms
+  - We will add a simple form to the page at the location identified by "Form goes here". Add the following code to page to create a simple horizontal form with two fields:
+  ```
+    <form>
+        <div class="form-group row">
+            <label for="firstname" class="col-md-2 col-form-label">First Name</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastname" class="col-md-2 col-form-label">Last Name</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+            </div>
+        </div>
+    </form>
+  ```
+  - [forms](https://getbootstrap.com/docs/4.0/components/forms/).
   
  </details>
  
  <details>
  <summary>Displaying Content: Tables and Cards</summary>
  
-  ### Second
+  ### 8. Bootstrap Tables and Cards
+  - The table used in bootstrap based that page is similar to how you use tables in standard HTML pages.
+  - Bootstrap provides many different classes for styling tables like, table striped for zebra striped tables as we saw in the example earlier.
+  - [Tables](https://getbootstrap.com/docs/4.0/content/tables/).
+  - [Card](https://getbootstrap.com/docs/4.0/components/card/).
+  - [Blockquotes](https://getbootstrap.com/docs/4.0/content/typography/#blockquotes)
+  
+  ### 9. Exercise: Displaying Content: Tables and Cards
+  - In this exercise we will be modifying the `aboutus.html` page to add a table, a card with some content and a card with a quotation.
   
  </details>
-  
-
-## Course 2: Front-End Web UI Frameworks and Tools: Bootstrap 4
+ 
+ <details>
+ <summary>Images and Media: Images, Thumbnails, Media Objects</summary>
+ 
+ ### 10. Images and Media
+ - Bootstrap provides extensive support for including images and various kinds of media in your websites and your web pages.
+ - `img-fluid` -> Will make your images responsive(meaning that the size of the image will automatically adjust to different screen sizes).
+ - `img-thumbnail` -> Will put a white border around your image.
+ - `rounded` -> to create a image with rounded corners.
+ - `rounded-<top|bottom|left|right>` -> to create a image with rounded corners to the selected corner.
+ - `rounded-circle` -> to create a image circle.
+ - `card-image-top` -> image class with cards. 
+ - A media object allows you to specify an image that you can position either to the left or to the right of the description.
+ - You can include a media body which contains the description that goes together with the image.
+ - `embed-responsive embed-responsive-<4by3|16by9>` -> You can use the embed or iframe or video or object HTML tags and then enclose it inside a div.
+ - `<4by3|16by9>` -> dimensions which you want to use.
+ - [Images](https://getbootstrap.com/docs/4.0/content/images/).
+ 
+ ### 11. Exercise: Images and Media
+ - We will now update the `index.html` file to include images and media objects on the web page.
+ - Add logo `img`.
+ - Next we will work with the media object classes to style the content in the content rows.
+ - **Note**: Since Bootstrap dropped the "media object" in `version 5`, you will now have to use the utility classes instead.
+ 
+ </details>
+ 
+ <details>
+ <summary>Alerting Users: Badges, Alerts, Progress Bars</summary>
+ 
+ ### 12. Alerting Users
+ - Badges are an easy way of adding small amount of information to your website to attract the attention of visitors.
+ - `badge  badge-danger` -> Red colored badge.
+ - `badge-pill` -> which creates a rounded rectangle.
+ - Alerts are another way of informing users about information.
+ - The Alert can be created by a appling the `alert` class together with additional qualifying alert classes, which enable you to create alerts in different colors.
+ - `alert-dismissible` -> allows you to include a class there which the user can click to dismiss an alert.
+ - Progress bars are included in websites to keep users informed about the progress of whatever we have initiated on the website.
+ - `progress` -> a progress bar created.
+ - [Badge](https://getbootstrap.com/docs/4.0/components/badge/)
+ - [Alerts](https://getbootstrap.com/docs/4.0/components/alerts/)
+ - [Progress](https://getbootstrap.com/docs/4.0/components/progress/)
+ 
+ ### 13. Exercise: Alerting Users
+ - we're going to make use of badges to add badges to our web page, so that we can highlight some information for our visitors to our website.
+ - **Note**: Since Bootstrap dropped the "badge-<color>" in `version 5`, you will now have to use the background utilities classes instead.
+ - **Note**: Since Bootstrap dropped the "badge-pill" in `version 5`, you will now have to use the rounded utilities classes instead.
+ 
+ </details>
+ 
+ <details>
+ <summary>Assignment 2</summary>
+ 
+ - In this assignment, you will continue to work with the website that you have been developing in the exercises. You will edit the home page (index.html). You will start with the current home page at the end of the last exercise in this module. At the end of this assignment, you should have completed the following tasks:
+   - Designed a form to enable users to submit a reservation request for a table. Note that at this stage the form will be inactive. This form should have been included in a new content row that you create just before the footer of the page.
+   - Formatted the contents of the second row of the page using media class. The content column of the row should have been converted to a media object. In addition it should include a badge.
+   - Added a button to the Jumbotron to enable users to access the form to reserve a table at the restaurant. Clicking on this button should take you to the reservation form at the bottom of the page.
+ 
+ </details>
+## Course 2: Front-End Web Development with React
 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
@@ -253,30 +406,8 @@
   
  </details>
  
- ### week 2 :
  
- <details>
- <summary>What is Full-Stack Web Development?</summary>
- 
-  ### Second
-  
- </details>
- 
- <details>
- <summary>What is Full-Stack Web Development?</summary>
- 
-  ### Second
-  
- </details>
- 
- <details>
- <summary>What is Full-Stack Web Development?</summary>
- 
-  ### Second
-  
- </details>
- 
-## Course 3: Front-End Web UI Frameworks and Tools: Bootstrap 4
+## Course 3: Multiplatform Mobile App Development with React Native
 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
@@ -303,30 +434,9 @@
   
  </details>
  
- ### week 2 :
  
- <details>
- <summary>What is Full-Stack Web Development?</summary>
  
-  ### Second
-  
- </details>
- 
- <details>
- <summary>What is Full-Stack Web Development?</summary>
- 
-  ### Second
-  
- </details>
- 
- <details>
- <summary>What is Full-Stack Web Development?</summary>
- 
-  ### Second
-  
- </details>
- 
- ## Course 2: Front-End Web UI Frameworks and Tools: Bootstrap 4
+ ## Course 4: Server-side Development with NodeJS, Express and MongoDB
 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
