@@ -379,6 +379,7 @@
    - Added a button to the Jumbotron to enable users to access the form to reserve a table at the restaurant. Clicking on this button should take you to the reservation form at the bottom of the page.
  
  </details>
+ 
 ## Course 2: Front-End Web Development with React
 
  ### This course is divided into 4 modules, Each module takes 1 week.
