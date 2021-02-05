@@ -4,7 +4,7 @@
  
  This Specialization contains 4 Courses: Front-End Web UI Frameworks and Tools: Bootstrap 4, Front-End Web Development with React, Multiplatform Mobile App Development with React Native, Server-side Development with NodeJS, Express and MongoDB.
  
-## Course 1: Front-End Web UI Frameworks and Tools: Bootstrap 4
+## Course 1: [Front-End Web UI Frameworks and Tools: Bootstrap 4](https://www.coursera.org/learn/bootstrap-4)
 
  This course is divided into 4 modules, Each module takes 1 week.
  
@@ -384,6 +384,9 @@
    - Designed a form to enable users to submit a reservation request for a table. Note that at this stage the form will be inactive. This form should have been included in a new content row that you create just before the footer of the page.
    - Formatted the contents of the second row of the page using media class. The content column of the row should have been converted to a media object. In addition it should include a badge.
    - Added a button to the Jumbotron to enable users to access the form to reserve a table at the restaurant. Clicking on this button should take you to the reservation form at the bottom of the page.
+   
+  - Additional links:
+    - [Responsive helpers](https://v4-alpha.getbootstrap.com/utilities/responsive-helpers/)
  
  </details>
  
@@ -392,14 +395,49 @@
  <details>
  <summary>Bootstrap JavaScript Components Overview</summary>
  
-  ### Second
+  ### 1. Bootstrap JavaScript Components
+  - Most of these components started with a base class that you applied. Like for example, `btn` class.
+  - Bootstrap supports a number of components that are supported through JavaScript plugins.
+  - The Bootstrap JavaScript-based components essentially take JQuery-based support, but then package them in a way that you can employ them in your webpage even without writing a single line of JavaScript code.
+  - The JavaScript components support a number of `data-*` attributes that you can apply to your `HTML` tags.
+  - [Programmatic API](https://getbootstrap.com/docs/4.0/getting-started/javascript/).
+  - [Js and Data attributes](https://getbootstrap.com/docs/4.0/getting-started/javascript/#data-attributes).
+  - [Bootstrap and JavaScript](https://getbootstrap.com/docs/4.0/getting-started/javascript/).
   
  </details>
  
  <details>
  <summary>Tabs, Pills and Tabbed Navigation</summary>
  
-  ### Second
+  ### 2. Tabs, Pills and Tabbed Navigation
+  - Tabs and pills provide a interesting navigation structure for our web page.
+  - They will allow you to enclose content inside your web page that the user can navigate among the content without reloading the web page to a different web page.
+  
+  ### 3. Exercise: Tabs
+  - Add tabs to `aboutus` page:
+  
+  ```
+     <ul class="nav nav-tabs">
+         <li class="nav-item">
+           <a class="nav-link active" href="#peter"
+             role="tab" data-toggle="tab">Peter Pan, CEO</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="#danny" role="tab"
+             data-toggle="tab">Danny Witherspoon, CFO</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="#agumbe"role="tab"
+             data-toggle="tab">Agumbe Tang, CTO</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="#alberto" role="tab"
+             data-toggle="tab">Alberto Somayya, Exec. Chef</a>
+         </li>
+     </ul>
+  ```
+  
+  - Note the use of the <ul> tag with the nav and nav-tabs classes to set up the tab navigation. Each list item within the list acts as the tab element. Within each list item, note that we set up the <a> tags with the href pointing to the id of the tab pane of content to be introduced later. Also note that the <a> tag contains the data-toggle=tab attribute. The first list element's <a> tag contains the class active. This tab will be the open tab when we view the web page. We can switch to the other tabs using the tabbed navigation that we just set up.
   
  </details>
  
