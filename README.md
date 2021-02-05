@@ -1,9 +1,12 @@
 # Full-Stack Web Development with React
- Full-Stack Web Development with React, Coursera Specialization
+ 
+ Full-Stack Web Development with React, Coursera Specialization.
+ 
+ This Specialization contains 4 Courses: Front-End Web UI Frameworks and Tools: Bootstrap 4, Front-End Web Development with React, Multiplatform Mobile App Development with React Native, Server-side Development with NodeJS, Express and MongoDB.
  
 ## Course 1: Front-End Web UI Frameworks and Tools: Bootstrap 4
 
- ### This course is divided into 4 modules, Each module takes 1 week.
+ This course is divided into 4 modules, Each module takes 1 week.
  
  ### Week 1 :
  
@@ -208,7 +211,11 @@
   <summary>Assignment 1</summary>
   
   ### 15. Assignment
-  
+  - In this assignment, you will continue to work with the website that you have been developing in the exercises. You will add the About Us web page to the website. To get you started, you are provided with a partially formatted aboutus.html.zip file given above that you need to download, unzip and move the aboutus.html to the conFusion folder that contains your website. At the end of this assignment, you should have completed the following tasks:
+    - Updated the page to make use of Bootstrap classes and Bootstrap grid
+    - Formatted the contents of the web page using the container, row and column classes
+    - Use the responsive utilities (hidden-* classes) to enable hiding of the detailed descriptions in the extra small screen size devices
+    
   - [Grid system](https://getbootstrap.com/docs/4.0/layout/grid/).
   - [Display property](https://getbootstrap.com/docs/4.0/utilities/display/).
   - [Full Page Screen Capture](https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl).
@@ -379,6 +386,75 @@
    - Added a button to the Jumbotron to enable users to access the form to reserve a table at the restaurant. Clicking on this button should take you to the reservation form at the bottom of the page.
  
  </details>
+ 
+### week 3 :
+ 
+ <details>
+ <summary>Bootstrap JavaScript Components Overview</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Tabs, Pills and Tabbed Navigation</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Hide and Seek: Collapse and Accordion</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Revealing Content: Tooltips, Popovers and Modals</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Carousel</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Assignment 3</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ 
+### week 4 :
+ 
+ <details>
+ <summary>Bootstrap and JQuery</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Less is More!: Less and Sass</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Assignment 4</summary>
+ 
+  ### Second
+  
+ </details>
+ 
  
 ## Course 2: Front-End Web Development with React
 
