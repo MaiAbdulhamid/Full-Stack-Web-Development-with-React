@@ -514,7 +514,12 @@
  <details>
  <summary>Assignment 3</summary>
  
-  ### Second
+  - In this assignment, you will continue to work with the website that you have been developing in the exercises. You will edit the home page (index.html). You will start with the current home page at the end of the last exercise in this module. At the end of this assignment, you should have completed the following tasks:
+
+    - Moved the table reservation form from the last content row into a modal.
+    - Included a radio button group in the table reservation form to enable diners to ask for a table in the smoking/non-smoking section of the restaurant.
+    - Removed the tooltip from the Reserve Table button.
+    - Updated the Reserve Table button to show the modal containing the table reservation form when the button is clicked.
   
  </details>
  
