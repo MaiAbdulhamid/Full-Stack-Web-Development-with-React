@@ -438,27 +438,76 @@
   ```
   
   - Note the use of the <ul> tag with the nav and nav-tabs classes to set up the tab navigation. Each list item within the list acts as the tab element. Within each list item, note that we set up the <a> tags with the href pointing to the id of the tab pane of content to be introduced later. Also note that the <a> tag contains the data-toggle=tab attribute. The first list element's <a> tag contains the class active. This tab will be the open tab when we view the web page. We can switch to the other tabs using the tabbed navigation that we just set up.
+ - [JavaScript behavior](https://getbootstrap.com/docs/4.0/components/navs/#javascript-behavior)
   
  </details>
  
  <details>
  <summary>Hide and Seek: Collapse and Accordion</summary>
  
-  ### Second
+  ### 4. Collapse and Accordion
+  - The Accordion makes use of the Collapse plugin for its functioning. 
+  - The Collapse plugin provides an easy way of revealing and hiding content on your web page.
+  - This revealing and hiding of the content is usually triggered by the user clicking on a button or a link in your web page.
+  - The way the Accordion works is that one piece of content is revealed and the remaining three are hidden.
+  
+  ### 5. Exercise: Accordion
+  - Update the `nav-tabs` to have `accordion` instead.
+  - [Collapse](https://getbootstrap.com/docs/4.0/components/collapse/).
+  - [Accordion](https://getbootstrap.com/docs/4.0/components/collapse/#accordion-example)
   
  </details>
  
  <details>
  <summary>Revealing Content: Tooltips, Popovers and Modals</summary>
  
-  ### Second
+  ### 6. Tooltips, Popovers and Modals
+  - Tooltips, popovers, and modals are a way of revealing content to the users, when the user interacts with certain elements on your web page.
+  - The information is displayed as an overlay on top of your web page.
+  - The underlying content of the web page is still there, but this is laid out on top of the underlying content.
+  - In some circumstances, popovers are more useful than tooltips.
+  - A modal allows you to present more detailed information to the users than a tooltip and popover.
   
+  ### 7. Exercise: Tooltips and Modals
+  - To add tooltip:
+    - `data-toggle="tooltip"`
+    - `data-html="true"` -> That means that the tooltip content can be styled using HTML
+    - `title="tooltipContent, html Tag "` -> This is where the contents of the tooltip will be enclosed. you can use `HTML` to format the contents of the tooltip.
+    - `data-placement="direction"` -> Specify The direction of showing tooltip.
+  - Tooltips are a nice way of providing some additional information for the user when the user navigates to different locations on the page.
+  - Add Modal:
+    - Advises that all modal related code be placed at the top of your page.
+    ```
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    ```
+    - Add login button to the navbar to attached with the Modal.
+  - **Note**: Since Bootstrap dropped the `data-*` in `version 5`, you will now have to use the `data-ba-*` instead.
+   
  </details>
  
  <details>
  <summary>Carousel</summary>
  
-  ### Second
+  ### 8. Carousel
+  -  The carousel allows you to display multiple items on your web page and provides an animated display of these items.
+  
+  ### 9. Exercise: Carousel
+  - The carousel will be added to the `index.html` page.
+  - [Carousel](https://getbootstrap.com/docs/4.0/components/carousel/)
   
  </details>
  
