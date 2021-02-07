@@ -529,7 +529,44 @@
  <details>
  <summary>Bootstrap and JQuery</summary>
  
-  ### Second
+  ### 1. Bootstrap and JQuery
+  - Bootstrap has a number of interesting JavaScript-based components.
+  - Bootstrap's JavaScript components are built upon jQuery.
+  - Bootstrap's JavaScript-based components can be used in your webpage without writing a single line of JavaScript code.
+  - So this is where the data-* attributes come to our rescue.
+  - You can write code using the jQuery syntax and then use that together to control your Bootstrap's JS components.
+  - `jQuery` is a very powerful, lightweight JavaScript-based library that provides a number of different components.
+  - It is a feature rich library that enables writing code for doing HTML or DOM manipulation.
+  - It allows you to do CSS manipulation.
+  - jQuery also supports various effects and animations that can be applied to your HTML elements.
+  - It allows you to handle HTML events, and when those events occur you can implement methods that are being executed in response to the occurrence of these events. 
+  - Also jQuery enables you to interact with a back end server using AJAX.
+  - `jQuery` Syntax -> `$(selector).action()` :
+    - The `$` at the start of a sentence implies that this defines and accesses jQuery's library plugins that are available.
+    - whenever we use the `$`, you also supply a selector.
+    - The selector is used to query and find those HTML elements within your DOM to which you want to apply this manipulation.
+    - Then the third aspect of a jQuery statement is the `action` that you specify.
+    - Action can be performed on the selected HTML element.
+    
+  - `JQuery` Example:
+  ```
+  $(document).ready(function(){
+   $('[data-toggle="tooltip"]').tooltip();
+  })
+  ```
+  - You can specify a selector by specifying any specific HTML element by specifying the tag. So you can say p, button, h4, h3, or any of the HTML tags directly.
+  - When you apply a selector like this, you're saying all the elements that match this criteria will be selected.
+  - Then you can also specify a specific HTML DOM element by specifying the ID of that element by using the `#id`.
+  - The other possibility is to specify an attribute that has been applied to HTML element.
+  - You can also specify jQuery events, events based on which you respond.
+  - We can even talk about the entire document.
+  - `$("#myCarousel").on('slide.bs.carousel')` -> That mean when that slide action starts, then invoke this function, and then do something inside that function there. 
+  
+  ### 2. Exercise: Bootstrap and JQuery
+  - We're going to explore this index exercise by using some JavaScript-based controls for our `Carousel` that we included in the `index.html` page in the previous exercise.
+
+  
+  
   
  </details>
  
@@ -547,6 +584,26 @@
   
  </details>
  
+ <details>
+ <summary>Building and Deployment: NPM Scripts</summary>
+ 
+  ### Second
+  
+ </details>
+ 
+ <details>
+ <summary>Building and Deployment: Task Runners: Grunt and Gulp</summary>
+ 
+  ### Second
+  
+ </details>
+  
+ <details>
+ <summary>Conclusions</summary>
+ 
+  ### Second
+  
+ </details>
  
 ## Course 2: Front-End Web Development with React
 
