@@ -1,0 +1,165 @@
+[MUSIC]. Let us now spend some time trying
+to understand how Bootstrap and jQuery work together to support
+the Bootstrap's JavaScript components. As we have understood from
+the previous module, Bootstrap has a number of interesting
+JavaScript-based components. And we also learned that
+Bootstrap's JavaScript-based components are all enabled using
+jQuery as the support. So many of these plugins
+are written in jQuery. Their plugins themselves can
+be individually included or you can include all the plugins
+together as a single unit. In the exercises, we have been including
+all the Bootstrap's JavaScript plugins into our webpage. We also saw this graphic
+in the previous module to help us understand the relationship
+between JavaScript, jQuery, and how the Bootstrap's JS-based
+plugins are implemented. So we saw that Bootstrap's JS components
+ox in the jQuery-based components and make it easy for
+us to make use of them in our webpage. We also learned that the Bootstrap's
+JavaScript-based components can be used in your webpage without writing
+a single line of JavaScript code. So this is where the data-*
+attributes come to our rescue. So you can use the various attributes
+that we saw in the previous module to enable many of our
+Bootstrap's JavaScript-based components. In case you want more flexibility
+with your JavaScript components, then the full flexibility of
+that JavaScript-based API is available for
+all the Bootstrap JavaScript components. You can write code using the jQuery
+syntax and then use that together to control your
+Bootstrap's JS components. We're going to explore that in
+a little more detail in this module. Before we proceed further, let me give you
+a quick tour of jQuery and its syntax so that we understand some of the code
+that we'll write in this module. jQuery is a very powerful, lightweight JavaScript-based library that
+provides a number of different components. It is a feature rich library
+that enables writing code for doing HTML or DOM manipulation. It allows you to do CSS manipulation. So, for example, you can apply CSS classes to various
+HTML elements through the jQuery code. It allows you to handle HTML events, and when those events occur you can
+implement methods that are being executed in response to the occurrence
+of these events. jQuery also supports various effects and animations that can be applied
+to your HTML elements. Also jQuery enables you to interact
+with a back end server using AJAX. Although we won't to explore that
+in too much detail in this course. We also learned that
+Bootstrap's JavaScript components are built upon jQuery. This components make use of many of
+the jQuery methods that are available to implement the various features that this
+Bootstrap JavaScript components support. Let's briefly understand jQuery Syntax. Now if you have seen some of
+the code that we included in the previous module, specifically for the tool tip, you remember that there was
+something that started with a dollar sign. So, the jQuery Syntax is all
+implemented using the dollar sign. The dollar sign at the start of
+a sentence implies that this defines and accesses jQuery's library
+plugins that are available. Now whenever we use the dollar sign,
+you also supply a selector. The selector is used to query and
+find those HTML elements within your DOM to which
+you want to apply this manipulation. There are various ways
+of doing selections. We'll look at them in
+the subsequent slide. Then the third aspect of a jQuery
+statement is the action that you specify. Now that you select an HTML element, what
+kind of an action you want to be performed on that element, so
+that is the third part that you will see. So as an example you can
+specify a jQuery statement like $("p") within codes, and then .hide. So in this case what it implies is that,
+select all those HTML elements which are the paragraph elements, starting with the p tag, and
+then those elements hide those elements. So the action to be
+performed is the height, so this will result in all the p
+elements being hidden from your DOM, and consequently from
+the webpage that is rendered. Similarly, you will see later on us using a statement like saying dollar, and then within quotation marks, #mycarousel, implying that you are specifying
+the ID of a specific HTML element, and then specifying carousel and pause. We'll look at more details
+of what this actually does in one of the subsequent slides there. But note the structure of
+the jQuery statement syntax there. You specify the selector, and then you
+specify the corresponding action to be performed on the element that
+is selected by these selectors. Let's take a look at
+Bootstrap jQuery example. We'll go back to the previous
+example that we have seen earlier, where we introduce the tooltip. So, when we introduce the tooltip,
+we specified script and then inside the script,
+we said $(document). In this case the document
+means the entire document. So the selected here is for
+the entire document. So for the entire document,
+and then we'll specify ready. Ready is the action to be taken. So when the document is ready,
+then execute this function that is specified as a parameter for
+this ready action there. So the function that we saw being used for
+the tooltip specified it as $, and then within brackets, it said,
+data-toggle=" tooltip". Now here we are specifying
+that select those elements for which there is an attribute
+with data-toggle="tooltip". And then for those elements that match
+this criteria,perform this action called enable tooltips for those elements. And we close the function there. So this specifies that this
+particular script will be activated for those elements for which
+you have applied the data-toggle tooltip. So basically for those HTML elements
+on which you have defined tooltips, you want the tooltip to be enabled there. So this is how we interpret this
+syntax of this jQuery example here. Let's look at the various
+ways of specifying selectors. So as we realize from
+the jQuery statement syntax, we always follow dollar and then,
+within brackets, we specify a selector. How do we specify selectors, what are the
+various ways you can specify selectors? Here are some possibilities. You can specify a selector
+by specifying any specific HTML element by specifying the tag. So you can say p, button, h4, h3, or any of the HTML tags directly. And so in that case the HTML tag
+name is specified within quotes and that'll form your selector. When you apply a selector like this,
+you're saying all the elements that match this criteria will be selected. Then you can also specify
+a specific HTML DOM element by specifying the ID of
+that element by using the #id. So, for example, we use #myCarousel. So in this case you're saying
+select that particular HTML element for
+which the ID is myCarousel. So that's the other way of selecting,
+by specifying an ID for an element. The third possibility is to select elements by the classes
+which have applied to that. So, for example, you can see
+within brackets if you say .btn, meaning all the HTML DOM elements for which you have applied the button
+class will be selected. Or you can even further qualify by
+specifying a group of classes by saying .btn.btn-default,
+meaning that those elements for which button class and the button
+default class have both been applied. So that's another way, by using the classes that
+are applied to the HTML element. The other possibility is to specify
+an attribute that has been applied to HTML element. So for example, you can say attributes
+are specified within square brackets here. So you can see within square brackets
+href, and include it in the quotation so which means that all those HTML elements
+for which href attribute has been applied. Similarly, you can say
+data-toggle="tooltip", which essentially saves
+all those elements for which the data-toggle tooltip
+attribute has been applied. Also, selecting the current element for which you want to do
+something by saying $(this). So meaning, for the current element
+that has already been selected, for this, do something. And a lot more other possibilities. So these are some examples, so
+you will see me using some of these in the examples and
+the exercise that follows. Not only that,
+you can also specify jQuery events, events based on which you respond. So, for example, the user interactions with various elements on your
+webpage will cause DOM events. So, for example, with a mouse, the user
+may click at a particular location. Or double-click, or when the mouse
+enters and leaves a specific location. For keyboard you can respond to
+key presses, keydown and keyup. Events for forms,
+when the form is submitted, when there is a change in
+a particular input element value, and when a particular
+element is focused upon, and so on. We can even talk about
+the entire document. So, upon the loading of the document,
+upon resizing the document, upon scrolling or unloading the document,
+you can respond to those events. So, in that case, the jQuery Event Methods
+that are supported include ready, click, dblclick, mousedown, on, and so on. So these are all the event methods that will be executed upon occurrence
+of any of these events there. Let's take an example of
+the Bootstrap's Carousel to see how JavaScript code can be written
+to control the carousel actions. So, for a carousel, you saw already
+from the previous module, index size. We used all these attributes. So we used the attribute
+data-slide="prev|next", or we said data-slide-to and
+then specified the specific slide number, where it says data-ride+"carousel". And then we've specified data interval,
+the interval for the sliding action to take place. So for
+the carousel you can do things like, for example, you can specify
+JavaScript based controls. You can see $, and within brackets
+specify to select those elements, the carousels, that are included in
+your page by specifying .carousel. Meaning all those elements for
+which the carousel class has been applied, and then following that you use
+the .carousel to specify something. So as an example you will see
+me using something like this in the exercise that follows. We'll say .carousel and carousel, and and inside there you would
+specify interval:2000, meaning set the interval for
+the sliding to be 2000 milliseconds. Or two seconds, in this case. So that way you control or
+modify a particular property of the carousel JavaScript element there. The carousel also supports
+many other controls. So, for example,
+you can say carousel('cycle'), meaning start cycling
+the items from left to right. You can say carousel('pause'), to pause
+the sliding action of the carousel. Then you can say carousel(number), so it cycles the carousel to that
+particular carousel item. And then you can say carousel('prev'), carousel('next') to go to the previous
+item and the next item in my carousel. So, these can be invoked directly
+from our JavaScript code. Similarly, when the JavaScript carousel item is in your webpage,
+it causes various events. And based on the occurrence of
+these events, you can respond. So, for example,
+you can say slide.bs.carousel. This particular event will be fired when
+the slide instance method is invoked. Similarly, slid.bs.carousel means this event is fired when it has completed
+the slide transition to the next item. So within your code you
+can specify something like
+$("#myCarousel").on('slide.bs.carousel'. So meaning that when that slide action
+starts, then invoke this function, and then do something
+inside that function there. So this kind of code can
+be returned also for responding to the events that
+are caused by your carousel's behavior. Having considered some of these examples,
+we'll go on to an exercise where we will actually write some JavaScript
+based code to control our carousel. We will write code to include a couple
+of buttons within our carousel, which will be used to control
+the sliding action of the carousel. So, which means that we can pause and
+resume the sliding action of our carousel. And we'll activate these
+buttons from JavaScript. [MUSIC]

@@ -1,0 +1,77 @@
+[MUSIC] Many of the Bootstrap's JavaScript-based
+components provide us with a mechanism to control some of the features of these
+components by writing JavaScript code, in particular,
+by writing code Using the jQuery syntax. So we're going to explore this
+index exercise by using some JavaScript-based controls for
+our Carousel that we included in the index.html
+page in the previous exercise. In the previous exercise, we introduced
+this Carousel into our index.html page. What I would like to do in this
+exercise is to introduce a couple of control buttons into this Carousel, and then use JavaScript to be able
+to activate these buttons. The buttons would be used to pause and play the sliding action of this Carousel. So, including the button
+in our Carousel here, we can click a button to stop
+the sliding action of the Carousel, and then we can click another button to resume
+the sliding action of the Carousel. So, that is what we can
+explore in this exercise. To get started on this exercise,
+we will go to the index.html page. And right after the left and
+right controls of our Carousel, I will introduce a div with
+the class button group. So this will enclose a button group of
+two buttons here, and then with an ID of, carouselButton and close off the div there. Now, inside this,
+I'm going to add in two buttons. So let me add in one button
+with the class btn, btn-danger, btn-small, and an id of carousel-pause. So this is going to act as the pause
+button, slows off the button there. And for this button,
+I'm going to introduce a font as an icon with the class fa fa, pause, and close off the span. So this will introduce a pause button
+into the group of Carousel buttons. I'm going to copy this and
+paste it again to create another button. That second button,
+I'll call btn btn-danger btn-sm, and then this would be carousel-play. And the span class, the button would be if it play here. Let's say the changes and go and
+take a quick look at it in the webpage. Taking a look at the buttons as they
+exist in our browser, you can see that these two buttons are now positioned
+to the left corner of my Carousel. I would like to reposition these
+buttons to the right edge, so that it doesn't cause this blue,
+empty space underneath the image here. So let me use a couple of CSS properties
+to reposition these buttons to the right column of the Carousel. Going to that style start CSS file, let me introduce some CSS code here. So for
+the element with the ID carouselButtons, I'm positioning it to the right edge and
+bottom, 0 pixel here. So these two and
+then the position is absolute. So this will position these buttons
+to the right corner of my Carousel. Obviously, just introducing the buttons
+into the Carousel will not serve any purpose. Now, we're going to take advantage
+of the JavaScript controls that the Carousel provides by writing
+a little bit of jQuery code at the bottom of index.html page to
+make these buttons do their work. We want to be able to pause and
+resume the sliding action of my Carousel. Going to the bottom of the index.html
+page, let me introduce some script here. So this script should contain some JavaScript code written in jQuery syntax. So I'm going to say, $(document).ready(function), And this function should contain a couple of functions here to activate the buttons. So I would say, mycarousel. This is the ID of the carousel
+that we are introduced, so we would say, carousel, Interval: 2000. So what this does is it sets
+the sliding interval of the Carousel to 2000 milliseconds or 2 seconds. So I'm making it a bit faster for the sliding action to take
+place in the Carousel. Continue with the jQuery code here. I'm going to now activate that pause
+button, so I will say carousel-pause. So that's the id I gave to
+the pause button there. So that's the reason for giving the id. So I want to activate the pause button. So I say when the user clicks. So you can see how to read the syntax. So this says, for
+the carousel-pause button, if a click action is done by the user,
+then execute this particular function that I
+specify inside this code here. What is the function that I want to do? I want to be able to, Pause the Carousel. So we would say, carousel('pause'). So now you see how you have
+used the jQuery-based controls. The JavaScript controls that are given for
+the Bootstrap Carousel component and written some code to be able
+to control the Carousel. Similarly, I want to be able
+to activate the play button. So when the play button is clicked, I want the sliding action
+of the Carousel to resume. So I'm going to simply copy this code,
+paste it there. And then I would say carousel-play, click function my carousel and
+then the function says carousel('cycle'). That's the way you
+specify that the Carousel should resume sliding like before. So this one, this function we
+are attaching to the play button here. So with this two, our function's introduced inside
+this document ready function. You're all set for
+the Carousel to be activated, and the two buttons to be able to control
+the behavior of our the Carousel. So let's show the changes, and go and have
+a look at the behavior of our Carousel. Going to our page, you now see that
+your Carousel is moving very fast, because I set the interval to
+2,000 milliseconds or 2 seconds. So every two seconds, you will see
+the sliding action of the Carousel. This is definitely annoying. So let me pause that by
+clicking on the pause button. So when you click on the pause button,
+your Carousel's sliding action is paused. Because when you click on the pause
+button, then the function that we introduced in the JavaScript
+code comes into action and then pauses the movement of the Carousel. Now, if you want to resume,
+the click on the play button and then the Carousel should
+resume its motion. So as you can see, the moment you click on
+a play button, the carousel starts moving. Now, of course, you can improve more upon
+how you create these buttons and so on, but this is a simple way that we can
+introduce to control our Carousel. This exercise illustrates to you
+how we can use JavaScript code to be able to control our
+Bootstrap JavaScript-based components. This is a good time to do a comment of your code with the message
+Bootstrap jQuery. [MUSIC]
