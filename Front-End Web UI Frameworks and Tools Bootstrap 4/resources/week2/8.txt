@@ -1,0 +1,45 @@
+[MUSIC] Let's briefly discuss
+about bootstrap tables. What does bootstrap bring to styling
+tables that we include in our web pages? We'll also look at another bootstrap
+component called as bootstrap card, which is a very versatile component for
+displaying content. There may be many occasions where
+you want to present tabular content on your web page. Tables were essentially designed for that purpose, but
+soon there after web page designers hijacked tables into using for designing and
+laying out content in the pages. Because inherently,
+the original HTML did not have the ability to properly lay
+out content in a web page. Of course, with the arrival of grid-based
+layouts like the bootstrap grid, the tables have been turned on tables. And increasingly,
+people are preferring not to use tables as a main sort of building
+content layout in web pages. Grid-based layouts are better designed for
+this purpose. Here is an example of what we
+can do to a standard HTML table by using several classes that
+bootstrap provides for styling tables. So here, you can see that
+the set apart by displaying it in darker color and
+then the rows themselves are highlighted by displaying alternate rows
+with different backups. The table used in
+bootstrap based that page is similar to how you use
+tables in standard HTML pages. But of course,
+you apply the class table which is supported in bootstrap to
+a standard table tech. In addition, bootstrap provides many
+different classes for styling tables like, table striped for zebra striped tables
+as we saw in the example earlier. Similarly, we have table bordered for
+borders. Tables, table-hover, table-sm for
+tables with cell padding cut in half. And similarly, table-responsive can
+be applied to a div around tables, so that the tables can be made responsive
+where it is shown on smaller screen sizes. The tables will then be able to
+scroll horizontally and vertically. Also, you could apply backgrounds
+to individual row of tables or entire tables themselves. Here are a couple of examples of
+how you could apply a background color to a particular row or
+a particular cell in table. Another versatile component
+that is available in bootstrap is a bootstrap card. Sometimes, you may want to highlight
+some content on your web page. So this is where bootstrap
+comes come to your aid. In Bootstrap card is a versatile
+component that allows you to display content in myriads of ways. You would notice that it allows
+you to have headers for cards. You can also include images in cards. You can include images in
+the background of cards. You can even change
+the background colors of cards. Many features are supported by cards. Here are a couple of examples of cards
+that we will see in the exercises later. We will also see more versatile us
+of cards in later exercises and other courses in this specialization. Card is a very important company
+that can be effectively used for displaying content. It's time to move on to the next
+exercise where we will use tables and cards to display some
+content in our web page. [MUSIC]

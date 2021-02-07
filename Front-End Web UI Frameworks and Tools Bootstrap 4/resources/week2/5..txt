@@ -1,0 +1,47 @@
+[MUSIC] Gone are the days when
+websites were purely used for delivering information to the users. These days on most websites, users will
+be able to interact with the website to supply information, for example by
+clicking buttons or by filling in forms and by typing something into search boxes,
+and so on. So how do we support these kinds
+of interactions with the users? So that is what we're going to deal
+with in this particular lecture and the exercise that follows. As an example, if you visit the Coursera
+website, you will see that you have buttons at the top here that you could
+click to reach different places. You could have a search box,
+into which you can type in information, to search for, say for example,
+full stack web development and, so on. So, what we notice is that user
+interaction needs to be supported on websites using many different
+approaches including buttons, forms, text boxes,
+check boxes, and many others. Early interactions with websites were
+provided mainly through hyperlinks. So you could click on a hyperlink and
+go on to other places and so on, but this is obviously, hyperlink is just one of the many methods
+of interacting with your website. You could have buttons included on
+the website which when clicked, will result in some action
+being taken on the website. You could have forms that you fill out
+to supply information to the website. So when you look at how you
+would include such user Interaction features into your website,
+you will see that you could use something like the a tags that are useful for
+providing hyperlinks, then you have the button tags that enable
+you to include buttons in your website. Now what we're going to look at is
+how do we format with a tags on the button tags using bootstrap classes so
+that you can style them to fake the general theme of bootstrap. HTML already includes the form elements
+and the input elements in there. Now, we can look at how bootstrap
+enhances these elements by providing styling features for forms, and
+various elements that go into the forms. Buttons obviously provide a simple
+way of interacting with your website. So when you have a button on your website,
+you might hover on the button, you might click on the button and
+expect something to happen in the process. The button behavior depends upon
+where it is positioned in bootstrap. If the button is inside a form,
+for example, typically the button clicking will result
+in the form being submitted to a server, or the form information being canceled. A button outside a form could have
+other ways of providing interaction. Similarly, the < a > tag that we
+have traditionally associated with hyperlinks could also be
+hijacked to be styled and presented in the form of a button. So here we will see how bootstrap
+provides classes that can be used to format the <a> tag into a button
+to be presented on your website. We'll also look at various form elements,
+like the input elements, select, the button and
+also the text AD elements, and how we make use of them within
+our forms to design and construct a form that can
+be included in our website. So the exercise that follows this
+particular lecture will introduce you to bootstrap support for styling buttons, and also look at how various form
+elements can be enhanced using bootstrap classes to present
+classic Bootstrap forms.

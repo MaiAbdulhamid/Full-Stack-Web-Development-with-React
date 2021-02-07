@@ -1,0 +1,86 @@
+[MUSIC] These days in web development world,
+we often hear people mentioning the terms responsive design and
+mobile first approach. Let's try and understand what
+is meant by these terms, and how they affect the way you design your
+websites and your web applications. Your obvious question is going to
+be why consider responsive design? To help us understand this, let's consider
+how people access websites these days? Traditionally, when websites were first
+designed, you could pretty much assume that people will be browsing
+your websites from a computer. These days your websites could be
+visited from a smartphone, a tablet or a computer with different screen sizes and
+screen resolutions. How do we render our websites consistently
+on devices of different screen sizes? The one size fits all
+approach that traditional website designers have
+taken no longer fixed bill. We need a better approach,
+an approach that will automatically adapt your website to the size of
+the screen on which it is being viewed. This is where we have to take an approach
+to adapt to the user's view port. This has to be built into your
+website design and development so that it will automatically adapt to
+the viewport of the user's device. To help you better appreciate the need for addressing devices of
+different screen sizes. I am taking the help of the developer
+options that might Safari browser provides that enables me to view the
+website with screens of different sizes. So that hopefully will convince of you
+of why we made responsive web design. So here you see that
+Coursera website being rendered on a 1920 by 1080 screen sites. This would be a typical large desktop or
+a high resolution laptop screen. Then let's consider the same website
+being viewed using a smaller screen such. So you see automatically your
+screen layout is slightly adjusting to the size of
+the viewport of your device, same thing at 800 by 600. So let's go down in screen sizes, this
+is an iPad close view of the same site. This is an iPad Air 2 size,
+this is an iPad Mini 4 size, note the transition from an iPad Mini 4 size to an iPhone 6S
+Plus in portrait mode. You'll now notice that the Navigation Bot
+has now collapsed into a button here, which when you click will reveal
+the options from your Navigation Bash. And let's look at the same
+thing in our iPhone 6S in landscape mode,
+note how the screen adopts itself. Similarly for
+an iPhone 6S in landscape mode and go down to an iPhone SE,
+and you see how the website has change the way it is being rendered. So hopefully, this example has
+illustrated to you how and why we need responsive web design. The second related concept that
+you will hear is mobile first. The mobile first approach instead
+looks at designing a website for a mobile device first. So consider how you would satisfy the
+screen constraints of your mobile device. And then as your screen size expands,
+you would automatically start an app to your website to
+the larger and larger screen sizes. Perhaps, you're willing more and
+more of the content. So as to take advantage of
+the increasing screen real estate. So the same website when seeing on
+a mobile device might have only parts of the information
+being revealed to the user. But then when rendered on
+a full fledge desktop it might show a lot more detail
+version of the website. Now this has to be automatically
+adapted based upon the information that you get from the device from
+which your website is being viewed. So how do we get this information? Fortunately, doing responsive
+web design is supported by many of the modern front end web
+UI frameworks including Bootstrap. So when we look at Bootstrap's
+definition on it's webpage it says, responsive mobile first approach. Yeah, how do we go by doing
+responsive web design? So there are several concepts that
+are built in to your frame time web UI frameworks that come to the aid
+when you need to do responsive web design. First and foremost is what
+is called is a Grid system? We're going to look at the Bootstrap's
+Grid system in more detail in the next lecture. So that we'll understand exactly how
+we can leverage that to be able to do responsive web design. The second aspect is fluid images, so
+that your images that you include in your website will automatically adapt
+itself to the screen size. And the third part is what is called
+a CSS media queries from your CSS code. You can query the size of the media and
+then appropriately adjust your CSS classes to fit the size of the device's screen. Now how do media queries work? Let's look at that next. Media queries are supported
+in CSS like this. So the technology allows you to do a media
+query to specify the minimum width of the screen under which this particular
+set of CSS classes will be active. So this would be specified in
+your CSS file as @media, and then within bracket,
+you specify for example, min-width. There are a lot more options to the media
+queries than what I'm showing here. This is just one example of how you would
+build a media query in your CSS code. Taking a look at
+Bootstrap's CSS code itself, let's go in and see how media
+queries are being used by Bootstrap. So here you see an example of a media
+query where it says, @media and min-width 576 pixels. And then it specifies that those
+particular CSS class call container, which we will learn more
+about in the next lecture, and also in the exercise that follows. We will see that the container's width is
+set based upon the width of the screen. Similarly, for a higher width screen, the
+container width is automatically adjusted. So this is what enables
+your web UI framework to support responsive web design. So doing media queries,
+your web UI framework is able to establish what kind of device
+you're rendering your website on. And correspondingly
+adjust the CSS classes to fit that particular devices screen size. So then obviously, the next question that
+is going to come in your mind is how do we do this in practice? Fortunately, if you start
+with a well designed front end web UI framework like Bootstrap,
+things become very straightforward. We will learn more about this in the next
+lecture and the exercise that follows. [MUSIC]

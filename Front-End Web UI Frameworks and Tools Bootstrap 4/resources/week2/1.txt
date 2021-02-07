@@ -1,0 +1,97 @@
+[MUSIC] Let's now talk about navigation. What is navigation, why is navigation
+important for your website? And how do you we provide navigation
+information on your website? So, these are the question that we will
+try to answer In this particular lecture. The first obvious question
+that comes to your mind is, why do we need to have website navigation? As you realize,
+most websites are no longer single pages. Of course,
+there do exist those single page websites like your professor's webpage In
+your computer science department. But most websites usually
+contain more than one page. As we have seen with our confusion
+website that we are building, we already have added a second
+page called aboutus.html page. Now the way we navigated to
+the aboutus.html page was to explicitly type that into
+the address bar of our browser. But that is a very inconvenient
+way of navigating to your website. It would make a lot more sense to
+provide an intuitive means for the users to navigate to your website. This intuitive means could be provided by
+many different approaches, the navigation bar being one of the most common
+methods of indicating this information. So, we'll look at several common
+ways of providing navigation patterns on typical websites. In this context, you often hear people
+talking about information architecture. The information architecture begins
+with the structure of the system, with respect to the way the information
+is organized, labelled. And navigation is provided through
+the content or through this information. Now information architecture,
+by itself, is a whole big field. It is beyond the scope of this course
+to cover information architect. But, in case you are interested
+in organizing and providing information to users through,
+for example, websites, then I have provided you with
+some links in the additional resources that you can go and
+read for further knowledge. But in any case,
+when you're designing a website, it is important to understand the need to design the information navigation
+structures within your website. And this organization of information
+within your website also dictates what kind of navigational aids
+you provide on your website, and based on how that
+information is organized. Typically, a website would be organized
+in some kind of a tree structured or a hierarchical fashion. And that automatically dictates to you how you would design navigational
+support within your website. The use of a navigation bar,
+breadcrumbs, and other means of navigation are very,
+very essential for enabling users to be able to see
+various parts of your website. When you visit most websites you will
+often look for the navigation bar. This is some kind of a bar that is
+typically attached at the top of the website, or sometimes at the bottom
+of the website, or sometimes on the side, that provides you with sufficient
+pointers towards the kind of information that you
+can access on this site. So your navigation bar will typically
+contain links to various pages that form part of your website. So a typical navigation bar,
+how do you go about designing this? When you design a typical navigation bar,
+you should obviously keep in mind some dos and don'ts
+about how you design navigation bars. First is that you use user-friendly and simple terms within your navigation
+bar to indicate the various links that the users can follow within
+your website to reach information.. You should provide
+a standardized navigation, so that wherever the user is
+within your website hierarchy, they'll always know how to go back to
+the homepage, how to go to the next, previous, or up and
+down the hierarchy of some sort. So indicating the location of the user within the hierarchy of your
+website is very, very useful to provide a user-friendly way
+of navigating your websites. Also, there are some standard
+conventions that people follow when these navigation bars are designed. Typically, when you have
+the logo of your website or your company included in your navigation
+bar, a click on these logos or a home button should take you back to
+the topmost level of the hierarchy or the home page of your website,
+typically the index.html page. Some of the don'ts that you should keep in
+mind is that you should not have too many choices in your navigation bar. How many is too many? If you find that navigating using your
+navigation bars is too cumbersome, then that means that there are too
+many options on your navigation bar. Provide a reasonable set of choices within
+your navigation bar so that you can indicate the directions that the user can
+follow in navigating through your website. And when you use these navigation
+elements in your navigation bar, don’t use generic labels,
+use meaningful labels. For example,
+if you put a label named product in your navigation bar, people will be confused
+about what you mean by product. Or say, if you put a service in your
+navigation bar, they may be confused. What kind of service are you providing? It will be more meaningful to
+give a more descriptive term In your headers in your navigation bar. Yet another means of
+providing navigation for users is to provide what
+is called as breadcrumbs. These are typically provided
+somewhere in that page, typical towards the top
+edge of the webpage, closer to the heading of that webpage. The breadcrumbs sort of indicate
+some kind of a navigational hierarchy within which you're
+currently In your website. So this provides a secondary
+navigation option for your website. So this could be placed somewhere
+below the primary navigation. It may indicate the hierarchy of
+pages through which you have gone. And the current location may
+be highlighted specifically in the breadcrumb there. So various ways that
+people can use breadcrumbs include providing a path based navigation. Say, for example, if you have a user
+going through a set of steps in order to complete a task on your website, say for
+example, reserving a airline ticket. Then you could use a breadcrumb
+approach for indicating to them what step the user is currently
+on in the sequence of steps. Similarly, if you are providing
+your location based navigation for hierarchical approach within your website. So, what level of hierarchy you are in and
+what is the upper part towards the root of your hierarchy, so that
+could be indicated by your breadcrumbs. Your breadcrumb could also be attribute
+based, meaning that you provide a set of choices indicated in your breadcrumb
+for the user at the current point of time. A typical front-end UI
+framework provides many other ways of providing
+navigation on your webpages. These include tabs, pills,
+pagination, dropdowns, accordions, tags, and
+SchrollSpy, and Affix. We'll look at some of these in
+a bit more detail as we go through the various lessons in the modules
+that follow this particular lesson. [MUSIC]

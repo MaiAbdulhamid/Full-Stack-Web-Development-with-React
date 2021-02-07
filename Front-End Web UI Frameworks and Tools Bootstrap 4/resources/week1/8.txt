@@ -1,0 +1,75 @@
+[MUSIC] Front-end Web UI Frameworks
+are becoming their go-to approach for designing and
+implementing their recent websites. Let's ask ourselves what exactly
+are front-end Web UI Frameworks, and learn a little more
+details about them. Next, so obviously in this lesson we're going to ask
+ourselves, what are front-end frameworks? What do they contain? What are some of the popular
+front-end UI frameworks? And why do we need to make use of
+front-end UI frameworks when we design our websites? So what are front-end web UI frameworks? Let's take a step backwards, and imagine that you only know HTML,
+CSS, and JavaScript. If you were asked to design a new website,
+you would obviously go about constructing and implementing the entire website
+Using the technical skills that you have based on your knowledge of HTML,
+CSS, and JavaScript. You would often realize
+that there are many repeated components that you
+would use on your website. And you would end up designing
+your own set of CSS classes. You will be designing
+JavaScript based component. And then once you get
+a group of these together, every time you need to design a new
+website you would be making use of these predefined sets of CSS classes and JavaScript based components to
+quickly implement a new website. Why not take this to
+its logical conclusion? How about, if we design an entire
+framework that consists of ready to use HTML, CSS, and
+JavaScript placed web UI components. So, here, a front-end web UI framework may define a bunch of CSS classes that will enable us to include
+components like Buttons, Tables, Navigation bars,
+Dropdowns, Alerts, Modals, Tabs, Accordions and many more. And quickly enable us to design and
+implement a website. So this is what a front-end
+web UI framework accomplishes. It is a collection of
+all these components. Not only that,
+it gives you a method of defining consistent typography that you can use for
+your entire website design. And enables you to quickly scaffold out a website or the pitch. If you search for
+front-end web frameworks, you would find a plethora of
+them out there in the Internet. Now several people have
+done their own service of all these different web UI frameworks, and have published their top ten
+lists of front-end UI frameworks. This is one such that you may or may not agree with this ranking, but Bootstrap happens to be the most popular
+among all the front-end web UI frameworks. Bootstrap consistently
+ranks as the number one in many of the lists of
+front end web UI frameworks. The remaining among this list may vary,
+but you would often find Semantic-UI, Foundation by Zerp,
+Materialize, Material UI, and some of these others appearing
+in many of those top-end lists. The next obvious question is, why would you want to use
+front-end web UI frameworks? First and foremost, they provide you with
+a consistent way of designing websites. And, most of these front-end frameworks support what is called as
+responsive web design. We will examine more about responsive
+web design in the next lesson, but quickly summarizing it, you don't realize
+that your website may be accessed from various kinds of devices of
+different screen savers ranging from small mobile phones all the way
+to up to a full fledged desktop. You want to be able to design your
+website to automatically adapt itself to cater to the size
+constraints of each of these different devices,
+from which your website is being accessed. So responsive web design is
+concerned about this aspect. The second issue that most of
+these Franken frameworks try to address is cross browser compatibility. If you have played around with
+browsers as much as I have done, I'm pretty sure you've
+come to realize that no two browsers render the same
+website exactly the same way. So when you design a website
+to render consistently across many different browsers, you
+are going to be facing an uphill battle. Now these front-end frameworks have
+managed to address most of these idiosyncrasies of the different browsers
+in such a way that you can deliver consistent rendering of your
+website on different browsers. So that's the second reason
+why you may want to resort to using a Front-End Web UI framework. And the third aspect of course is that
+when you need to design a website, you're always going to be
+under terrible time pressure. So increasing your productivity so that you don't waste your energy and
+time on wasteful configuration issues of those
+individual components of your website. Instead, let that be taken care of by a consistently designed
+front-end web UI framework. So that saves you a lot of time in
+terms of implementing your website. They have sacked. And finally, of course, most of these front-end UI frameworks that
+are all there have their own community. They are users that use these
+frameworks for implementing websites. So this community of users
+will provide you with a very efficient way of being able
+to solve issues that you may encounter when you're applying anyone of
+this frameworks for your website design. So given these different advantages, why would you not want to resort to
+using a front-end web UI framework? With this understanding of
+front-end web UI frameworks, let's now proceed forward to
+learn more about Bootstrap, the most popular front
+end web UI framework. [MUSIC]

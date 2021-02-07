@@ -1,0 +1,38 @@
+[MUSIC] In the previous lesson I referred to the
+nav class that is used in Bootstrap for creating navigation structures. We explored the navbar nav
+already in the previous module. In this lecture, we're going to explore nav tabs and
+nav pills in a bit more detail. And the exercise that follows this, we'll look at how we make use of this to create
+a navigation structure for our web page. Tabs and pills provide a interesting
+navigation structure for our web page. They will allow you to enclose
+content inside your web page that the user can navigate among
+the content without reloading the web page to a different web page. So if you have a certain amount of
+content to be presented in your web page, but want to show only part of
+the content on your web page, but still provide user with an ability to
+navigate to other parts of the content, then tabs and pills can be very useful for
+this purpose. What's better than to just go and
+take a look at the use of tabs and pills in navigation? Taking a look at an example of
+the use of tabs in navigation, you'll see that in this particular case,
+you have the Corporate Leadership information
+in our aboutus.html page, enclosed inside tabs with
+the tab navigation built on top. So you can see that you have
+the four different corporate leaders represented in their own tab here. And the content currently
+revealed on the web page is only the details about
+the first corporate leader. So if you want to switch to others,
+then you simply click on the corresponding tab, and
+then reveal that content in your web page. So notice that we are not navigating
+to a different web page, but we are simply revealing the content
+using this tab navigation here. Instead, in some cases you may find a pill-based navigation more useful for
+your purpose. So a pill-based navigation
+works like this. So you still have the same navigation
+structure on top here, but the currently displayed information
+will be highlighted as a pill here. So if you switch to another part
+of your navigation, notice how that particular item is being
+highlighted in the web page, and the corresponding information being
+displayed in the tab content down below. So this is a pill-based navigation. So this uses nav pills
+instead of nav tabs for the class being applied
+to the nav class there. Now that you have seen an example of
+the use of tabbed and pull navigation in a web page, I'm sure you're curious
+to know how it is actually constructed. That is what we're going to
+explore in the exercise next. So we will use tabbed navigation and
+then use tab content and tab panes to organize the actual content
+that will be displayed in our web page. [MUSIC]

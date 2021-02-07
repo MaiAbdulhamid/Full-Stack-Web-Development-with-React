@@ -1,0 +1,56 @@
+[MUSIC] Let's now talk about a very useful plugin
+in Bootstrap called as the Collapse. We have seen its application
+in the navigation bar earlier. We'll revisit that code and
+take a quick look at it in more detail. A related component is
+called as the Accordion. The Accordion makes use of the Collapse
+plugin for its functioning. And we will see that in detail
+in the exercise that follows. The Collapse plugin provides
+an easy way of revealing and hiding content on your web page. This revealing and
+hiding of the content is usually triggered by the user clicking on a button or
+a link in your web page. Now you will see many places
+where the Collapse kind of behavior is very well
+leveraged to show content. We'll revisit our navbar to look at
+the Collapse plugin in action, and then we'll also see
+an Accordion example next. Going back to our web page, you'll
+recall that when we created the navbar in our web page for extra-small screens,
+the navbar was collapsed and then it was revealed when we
+clicked on the button here. Now this is an example of the use
+of the Collapse plugin here. When we look at the code, we will see that
+we actually apply the Collapse plugin to the div that contains this navigation bar. Taking a look at the code for our navigation bar that we designed
+earlier, you saw that in here, inside the container, we created
+this button which is displayed for the extra-small screen sizes by
+using the navbar-toggler class. Look at the div that
+follows this button here. For the div that follows this button,
+we used the collapse class. So this is the use of the Collapse
+plugin in our navbar. So what this creates is that
+this particular content, our navbar that is enclosed inside
+this div, will be collapsed for the extra-small screen sizes. And then together with the Collapse
+plugin, this button that appears there will trigger the showing and
+hiding of this navbar here. That is why when you look at the button,
+you will see that right there, we supply the data-toggle attribute
+with the collapse in here, and then the data-target as #Navbar here. And notice that the id for
+this div that we applied here is Navbar. So we are specifying essentially that this
+button is going to act as the triggering mechanism for this Collapse
+plugin to work on this div here. So this is a use of the Collapse
+plugin in your web page. Also, we'll look at the other component,
+which is the Accordion in Bootstrap. How does an Accordion behave? So this is an example of an Accordion that
+we're going to construct in the exercise that follows. So here, you'll see that I have
+replaced the tabbed navigation that we did in the previous exercise
+by using an Accordion here. The way the Accordion works is that
+one piece of content is revealed and the remaining three are hidden. So this uses the Collapse plugin for
+this purpose. So when you click on any one of
+these other corporate leader's name, then the details of that
+corporate leader gets revealed and the remaining three gets hidden. So this is the Accordion behavior here. If you are familiar with an accordion, the musical instrument, you know how
+the bellows of the accordion work. So this is, in some sense, behaving
+like the bellows of the accordion. So that's the reason why this component is
+referred to as an Accordion in Bootstrap. One more example of the Collapse plugin
+in use is on your own course website. So if you go to your course website, and then you go into the content
+of your course website and start viewing the content here,
+you will notice that on the left side, you have a navigation that comes
+into picture on the left side. So this is the navigation there. So when you click on each one of them,
+you notice how the content in here is hidden and revealed by clicking
+on each of these links there. So this is like the Collapse
+plugin that we saw in Bootstrap. Although, of course, the Coursera
+page actually doesn't use Bootstrap. We'll move to the next exercise
+where we will see how we construct the Accordion for showing our
+corporate leadership information. [MUSIC]

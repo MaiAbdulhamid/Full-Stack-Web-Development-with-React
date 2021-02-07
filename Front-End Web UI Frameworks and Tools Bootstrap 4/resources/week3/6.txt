@@ -1,0 +1,55 @@
+[MUSIC] Let us now try to understand
+several mechanisms to enable us to display information to the users
+overlaying the content of your web page. So here we'll look at three different
+constructs that are available in Bootstrap called tooltips, popovers, and modals. So what are tooltips, popovers and
+modals and how are they useful? We'll look at some basic ideas first ,and
+then we'll go on to look at some examples. In the exercise that follows,
+we'll use tooltips and modals in our web page, and
+we'll look at an example of popovers. So, as I mentioned, tooltips, popovers,
+and modals are a way of revealing content to the users, when the user interacts
+with certain elements on your web page. Say for example when the user's mouse clicks on a button, or
+hovers over a button, or clicks on a link, or reaches a certain
+point on your web page. So all these will trigger information
+to be displayed to the users. So in this case, the information is displayed as
+an overlay on top of your web page. So the underlying content of
+the web page is still there, but this is laid out on top of
+the underlying content. So in terms of flexibility, tooltips
+are the simplest to implement, but at the same time have limited flexibility
+in how they can display information. Popovers are more flexible than tooltips,
+but they also have their own limitations. Modals give you the most
+extensive support for displaying content in
+a wide variety of ways. As an example, let's go to our
+webpage that we have been working on. You see that when we hover our
+mouse pointer onto this button. You see this message popping
+up on the screen here, with some additional information. This is an example of a tooltip. This allows you to display smaller
+amounts of information to the users. So for example if you are trying to
+guide users through your website and want them to know what happens when you
+click various locations any web page, these maybe a good way of reminding
+them of what is expected. So you could easily design for example, walkthroughs of your website using
+these tooltips to indicate to users. If you want a bit more
+detailed information, then popovers would be more useful. The same example, implement and
+using a popover would look like this. Now in this case, you will have to explicitly click
+on the button to show the popover. So in that case, the popover is shown
+with some title information, and then the actual content at
+the bottom in that popover. Now, dismissing the popover will require
+you again to click on the bottom there. So this is the behavior of a popover. In some circumstances,
+popovers are more useful than tooltips. Our third kind of data
+overlay is the modal. A modal allows you to present more detailed information to the users
+than a tooltip and popover. The content of the modal is itself divided
+into a header, body, and the footer. And the modal itself can contain
+a lot more detailed information. And you can use the entire Bootstrap grid, inside the modal body,
+to organize the actual content. We look at a couple of examples
+of the use of modals next. Going to our web page,
+you will see that on the right hand side, here we have a link here called Login. So when you click on that link,
+you will notice that this modal with their login form is
+popped up on the screen. So this is the typical
+behavior of a modal. And so
+here you can type in the information, and then click on the Sign In button
+to sign in to your website. Going to your Coursera page, here is
+a real life example of the use of a modal. So for example,
+if you click on the Log In button here, you can see that on Coursera,
+a form pops up on the screen. So this is another use of
+a modal in your web page. Now that you have seen examples of
+tooltips, popovers, and modals, let's go to the next exercise, where we'll
+create a tooltip on our index.html page. We'll also create a modal that allows
+the user to type in information for logging in into our web page. [MUSIC]

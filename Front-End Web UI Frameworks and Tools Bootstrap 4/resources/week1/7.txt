@@ -1,0 +1,218 @@
+[MUSIC] Now that you have Node.js
+on your computer, you're obviously wanting to
+immediately start using it. So, in this exercise,
+we will start using Node. We will set up a packaged,
+or adjacent, file for our Git test folder that we
+have been working with so far. Then, we will setup a node module
+called as lite server that will serve up the contents
+of our get test folder. And then we can browse
+this index.html file and other files in a browser. And we will also see how
+the lite server will enable us to automatically see updates to our browser
+window as we make changes to our index.html file, or
+any other files in our get test folder. The lite server is something that we're
+going to extensively use in this and future courses,
+to be able to see the changes in real time in a browser window as you edit
+the files of your project. As I mentioned,
+we want to set up the package.json file. So what exactly is this package.json
+file that we're going to setup? So here, I have some information from the npmjs.org site which specifies what exactly is
+the role of the package.json file. So the package.json file serves
+as the documentation on what all other packages that your
+project is dependent upon. So, for example, when you set up
+the lite server of your project, that will be recorded in
+the package.json file. And so that, subsequently, you can also
+make use of that package in the future. Also, it allows you to specify
+which specific version of a package that your project is dependent on. So even if the package that you
+depend on changes in the future, you may insist that you want
+the user to install only a specific version of the package for
+use within your node application. And also,
+it makes your builds reproducible, which means that when you
+share your code with others, then they can also do installation
+of all the node modules, as we will see later in this exercise,
+on their own computer. So obviously your next question will be,
+how do we create this package.json file? If you are starting a new project where
+you want to initialize the package.json file, then simply type npm init at
+the prompt in the project folder. And then that will take you through
+a set of steps which will enable you to configure your package.json file. So let's proceed with that for
+our Git test project. So here I am in the git-test
+folder in my terminal window. Make sure that you also open a terminal
+window or a command window and then go to the git-test folder. And at the prompt, type npm init. And then follow along
+the questions that are asked. So for the name of the project, we'll
+just leave it as the default, git-test. For version, we'll just leave it as 1.0.0. We can edit that later. For description, this is a test directory to learn Git and Node. It doesn't matter,
+type some description there. And then the entry point,
+I would just say index.html. Usually if it is a node package,
+the entry point will be index.js. Now this folder that we have setup is an index.html based folder, so
+that's why I just typed in index.html. Test command, nothing. Git repository, if we had already setup
+the git repository in the previous exercise, it'll automatically
+prompt that for you, if not, this would be empty and give you an option
+to type in the git repository URL, in case you're using
+an online git repository. Some keywords for your project,
+which I'm going to leave blank. Author, type your name. Let's be narcissistic. And the license. And then, it'll show you the configuration
+of the package.json file in JSON format. So if your family have a JSON,
+does it look very, very familiar to you. So if this looks all good,
+let's just say OK and then that results in the creation
+of the package.json file. So now if you list the folder contents, you would see the package.json
+file in the folder contents. Open that Git test folder
+in your favorite editor, and then take a look at the contents
+of package.json file in your editor. As the next step, we will learn
+how we can install a node module using NPM, the Node Package Manager. So, we're going to install this
+node module called as light server. The light server will serve up
+the contents of this git-test folder in a server that it starts up so that you
+can view the contents in a browser. Given that we have an index.html file, if we serve up this folder,
+then it'll be a website. And you can view
+the index.html in a browser. So, let's set up the light server and
+then we will see how we can make use of the light server to serve
+up the contents of this folder. This is very, very useful because if
+you're working on a web development project, you want to see where live
+version of your web development project. So that,
+as you make changes to your project, you can see the changes immediately
+reflected in the browser. So this is a very good node package
+that is very useful for this purpose. So let's set up this light server. To do that, add the prompt. Type in NPM install. So notice,
+if you want NPM to install a node package, this is how you're going to invoke it and
+then you'd say lite-server. And then, we also want to save the fact
+that our project is using the lite server. So we will save this information
+in the package.json file. So to do that,
+you're going to type in -- save-dev. Now the save-dev option specifies
+that this lite server is used for development dependency for our project. If you are installing a node module on
+which your project is directly dependent on, then you would install it
+by simply saying --save option. So, let's go ahead and install it. And you wait patiently for
+the installation to take place. It'll take all of a few minutes for
+that to complete its installation. Once that is installed,
+then you would immediately notice when you look at
+the contents of your folder, you will immediately notice that there is
+a folder there created named node_modules. Now, if you go into the node_module,
+you will see a whole bunch of other subfolders in there,
+which contain node modules, which are necessary for
+the likes of our node module and so on. So let's take a quick tour of
+the node modules folder to see what the contents of these are. Going to my git-test folder, if you're
+going to the node modules folder, you would see, as I said,
+a whole bunch of subfolders there. Normally you don't need to be venturing
+into the node modules folder. They just exist there because they
+are needed for the [INAUDIBLE]. So as you browse through, you should
+notice a folder named lite-server here. When you go into the lite-server folder, note in particular the presence
+of the index.js file and then your package.json file and
+several other things. So this contents of the folder
+comprises the lite-server node module. But this lite-server node module
+is dependent on other node modules to provide it with some
+additional functionality. So that's the reason when you install the
+light server node module, it'll in turn install many other node modules, on which
+the light server itself is dependent on. So that's the reason why
+you see that explosion of this folders inside the node modules. Don't be too concerned about it,
+the sum total of folders will not be more than a few tens of megabytes. So it is not going to fill
+up your directory with junk. This is all essential for
+node to be able to help you. In case you're curious about the
+lite-server and how it works and so on, you can always go down to this GitHub
+site where the lite-server is hosted. And then look up the documentation for
+lite-server. I will introduce you to whatever you need
+to know about lite-server as we go through this course and the remaining courses. So you don't need to worry too much about
+it, but just in case you're curious, you can always go to the site to find
+out more details about lite-server. The link is provided in your
+exercise instructions and additional resources
+are part of this lesson. Once you have completed that,
+then head over to the. Editor where you have the folder,
+Git-Test folder, opened and then view the contents of
+the package.json file. So you would see that the package.json
+file contains exactly the information that you configured with your NPM. So you would see the name version and
+repository author and in particular, note this information here. It says devDependencies, so
+then it specifies the lite-sever, and also notice it says hat 2.2.2. So which means that this
+particular project depends upon lite-server that is a at
+least version 2.2.2 or higher. So this is very useful for us. Now why do we need this information here? Later on,
+when you go to the other exercises, you will notice that when you store
+this on an online repository, you don't want to be storing
+everything in your node modules folder. You will only be storing information
+of all the files that we have created. The node modules folder
+can always be recreated by typing NPM install at our command prompt. And then based upon
+the dev dependencies and dependencies that are listed in
+the packager file, all the node modules that your project depends
+on will automatically be installed. We will see that later on how to use NPM install in this course. Now that we are at package.json file
+let's make a couple of edits so that we will be able to make use of
+the lite-server to serve up that content. So right here,
+in this option called scripts, let's add in one more here. So we will say "start". So start is a command that
+NPM supports which enables you to specify a bunch of
+things that will be started. So later on we will see
+how we make use of this. So here I'm going to say "npm run lite". And after that test, I'm going to add in one more entry called "lite", which I will configure as "lite-server",
+okay? With these changes,
+let's save the package.json file. And then, now our project is configured,
+so that now if you start the lite- server, the contents of your folder will be now
+served up in your favorite browser. Heading back to our command prompt,
+add the prompt. If I type, npm start,
+now you see why I put that entry card start into
+my package.JSON file. If I say npm start, whatever the start is
+configured as in the package.JSON file, we specify that npm run light, and
+the lite was specified as lite server. So essentially,
+we are saying Start the lite-server. So, once I type npm start,
+it will start the lite-server, and it will serve up
+the contents of this folder. Now how do you access
+the contents of this folder? If you want to accesses this locally, you will access it by specifying
+the you are as localhost:3000. These are the default settings for
+the lite-server. Furthermore, this should
+automatically open the browser window of
+your default browser, and show the contents of index or
+HTML in the browser window. Here you can see that I
+have opened my editor and my browser window directed
+at localhost:3000 simultaneously side by side,
+so that we can see how the browser window
+will immediately reflect any changes that we make
+to our Git test folder. So let me go to index.html. And then for the sake of space,
+I'm going to turn that over. And then, so here, you can see
+that this is the contents of this. And then, now,
+let me add in one more paragraph. And save the changes, and
+then you will immediately notice that the change that I made to my index.html
+file is reflected into my browser. This provides a very nice way
+of being able to observe in real time the changes that you make to your
+code being reflected into your browser. So when you are working on a project,
+it'll be very appropriate for you to be able to see
+the changes immediately. So when you make a change and
+then save the file, the modified code is immediately
+loaded into your browser. So you can immediately see the change
+being reflected in your browser window. This is a very useful tool while you
+are doing development of your project. That is the reason why I introduced
+you to that lite-server, and set it up so that we can make use of it,
+as we develop the website in this course. If you recall, we had already set up our
+git-test folder to be a Git repository. So Checking again, We will see that we already have three
+commits in our Git repository. And this Git repository is already
+mirrored to our online Git repository which we have set up in the previous
+exercise either at Bitbucket or GitHub. My git-test folder is synced to my Bitbucket repository in
+this particular exercise. So what I'm going to do now is to
+show you how you can exclude some folders from your project folder, and then make sure that they are not
+synchronized to your online repository. Now as I said, the node_modules
+folder can always be recreated by typing npm install at the prompt. So that's why when you upload the contents of your folder
+to an online Git repository, or when you do a commit of
+the folder to your Git repository, you don't want the node_modules folder or
+all the subfolders under it to be included in the commit. So how do we exclude some folders or some files from our folder from being
+checked in into our Git repository? So to do that,
+we will set up a file named .gitignore. So that's the name of the file,
+.gitignore. So to create this .gitignore file,
+we will go to our editor. So in the editor, in the git-test folder, I'm going to create a new file and
+I will name it .gitignore. Note that the name begins with a dot and then, the rest of the name
+is g-i-t-i-g-n-o-r-e. So this is very very important that you
+set up the file with exactly that name, .gitignore. So let's create this file
+called .gitignore, and the first line of that file,
+we will type as node_modules. So what this means is that
+the node_modules folder is going to be excluded from our git commit. So once I create that .gitignore file and then add node_modules into the .gitignore
+file, let's save the changes. And then we will now do a commit of
+the current state of our project into our Git repository. I hope you remember your git commands. Let's do a git status,
+and then when you do that, you will immediately notice
+that you have the index.html file marked as modified, and then the two
+new files, .gitignore and package.json. So, we do a git add .,
+and then do a git status. And then you see that all this new files
+have been checked in into your commit. Let's do a git commit.
+git commit -m "fourth commit". And the files are committed. Let's push the new commit
+to our online repository. So, to do that git push -u origin master and wait for it to be pushed to our server. Now, if you go to your
+online Git repository, you will see that
+the package.json file and .gitignore would have been checked
+in into your Git repository. Going to my Bitbucket repository
+from the Git test, you will see that when I look at the source, you will see
+that the package.json file has been added. The .gitignore has been added and the new
+index.html file has been checked in. So that completes this exercise. So in this exercise, we have learned how to set up
+a package.json file using npm init. We have learned how to
+install an npm module. And we have learned how to use
+the lite-server npm module to serve up the contents of our project folder so
+that it can be viewed in a browser. So, this is a nice way of
+serving up your web contents, your web application or your website, so that you can see changes in real time
+being reflected to your browser window. And then we also saw how we can
+setup the .gitignore so that some folders can be excluded from being
+checked into our Git repository. This completes this exercise. So with this,
+I'm sure you have gotten a good handle on the use of both Git, and
+then also node and node modules. Don't worry, we will be using node
+extensively, in various ways, as you go through the courses
+of this specialization. This is just a start. [MUSIC]

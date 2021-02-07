@@ -1,0 +1,47 @@
+[MUSIC] Let us now talk about icon fonts. What are they? How are they useful? And how do we make use of them
+in designing our website? Icon fonts provide a very
+flexible way of including tiny images into our web pages that
+can be styled just like text. So that is the reason
+icon fonts prove very, very useful in designing websites. Using icon fonts,
+you can take a web page like this and quickly turn it into a web page like this. Note the use of icons together
+with the text in the nav bar, and then when you scroll
+down to the footer, you can see more icons
+being used in the footer. And also your social media links are now
+replaced by social media buttons here. So these are the changes that icon fonts
+will enable you to do to your website. So as I briefly mentioned earlier,
+icon fonts are a set of symbols or glyphs that can be used
+in your website design. These can be used just like regular fonts, just like regular text fonts
+that you use in your website. Their advantage is that
+you can style them and then expand and contract them and
+use all typical stylings that you use on your text,
+for your icons also. They are seen as a popular
+lightweight replacement for simple graphics that you
+can use in your web pages, simply graphics or
+images that you can use in your web pages. And they are very,
+very useful in designing your web pages. There are many icon font packs
+that are available in the market. One of the most popular
+ones is Font Awesome, which I'm going to talk about next. Font Awesome, as I say,
+is a very popular icon font. It is available free for
+use in designing your page design. It has been extensively used
+by many different websites. We'll learn how to
+download Font Awesome and then use it in web page in the exercise
+that follows this lecture. Using Font Awesome in your
+webpage is as simple as using some classes that
+are applied to an i, or a span tag in your web page HTML code. So once you include the CSS and the font files that are available
+through Font Awesome, then it is very straightforward to make
+use of Font Awesome in your pages. Another common feature
+that you would see on web pages is the use of social site
+buttons there like Facebook, Twitter, Google+, and
+YouTube and many others. Now fortunately for us,
+there is this other CSS file called bootstrap-social
+that you can download and make use of, including various social media site buttons into your web page. We will see the use of bootstrap-social
+in the exercise that follows. Once you download the bootstrap-social css
+file, you include that in your web page. And then together with
+the Font Awesome icons, you can combine that with
+bootstrap social classes to include various social media
+buttons on your web pages. So without further ado,
+let's move to the next exercise where we're going to use both Font Awesome and
+bootstrap-social, a modified version of
+bootstrap-social.css file that I provide on the exercise instructions
+that you should download and include in your confusion project and
+make use of it in the exercise. [MUSIC]
