@@ -564,8 +564,52 @@
   
   ### 2. Exercise: Bootstrap and JQuery
   - We're going to explore this index exercise by using some JavaScript-based controls for our `Carousel` that we included in the `index.html` page in the previous exercise.
-
+  - We are adding the two buttons inside a button group with the ID carouselButtons. The two buttons contain the pause and play glyphicons to indicate their corresponding actions:
   
+  ```
+  <div class="btn-group" id="carouselButton">
+    <button class="btn btn-danger btn-sm" id="carousel-pause">
+      <span class="fa fa-pause"></span>
+    </button>
+    <button class="btn btn-danger btn-sm" id="carousel-play">
+      <span class="fa fa-play"></span>
+    </button>
+  </div>
+  ```
+  - To active that  buttons:
+  ```
+    <script>
+      $(document).ready(function(){
+        $("#mycarousel").carousel( { interval: 2000 } );
+        $("#carousel-pause").click(function(){
+          $("#mycarousel").carousel('pause');
+        });
+        $("#carousel-play").click(function(){
+          $("#mycarousel").carousel('cycle');
+        });
+      });
+    </script>
+  ```
+  
+  ### 3. Exercise: More Bootstrap and JQuery
+  - We will modify the carousel control buttons in the carousel component that we already included in the index.html page. Instead of two buttons, we will use a single button that will indicate if the carousel is currently cycling or paused. Furthermore we can use the button to toggle the carousel cycling behavior:
+  ```
+    $("#carouselButton").click(function(){
+      if ($("#carouselButton").children("span").hasClass('fa-pause')) {
+        $("#mycarousel").carousel('pause');
+        $("#carouselButton").children("span").removeClass('fa-pause');
+        $("#carouselButton").children("span").addClass('fa-play');
+      }
+      else if ($("#carouselButton").children("span").hasClass('fa-play')){
+        $("#mycarousel").carousel('cycle');
+        $("#carouselButton").children("span").removeClass('fa-play');
+        $("#carouselButton").children("span").addClass('fa-pause');                    
+      }
+    });
+  ```
+  
+  - [Bootstrap Carousel Methods](https://getbootstrap.com/docs/4.0/components/carousel/#methods).
+  - [Jquery](https://jquery.com/).
   
   
  </details>
@@ -573,21 +617,139 @@
  <details>
  <summary>Less is More!: Less and Sass</summary>
  
-  ### Second
+  ### 4. CSS Preprocessors: Less and Sass
+  - Bootstrap is built using `Sass` for its source.
+  - `CSS` is great for defining styles and repeatedly applying these styles to various `HTML` elements.
+  - `CSS` doesn't have what you typically expect in a programming language, like variables, nesting of selectors, variables, expressions, and functions.
+  - This means that writing `CSS` code becomes cumbersome, and maintaining `CSS` code becomes cumbersome.
+  - This is where the `CSS` preprocessors come to our rescue.
+  - There are several popular `CSS` preprocessors that try to address some of the shortcomings of `CSS` by supporting many of these features. Two in particular that is of interest to us is `Less` and `Sass`.
+  - What these preprocessing languages bring to us is more programming language-like syntax.
+  - CSS preprocessors bring is the support for variables, nesting selectors, expressions, functions and mixins.
+  - Variables in the CSS preprocessor languages can also have their own scope.
+  
+  ### 5. Exercise: Less
+  - In this exercise you will learn to write Less code and then automatically transform it into the corresponding CSS code.
+  - Make `style.less` file and add `less` Code.
+  - Add global variables:
+  ```
+  @lt-gray: #ddd;
+  @background-dark: #512DA8;
+  @background-light: #9575CD;
+  @background-pale: #D1C4E9;
+
+  // Height variables
+  @carousel-item-height: 300px;
+  ```
+  - Add Mixin:
+  ```
+  .zero-margin (@pad-up-dn: 0px, @pad-left-right: 0px) {
+   margin:0px auto;
+   padding: @pad-up-dn @pad-left-right;
+  }
+  ```
+  - Nesting styles:
+  ```
+  .carousel {
+      background:@background-dark;
+
+      .carousel-item {
+          height: @carousel-item-height;
+          img {
+              position: absolute;
+              top: 0;
+              left: 0;
+              min-height: 300px;
+          }
+      }
+  }
+  ```
+  - `$ npm install -g less@2.7.2` -> This will install the less NPM module globally so that it can be used by any project.
+  - `$ cd css` -> Change directory to css folder.
+  - `$ lessc styles.less styles.css` -> To compile the Less file into a CSS file.
+  
+  ### 6. Exercise: Scss
+  - In this exercise you will learn to write Scss code and then automatically transform it into the corresponding CSS code.
+  - Add the following Scss variables into the file:
+  
+  ```
+  $lt-gray: #ddd;
+  $background-dark: #512DA8;
+  $background-light: #9575CD;
+  $background-pale: #D1C4E9;
+
+  // Height variables
+  $carousel-item-height: 300px;
+  ```
+  
+  - Next we add a mixin into the file as follows:
+  ```
+  @mixin zero-margin($pad-up-dn, $pad-left-right) {
+   margin:0px auto;
+   padding: $pad-up-dn $pad-left-right;
+  }
+  ```
+  
+  - Using the variables and Mixin class that we defined earlier to the styles.
+  - Next we add a nesting of classes:
+  ```
+  .carousel {
+      background:$background-dark;
+
+      .carousel-item {
+          height: $carousel-item-height;
+          img {
+              position: absolute;
+              top: 0;
+              left: 0;
+              min-height: 300px;
+          }
+      }
+  }
+  ```
+  - `$ npm install --save-dev node-sass@4.7.2` -> This will install the node-sass NPM module into your project and also add it as a development dependency in your package.json file.
+  - Next open your package.json file and add the following line into the scripts object there.  This adds a script to enable the compilation of the Scss file into a CSS file:
+  `"scss": "node-sass -o css/ css/"`
+  - `$ npm run scss` -> In order to transform the Scss file to a CSS file.
+  - [Less](http://lesscss.org/).
+  - [Sass](https://sass-lang.com/guide).
+  - [Getting Started with Less](https://scotch.io/tutorials/getting-started-with-less).
+  - [Getting Started with SASS](https://scotch.io/tutorials/getting-started-with-sass).
+  - [Less NPM package](https://www.npmjs.com/package/less).
+  - [Node-sass NPM package](https://www.npmjs.com/package/node-sass).
   
  </details>
  
  <details>
  <summary>Assignment 4</summary>
  
-  ### Second
+  - In this assignment, you will continue to work with the website that you have been developing in the exercises. You will edit the home page (index.html), the JavaScript code (scripts.js) and the SCSS code (styles.scss). You will start with the current home page at the end of the last exercise in this module. At the end of this assignment, you should have completed the following tasks:
+
+   - Removed the data-* attributes from the Reserve Table button and the Login link in the Navbar that control the two modals.
+   - Updated the button and the link so that they will trigger the appropriate JavaScript code when clicked.
+   - Included appropriate JavaScript code using the modal methods to toggle the showing and hiding of the modals when the two buttons are clicked.
+   - Add SCSS code to style the modal with colors
+ 
+  - [Modal Methods](https://getbootstrap.com/docs/4.0/components/modal/#methods)
   
  </details>
  
  <details>
  <summary>Building and Deployment: NPM Scripts</summary>
  
-  ### Second
+  ### 7. Building and Deployment
+  - Once your website is ready, the next step is to be able to build your website and to deploy it to a web server, so that it becomes publicly available.
+  - The CSS code using one of the CSS preprocessing languages, like Sass or Less, then you need to convert that code into the corresponding CSS code. Thereafter, you need to do additional processing on your CSS files like minification, compaction, and concatenation.
+  -  All these tasks are repetitive tasks, which we would like to automate as far as possible, so that we can concentrate on the actual design and building of our website, rather than these repetitive tasks.
+  - Minification is the process of removing all the unnecessary characters, the white space, newlines, comments, from your CSS code.
+  - Concatenation is the process of concatenate all of css files into a single CSS file at the end.
+  - The uglification of the JavaScript code, which stands for minification, meaning removing all the unnecessary white space and comments and so on.
+  - Mangling of the code, meaning reducing the names of the local variables to single letters wherever feasible.
+  - You might include a lot of images into your web pages. Once your website is ready, you may want to compact those images so that you optimize the file sizes, so that their images will be minimum sized files to be deployed.
+  - We could use watch tasks, whose main job is to keep a watch on all these files. And if any changes are done to these files, the tasks will be automatically executed.
+  - One other aspect, while you're doing your development, is to be able to serve up your code and watch the code in your browser.
+  - If you are writing code, you obviously need to carry out testing of your code.
+  - You want to be able to accomplish all these tasks and then build up your final deployment code that can then be uploaded to your web server to make your website available for the general public.
   
  </details>
  
