@@ -751,12 +751,118 @@
   - If you are writing code, you obviously need to carry out testing of your code.
   - You want to be able to accomplish all these tasks and then build up your final deployment code that can then be uploaded to your web server to make your website available for the general public.
   
+  ### 8. NPM Scripts
+  - NPM scripts are supported through this scripts property in the package.json file as we have seen in the example earlier.
+  - `start-script` -> That you can add the prompt type `$ npm start`, and then the corresponding script referred to by the start, will be started.
+  - We can define arbitrary scripts in the scripts property and then run them by saying NPM run and the name of the script. Ex: `$ npm run scss`.
+  - We are going to leverage this to be able to develop a few additional scripts that will automate a lot of those tasks.
+  
+  ### 9. Exercise: NPM Scripts Part 1
+  - Keep JavaScript code which is inside `index.html` in a separate file which contains all our scripts, and then include that file into `index.html`.
+  - Create a new file with the name `scripts.js`.
+  - The next step that I would like to do is to install a couple of NPM modules that I'm going to make use of for automating some tasks.
+  - [onchange](https://github.com/Qard/onchange) module is going to watch files in my project folder, and then whenever those files change, then it automatically triggers a task to be executed.
+  - There is another NPM model called `Watch`, which you can also use for the same purpose.
+  - [parallelshell](https://github.com/darkguy2008/parallelshell) module allows me to execute multiple NPM scripts in `parallelshells` as the name implies.
+  - `$ npm install --save-dev onchange@3.3.0 parallelshell@3.0.2` -> To install packages.
+  - If you are doing the exercise on a Windows computer, please use the following two script items:
+  ```
+    "watch:scss": "onchange \"css/*.scss\" -- npm run scss",
+    "watch:all": "parallelshell \"npm run watch:scss\" \"npm run lite\""
+  ```
+  - Add the following two script items to `package.json` if you are doing the exercise on a MacOS computer or a Linux computer:
+  ```
+    "watch:scss": "onchange 'css/*.scss' -- npm run scss",
+    "watch:all": "parallelshell 'npm run watch:scss' 'npm run lite'"
+  ```
+  - You will also update the start script as follows: `"start": "npm run watch:all",`.
+  - `$ npm start` -> To start watching for changes to the SCSS file, compile it to CSS, and run the server.
+  
+  ### 10. Exercise: NPM Scripts Part 2
+  - Build a distribution (dist) folder which contains all the files for our project that we can simply deploy to a web server that hosts our website.
+  - `$ npm install --save-dev rimraf@2.6.2` ->  [rimraf](https://github.com/isaacs/rimraf) module helps us to clean out a folder completely.
+  - Then, set up the following script: `"clean": "rimraf dist",` -> This means is that, when executed, will clean out the `distribution` folder.
+  - Your project uses font-awesome fonts. These need to be copied to the distribution folder.
+  - `$ npm -g install copyfiles@2.0.0` -> [copyfiles](https://github.com/calvinmetcalf/copyfiles) module to copy some `font` files from my `node_modules` folder into my `distribution` folder.
+  - Then set up the following script: `"copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",`.
+  - `$ npm run copyfiles` -> When this runs, it's going to create a folder named dist in my project folder hierarchy. And then inside the dist, there will be a subfolder named fonts, which will contain the font files.
+  - `$ npm run clean` -> This is going to delete that `distribution` folder.
+  - `$ npm -g install imagemin-cli@3.0.0` -> We use the [imagemin-cli](https://github.com/imagemin/imagemin-cli) NPM module to help us to compress our images to reduce the size of the images being used in our project.
+  - Then set up the following script: `"imagemin": "imagemin img/* --out-dir='dist/img'",`.
+  - Update `.gitignore` file:
+  ```
+   node_modules
+   dist
+  ```
+  - [usemin-cli](https://github.com/nelsyeung/usemin-cli) module is the one that allows me to do the transformation from my HTML file. And then concatenate and combine all the CSS files into a single CSS file, and then put it into the `distribution` folder.
+  - But this `usemin-cli` takes the help of three other node modules called the [cssmin](https://github.com/jbleuzen/node-cssmin), then [uglifyjs](https://github.com/mishoo/UglifyJS), and [htmlmin](https://github.com/jserme/htmlmin). 
+  - `$ npm install --save-dev usemin-cli@0.5.1 cssmin@0.4.3 uglifyjs@2.4.11 htmlmin@0.0.7` -> Install the usemin-cli, cssmin, uglifyjs and htmlmin NPM packages.
+  - Add the following two scripts to the package.json file:
+  ```
+  "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
+  "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
+  ```
+  - `<!-- build:css css/main.css  -->` -> Is a comment in html page before all css files. This means is that these Block of CSS files will all be combined together, and then concatenated, minified, and then put into this file called `main.css`.
+  - `<!-- endbuild -->` -> After all css files.
+  - whatever is between this `build` and `endbuild`, this group will be treated as a unit for being combined by our `usemin` npm module there.
+  - Do the same change in js files:
+  ```
+    <!-- build:js js/main.js -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+  ```
+  - `$ npm run build` -> To build the `distribution` folder.
+  - The transformed files will be put into the distribution folder created from these files. 
+  
+  ### Additional Resources:
+  
+  - [Why npm Scripts?](https://css-tricks.com/why-npm-scripts/).
+  - [How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/).
+  - [The Command Line for Web Design](https://webdesign.tutsplus.com/series/the-command-line-for-web-design--cms-777).
+
+  
  </details>
  
  <details>
  <summary>Building and Deployment: Task Runners: Grunt and Gulp</summary>
  
-  ### Second
+  ### 11. Task Runners
+  - Will concentrate on task renders. Two in particular, `Grunt` and `Gulp`, and try to understand how they facilitate their automation of the various web developement tasks.
+  - `Grunt` and `Gulp` enable us to double up automated tasks for executing and building and deploying our website.
+  - `Grunt` operates based on doing configuration.
+  - `Gulp` concentrates more on code.
+  - Both are built around plugins. So, both Grunt and Gulp provide a framework for which you write various plugins that enable you to perform these kinds of tasks.
+  
+  ### 12. Exercise: Grunt Part 1
+  - `$ npm install -g grunt-cli@1.2.0` -> install [Grunt-command-line](https://www.npmjs.com/package/grunt-cli)interface (CLI).
+  - `$ npm install grunt@1.0.2 --save-dev` -> install [Grunt](https://www.npmjs.com/package/grunt) to use within your project.
+  - Next create a file named `Gruntfile.js` in the project folder and add the following code:
+  ```
+  'use strict';
+
+  module.exports = function (grunt) {
+    // Define the configuration for all the tasks
+    grunt.initConfig({
+
+    });
+  };
+  ```
+  
+  This sets up the Grunt module ready for including the grunt tasks inside the function above.
+  
+  - Next, we are going to set up our first `Grunt` task. The `SASS` task converts the `SCSS` code to `CSS`. 
+  - To do this, you need to include some Grunt modules that help us with the tasks, [grunt-sass](https://www.npmjs.com/package/grunt-sass), [time-grunt](npmjs.com/package/time-grunt), [jit-grunt](https://www.npmjs.com/package/jit-grunt). 
+  - Install the following modules by typing the following at the prompt:
+  ```
+  $ npm install grunt-sass@2.1.0 --save-dev
+  $ npm install time-grunt@1.4.0 --save-dev
+  $ npm install jit-grunt@0.10.0 --save-dev
+  ```
+  
+  
   
  </details>
   
