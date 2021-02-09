@@ -1229,13 +1229,7 @@
    
   
  </details>
-  
- <details>
- <summary>Conclusions</summary>
  
-  ### 16. 
-  
- </details>
  
 ## Course 2: Front-End Web Development with React
 
