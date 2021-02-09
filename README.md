@@ -854,12 +854,53 @@
   This sets up the Grunt module ready for including the grunt tasks inside the function above.
   
   - Next, we are going to set up our first `Grunt` task. The `SASS` task converts the `SCSS` code to `CSS`. 
-  - To do this, you need to include some Grunt modules that help us with the tasks, [grunt-sass](https://www.npmjs.com/package/grunt-sass), [time-grunt](npmjs.com/package/time-grunt), [jit-grunt](https://www.npmjs.com/package/jit-grunt). 
+  - To do this, you need to include some Grunt modules that help us with the tasks:
+    - [grunt-sass](https://www.npmjs.com/package/grunt-sass) -> installs the Grunt module for SCSS to CSS conversion
+    - [time-grunt](npmjs.com/package/time-grunt) -> generates time statistics about how much time each task consumes 
+    - [jit-grunt](https://www.npmjs.com/package/jit-grunt) -> enables us to include the necessary downloaded Grunt modules when needed for the tasks.
+    
   - Install the following modules by typing the following at the prompt:
   ```
   $ npm install grunt-sass@2.1.0 --save-dev
   $ npm install time-grunt@1.4.0 --save-dev
   $ npm install jit-grunt@0.10.0 --save-dev
+  ```
+  - Now, configure the SASS task in the Gruntfile as follows, by including the code inside the function in Gruntfile.js:
+  ```
+  'use strict';
+
+  module.exports = function (grunt) {
+      // Time how long tasks take. Can help when optimizing build times
+      require('time-grunt')(grunt);
+
+      // Automatically load required Grunt tasks
+      require('jit-grunt')(grunt);
+
+      // Define the configuration for all the tasks
+      grunt.initConfig({
+          sass: {
+              dist: {
+                  files: {
+                      'css/styles.css': 'css/styles.scss'
+                  }
+              }
+          }
+      });
+
+      grunt.registerTask('css', ['sass']);
+
+  };
+  ```
+  - `$ grunt css` -> run the grunt SASS task.
+  - The final step is to use the Grunt modules watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated :
+  ```
+  $ npm install grunt-contrib-watch@1.0.0 --save-dev
+  $ npm install grunt-browser-sync@2.2.0 --save-dev
+  ```
+  - The final step is to use the Grunt modules watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated. To do this, install the following grunt modules:
+  ```
+  $ npm install grunt-contrib-watch@1.0.0 --save-dev
+  $ npm install grunt-browser-sync@2.2.0 --save-dev
   ```
   
   
