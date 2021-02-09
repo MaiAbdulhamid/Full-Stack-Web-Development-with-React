@@ -892,25 +892,348 @@
   };
   ```
   - `$ grunt css` -> run the grunt SASS task.
-  - The final step is to use the Grunt modules watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated :
+  
+  - The final step is to use the Grunt modules:
   ```
   $ npm install grunt-contrib-watch@1.0.0 --save-dev
   $ npm install grunt-browser-sync@2.2.0 --save-dev
   ```
-  - The final step is to use the Grunt modules watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated. To do this, install the following grunt modules:
+  - [grunt-contrib-watch](https://www.npmjs.com/package/grunt-contrib-watch), [grunt-browser-sync](https://www.npmjs.com/package/grunt-browser-sync) -> watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated
+  - After this, we will configure the browser-sync and watch tasks by adding the following code to the Grunt file:
   ```
-  $ npm install grunt-contrib-watch@1.0.0 --save-dev
-  $ npm install grunt-browser-sync@2.2.0 --save-dev
+   ,
+   watch: {
+      files: 'css/*.scss',
+      tasks: ['sass']
+   },
+   browserSync: {
+      dev: {
+          bsFiles: {
+              src : [
+                  'css/*.css',
+                  '*.html',
+                  'js/*.js'
+              ]
+          },
+          options: {
+              watchTask: true,
+              server: {
+                  baseDir: "./"
+              }
+          }
+      }
+   }
+  ```
+  - `grunt.registerTask('default', ['browserSync', 'watch']);` -> add to Grunt file.
+  - `$ grunt` -> It will start the server, and open the web page in your default browser. It will also keep a watch on the files in the css folder, and if you update any of them, it will compile the scss file into css file and load the updated page into the browser (livereload).
+  
+  ### 13. Exercise: Grunt Part 2
+  - [grunt-contrib-clean](npmjs.com/package/grunt-contrib-copy) to copy over files to a distribution folder named dist, and [grunt-contrib-clean](https://www.npmjs.com/package/grunt-contrib-clean) to clean up the dist folder when needed. Install the following Grunt modules:
+  ```
+  $ npm install grunt-contrib-copy@1.0.0 --save-dev
+  $ npm install grunt-contrib-clean@1.1.0 --save-dev
+  ```
+  - Add the following code to `Gruntfile.js` after the configuration of the SASS task.:
+  ```
+   ,
+   copy: {
+      html: {
+          files: [
+          {
+              //for html
+              expand: true,
+              dot: true,
+              cwd: './',
+              src: ['*.html'],
+              dest: 'dist'
+          }]                
+      },
+      fonts: {
+          files: [
+          {
+              //for font-awesome
+              expand: true,
+              dot: true,
+              cwd: 'node_modules/font-awesome',
+              src: ['fonts/*.*'],
+              dest: 'dist'
+          }]
+      }
+   },
+   clean: {
+       build: {
+           src: [ 'dist/']
+       }
+   }
+  ```
+  - `$ npm install grunt-contrib-imagemin@2.0.1 --save-dev` -> install the grunt-contrib-imagemin module and use it to process the images.
+  - Configure the imagemin task as shown below in the Gruntfile:
+  ```
+   ,
+   imagemin: {
+       dynamic: {
+           files: [{
+               expand: true,                  // Enable dynamic expansion
+               cwd: './',                   // Src matches are relative to this path
+               src: ['img/*.{png,jpg,gif}'],   // Actual patterns to match
+               dest: 'dist/'                  // Destination path prefix
+           }]
+       }
+   }
+  ```
+  - Use the Grunt usemin module together with concat, cssmin, uglify and filerev to prepare the distribution folder. To do this, install the following Grunt modules:
+  ```
+   $ npm install grunt-contrib-concat@1.0.1 --save-dev
+   $ npm install grunt-contrib-cssmin@2.2.1 --save-dev
+   $ npm install grunt-contrib-htmlmin@2.4.0 --save-dev
+   $ npm install grunt-contrib-uglify@3.3.0 --save-dev
+   $ npm install grunt-filerev@2.3.1 --save-dev
+   $ npm install grunt-usemin@3.1.1 --save-dev
+  ```
+  - Configuration within the `Gruntfile.js`:
+  ```
+  ,
+  useminPrepare: {
+     foo: {
+         dest: 'dist',
+         src: ['contactus.html','aboutus.html','index.html']
+     },
+     options: {
+         flow: {
+             steps: {
+                 css: ['cssmin'],
+                 js:['uglify']
+             },
+             post: {
+                 css: [{
+                     name: 'cssmin',
+                     createConfig: function (context, block) {
+                     var generated = context.options.generated;
+                         generated.options = {
+                             keepSpecialComments: 0, rebase: false
+                         };
+                     }       
+                 }]
+             }
+         }
+     }
+  },
+
+  // Concat
+  concat: {
+     options: {
+         separator: ';'
+     },
+
+     // dist configuration is provided by useminPrepare
+     dist: {}
+  },
+
+  // Uglify
+  uglify: {
+     // dist configuration is provided by useminPrepare
+     dist: {}
+  },
+
+  cssmin: {
+     dist: {}
+  },
+
+  // Filerev
+  filerev: {
+     options: {
+         encoding: 'utf8',
+         algorithm: 'md5',
+         length: 20
+     },
+
+     release: {
+     // filerev:release hashes(md5) all assets (images, js and css )
+     // in dist directory
+         files: [{
+             src: [
+                 'dist/js/*.js',
+                 'dist/css/*.css',
+             ]
+         }]
+     }
+  },
+
+  // Usemin
+  // Replaces all assets with their revved version in html and css files.
+  // options.assetDirs contains the directories for finding the assets
+  // according to their relative paths
+  usemin: {
+     html: ['dist/contactus.html','dist/aboutus.html','dist/index.html'],
+     options: {
+         assetsDirs: ['dist', 'dist/css','dist/js']
+     }
+  },
+
+  htmlmin: {                                         // Task
+     dist: {                                        // Target
+         options: {                                 // Target options
+             collapseWhitespace: true
+         },
+         files: {                                   // Dictionary of files
+             'dist/index.html': 'dist/index.html',  // 'destination': 'source'
+             'dist/contactus.html': 'dist/contactus.html',
+             'dist/aboutus.html': 'dist/aboutus.html',
+         }
+     }
+  }
+  ```
+  - update the jit-grunt configuration:
+  ```
+  require('jit-grunt')(grunt, {
+    useminPrepare: 'grunt-usemin'
+  });
+  ```
+  - Update the Grunt build task:
+  ```
+  grunt.registerTask('build', [
+     'clean',
+     'copy',
+     'imagemin',
+     'useminPrepare',
+     'concat',
+     'cssmin',
+     'uglify',
+     'filerev',
+     'usemin',
+     'htmlmin'
+  ]);
+  ```
+  - `$ grunt build` -> run Grunt.
+  
+
+  ### 14. Exercise: Gulp Part 1
+  - [Gulp](https://gulpjs.com/).
+  - `$ npm install -g gulp-cli` -> install Gulp command-line interface (CLI).
+  - `$ npm install gulp` -> install Gulp.
+  - `$ npm i gulp-dart-sass browser-sync` -> Install Gulp Plugins [gulp-dart-sass](https://www.npmjs.com/package/gulp-dart-sass) and [Browser-Sync](https://browsersync.io/docs/gulp).
+  - Create a file named `gulpfile.js` in the project folder.
+  - Load in all the Gulp plugins by including the following code in the Gulp file:
+
+  ```
+  "use strict";
+
+  var gulp = require("gulp"),
+      sass = require('gulp-dart-sass'),
+      browserSync = require("browser-sync");
+
+  gulp.task("sass", function () {
+    return gulp
+      .src("./css/*.scss")
+      .pipe(sass().on("error", sass.logError))
+      .pipe(gulp.dest('./css'));
+  });
+
+  gulp.task("sass:watch", function () {
+    gulp.watch("./css/*.scss", ["sass"]);
+  });
+  gulp.task("browser-sync", function () {
+    var files = [
+      "./*.html",
+      "./css/*.css",
+      "./js/*.js",
+      "./img/*.{jpg, jpeg, gif}",
+    ];
+    browserSync.init(files, {
+      server: {
+        baseDir: "./",
+      },
+    });
+  });
+
+  gulp.task('default', gulp.series('browser-sync', 'sass:watch'))
+  ```
+  - The way Gulp works is like you take a set of files and you specify the set of files by saying gulp source
+  - The pipe allows the stream to be piped through a function.
+  - The gulp dest specifies the destination of the files that have been processed.
+  - Your stream files through the pipes until they are transferred and then they will be deposited at specified destination.
+  - `$ gulp` -> run the default task.
+
+  ### 15. Exercise: Gulp Part 2
+  - [del module with gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md).
+  - `$ npm install del` -> create the tasks for copying the font files and cleaning up the distribution folder.
+  - `var del = require('del')` -> require module.
+  - Add the code for the Clean task and the copyfonts task as follows:
+  ```
+  // clean Task
+  gulp.task('clean', function(){
+    return del(['dist'])
+  })
+
+  // Copyfiles
+  gulp.task('copyfiles', function(){
+    return gulp.src('./node_modules/font-awesome/fonts/**/*.{eot, svg, ttf, woff, woff2}*')
+           .pipe(gulp.dest('./dist/fonts'));
+  })
+  gulp.task('default', gulp.series('browser-sync', 'sass:watch'))
+  ```
+  - `$ npm i gulp-imagemin` -> install [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) plugin.
+  - `var imagemin = require('gulp-imagemin'),` -> require module.
+  - create the imagemin task:
+  ```
+  // Images
+  gulp.task('imagemin', function() {
+    return gulp.src('img/*.{png,jpg,gif}')
+         .pipe(imagemin([
+           imagemin.gifsicle({interlaced: true}),
+           imagemin.mozjpeg({quality: 75, progressive: true}),
+           imagemin.optipng({optimizationLevel: 5})
+         ]))
+        .pipe(gulp.dest('dist/img'));
+  });
+  ```
+  - Execute the clean task before the remaining tasks are executed because we want to first clean up the distribution folder. And that has to be completed before the remaining tasks are done.
+  - `$ npm install gulp-uglify gulp-usemin gulp-rev gulp-clean-css gulp-flatmap gulp-htmlmin` -> install the gulp-usemin and other related Gulp plugins.
+  - Require plugins and add usemin task:
+  ```
+  var
+      uglify = require('gulp-uglify'),
+      usemin = require('gulp-usemin'),
+      rev = require('gulp-rev'),
+      cleanCss = require('gulp-clean-css'),
+      flatmap = require('gulp-flatmap'),
+      htmlmin = require('gulp-htmlmin');
+
+
+  gulp.task('usemin', function() {
+    return gulp.src('./*.html')
+    .pipe(flatmap(function(stream, file){
+        return stream
+          .pipe(usemin({
+              css: [ rev() ],
+              html: [ function() { return htmlmin({ collapseWhitespace: true })} ],
+              js: [ uglify(), rev() ],
+              inlinejs: [ uglify() ],
+              inlinecss: [ cleanCss(), 'concat' ]
+          }))
+      }))
+      .pipe(gulp.dest('dist/'));
+  });
+  
+  ```
+  - Flatmap takes these multiple htmlfiles and then starts up parallel pipelines for each one of these htmlfiles. Each one of them going through the same set of steps and then finally, converging and copying it into the destination folder. 
+  - Usemin task takes the htmlfiles and then looks up the CSS and JavaScript blocks in the htmlfiles, combines, concatenates, and minifies and nuglifies the files and then replaces them by using the concatenated file in the distribution folder. 
+  - All the tasks that we specify here are going to be executed in parallel:
+  ```
+  // Build Task
+  gulp.task('build', gulp.series('clean','copyfiles', 'imagemin', 'usemin'))
   ```
   
-  
+  - `$ gulp build` -> Run!
+   
+   
   
  </details>
   
  <details>
  <summary>Conclusions</summary>
  
-  ### Second
+  ### 16. 
   
  </details>
  
