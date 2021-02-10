@@ -1225,8 +1225,6 @@
   ```
   
   - `$ gulp build` -> Run!
-   
-   
   
  </details>
  
@@ -1240,59 +1238,145 @@
  <details>
  <summary>Welcome to Front-End Web Development with React</summary>
  
- ### Welcome to Front-End Web Development with React
+ ### 1. Welcome to Front-End Web Development with React
+ - we are concentrating more on building up our hard web development skills.
+ - this course concentrates on the React library and the React ecosystem.
  
- ### How to Use the Learning Resources
+ ### 2. How to Use the Learning Resources
+ - As you learn and make use of the concepts and technologies that you learn in this course, you'll begin to understand more and more about this particular topic.
  
  ### Additional Resources
+ - [React](https://reactjs.org/)
   
  </details>
- 
  <details>
- <summary>Full-Stack Web Development: The Big Picture</summary>
+ <summary>Full Stack Web Development: The Big Picture</summary>
  
- ### What is Full-Stack Web Development?
- 
- ### Additional Resources
+ ### 3. What is Full-Stack Web Development?
 
+ - **The frond end**: is where we are delivering the content to the user, typically, in a browser where they use accesses the information, and this is where we use technologies like HTML, CSS and JavaScript to render the content for to the user.
+ - This information delivery is supported behind the scenes by a back end support which is typically implemented these days using technologies like PHP, Java, ASP.NET, Ruby, Python or NodeJS.
+ - The three tier architecture for Web Development:
+ - The presentation layer, which is concerned with delivering the to the user, So, this is usually the UI-related concerns that are dealt with at the presentation layer(front-end).
+ - The Business Logic Layer, on the other hand, is concerned more about the data, the data validation, the dynamic content processing, and generating the content to be delivered to the user(servers). 
+ - This is backed up behind the scenes with the data persistence layer or the data access layer. So, this is concerned with how we store and interact with the data, typically, in the form of a database and access this data through an API(Databases). 
+ - Additional Links:
+   - [What is a Full Stack developer](https://www.laurencegellert.com/2012/08/what-is-a-full-stack-developer/)
+   - [What is a Full-stack Web Developer After All](https://edward-designer.com/web/full-stack-web-developer/)
+   - [The Myth of the Full-stack Developer](https://www.andyshora.com/full-stack-developers.html)
+   - [What is the 3-Tier Architecture?](http://www.tonymarston.net/php-mysql/3-tier-architecture.html)
+   - [Multitier architecture](https://en.wikipedia.org/wiki/Multitier_architecture).
+    
  </details>
+
  
  <details>
  <summary>Setting up your Development Environment: Git and Node</summary>
- 
+  
+ ### 4. Setting up Git
 
- ### Setting up your Development Environment
+ - **version control system**: This is a software tool that enables us for the management of changes to source code and maintaining your version history. So as your source code evolves, you will be able to check in the code at different points of times so that you can always have a way of rolling back to a previous version, in case your updates to the code doesn't work correctly.
+ - [git-scm](https://git-scm.com/downloads)
+ - `$ git --version` -> to check what version of git is installed on your computer.
+ - `$ git config --global user.name "username"` -> will configure a global identity parameters, the username.
+ - `$ git config --global user.email "email"` -> will configure a global identity parameters, the email.
+ - `$ git config --list` -> to insure that this information has been configured.
 
- ### Exercise: Setting up Git
+ ### 5. Basic Git Commands
 
- ### Exercise: Basic Git Commands
+ - `$ git init` -> This initializes the current folder as a git repository and when it initializes the folder, it will mark that folder as a master(branch). 
+ - `$ git status` -> It'll tell you the current status of the folder.
+ - `$ git add .` -> means that all the files in the current directory will be added to what is called as the staging area of my git repository.
+ - `$ git commit -m "Message"` -> commit the current state of our folders into our git repositories.
+ - `$ git log --oneline` -> will show us a brief log of all the commits, commitNumber and the commit message.
+ -  commitNumber -> identifies the particular commit.
+ - `$ git checout commitNumber <file>` -> allows us to check out a file from a previous commit in our git repository.
+ - `$ git reset HEAD <file>` -> the modified version that I had checked out is still there but this file has been unstaged from the staging area.
+ - `$ git checkout -- <file> ` -> discard the changes that you have made to a particular file corresponding to the previous commit.
+ - `$ git reset <file> ` -> it'll restore you back to the last commit. So it will reset the staging area to the last commit, without disturbing the changes that you have done to your working directory. 
+ - `$ git reset ` -> restore your folder back to the where you were at the starting point of the previous commit.
 
- ### Exercise: Online Git Repositories
+ ### 6. Online Git Repositories
 
- ### Node.js and NPM
+ - Online Git repositories enable you to store a copy of your Git repository online.
+ - Popular Git repositories: [Github](https://github.com/), [bitbucket](https://bitbucket.org/).
+ - `$ git remote add origin <repositoryUrl>` -> Add the remote origin is set to the online repository.
+ - `$ git push -u origin master` -> push the local git repository to my online repository.
+ - Remember that your local repository can only be matched to one online repository.
+ - `$ git clone <repositoryUrl>` -> Make a copy of that Git repository on to your local.
 
- ### Exercise: Setting up Node.js and NPM
+ ### 7. Node.js and NPM
 
- ### Exercise: Basics of Node.js and NPM
+ - Node.js has played a significant role in this shift of JavaScript from the browser to the desktop.
+ - Node js is based on the JavaScript runtime engine that has been built for the Chrome browser.
+ - Node.js is built around an event-driven, non-blocking I/O model which makes it very efficient to run JavaScript programs on the desktop, asynchronous JavaScript on the desktop. 
+ - When you install Node on your computer NPM automatically gets installed.
+ - The Node package manager is the manager for the Node ecosystem.
+ - NPM manages all the Node modules and packages that have been made publicly available by many different users.
+ - `package.json` -> the manifest file for this Node module.
 
- ### Additional Resources
+ ### 8. Setting up Node.js and NPM
+
+ - To install Node on your machine, go to [Node.js](https://nodejs.org/en/) and click on the Download button. Depending on your computer's platform (Windows, MacOS or Linux), the appropriate installation package is downloaded.
+ - `$ node -v` -> to check the version of node installed.
+ - `$ npm -v` -> to check the version of NPM installed.
+
+ ### 9. Basics of Node.js and NPM
+
+ - The **[lite-server](https://github.com/johnpapa/lite-server)**: is something that we're going to extensively use in this and future courses, to be able to see the changes in real time in a browser window as you edit the files of your project.
+ - `package.json` file:
+   - it serves as the documentation on what all other packages that your project is dependent upon.
+   - it allows you to specify which specific version of a package that your project is dependent on.
+   - it makes your builds reproducible, which means that when you share your code with others, then they can also do installation of all the node modules.
+ - `$ npm init` ->  initialize the `package.json` file.
+ - `$ npm i lite-server --save-dev` -> Set up this lite server.
+ - save-dev option specifies that this lite server is used for development dependency for our project. 
+ - You will immediately notice that there is a folder there created named node_modules, which contain node modules.
+ - This lite-server node module is dependent on other node modules to provide it with some additional functionality. So that's the reason when you install the light server node module, it'll in turn install many other node modules, on which the light server itself is dependent on.
+ - In `package.json` file: there is an option called scripts. Add `"start":"npm run lite"` before `"test"`. Add `"lite": "lite-server"` after `"test"`.
+ - now our project is configured, so that now if you start the lite- server, the contents of your folder will be now served up in your favorite browser.
+ - `$ npm start` -> Start the lite-server, and it will serve up the contents of this folder.
+ - This should automatically open the browser window of your default browser, and show the contents of index or HTML in the browser window.
+ - So when you make a change and then save the file, the modified code is immediately loaded into your browser. So you can immediately see the change being reflected in your browser window.
+ - Add `.gitignore` file, and the first line of that file, we will type as node_modules. So what this means is that the node_modules folder is going to be excluded from our git commit.
   
  </details>
  
  <details>
  <summary>Introduction to React</summary>
  
- ### Front-end JavaScript Frameworks and Libraries Overview
+ ### 10. Front-end JavaScript Frameworks and Libraries Overview
+ - When you need complex manipulations of the DOM, especially by fetching data from a server and then update the DOM, it gets fairly complicated using tools like jQuery and plain Vanilla JavaScript.
+ - we realize that for a full-fledged web application, we will need a structured way of approaching this, and so that is where software engineering paradigms like the Model-View-Controller, Model-View-ViewModel, help us to structure our web application.
+ - A software library gives you a well-defined collection of implementations or repeated behaviors that you can use to quickly implement complicated applications.
+ - A software framework is an abstraction in which the framework provides a set of generic functionality that you can then customize by implementing it on user defined code.
+ - A framework clearly defines how the application should be implemented and very often, it is highly opinionated in the way the application needs to be implemented.
+ - **ٌReact** will call upon their specific functionality that you implement as a web application designer in order to customize the generic functionality that the framework provides (inversion of control).
+ - In an imperative approach, the application designer clearly specifies how the work needs to be accomplished or how the application needs to be executed.
+ - In the declarative approach, the application designer simply specifies what needs to be accomplished and leaves it up to the framework to decide how the work is going to be accomplished.
 
- ### Introduction to React
+ ### 11. Introduction to React
+ - React is a JavaScript library for building user interfaces.
+ - React also states that it uses a declarative approach.
+ - React takes care of automatically updating the UI and then rendering any changes to their specific components as required on your page.
+ - React Indeed is a component based approach.
+ - React makes no assumptions about the entire technology stack that you're going to use for implementing your Web applications. React plays well with any technology stack that you can use behind the seats.
+ - React itself concentrates only on the user interface side of the story, and that leaves it up to the application designer to decide how they want to implement the architecture and how they want your application to interact with the back-end server.
+ - React history:
+  - React was first designed by Jordan Walke who was part of the Facebook team. 
+  - It was first deployed for Facebook's news feed around 2011. 
+  - Subsequently in 2013, React was open sourced at this JS conference.
+  - React took off as an approach for implementing Web applications from then onwards. 
+  - React is designed for speed, speed of implementing the application, simplicity, and scalability.
 
- ### Exercise: Getting Started with React
+ ### 12. Exercise: Getting Started with React
+ - In this course I'm going to use [Yarn](https://yarnpkg.com/) for installing and downloading all my Node modules for my React application.
 
- ### React App Overview
+ ### 13. React App Overview
 
- ### Introduction to JSX
+ ### 14. Introduction to JSX
 
- ### Exercise: Configuring your React Application
+ ### 15. Exercise: Configuring your React Application
 
  ### Additional Resources
   
