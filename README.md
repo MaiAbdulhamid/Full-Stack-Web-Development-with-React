@@ -1371,14 +1371,75 @@
 
  ### 12. Exercise: Getting Started with React
  - In this course I'm going to use [Yarn](https://yarnpkg.com/) for installing and downloading all my Node modules for my React application.
+ - yarn global add create-react-app -> `$ yarn create react-app confusion` or `$ npx create-react-app confusion`.
+ - `$ cd confusion`
+ - `$ yarn start` or `$ npm start`.
+ - You can initialize your project to be a Git repository:
+ ```
+ $ git init
+ $ git add .
+ $ git commit -m "Initial Setup"
+ ```
+ - You can synchronize this git repository with an online git repository either on GitHub or on bitbucket. 
 
  ### 13. React App Overview
+ - Element is the smallest building in React -> ` const element = <h1 className="App-title">Welcome to React</h1>;`.
+ - Components are made of elements -> ` class App extends Component { elements }`.
+ - Rendered using ReactDOM. In `./src/index.js`:
+ 
+ ```
+ ReactDOM.render(
+   <React.StrictMode>
+     <App />
+   </React.StrictMode>,
+   document.getElementById('root')
+ )
+ ```
+ - In `./public/index.html` -> `<div id="root"></div>`.
 
  ### 14. Introduction to JSX
+ - JSX : 
+   - Syntactic extension to JavaScript
+   - Shorthand notation to represent JavaScript functions calls that evaluate to JavaScript objects
+   - Avoids artificial separation of rendering logic from other UI logic
+ - Many of the standard HTML CACs have corresponding react components that are already defined, predefined react components.
+
 
  ### 15. Exercise: Configuring your React Application
+ - `Reactstrap` supplies is Bootstrap components re-implement using React components. 
+ ```
+ $ yarn add bootstrap
+ $ yarn add reactstrap
+ $ yarn add react-popper
+ ```
+ - Open `index.js` file in the `src` folder and add the following line into the imports:
+ ```
+ import 'bootstrap/dist/css/bootstrap.min.css';
+ ```
+ - Open `App.js` in the `src` folder and update it:
+ ```
+ import { Navbar, NavbarBrand } from 'reactstrap';
+
+ class App extends Component {
+   render() {
+     return (
+       <div className="App">
+         <Navbar dark color="primary">
+           <div className="container">
+             <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+           </div>
+         </Navbar>
+       </div>
+     );
+   }
+ }
+ ```
 
  ### Additional Resources
+ - [Imperative vs Declarative](http://latentflip.com/imperative-vs-declarative).
+ - [Imperative vs. Declarative Programming](https://www.netguru.com/blog/imperative-vs-declarative).
+ - [Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control).
+ - [Why isn't React called framework? What does it lack to be a framework?](https://hashnode.com/post/why-isnt-react-called-framework-what-does-it-lack-to-be-a-framework-ciwm324og010xzx53wjfq354i)
   
  </details>
   
@@ -1386,15 +1447,123 @@
  <summary>React Components</summary>
  
 
- ### React Components
+ ### 15. React Components
+ - We can look at a component as a unit that returns a group of React elements that together render it part of the screen.
+ - The use of react components enables us to split the user interface into multiple independent, reusable pieces. 
+ - You can easily control what a component renders by supplying inputs to the component.
+ - You should always start the name of the component with a capital letter. 
 
- ### Exercise: React Components Part 1
+ ### 16. Exercise: React Components Part 1
+ - First, download the images.zip file provided above and then unzip the file. Create a folder named assets in the public folder. Move the resulting images folder containing some PNG files to the React project's public/assets folder. These image files will be useful for our exercises.
+ - Next, add a new folder named `components` in the `src` folder, and create a new file named `MenuComponent.js` in this folder.
+ - Add the following code to `MenuComponent.js`:
+ ```
+ import React, { Component } from 'react'
+ import { Media } from 'reactstrap'
 
- ### React Components: State and Props
+ class Menu extends Component{
+   constructor(props){
+     super(props)
+     this.state = {
+       dishes: [
+         {
+           id: 0,
+           name:'Uthappizza',
+           image: 'assets/images/uthappizza.png',
+           category: 'mains',
+           label:'Hot',
+           price:'4.99',
+           description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+         },
+         {
+           id: 1,
+           name:'Zucchipakoda',
+           image: 'assets/images/zucchipakoda.png',
+           category: 'appetizer',
+           label:'',
+           price:'1.99',
+           description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
+         },
+         {
+           id: 2,
+           name:'Vadonut',
+           image: 'assets/images/vadonut.png',
+           category: 'appetizer',
+           label:'New',
+           price:'1.99',
+           description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
+         },
+         {
+            id: 3,
+            name:'ElaiCheese Cake',
+            image: 'assets/images/elaicheesecake.png',
+            category: 'dessert',
+            label:'',
+            price:'2.99',
+            description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
+         }
+       ]
+     }
+   }
+   render(){
+     const menu  = this.state.dishes.map(dish => {
+       return (
+         <div key={dish.id} className="col-12 mt-5">
+         <Media tag="li">
+           <Media  left middle href="#">
+             <Media object src={dish.image} alt={dish.name} />
+           </Media>
+           <Media body className="ml-5">
+             <Media heading>
+               {dish.category}
+             </Media>
+             {dish.description}
+           </Media>
+         </Media>
+         </div>
+       )
+     });
 
- ### Exercise: React Components Part 2
+     return(
+       <div className="container">
+         <div className="row">
+           <Media list>
+             {menu}
+           </Media>
+         </div>
+       </div>
+     );
+   }
+ }
 
- ### React Components: Lifecycle Methods Part 1
+ export default Menu;
+
+ ```
+ - Next, open App.js file and update it:
+ ```
+ import Menu from './components/MenuComponent';
+ ```
+ - Open `App.css` file and delete all its contents.
+
+ - Any component in React (a class component), should implement method called `render()` which will turn the corresponding view for this component.
+ - Don't forget to export the component from this file.
+ - The `state` stores in. Properties related to this component that we can make use of. 
+ - In React, every item requires a `key` attribute to be specified for it.
+ - The key helps React to recognize each one of these elements and while it is updating the screen so the keys will enable it to identify each of those elements uniquely.
+
+ ### 17. React Components: State and Props
+ - In react, only class components can store state.
+ - The `state` information is usually declared in the constructor of the class component.
+ - You cannot directly go and update the `state` by changing the property values. Instead, any update to a `state`  has to be done through `satState()` method.
+ - When you make use of the child component in your own component, then whatever attributes that you specify to the JSX element will be passed in as `props` to the child component.
+ - like the way you handle events in the DOM, you can also handle events similarly in react. But when you specify the events, then you use camel case to specify the events.
+
+ ### 18. Exercise: React Components Part 2
+ - Inside `src` folder, create a new subfolded named `shared` subfolder. 
+ - Use the `shared` subfolder to store all the information that is shared among various components in my React Application that I'm designing.
+ 
+ 
+ ### 19. React Components: Lifecycle Methods Part 1
 
  ### Additional Resources
 
