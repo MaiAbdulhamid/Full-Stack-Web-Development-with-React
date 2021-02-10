@@ -1238,23 +1238,177 @@
  ### week 1 :
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### Welcome to Front-End Web Development with React
+ 
+ ### How to Use the Learning Resources
+ 
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Full-Stack Web Development: The Big Picture</summary>
+ 
+ ### What is Full-Stack Web Development?
+ 
+ ### Additional Resources
+
+ </details>
+ 
+ <details>
+ <summary>Setting up your Development Environment: Git and Node</summary>
+ 
+
+ ### Setting up your Development Environment
+
+ ### Exercise: Setting up Git
+
+ ### Exercise: Basic Git Commands
+
+ ### Exercise: Online Git Repositories
+
+ ### Node.js and NPM
+
+ ### Exercise: Setting up Node.js and NPM
+
+ ### Exercise: Basics of Node.js and NPM
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Introduction to React</summary>
+ 
+ ### Front-end JavaScript Frameworks and Libraries Overview
+
+ ### Introduction to React
+
+ ### Exercise: Getting Started with React
+
+ ### React App Overview
+
+ ### Introduction to JSX
+
+ ### Exercise: Configuring your React Application
+
+ ### Additional Resources
+  
+ </details>
+  
+ <details>
+ <summary>React Components</summary>
+ 
+
+ ### React Components
+
+ ### Exercise: React Components Part 1
+
+ ### React Components: State and Props
+
+ ### Exercise: React Components Part 2
+
+ ### React Components: Lifecycle Methods Part 1
+
+ ### Additional Resources
+
+  
+ </details>
+   
+ <details>
+ <summary>Assignment 1: React Components</summary>
  
   ### Second
   
  </details>
  
- <details>
- <summary>What is Full-Stack Web Development?</summary>
+ ### week 2 :
  
-  ### Second
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ ### week  :
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
   
  </details>
  
@@ -1266,23 +1420,44 @@
  ### week 1 :
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
   
  </details>
  
@@ -1295,45 +1470,132 @@
  ### week 1 :
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
   
  </details>
  
  ### week 2 :
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
  
  <details>
- <summary>What is Full-Stack Web Development?</summary>
+ <summary>Title</summary>
  
-  ### Second
+ ### here
   
  </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ ### week  :
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Welcome to Front-End Web Development with React</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
