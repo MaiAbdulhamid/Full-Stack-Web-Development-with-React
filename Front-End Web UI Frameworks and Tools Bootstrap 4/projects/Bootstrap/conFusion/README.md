@@ -1,0 +1,3 @@
+- In this project I used bootstrap version `5` for my Implementation, and choosed `Gulp` to make tasks.
+- To run the project -> `$ gulp`
+- To run tasks -> `$ gulp build`

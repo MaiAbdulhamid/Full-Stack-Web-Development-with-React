@@ -1,0 +1,105 @@
+[MUSIC] So far, we have been
+concentrating on designing and implementing our website,
+be it HTML, CSS, or JavaScript code. Once your website is ready, the next step
+is to be able to build your website and to deploy it to a web server, so
+that it becomes publicly available. Then our second set of steps
+that we need to undergo before your website is ready for
+deployment on a web server. This is what we're going to look
+at in this and the next lesson. As I mentioned, web development and deployment involves a lot
+of repetitive tasks. Obviously, the writing of the HTML/CSS and
+JavaScript code is one part of it. But the other part is
+the fact that if you write the CSS code using one of the CSS
+preprocessing languages, like Sass or Less, then you need to convert that
+code into the corresponding CSS code. Thereafter, you need to do
+additional processing on your CSS files like minification,
+compaction, and concatenation. We'll talk a little bit more about
+these in the next few slides. Similarly, with your JavaScript code,
+you need to do JSHinting, checking for potential errors. Then concatenation of
+various script files and then even uglification and
+the mangling of the code. We'll talk a little bit about
+that in the next few slides. All these tasks are repetitive tasks,
+which we would like to automate as far as possible, so that we can
+concentrate on the actual design and building of our website,
+rather than these repetitive tasks. So that the DRY principle,
+do not repeat yourself principle, is very essential in this case. We don't want to be wasting our time
+on such repetitive combustion tasks, and instead,
+try to automate them as far as possible so that they can be executed
+whenever required. Let's talk about some of these
+repetitive tasks in a bit more detail. Let's take the example of CSS as a case. When we write CSS code,
+we often write the code using one of the preprocessing
+languages likes Less or Sass. Now once the code is written, then it
+needs to be converted into CSS by using one of the preprocessors as we
+have seen in the previous lesson. There, we may need to do some
+vendor specific prefixing for our CSS code to address the issues that
+might arise with various browsers. So this is where the task of
+doing auto-prefixing is used, whereby this can be automatically done for
+us. Similarly, once your CSS code is written,
+obviously, the way we write CSS code
+is to be humanly readable. But for a machine, it doesn't really
+care whether there are enough spaces between the code or
+whether it is properly formatted or not. So, minification is the process of
+removing all the unnecessary characters, the white space, newlines,
+comments, from your CSS code. So that your end result is a very
+compact file with minimum number of characters, so
+that may be served up very, very quickly. But at the same time, you want to preserve the functionality
+that you designed in your CSS code. Similarly, you might distribute
+your CSS code into many files, while you are designing and
+building your website. You may want to concatenate all of them
+into a single CSS file at the end, so that only a single CSS
+file needs to be downloaded by the browser when it is
+rendering your website. So concatenation is yet another task that is involved when
+you're building your website. Similarly, when you write JavaScript code,
+whether it is pure JavaScript or jQuery or
+one of the frameworks that we will use in the future courses of this specialization,
+you would need to write JavaScript code. So once you've written the JavaScript
+code, you'll want to be able to check the JavaScript code for
+errors and potential problems. Things like missing semicolons, Improper use of the language, and so on,
+so what we call as static code analysis. So if you want to be able to perform this,
+even before we deploy our website on the web server. Similarly, we might organize our
+code into multiple JavaScript files. When we actually deploy, we may want
+to concatenate all these files into a single JavaScript file and
+then use that in our web pages. And this concatenation can
+be done automatically. Similarly, the uglification of
+the JavaScript code, which stands for minification, meaning removing all
+the unnecessary white space and comments and so on. And mangling of the code,
+meaning reducing the names of the local variables to single
+letters wherever feasible. Now, from a perspective of a computer, it doesn't really care what the code
+looks like as long as it works correctly. For human readable format,
+we obviously write code in a lot more elaborate manner, so that it's easier for
+us to follow what the code is doing. So when you actually deploy, you may wish to remove all
+the extraneous features from your code. And then compact it so that the minimum
+amount of code will be served up. At the same time, upon completion
+of the JSHint concatenation and uglification process, you may still want to make sure that your
+resulting code will still work correctly. So, you may want to recheck your code for
+potential errors. CSS and JavaScript are two major aspects
+of your web development that you obviously need to pay
+a lot of attention to. But there are many other smaller
+tasks that you need to perform before your website is ready for
+deployment. You might include a lot of
+images into your web pages. Once your website is ready,
+you may want to compact those images so that you optimize the file sizes, so that their images will be minimum
+sized files to be deployed. Similarly, while you're doing development,
+you may be making modifications to, for example, your Sass files or
+your JavaScript code. When such modifications are done, you want to be able to automatically
+carry out those tasks, like concatenation, minification,
+and uglification tasks. So we could use watch tasks, whose main job is to keep
+a watch on all these files. And if any changes
+are done to these files, the tasks will be automatically executed. This will free up a lot of our time
+from doing repetitive tasks manually. We'll look at some of this in more
+detail in the exercises that follow. One other aspect,
+while you're doing your development, is to be able to serve up your code and watch the code in your browser. So we have seen the use of the live
+server in our previous development, where we had the server up and
+running and serving up the code. So that we can see the changes
+that we make instantaneously being rendered in the browser. So, for this, we need server and
+livereload mechanism, and live server that we saw earlier is one
+such example of how we can achieve this. Finally, if you are writing code,
+you obviously need to carry out testing of your code, which, in Bootstrap's case,
+is a lot less of consideration. But as you go on to use
+various JavaScript frameworks, testing becomes an equally important task. Finally, you want to be able to
+accomplish all these tasks and then build up your final deployment
+code that can then be uploaded to your web server to make your website
+available for the general public. The steps involved in building up your
+site for deployment, what we call as building up the distribution files,
+is also an equally important task. We'll look at some of these through
+examples in the next exercise and also the next lesson where we
+will look at task runners. [MUSIC]

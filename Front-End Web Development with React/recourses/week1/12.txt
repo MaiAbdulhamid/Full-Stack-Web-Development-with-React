@@ -1,0 +1,97 @@
+Now that we have examined React
+briefly in the previous two lectures, I'm sure you're curious about
+getting started with React, getting your hands dirty with
+starting out on a React application. So in this exercise, we will look at
+how we will get started with React. I'm sure by now your computer is
+already configured with Note and you have access to NPM,
+the package manager that comes with Note. Just like NPM, Yarn is yet another package manager that is very
+useful, especially in the React. In this course I'm going to use Yarn for
+installing and downloading all my Node modules for
+my React application. If you choose to instead stay
+with NPM that is perfectly fine. You can use NPMto accomplish
+exactly the same thing. And so whenever I use Yarn, I will
+also remind you about how you can use NPM to do exactly the same set of
+commands that you do with Yarn. So if you choose to use Yarn, it is important to get started first
+installing Yarn on your computer. So where do we get ahold of Yarn? If you choose to use Yarn instead
+of NPM for your React application, then I would suggest you go to this
+site called yarnpackage.com and then you Instructions there on how
+to install Yarn on your computer. So going to the getting started
+page you will see the installation instructions right there for
+your specific operating system. And so please follow along
+the instructions if you choose to use Yarn instead of using NPM. If you choose to use NPM
+that is perfectly fine. As I said, I will tell you both
+approaches as we go along in the exercises of this course, but
+I find that Yarn is much better suited when I am working
+with the React application. So that's why I choose to use Yarn. So go ahead and
+install Yarn on your computer as specified in the installation
+instructions here. If you go to the React site and
+then look up the documentation and especially in the installation, you would notice that there is a link
+to saying add React to a new app. And when you click on
+that the approach that is suggested by React is to
+use this create React app. Which they say is the best way of
+starting out building a new React single page application. In this course that is indeed
+the approach that I am going to take in order to make use of React with
+in this particular course. To get started open a terminal window or a command window on your computer and at the prompt type npm install -g create-react-app@1.5.2. As we go through this course,
+I will specify exact versions of the various NPM packages that
+I will use in this course. This is to ensure that when
+you go through this course, you will install the exact same versions
+of the NPM packages that I use in my course so that your journey
+through this course will be painless. If you are doing this installation
+on a Mac or a Linux machine, don't forget to put pseudo in
+front of the NPM install because we are installing this as
+a global package here. And wait for
+the installation to be completed. So once this is completed as you can see, I am using create-react-app
+version 1.5.2 in this course. After you install create-react-app you
+may need to restart your terminal or your command window in order for the create-react-app command to
+be made available at your prompt. So once you get restarted
+with your terminal or your command window at the prompt
+type create-react-app --help and that will print out a set
+of instructions on how we can use the create react app
+to create a React application. So once we understand this
+then we will get started creating our first React application. So to create our first React application
+let me go to a convenient location on my computer. So I will go into my
+documents Coursera folder. And in this folder I will create
+a new subfolder named React. So let me create a new
+subfolder named React. Again, if you are using a Windows machine,
+you can appropriately create the react some folder and
+then move into the React subfolder. And as you notice,
+this is empty at this moment. To scaffold out your very
+first React application at the prompt type create-react-app and then the name of your
+application as confusion. It will become more clear to you
+why I named this application as confusion as you go through the rest
+of this course, and wait for the create-react-app to create
+your React application. It will take some time for
+this to complete its work. Once it is completed doing
+its work you will notice that there will be a sub folder
+in there named confusion. So move into this subfolder and then to
+get started on your React application. You can just type yarn start or
+if you are using NPM you just type npm start and
+your React application will start up, and be served using that
+built-in server that is part of the create-react-app ecosystem. And once your react application
+is compiled then it'll become available at this address. So go to a browser and
+type this address into the address bar and then you will be able to
+view your React application. Going to my browser I have typed in
+that address into my address bar. And then you see the resulting
+React application here. We will examine the details of this
+React application in the next lecture. If you are going to initialize
+a git repository for your React application,
+which I would strongly suggest you do. So then, go to the confusion
+folder in another terminal tab or another command window. And the at the prompt type git init
+to initialize the git repository and then we can do a git status to look
+at the states of our folder and then do a git add space
+dot to add all the files from the git repository
+into my git staging area. And then again, if I do git status,
+you'll see all the files that have been checked into
+the staging area of my git. And then let's do a git commit, so at the prompt type git
+commit- m "Initial Setup. So this is the starting point for
+our React application. And so then when you say git
+status you will see that the your commit has been saved
+into the git repository. And then you can do git log and note that your very first commit has
+been put into the git repository there. Thereafter you can synchronize this
+git repository with an online git repository either on GitHub or
+on bitbucket. Make sure that your get repository
+is a private repository. With this we complete this very
+first exercise where we have used create-react-app to scaffold out
+our very first React application. We will examine what has been
+scaffolded out in the next lecture and thereafter we will start working on
+further developing our React application. [MUSIC]

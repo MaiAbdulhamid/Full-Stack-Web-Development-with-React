@@ -1,0 +1,112 @@
+In the previous exercise, we saw how we can leverage the JavaScript-based controls
+that are provided for the Bootstrap
+JavaScript components in order to control
+the behavior of the components. In particular, we saw the
+use of the carousel and how we were able to introduce two buttons to control the cycling behavior
+of the carousel. Now, I'm not fully satisfied
+with that implementation. I would like to now
+collapse the whole thing into one single button
+that can both indicate the current behavior of the carousel and also be able
+to control the carousel. So let's see how we can leverage further jQuery code in order to achieve this,
+in this exercise. To achieve that, we'll
+go back to the code in index.html where we
+defined the two buttons. I'm going to now
+remove this div for the button group because
+we are going to have only one single button
+instead of two buttons. So I have removed the div
+around the two buttons. I'm also going to delete
+one of the buttons, because we're going to work with just a single button
+for this exercise. So let me change the indentation. So now, this particular
+button that we have there, I'm going to rename
+this button as carouselButton. We will start out with
+this button being a button with the pause icon. We're going to flip the icon for this button through
+JavaScript code. So how do we do that? Taking a look at our web page, we'll now see that we have
+one single button here, which is currently
+indicating the pause there. Now, my hope at the end
+of this exercise is to turn this button into a single control whereby
+if I click on this button, it will pause the cyclic
+behavior of the carousel, and then simultaneously turn this button into a play button, meaning that this icon will be replaced with the play icon. So that this single button
+indicates what the current state of the cyclic behavior of my
+carousel is. How do we do that? We need to go and edit the JavaScript code in
+order to achieve that. Going down to the JavaScript code at the bottom of index.html page. So here, we had
+this script that we had included earlier in order to activate
+the two buttons there. I'm going to edit this code to make use of that single
+button that we have there. So coming down here, I'm going to remove this second part because we only have one single
+button now here, which is the carouselButton, and whenever that is clicked, you need to do something
+in response to doing that. So if the carousel button is clicked, then what do you do? Now, fortunately, depending on whether the button is
+a Play button or a Pause button, we'll be able to take
+an appropriate action. But how do we know whether it is a Play button
+or a Pause button? So this is where we're
+going to make use of some jQuery code in order to identify whether this is a play
+button or a pause button. To help us to identify this, we're going go inside here
+and then use an if statement, and inside there,
+I'm going to test to see whether this is
+a play or a pause button. So here I say, carouselButton.children span. So which means that, for this carousel button, inside where if there is
+an element with the span tag, so we obviously know that
+in our carousel button, we had the span tag which contained the Font
+Awesome icon there. So for that span tag, we're going to check hasClass. So we're going to
+check this hasClass, and then the class
+that we're going to check for is fa-pause. So which means that, if the span tag has
+the fa-pause class, then we know that this button is currently acting as
+the pause button. So obviously, when
+the button is clicked, the user is expecting that the cyclic behavior
+should be paused. So that's what we identify here. So you now see that
+we are writing some more advanced
+JavaScript code using the jQuery syntax in order
+to make this work correctly. So inside here, so
+what do I need to do? Now, so which means
+that if the button is currently a Pause button, then, obviously when
+the button is clicked, you want to pause the carousel. Then, in addition, we want
+now to be able to flip that icon from a pause
+icon to a play icon. So what we will do is, we will say right
+there after this, we'll say
+$carouselButton.children span, and then we'll say, removeClass. So we're going to
+remove the pause class. So notice how this works. We're going to remove the
+pause class from that, and then, we're going
+to add the playClass. So that way your
+button's icon is now going to be flipped from a
+Pause button to a Play button. So we're going to
+remove the pauseClass. I'm going to just
+copy this code and then paste it right there and then do
+the edit to this code. Same thing, for the carouselButton
+for the children span, I'm going to instead
+now of the removeClass, I would say addClass,
+and then fa-play. So that way, what
+we are doing is, we are flipping that button from a Pause button to a Play button. Also, we are pausing the cycling behavior
+of the carousel. Now, if this is
+not the case then, it should be a Play button so the opposite effect
+should be introduced. Then, I'm going to
+simply copy this code, and then do the other tests
+for the situation where the button is a playButton. So I would say else,
+now obviously, I don't need this if here
+but just to be doubly sure, I'm going to put that in there. Because there are
+only two possibilities, either it's a Pause
+button or a Play button, but just for my reassurance, I'm going to put that
+as an fa-play there. Now inside there,
+I'm going to change this from pause to cycle. Because from
+the previous exercise, you remember that if you want the cycling behavior to resume, you would have to set
+the carousel action to be cycle. Then similarly, for
+the remaining two statements, I am going to remove
+the playClass and then add the pauseClass. So notice how we are
+using a little bit of advanced jQuery code to be able to dynamically
+change the buttons icon, and at the same time, induce the appropriate cycling
+behavior on our carousel. Taking a look at our web page, you now see that
+my carousel is cycling, and you see that this button
+is currently a Pause button. When I click on this button, notice how it changes from
+Pause to a Play button there, and then simultaneously, my cycling behavior of
+the carousel is paused. So at this point, my carousel will remain paused at that location until
+I click the button. So now, if I click
+this button again, note the change from the Play
+button to a Pause button, and then the cycling behavior of the carousel will
+resume on the spot. So using a single button now, I'm able to both control the behavior of the carousel
+and also simultaneously, display the current state of my carousel's
+cycling behavior. If that is a Pause button, that means that my carousel
+is currently cycling. If that is a Play button, then my carousel is paused. So to resume it, I will have to click
+on the button. So this is one more
+additional change that you can do to the exercise. So now, you see
+how in our code we made use of the hasClass method, and we also saw the use of the removeClass and
+addClass methods, jQuery methods that we applied in order to manipulate the DOM to reflect the behavior as pertinent in
+this particular case. With this, we complete
+this exercise. It's time for you to
+do a Git commit with the message more
+Bootstrap and jQuery.

@@ -1,0 +1,25 @@
+[MUSIC] As we come to the conclusion of this
+course, it's time to look back and reflect about what we've
+covered in this course so far. And what is the way forward from this course towards the other
+courses of this specialization. Looking back at the big picture
+view of full stack web development. We have started out our journey by looking
+at the front-end web UI frameworks, in particular, Bootstrap 4,
+in this course. We will cover the remaining parts of
+the full stack web development stack in the rest of the courses
+of this specialization. In this course,
+we covered Bootstrap in great detail. We looked at responsive web design and how the Bootstrap grid system enables
+us to achieve responsive websites. We also looked at various Bootstrap CSS
+and JavaScript components. Along the way, we learned how to
+operate within the Node ecosystem for doing development. We learned web tools like Git,
+and we installed Node and learned about the NPM package manager. We also learned about task
+runners like Grunt and Gulp. And learned how to set up NPM scripts for automating frequently performed
+tasks in web development. As we move towards the next
+course of the specialization, in the next course we'll be
+concentrating on Javascript frameworks. So this is the other piece
+of the puzzle on front-end. So together with UI frameworks,
+the Javascript frameworks facilitate development of dynamic websites,
+especially the front-end. We'll look at the remaining parts,
+including hybrid development and server-side, in the remaining
+courses of the specialization. I hope you enjoyed going
+through this course. And I hope I'll see you back again in
+the next course of the specialization. [MUSIC]

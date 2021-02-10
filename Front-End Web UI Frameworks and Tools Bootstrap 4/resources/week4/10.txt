@@ -1,0 +1,223 @@
+[MUSIC] We'll now continue our journey with
+NPM scripts in this next exercise. Here, we're going to learn
+how to be able to build a distribution folder which
+contains all the files for our project that we can simply deploy
+to a web server that hosts our website. So given the HTML, CSS,
+and JavaScript files that we have already prepared in our project
+folder, we're going to, from those, process them by using the various
+tasks that we talked about. That is doing a CSS modification, concatenation, and
+JavaScript uglification, minification, and HTML minification and then generate a distribution
+folder with all the files. But essentially forms
+the set of files that can be deployed to our web server
+that hosts our website. To help you understand what we are going
+to do in this particular exercise, as we note from our index.html page,
+we have a set of CSS files that you included
+here using this link tag here. Similarly, you have a set of
+scripts that you have included at the bottom of this page
+using the script tag. We've included a set of JavaScript code. Now, what we're going to do in this
+exercise is to combine all these files into a single JavaScript
+file that will be delivered from our web server to a browser
+that is trying to view our website. This way, we minimize the number of
+downloads that the browser needs to do in order to render our website. Similarly, we're going to combine all
+the CSS code into one single CSS file, so that it can be delivered. So the combined CSS file will
+contain all the code for Bootstrap plus Bootstrap social,
+and also the Font Awesome and also the CSS code that we ourselves wrote. Similarly, there will be
+a single JavaScript file which will contain the jQuery tether,
+Bootstrap and the JavaScript code that we, ourselves wrote,
+all combined together in one single file. Now, this is how you can do
+deployment of your web pages. And instead of having multiple
+such files there, one way that deployment is done is to combine them into
+a single file so that one single download you get all the JavaScript code
+necessary for rendering your web page. One single download you get
+all the CSS code necessary for rendering your web page. And then, of course, the HTML file
+itself is going to be downloaded. To get these tasks to be completed,
+we need to use a certain set of NPM
+modules to accomplish this. Now, what we will end up
+doing is to build a folder in our projects file, and
+then we call that folder as dist, D-I-S-T. I'm just randomly naming
+that as a dist folder. In my case, what I mean by the dist
+folder is a distribution folder. At the end of the set of steps we're
+going to do, this folder will contain all the files that can be simply copied to
+the web server that hosts our website. To get started, what we're
+going to do is to set up a set of scripts here that will help
+us to automate this process. So first thing, we might prepare the distribution folder once
+then maybe we may do some edits to our source files then we may need
+to recompile our distribution folder. First step, we would set up the script for
+cleaning out that distribution folder essentially meaning,
+delete the distribution folder. So to do that, I'm going to take the help
+of an NPM module called as rimfraf. So I will install npm --save-dev rimfraf. This module helps us to clean
+out a folder completely. So once I have installed this,
+then I will set up a script in my package.json file to
+clean out all the files. Going to the package.json file,
+I'm going to add in, so remember always that coma is very,
+very important in those scripts. Sometimes you'll run into problems
+just because you forgot the comma. So make sure you put those
+commas where necessary. The next descript that I'm
+going to add is, clean, obviously as the name implies,
+this is going to clean out my folder. So I will say rimraf dist. What this means is that this,
+when executed, will clean out the distribution folder. So I will add that in, and then I will put that comma there because
+I'm going to add more scripts below this. So let me save the changes,
+the next step that I'm going to do is to install an npm module called
+copy files which are used to copy some font files from my node modules
+folder into my distribution folder. So that when it is deployed,
+the font files also get deployed. Going to the terminal, the next
+package that I'm going to install is npm -g, recall that this means that
+it should be installed globally. Since I am doing this on a Mac, I should say sudo npm -g, if you are doing
+it on Windows, you don't need the sudo. sudo npm -g install copy files. And then once that is installed ,this
+NPM module will help me to copy files from one folder to another folder. Now, let me introduce
+another NPM script here. Going to my package.json file, I'm going to create a new
+scrip here name copyfonts. This script is going to enable me
+to copy all the fonts files from my Font Awesome folder into
+my distribution folder. So that when my website is rendered, all these fonts files can
+also be sent out, such that my webpages are rendered correctly
+with the Font Awesome fonts in place. So to do that, I'll say, copy files -f, -f means it just simply copies the files
+without the full of hierarchy and simply copies the files from one
+location to another location. So I'll say copy files -f node_modules/font_awesome/fonts/star And dist/fonts, And then save the changes. Let me now illustrate how these
+two npm scripts work together. Going to my command window, I will type npm run copyfonts. When this runs,
+it's going to create a folder named dist in my project folder hierarchy. And then inside the dist, there will be a subfolder named fonts,
+which will contain the font files. So running this, you will immediately notice that
+the distribution folder is created here. And inside the distribution folder, you can see that there is
+a subfolder named fonts. And inside there, all the fontawesome
+files have been copied. This is how the copyfonts script works. Now, I'm going to show you
+how the clean script works. So if I type in npm run clean, this is
+going to delete that distribution folder. So when I run that,
+then you would notice that the distribution folder gets deleted
+from my projects folder hierarchy. So this is how the clean works. Now that we have these two scripts set up, we now need to be able to build up
+the remaining distribution files. In the next step, we're going to install
+a node module called imagemin-cli, which is the command line interface for
+the imagemin module. The imaginemin module will take a sect of
+image files and then compress them down. So it stacked the size of those files
+are minimized as far as possible, but still be rendered properly
+when our website is rendered. So this way,
+we will reduce the amount of data that needs to be downloaded by the browser
+when it needs to render our webpage. So if you are including images into
+your webpage, then imagemin task is something that you should learn in order
+tor reduce the size of your image files. So to do that, I'm going to install this
+imagemin node module as a global module. So I type in sudo, since I'm using a Mac, npm -g install imagemin-cli, and then install this node module. Sometimes on a Mac, some of the imagemin
+plugins do not get installed correctly. So that's why I'm giving these
+additional flags to the command, they're saying --unsafe-perm=true and
+--allow-root. Once that installation is complete, let me set up a script in order to
+do that magnification of my images. Going to package.json again,
+I'm going to set up the next script here. So I would say imagemin is the script
+name that I'm going to do, and I would say imagemin. And then since all my images are in
+the img folder, I would say img/*, and then then many files are going to
+be copied to dist image. So the original image files from the image
+folder that I have will be copied into the distribution folder and
+into the image subfolder there. So this completes my imagemin. Let me proceed forward with
+the remaining set up, and then we will see how we'll make use of the
+scripts that we have already set up there. Now that I have the test folder in there,
+which I might create, I don't want to check in the dist
+folder into my Git repository. So that's why into my .gitignore file,
+I'm going to add in the dist folder also. So the dist folder will be ignored when
+I do my check into the Git repository. So let's save the changes,
+going back to package.json. Now, what I'm going to do next
+is to install three different node modules,
+which enable me to do the modifications to my index.html file and
+the remaining HTML files there. At the command prompt,
+type in npm install --save dev. I'm going to install a module
+called as usemin-cli. This usemin-cli is the one that allows
+me to do the transformation from my HTML file. And then concatenate and
+combine all the CSS files into a single CSS file, and
+then put it into the distribution folder. Similarly, all the JS files will be
+concatenated and put into a single folder. So this usemin-cli is useful. But this usemin-cli takes the help of three other node
+modules called the cssmin, then uglifyjs, and htmlmin. So I need to install these three node
+modules in addition to usemin-cli. And I'm going to install this
+locally into my project, so that's why npm install --save-def. So this way, they will be
+remembered in my package.json file. So let's go ahead and
+complete the installation. Now that I have installed the usemin and the related node modules,
+I need to do some transformation to my index.html file and
+the remaining HTML files. Such that the usemin node_module
+recognizes that this group is a bunch of CSS files that need to be
+compressed, calculated, and verified. Similarly, this is the group of JavaScript
+files that need to be uglyfied, combined, and concatenated together. So to help the usemin package work, I need to add in a little bit
+of code into my index.html file. So right before the first link there, I'm going to add in a mark up here, which says !-- build:css. Now, this !--, as you'll recognize, is a comment from html perspective. So inside that comment, I'm going to
+include that this particular line is going to be used by the use menu
+in order to recognize the block of code that specifies all the CSS
+files that need to be transferred. So I say build.css, and
+then I will specify the filename as css/main.css. This is the syntax for specifying. What this means is that these Block of
+CSS files will all be combined together, and then concatenated, minified, and
+then put into this file called main.css. And then this block will be identified
+on the other side by saying, Hyphen --, okay, sorry. I forgot to include double
+dash at the end there. That's the reason why this
+was not turning colors. So sometimes you are happy that your editor is pointing out this potential
+mistakes that you might be committing. So right there I would say endbuild and then -- right bracket there. Now, whatever is between this build and endbuild, this group will
+be treated as a unit for being combined by our
+usemin npm module there. Watch the syntax the usemin
+module uses there. I need to do the same transformation to
+contactus.html and aboutus.html also. So I'm going to copy this one here the lazy one that I am. I will simply just copy and paste into contactus.html and then also aboutus.html there. Similarly, going back to the index.html, I'll copy this inbuild and
+then also copy that into contactus.html and aboutus.html data. Okay, let's save the changes
+to all the files. Then, going to back to index.html. I'm going to repeat the same
+thing at the bottom for my JavaScript scripts that
+I've included there. So, going to the bottom here, what I need to do here, is to specify <!-- build js, and I will say js/main.js. Double hyphen, slash. So that's the starting of the block and
+then the ending is specified by, Build, okay? So with these changes, now,
+my index.html file is ready, and I have to do the same transformation
+to contactus.html at the bottom. And aboutus.html also at the bottom. Similarly, this enbuild copied in. Into contactus.html and aboutus.html and
+then save all the files. And that prepares our HTML files for being transformed to prepare
+the distribution folder. These files will remain as such, but then
+the transformed files will be put into the distribution folder
+created from these files. Now, once we complete that,
+let's set up some scripts. Going to package.json, I will set
+up my next script called usemin. And then this says usemin, contactus.html -d dist,
+this is the syntax for specify -d dist meaning
+that the destination for this distribution dist folder. And then I would say htmlmin, this is
+also going to minimize the HTML file. So it'll remove all the extraneous
+spaces and comments from the HTML file. But they compress it down so that it contains the minimum
+number of characters there. We'll look at the result after we
+complete and do the transformation there. So that and then, not only that, and then htmlmin, and then say -o dist/contactus.html and &&, this means that there is more to come after this. Then I will say usemin then aboutus.html -d dist --htmlmin -o dist/aboutus.html. So that's the second one for
+transforming the aboutus.html file. And then &&, this is a long script, usemin index.html, we need to transform all the files. So that's why I need to specify
+each one explicitly there. usemin doesn't take wild cards, so that's the reason why I have to
+specify the holding like [INAUDIBLE]. And so usemin index.html -d dist --htmlmin -o dist/index.html. And then after that I put a comma because
+I'm going to introduce the next script, which is, Called build. So this build script will
+create my distribution folder. So to create my distribution folder, the first thing that I'm
+going to do is npm run clean. And then npm run copyfonts. You have already seen these
+two in action earlier, then I will say npm run imagemin
+to create the minimized images, and then I would say npm run usemin. And this particular script will
+build up my distribution folder, the contents of which can then be copied
+to my web server to solve up my pitch. Save the changes. Let's now see how we build up the website. At this point, to build up our website and the command prompt is simply type
+npm run build and then just execute. That script,
+which in turn will execute a set of either scripts,
+which in turn will complete the entire set of tasks that have to be executed in
+order to prepare my distribution folder. So, let's go ahead and run this thing and then this will run through all
+the different scripts there. It takes a few minutes for
+it to complete, and when it is completed, then your distribution folder will now be
+ready for deployment onto your web server. Going to our editor, you now see that the distribution
+folder is now ready. Inside the distribution folder you
+will see the three index files, and in the CSS folder, you will see
+the single file called m ain.css, which contains all the Bootstraps CSS,
+the Bootstraps CSS, and the CSS code that you have created. And the JS folder will
+contain the main.js, which contains the Bootstrap,
+the jQuery, and all the whole bunch of JavaScript code
+combined together into one single file. The image will contain the optimized
+images, and the fonts, obviously, you have seen earlier,
+contain the font files. Now, let's take a quick look at
+index.html that has been created here. So when you look at the index.html
+that has been created here, you will notice that the whole
+thing is literally unreadable, because when you did HTML min it
+has stripped off all the extraneous comments, it has stripped
+off all the spaces, and then created this whole
+running set of characters. To the computer it doesn't make any
+difference because it will render this webpage just as well. To you and me, it makes a difference,
+because we can't read this easily. So this is what minification
+causes to your HTML file. Let's take a look at the main.css. When you look at the main.css you
+see the whole thing is crunched up into one single unit,
+as you go to the bottom. If you are brave enough, go down to
+the bottom and then you will see the, You will see hours specifically written CSS classes right down at the bottom here. Right there, you recognize
+carousel button, and other things, nabber-dark, and other things there,
+so it's all scrunched up into. So that's what minification, and costs. Main.js, same thing. Unreadable code there. Their computer, no difference. So with this,
+our distribution folder is now complete. Let's check out our distribution folder. Fortunately, we have our
+light server already running. So what I'm going to do is
+to go to the browser, and then check out the index ready CLM
+file in this distribution folder to see whether it is being
+rendered correctly or not. Going to the browser,
+in my address bar I will type, dist index.html, and notice that this particular
+file is the distribution file that has been created, and
+it contains exactly the same thing and renders exactly the same way as our
+original webpage that we created. About, similarly, notice that this
+aboutus.html is from the distribution folder and
+this is rendered exactly as before, and also the contactus.html file. Everything works perfectly. So now all that is left for
+you to do in order to deploy your webpage, or your website, is to simply copy
+the contents from the dist folder, and then upload it to your web server, and then your web server is up and
+running, serving up your website. With this, we complete this exercise. In this exercise,
+we saw how we can make use of NBM scripts in order to build and
+deploy our website. This may be a good time for you to do a Get Comment with
+message NPM Scripts, Part 2. [MUSIC]

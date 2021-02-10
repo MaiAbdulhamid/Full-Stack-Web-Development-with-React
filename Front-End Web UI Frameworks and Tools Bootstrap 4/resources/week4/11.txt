@@ -1,0 +1,47 @@
+[MUSIC] As we understood from
+the previous lesson building and deployment of websites
+involves a lot of steps. And we looked at the use
+of [INAUDIBLE] scripts for doing the building and deployment tasks. In this lesson,
+we will concentrate on task renders. Two in particular, Grunt and
+Gulp, and try to understand how they facilitate their automation of
+the various web developement tasks. The primary task of a Task Runner is to
+enable to us to configure the tasks and then rerun them automatically
+as it when request. In the previous Lesson, we show
+the user NPM scripts that we set up in the package.json file in order
+to automate some of these tasks, including the use of the on
+change to automatically run some of these tasks based upon
+changes to files that are made. Now, thinking back, we realize
+that we are in the Node ecosystem. And what Node enables us to do is
+to run JavaScript on the desktop. Now, better luck than people,
+the programmers as you know of them, took on the task of using
+JavaScript itself to write applications that enable us to set up and
+run these tasks automatically. So this is where the task
+runners came into the picture. Grunt, Gulp, Cake, Brunch, Broccoli. What's this obsession with food? Well when you're sitting in a single
+place for a long time, you develop a big appetite, Grunt and Gulp being
+the two most successful in this field. We'll look at both of them in
+more detail in this lesson. These enable us to double
+up automated tasks for executing and building and
+deploying our website. As I mentioned,
+the JavaScript based task runners, the two of them in particular that we will deal
+with in this lesson are Grunt and Gulp. Grunt operates based
+on doing configuration whereas Gulp concentrates more on code. We'll look at the two of them
+in more detail as we go along. But both of them pretty much enable us
+to accomplish the same kind of tasks. Both are built around plugins. So, both Grunt and
+Gulp provide a framework for which you write various plugins that enable
+you to perform these kinds of tasks. So Grunt and Gulp together with their
+plugins enable us to configure and execute various tasks. If you ask me, is Grunt better or is Gulp
+better, that's a tough question to answer. The Grunt people are grunting all over, saying that theirs is
+the best way of doing it. Which the Gulp community
+finds hard to swallow. Both these communities can easily give
+your televangelists a run for their money. But, from my perspective, I look at any of these tools as just
+mechanisms to get my work done. So long as it gets my work done,
+I'm happy with it. If one makes it easier to
+accomplish a set of tasks that has, then I choose the one over the other for
+that particular project. So my take is event VM scripts
+satisfies you, stable them. If Grunt is the way to go, be my guest. If Gulp is worth satisfies you, take
+you a big gulp and you'll be satisfied. So having said that,
+let's take a look at both Grunt and Gulp. I will show you how you
+perform the same set of tasks that I did with the npm scripts in
+the previous lesson and the exercise. By showing you the Grunt and
+the Gulp way of doing the same sort of tasks in the exercises
+that follow this lecture. [MUSIC]

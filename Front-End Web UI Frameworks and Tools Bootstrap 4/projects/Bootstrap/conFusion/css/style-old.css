@@ -1,0 +1,120 @@
+
+body{
+    padding:50px 0px 0px 0px;
+    z-index:0;
+}
+.navbar-dark {
+     background-color: #512DA8;
+}
+
+.breadcrumb {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #e9ecef;
+  border-radius: .25rem;
+}
+
+.row-header {
+  margin: 0px auto;
+  padding: 0px;
+}
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px;
+}
+.carousel {
+  background:#512DA8;
+}
+.carousel-item {
+height: 300px;
+}
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 300px;
+}
+#carouselButton {
+  right:0px;
+  position: absolute;
+  bottom: 0px;
+  z-index: 1;
+}
+.jumbotron {
+  padding: 70px 30px 70px 30px;
+  margin: 0px auto;
+  background: #9575CD;
+  color: floralwhite;
+}
+
+.card {
+  padding: 0;
+}
+.card-header{
+  color: white;
+  font-size: 30px;
+  padding: 15px;
+}
+
+
+.footer {
+  background-color: #D1C4E9;
+  margin: 0px auto;
+  padding: 20px 0px 20px 0px;
+}
+.footer p{
+  margin-top: 18px
+}
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+/* Contact */
+
+//My Custom styles
+/* Modal */
+.modal {
+  .form-group{
+    margin: 20px 0;
+  }
+}
+.navbar-text{
+  cursor: pointer;
+}
+.reserve{
+  display: block;
+  font-size: 18px;
+  padding: 10px;
+  font-weight: 500;
+}
+.jumbotron p{
+  font-size: 18px;
+}
+label{
+  font-weight: 500
+}
+label.label{
+  font-weight: bold;
+  font-size: 18px
+}
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: #0f0f0f;
+}
+.form-control{
+  margin-bottom: 15px
+}
+.blockquote-footer {
+  margin-top: 0;
+}
+
