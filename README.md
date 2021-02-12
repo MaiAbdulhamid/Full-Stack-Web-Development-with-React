@@ -1231,7 +1231,7 @@
  
 ## Course 2: Front-End Web Development with React
 
- ### This course is divided into 4 modules, Each module takes 1 week.
+ This course is divided into 4 modules, Each module takes 1 week.
  
  ### week 1 :
  
@@ -1559,67 +1559,190 @@
  - like the way you handle events in the DOM, you can also handle events similarly in react. But when you specify the events, then you use camel case to specify the events.
 
  ### 18. Exercise: React Components Part 2
- - Inside `src` folder, create a new subfolded named `shared` subfolder. 
+ - Inside `src` folder, create a new subfolded named `shared` subfolder.
+ - In the `shared` folder, create a new file named `dishes.js`.
  - Use the `shared` subfolder to store all the information that is shared among various components in my React Application that I'm designing.
+ - We need to define the state in `App.js` file.
+ - Update `App.js`:
  
+ ```
+ import { DISHES } from './shared/dishes';
+
+ . . .
+
+ class App extends Component {
+   constructor(props) {
+     super(props);
+     this.state = {
+       dishes: DISHES
+     };
+   }
+
+ . . .
+
+  <Menu dishes={this.state.dishes} /> 
+ ```
+ 
+ - Open `MenuComponent.js` and update its contents.
+ - We have removed the dishes variable from the state of the component, and updated it to use the Card:
+ ```
+ . . .
+ 
+ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+     CardTitle } from 'reactstrap';
+
+ class Menu extends Component {
+
+     constructor(props) {
+         super(props);
+
+         this.state = {
+             selectedDish: null
+         }
+     }
+
+     onDishSelect(dish) {
+         this.setState({ selectedDish: dish});
+     }
+
+     renderDish(dish) {
+         if (dish != null)
+             return(
+                 <Card>
+                     <CardImg top src={dish.image} alt={dish.name} />
+                     <CardBody>
+                       <CardTitle>{dish.name}</CardTitle>
+                       <CardText>{dish.description}</CardText>
+                     </CardBody>
+                 </Card>
+             );
+         else
+             return(
+                 <div></div>
+             );
+     }
+
+     render() {
+         const menu = this.props.dishes.map((dish) => {
+             return (
+               <div  className="col-12 col-md-5 m-1">
+                 <Card key={dish.id}
+                   onClick={() => this.onDishSelect(dish)}>
+                   <CardImg width="100%" src={dish.image} alt={dish.name} />
+                   <CardImgOverlay>
+                       <CardTitle>{dish.name}</CardTitle>
+                   </CardImgOverlay>
+                 </Card>
+               </div>
+             );
+         });
+
+         return (
+             <div className="container">
+                 <div className="row">
+                     {menu}
+                 </div>
+                 <div className="row">
+                   <div  className="col-12 col-md-5 m-1">
+                     {this.renderDish(this.state.selectedDish)}
+                   </div>
+                 </div>
+             </div>
+         );
+     }
+ }
+
+ . . .
+ 
+ ```
  
  ### 19. React Components: Lifecycle Methods Part 1
+ - Every class component has a life cycle associated with it.
+ - Each React component, when it is required will be created by React and then added into the DOM of your entire application.
+ - So, every time a React component needs to be included into your applications view, then the component that hosts the specific part of the view will be created and added into the overall React component hierarchy.
+ - A component passes through a life cycle of creation, mounting, and then existing in the hierarchy, then unmounting, and then disappearing at the point.
 
  ### Additional Resources
-
+ - [React.Component and Lifecycle Methods](https://reactjs.org/docs/react-component.html).
+ - [Card reactstrap](https://reactstrap.github.io/components/card/).
+ - [React Dev Tools](https://github.com/facebook/react-devtools).
+ - [React Dev Tools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).
   
  </details>
    
  <details>
  <summary>Assignment 1: React Components</summary>
  
-  ### Second
+ - In this assignment, you will continue to work with the React application that you have been developing in the exercises. You will add a new component named DishdetailComponent that will display the details of a selected dish. You will then design the view for the component using the card component. At the end of this assignment, you should have completed the following tasks:
+
+   - Created a new DishdetailComponent and added it to your React application. 
+   - Updated the view of the DishdetailComponent to display the details of the selected dish using an reactstrap card component.
+   - Updated the view of the DishdetailComponent to display the list of comments about the dish using the Bootstrap unstyled list component.
   
  </details>
  
  ### week 2 :
  
  <details>
- <summary>Title</summary>
+ <summary>React Component Types</summary>
  
- ### here
+
+ ### Presentational and Container Components
+
+ ### Exercise: Presentational and Container Components
+
+ ### React Components: Lifecycle Methods Part 2
+
+ ### Functional Components
+
+ ### Exercise: Functional Components
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>React Router</summary>
  
- ### here
+
+ ### React Virtual DOM
+
+ ### Exercise: Header and Footer
+
+ ### React Router
+
+ ### Exercise: React Router
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Single Page Applications</summary>
  
- ### here
+
+ ### Single Page Applications
+
+ ### Exercise: Single Page Applications Part 1
+
+ ### React Router: Parameters
+
+ ### Exercise: Single Page Applications Part 2
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Assignment 2:</summary>
  
  ### here
   
  </details>
  
- <details>
- <summary>Welcome to Front-End Web Development with React</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
  
  ### week  :
  
