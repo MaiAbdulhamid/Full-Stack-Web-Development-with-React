@@ -1229,7 +1229,7 @@
  </details>
  
  
-## Course 2: Front-End Web Development with React
+## Course 2: [Front-End Web Development with React](https://www.coursera.org/learn/front-end-react)
 
  This course is divided into 4 modules, Each module takes 1 week.
  
@@ -1686,50 +1686,249 @@
  <details>
  <summary>React Component Types</summary>
  
+ ### 1. Presentational and Container Components
+ - There is no formal description of these kinds of components in React itself,
+ - A pure presentational component:
+  - Mainly concerned with rendering the "view"
+  - Render the view based on the data that is passed to them in props. 
+  - Do not maintain their own local state
+ - Container Components:
+  - Responsible for making things work.
+  - Make use of presentational components for rendering
+  - Provide the data to the presentational components
+  - Maintain state and communicate with data sources.
 
- ### Presentational and Container Components
+ ### 2. Exercise: Presentational and Container Components
+ - We will implement the menu component as a pure presentational component, and the dish detail component is already a pure presentational component.
+ - Make sure that yarn start or npm start that you executed in the very first exercice, keeps running continuously.
+ - `{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}` -> will turn that ISO string into an actual date that can be displayed in a format that is more easily readable.
+ - Add a new component named `MainComponent.js` in the components folder and update its contents:
+ ```
+ import React, { Component } from 'react';
+ import { Navbar, NavbarBrand } from 'reactstrap';
+ import Menu from './MenuComponent';
+ import DishDetail from './DishdetailComponent';
+ import { DISHES } from '../shared/dishes';
 
- ### Exercise: Presentational and Container Components
+ class Main extends Component {
 
- ### React Components: Lifecycle Methods Part 2
+   constructor(props) {
+     super(props);
+     this.state = {
+         dishes: DISHES,
+         selectedDish: null
+     };
+   }
 
- ### Functional Components
+   onDishSelect(dishId) {
+     this.setState({ selectedDish: dishId});
+   }
 
- ### Exercise: Functional Components
+   render() {
+     return (
+       <div>
+         <Navbar dark color="primary">
+           <div className="container">
+             <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+           </div>
+         </Navbar>
+         <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
+         <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
+       </div>
+     );
+   }
+ }
+
+ export default Main;
+ ```
+
+ ### 3. React Components: Lifecycle Methods Part 2
+ - Lifecycle methods: are called when a component is being re-rendered or being updated.
+ - React Component goes through the following lifecycle stages:
+   – Mounting: Called when an instance of a component is being created and inserted into the DOM.
+   – Updating: Called when a component is being re-rendered
+   – Unmounting: Is called when the component is being removed from the DOM:
+ - Several lifecycle methods available in each stage.
+
+ ### 4. Functional Components
+ - For components that simply work only using their props that are sent by their parent, there is an even simpler way of implementing the components what are called as Functional Components.
+ - Functional Components: Simplest way to define React components.
+ - It is a JavaScript function that returns a React element, or a collection of React elements that define the view
+
+ ### 5. Exercise: Functional Components
+ - Update `MenuComponent.js` and `DishdetailComponent.js` files to be functional components.
 
  ### Additional Resources
+ - [Functional Stateless Components in React](https://www.jackfranklin.co.uk/blog/functional-stateless-components-react/)
 
-  
+
  </details>
  
  <details>
  <summary>React Router</summary>
  
+ ### 6. React Virtual DOM
+ - Browser DOM is a browser object. And so when you render something in your web page, the Browser DOM is built up, and so any changes that you want to make to your web page will be effected when you make changes to the Browser DOM.
+ - The Virtual DOM in React terminology is a lightweight representation of a Browser DOM.
+ - When you change anything in the Browser DOM, you need to go and re-render the web page allover again(refresh page).
+ - But the Virtual DOM, since it is maintained in memory by your React application, you can easily make changes to the Virtual DOM.
+ - So any changes are reflected at the Virtual DOM first.
+ - Virtual DOM is created completely from scratch every time you call the setState.
+ - To update the DOM, React runs in *diffing algorithm*.
+ - The *diffing algorithm* identifies the minimum number of components or minimum part of the tree that needs to be updated in order to make the modified version in sync with that Browser DOM.
+ - You can use the key attribute in the list items in order to indicate which child elements are stable.
+ - When the diffing algorithm works, if it notices that some parts of the list cannot change, they don't need to be re-rendered. And so, it'll re-render only those list items that have actually been modified. 
+- There is a new version of the React diffing algorithm called *React Fiber*. 
+- This is a new reconciliation algorithm that has been launched with React 16 and it is a lot more faster in performing the diffing and then identifying what needs to be changed in the Browser DOM to update the views.
 
- ### React Virtual DOM
+ ### 7. Exercise: Header and Footer
+ - Add a header and footer for our application
+ - `$ yarn add font-awesome bootstrap-social` -> fetch Font Awesome and Bootstrap-social
+ - open index.js file and update it:
+ 
+ ```
+ import 'font-awesome/css/font-awesome.css';
+ import 'bootstrap-social/bootstrap-social.css';
+ ```
+ 
+ - Create a new file named `HeaderComponent.js`.
+ - The reason for adding a header and footer component is so that all our pages in our application they get the same header and footer.
+ - The reason for creating this as a class component as opposed to a functional component is because we need to maintain some UI state in the Header Component.
+ - *React fragment*: enables us to group together a bunch of React elements and then return it. And also ensures that their alternative they're going to use a div to enclose all the React elements.
+ - `<></>` -> this is the short form syntax for using the *React fragment*. The long form would be to say `<React.Fragment></React.Fragment>`.
+ - Then Create a new file named `FooterComponent.js`.
+ - Open `MainComponent.js` and update it:
+ ```
+ . . .
 
- ### Exercise: Header and Footer
+ import Header from './HeaderComponent';
+ import Footer from './FooterComponent';
 
- ### React Router
+ . . .
 
- ### Exercise: React Router
+         <Header />
+         <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
+         <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
+         <Footer />
+
+ . . .
+ ```
+ - Update `App.css` to add some new CSS.
+
+ ### 8. React Router
+ - React Router: Collection of navigational components.
+ - Uses a browser-based bookmarkable URLs as an instruction to navigate to a client-generated view in your web app.
+ - Route matching components:
+   – `<Route>’s path prop` enables specification of the current location’s pathname
+   – `<Route>’s component prop` specifies the corresponding view for the location
+   – Using `exact` attribute ensures that the path must be exactly matched
+   – `<Redirect>` enables the default route specification
+   – `<Switch>` enables grouping together several routes
+ - Navigation is supported through:
+   – `<Link>` creates links in your application
+   - `<NavLink>` also attaches the active class to the link when its prop matches the current location
+
+ ### 9. Exercise: React Router
+ - `$ yarn add react-router-dom` -> install React Router.
+ - Update `App.js`:
+ ```
+ . . .
+
+ import { BrowserRouter } from 'react-router-dom';
+
+ . . .
+
+     <BrowserRouter>
+       <div className="App">
+         <Main />
+       </div>
+     </BrowserRouter>
+
+ . . .
+ ```
+ - Create a new file named `HomeComponent.js` in the `components` folder.
+ - Import it into `MainComponent.js`.
+ - 
+ ```
+ . . .
+
+ import Home from './HomeComponent';
+
+ . . .
+
+ import { Switch, Route, Redirect } from 'react-router-dom';
+
+ . . .
+
+   render() {
+
+
+     const HomePage = () => {
+       return(
+           <Home 
+           />
+       );
+     }
+
+ . . .
+
+           <Switch>
+               <Route path='/home' component={HomePage} />
+               <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
+               <Redirect to="/home" />
+           </Switch>
+
+ . . .
+ ```
+ - When you have a URL ending with `/home`, then this will route me to this particular component that is going to act as the view here.
+ - Open `HeaderComponent.js` and update its contents.
+ - `NavbarToggler` reactstrap component adds in a button to the `Navbar`, and this button will be shown only on extra small to small screen sizes.
+ - Collapse also requires `isOpen` attribute, a Boolean attribute which defined in my state called `this.state.isOpen`.
+ - Open `FooterComponent.js` and update it:
+ ```
+ . . .
+
+ import { Link } from 'react-router-dom';
+
+ . . .
+
+                         <li><Link to='/home'>Home</Link></li>
+                         <li><Link to='/aboutus'>About Us</Link></li>
+                         <li><Link to='/menu'>Menu</Link></li>
+                         <li><Link to='/contactus'>Contact Us</Link></li>
+
+ . . .
+ ```
+ - Open `MenuComponent.js` and remove the `onClick()` from the Card in the `RenderMenuItem()` function.
 
  ### Additional Resources
-
+ - React:
+   - [react-router](https://github.com/ReactTraining/react-router).
+   - [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom).
+   - [React Router Documentation](https://reactrouter.com/).
+   - [React Router Dom Documentation](https://reactrouter.com/web/guides/philosophy).
+ - Other Resources:
+   - [React Router DOM: set-up, essential components, & parameterized routes](https://blog.logrocket.com/react-router-dom-set-up-essential-components-parameterized-routes-505dc93642f1/).
   
  </details>
  
  <details>
  <summary>Single Page Applications</summary>
  
+ ### 10. Single Page Applications
+ - single-page applications has a web application or a website that fits into a single page. So you don't need to reload an entire page again.
+ - single-page applications enable you to deliver a user experience that is more closer to what they see with desktop applications. 
+ - Web application or web site that fits in a single page
+   – No need to reload the entire page
+   – UX like a desktop/native application
+   – Most resources are retrieved with a single page load
+   – Redraw parts of the page when needed without requiring a full server roundtrip
 
- ### Single Page Applications
+ ### 11. Exercise: Single Page Applications Part 1
 
- ### Exercise: Single Page Applications Part 1
+ ### 12. React Router: Parameters
 
- ### React Router: Parameters
-
- ### Exercise: Single Page Applications Part 2
+ ### 13. Exercise: Single Page Applications Part 2
 
  ### Additional Resources
 
