@@ -1976,8 +1976,107 @@
  ```
 
  ### 12. React Router: Parameters
+ - Paths specified as a URL
+ - Route parameters specified in the path specification as a token -> `path="menu/:id"` where `id` is the token.
+ - Route parameters can be specified using a link parameter while specifiyng the link -> ```<Link to{`/menu/${dish.id}`} >```.
+ - Route passes three props to the component: `match`, `location`, `history`.
+ - `Match` is the one that carries the route parameters inside it as its own properties.
+ - `Location` where you are in the URL location.
+ - `History` will allow you to go back. 
 
  ### 13. Exercise: Single Page Applications Part 2
+ - Configure the routes in your React router configuration to enable the use of route parameters within the URL to pass information to a component.
+
+ ### Additional Resources
+ - [Single-page application](https://en.wikipedia.org/wiki/Single-page_application)
+ - [Deep linking](https://en.wikipedia.org/wiki/Deep_linking)
+ - [Single page apps in depth](http://singlepageappbook.com/)
+ - [SPA and the Single Page Myth](https://johnpapa.net/pageinspa/)
+
+  
+ </details>
+ 
+ <details>
+ <summary>Assignment 2:</summary>
+ - In this assignment you will continue working with the React application by adding a new component named AboutComponent to serve up the details of the corporate leaders, and you will then integrate the AboutComponent into the single page application.
+ 
+ ### here
+  
+ </details>
+ 
+ 
+ ### week  3:
+ 
+ <details>
+ <summary>Controlled Forms</summary>
+
+ ### 1. Controlled Forms
+ - Forms are a standard way of seeking user input.
+ - In HTML, you can easily create a form wherever you want in your html page by using the `form` tag.
+ - The `input` form element allows us to create the input boxes in the form where you can fill in information. 
+ - The input type could be of the type text, password, submit, radio button, checkbox, email, telephone number, date and time, and many more.
+ - These elements maintain their own state and update it based on user input.
+ - Controlled Components: Make the React component control the form that it renders.
+
+ ### 2. Exercise: Controlled Forms
+ - You will start out by importing the necessary components from reactstrap into `ContactComponent.js` :
+ ```
+ . . .
+
+ import React, { Component } from 'react';
+ import { Breadcrumb, BreadcrumbItem,
+             Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+
+ . . .
+ ```
+ - Since we need to store the state of the form in the state of our react component, we need to turn this component into a class component.
+ - Update the `ContactComponent.js` file and add the `form`.
+ - 
+ 
+ ```
+ . . .
+
+     constructor(props) {
+         super(props);
+
+         this.state = {
+             firstname: '',
+             lastname: '',
+             telnum: '',
+             email: '',
+             agree: false,
+             contactType: 'Tel.',
+             message: ''
+         };
+
+         this.handleInputChange = this.handleInputChange.bind(this);
+         this.handleSubmit = this.handleSubmit.bind(this);
+
+     }
+
+     handleInputChange(event) {
+         const target = event.target;
+         const value = target.type === 'checkbox' ? target.checked : target.value;
+         const name = target.name;
+
+         this.setState({
+           [name]: value
+         });
+     }
+
+     handleSubmit(event) {
+         console.log('Current State is: ' + JSON.stringify(this.state));
+         alert('Current State is: ' + JSON.stringify(this.state));
+         event.preventDefault();
+     }
+
+ . . .
+ ```
+ - The default behavior when you submit a Form in any browser is to go to the next page. So, we will prevent that from happening.
+ - Remember to make sure that the names that you give to the input box will be the same as what you use for the properties in the state.
+
+ ### 3. Exercise: Controlled Form Validation
+ - Use another state property called `touched`, which will keep track of whether a particular field has been touched or not. 
 
  ### Additional Resources
 
@@ -1985,52 +2084,48 @@
  </details>
  
  <details>
- <summary>Assignment 2:</summary>
+ <summary>Uncontrolled Forms</summary>
  
- ### here
-  
- </details>
- 
- 
- ### week  :
- 
- <details>
- <summary>Title</summary>
- 
- ### here
+ ### 4. Uncontrolled Components
+
+ ### 5. Exercise: Uncontrolled Forms
+
+ ### Additional Resources
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Introduction to Redux</summary>
  
- ### here
+ ### 6. The Model-View-Controller Framework
+
+ ### 7. The Flux Architecture
+
+ ### 8. Introduction to Redux
+
+ ### 9. Exercise: Introduction to Redux
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>React Redux Form</summary>
  
- ### here
+ ### 10. React Redux Forms
+
+ ### 11. Exercise: React Redux Form
+
+ ### 12. Exercise: React Redux Form Validation
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Welcome to Front-End Web Development with React</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
+ <summary>Assignment 3</summary>
  
  ### here
   
