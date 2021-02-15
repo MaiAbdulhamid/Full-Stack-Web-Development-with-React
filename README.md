@@ -1925,6 +1925,55 @@
    – Redraw parts of the page when needed without requiring a full server roundtrip
 
  ### 11. Exercise: Single Page Applications Part 1
+ - Add a new file named `ContactComponent.js`.
+ - Update the MainComponent.js file to integrate the ContactComponent:
+ ```
+ . . .
+
+ import Contact from './ContactComponent';
+
+ . . .
+
+              <Route exact path='/contactus' component={Contact} />} />
+ ```
+ - Update the `HomeComponent.js` file to fetch and display the featured dish, promotion and leader.
+ - Next, update `MainComponent.js`:
+ ```
+ . . .
+
+ import { COMMENTS } from '../shared/comments';
+ import { PROMOTIONS } from '../shared/promotions';
+ import { LEADERS } from '../shared/leaders';
+
+ . . .
+
+ class Main extends Component {
+
+   constructor(props) {
+     super(props);
+
+     this.state = {
+       dishes: DISHES,
+       comments: COMMENTS,
+       promotions: PROMOTIONS,
+       leaders: LEADERS
+     };
+   }
+
+   . . .
+
+     const HomePage = () => {
+       return(
+           <Home 
+               dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+               promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+               leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+           />
+       );
+     }
+
+ . . .
+ ```
 
  ### 12. React Router: Parameters
 
