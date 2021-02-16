@@ -2076,10 +2076,13 @@
  - Remember to make sure that the names that you give to the input box will be the same as what you use for the properties in the state.
 
  ### 3. Exercise: Controlled Form Validation
+ - In this exercise you will be introduced to simple form validation for controlled forms in React.
  - Use another state property called `touched`, which will keep track of whether a particular field has been touched or not. 
 
  ### Additional Resources
-
+ - [Controlled Components](https://reactjs.org/docs/forms.html).
+ - [Controlled / Uncontrolled React Components](https://www.viget.com/articles/controlling-components-react/).
+ 
   
  </details>
  
@@ -2087,10 +2090,104 @@
  <summary>Uncontrolled Forms</summary>
  
  ### 4. Uncontrolled Components
+ - Uncontrolled component approach allows you to handle the form data by the DOM itself.
+ - Instead of writing an event handler for every state update, use a ref to get form values from the DOM
 
  ### 5. Exercise: Uncontrolled Forms
+ - Update `HeaderComponent.js` :
+ ```
+ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
+     Button, Modal, ModalHeader, ModalBody,
+     Form, FormGroup, Input, Label } from 'reactstrap';
 
+ . . .
+
+         this.state = {
+             isNavOpen: false,
+             isModalOpen: false
+         };
+
+ . . .
+
+         this.toggleModal = this.toggleModal.bind(this);
+
+ . . .
+
+
+       toggleModal() {
+         this.setState({
+           isModalOpen: !this.state.isModalOpen
+         });
+       }
+
+ . . .
+
+                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                     <ModalBody>
+
+                     </ModalBody>
+                 </Modal>
+
+ . . .
+ ```
+ - To invoke this modal, we will add in a button into our header here into the navbar:
+ ```
+ . . .
+
+                       <Nav className="ml-auto" navbar>
+                           <NavItem>
+                               <Button outline onClick={this.toggleModal}><span className="fa fa-sign-in fa-lg"></span> Login</Button>
+                           </NavItem>
+                       </Nav>
+
+ . . .
+ ```
+ - Add the form to the modal body:
+ ```
+ <Form onSubmit={this.handleLogin}>
+     <FormGroup>
+         <Label htmlFor="username">Username</Label>
+         <Input type="text" id="username" name="username"
+             innerRef={(input) => this.username = input} />
+     </FormGroup>
+     <FormGroup>
+         <Label htmlFor="password">Password</Label>
+         <Input type="password" id="password" name="password"
+             innerRef={(input) => this.password = input}  />
+     </FormGroup>
+     <FormGroup check>
+         <Label check>
+             <Input type="checkbox" name="remember"
+             innerRef={(input) => this.remember = input}  />
+             Remember me
+         </Label>
+     </FormGroup>
+     <Button type="submit" value="submit" color="primary">Login</Button>
+ </Form>
+ ```
+ 
+ - Add the following function to the class to handle the form submission:
+ ```
+ . . .
+
+         this.handleLogin = this.handleLogin.bind(this);
+ . . .
+
+     handleLogin(event) {
+         this.toggleModal();
+         alert("Username: " + this.username.value + " Password: " + this.password.value
+             + " Remember: " + this.remember.checked);
+         event.preventDefault();
+
+     }
+
+ . . .
+ ```
+ 
+ 
  ### Additional Resources
+ - [Controlled and uncontrolled form inputs in React don't have to be complicated](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/).
   
  </details>
  
@@ -2098,14 +2195,168 @@
  <summary>Introduction to Redux</summary>
  
  ### 6. The Model-View-Controller Framework
+ - Design Patterns: Well-documented solution to a recurring problem.
+ - Software design pattern: Reusable solution to commonly occurring problems
+ - The Model-View-Controller (MVC): Software engineering architecture pattern:
+   – Isolation of domain logic from user interface
+   – Permits independent development, testing and maintenance (separation of concerns)
+ - we can divide our entire application into three parts:
+   - The View, that is primarily concerned with presenting the information to the user. 
+   - The Model, that stores the domain state and the domain logic and also provides the way of manipulating this state from the rest of the application.
+   - The Controller that mediates between the view and the model. 
+ - Model View View-Model (MVVM): Descendent of MVC.
+ - You have the model that represents the business logic and the data for your application. 
 
  ### 7. The Flux Architecture
+ - Facebook found issues with using the standard MVC architecture pattern.
+ - Flux Architecture: just like MVC, it is a software engineering pattern. It is a suggestion idea or a pattern for you to organize your code, and not necessarily the only way of doing things.
+ - One of the salient features of flux is unidirectional data flow.
+ - New actions propagated through the system in response to user interactions, and the dispatcher becomes the center unit that controls all the changes and mediates to ensure that changes to the store are sent through it.
+ - So the only way you can do any changes is by sending `actions` into the `dispatcher` and the dispatcher then serializes these changes to your store. 
 
  ### 8. Introduction to Redux
+ - Redux is one such approach that has been suggested as a way of organizing your react application.
+ - Redux derives a lot of its ideas also from the Flux architecture but it is a realization of the Flux architecture.
+ - Redux is Predictable state container for JavaScript apps.
+ - Main Principles of Redux:
+  - Single source of truth -> Single state object tree within a single store.
+  - State is read-only (only getters, no setters) –> Changes should only be done through actions.
+  - Changes are made with pure functions -> Take previous state and action and return next state.
+ - The pure function takes the previous state of your application, and the action that is specified, and given the previous state and the actual that is specified, it'll generate the new state for the application.
+ - Redux Concepts:
+  - State: stored in plain JS object
+  - Action: plain JS object with a type field that specifies how to change something in the state
+  - Reducer: pure functions that take the current state and action and return a new state.
+ - In immutability, if you have an object you won't change that directly, but instead you derive a new object by copying the previous object and then generate a new object as a copy with the modification applied.
 
  ### 9. Exercise: Introduction to Redux
+ - `$ yarn add redux react-redux` -> As a first step you will install Redux and React-Redux into your application.
+ - Next, create a folder named `redux` in the `src` folder and then add a file named `reducer.js` where I will implement my reducer function.
+ - dishes, comments, leaders and promotions -> move them from `MainComponent.js` into `reducer.js` file.
+ - We need to set up the reducer function because our store needs to know what to do when an action is dispatched to it:
+ ```
+ import { DISHES } from '../shared/dishes';
+ import { COMMENTS } from '../shared/comments';
+ import { PROMOTIONS } from '../shared/promotions';
+ import { LEADERS } from '../shared/leaders';
+
+ export const initialState = {
+     dishes: DISHES,
+     comments: COMMENTS,
+     promotions: PROMOTIONS,
+     leaders: LEADERS
+ };
+
+ export const Reducer = (state = initialState, action) => {
+     return state;
+ };
+ ```
+ - Then, add a file named `configureStore.js` in the `redux` folder:
+ ```
+ import {createStore} from 'redux';
+ import { Reducer, initialState } from './reducer'
+
+ export const ConfigureStore = () => {
+     const store = createStore(
+         Reducer, // reducer
+         initialState, // our initialState
+     );
+
+     return store;
+ }
+ ```
+ - `createStore` -> It allows me to create the Redux Store and then also, let me import the reducer and `initialState`.
+ - Upadte `App.js` :
+ ```
+ . . .
+
+
+ import { Provider } from 'react-redux';
+ import { ConfigureStore } from './redux/configureStore';
+
+ const store = ConfigureStore();
+
+
+ . . .
+
+       <Provider store={store}>
+         <BrowserRouter>
+           <div className="App">
+             <Main />
+           </div>
+         </BrowserRouter>
+       </Provider>
+
+ . . .
+ ```
+ 
+ - The provider is part of react-redux. This provider component allows me to configure my React application so that the Redux Store becomes available to all components in my application.
+ 
+ - Finally, update `MainComponent.js` to connect it to Redux store and use it:
+ ```
+ . . .
+
+ import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+ import { connect } from 'react-redux';
+
+
+ const mapStateToProps = state => {
+   return {
+     dishes: state.dishes,
+     comments: state.comments,
+     promotions: state.promotions,
+     leaders: state.leaders
+   }
+ }
+
+ . . .
+
+     const HomePage = () => {
+       return(
+           <Home 
+               dish={this.props.dishes.filter((dish) => dish.featured)[0]}
+               promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
+               leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+           />
+       );
+     }
+
+     const DishWithId = ({match}) => {
+       return(
+           <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+             comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+       );
+     };
+
+     return (
+       <div>
+         <Header />
+         <div>
+           <Switch>
+               <Route path='/home' component={HomePage} />
+               <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} />} />} />
+               <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
+               <Route path='/menu/:dishId' component={DishWithId} />
+               <Route exact path='/contactus' component={Contact} />} />
+               <Redirect to="/home" />
+           </Switch>
+         </div>
+         <Footer />
+       </div>
+     );
+   }
+ }
+
+ export default withRouter(connect(mapStateToProps)(Main));
+ ```
+ 
+ - `mapStateToProps` function will will map the Redux Store's state into props that will become available to my component. 
 
  ### Additional Resources
+ - [Flux](https://facebook.github.io/flux/).
+ - [Redux](https://redux.js.org/).
+ - [Redux Basics Documentation](https://redux.js.org/tutorials/fundamentals/part-1-overview).
+ - [Redux Tutorials](https://github.com/markerikson/react-redux-links/blob/master/redux-tutorials.md).
 
   
  </details>
