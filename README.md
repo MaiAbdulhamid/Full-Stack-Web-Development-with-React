@@ -2365,12 +2365,214 @@
  <summary>React Redux Form</summary>
  
  ### 10. React Redux Forms
+ - React-Redux-Form: A versatile, fast, and intuitive library for creating complex and performant forms in React and Reduxز
+ - Suppose you want to persist the state of the form even across page reloads or as you navigate in and out of a view, then React-Redux-Form would be of use to you. 
 
  ### 11. Exercise: React Redux Form
+ - `$ yarn add react-redux-form` -> Install the react-redux-form.
+ - Then open `ContactComponent.js` and update:
+ ```
+ . . .
+
+ import { Breadcrumb, BreadcrumbItem,
+             Button, Row, Col, Label } from 'reactstrap';
+ import { Control, LocalForm, Errors } from 'react-redux-form';
+
+ . . .
+
+
+     handleSubmit(values) {
+         console.log('Current State is: ' + JSON.stringify(values));
+         alert('Current State is: ' + JSON.stringify(values));
+         // event.preventDefault();
+     }
+
+ . . .
+
+                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                             <Row className="form-group">
+                                 <Label htmlFor="firstname" md={2}>First Name</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".firstname" id="firstname" name="firstname"
+                                         placeholder="First Name"
+                                         className="form-control"
+                                          />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="lastname" md={2}>Last Name</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".lastname" id="lastname" name="lastname"
+                                         placeholder="Last Name"
+                                         className="form-control"
+                                          />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".telnum" id="telnum" name="telnum"
+                                         placeholder="Tel. Number"
+                                         className="form-control"
+                                          />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="email" md={2}>Email</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".email" id="email" name="email"
+                                         placeholder="Email"
+                                         className="form-control" />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Col md={{size: 6, offset: 2}}>
+                                     <div className="form-check">
+                                         <Label check>
+                                             <Control.checkbox model=".agree" name="agree"
+                                                 className="form-check-input"
+                                                  /> {' '}
+                                                 <strong>May we contact you?</strong>
+                                         </Label>
+                                     </div>
+                                 </Col>
+                                 <Col md={{size: 3, offset: 1}}>
+                                     <Control.select model=".contactType" name="contactType"
+                                         className="form-control">
+                                         <option>Tel.</option>
+                                         <option>Email</option>
+                                     </Control.select>
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="message" md={2}>Your Feedback</Label>
+                                 <Col md={10}>
+                                     <Control.textarea model=".message" id="message" name="message"
+                                         rows="12"
+                                         className="form-control" />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Col md={{size:10, offset: 2}}>
+                                     <Button type="submit" color="primary">
+                                     Send Feedback
+                                     </Button>
+                                 </Col>
+                             </Row>
+                         </LocalForm>
+
+ . . .
+ ```
 
  ### 12. Exercise: React Redux Form Validation
+ - Open `ContactComponent.js` and update it:
+ ```
+ . . . 
+
+
+ const required = (val) => val && val.length;
+ const maxLength = (len) => (val) => !(val) || (val.length <= len);
+ const minLength = (len) => (val) => val && (val.length >= len);
+ const isNumber = (val) => !isNaN(Number(val));
+ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
+ . . .
+
+                             <Row className="form-group">
+                                 <Label htmlFor="firstname" md={2}>First Name</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".firstname" id="firstname" name="firstname"
+                                         placeholder="First Name"
+                                         className="form-control"
+                                         validators={{
+                                             required, minLength: minLength(3), maxLength: maxLength(15)
+                                         }}
+                                          />
+                                     <Errors
+                                         className="text-danger"
+                                         model=".firstname"
+                                         show="touched"
+                                         messages={{
+                                             required: 'Required',
+                                             minLength: 'Must be greater than 2 characters',
+                                             maxLength: 'Must be 15 characters or less'
+                                         }}
+                                      />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="lastname" md={2}>Last Name</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".lastname" id="lastname" name="lastname"
+                                         placeholder="Last Name"
+                                         className="form-control"
+                                         validators={{
+                                             required, minLength: minLength(3), maxLength: maxLength(15)
+                                         }}
+                                          />
+                                     <Errors
+                                         className="text-danger"
+                                         model=".lastname"
+                                         show="touched"
+                                         messages={{
+                                             required: 'Required',
+                                             minLength: 'Must be greater than 2 characters',
+                                             maxLength: 'Must be 15 characters or less'
+                                         }}
+                                      />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".telnum" id="telnum" name="telnum"
+                                         placeholder="Tel. Number"
+                                         className="form-control"
+                                         validators={{
+                                             required, minLength: minLength(3), maxLength: maxLength(15), isNumber
+                                         }}
+                                          />
+                                     <Errors
+                                         className="text-danger"
+                                         model=".telnum"
+                                         show="touched"
+                                         messages={{
+                                             required: 'Required',
+                                             minLength: 'Must be greater than 2 numbers',
+                                             maxLength: 'Must be 15 numbers or less',
+                                             isNumber: 'Must be a number'
+                                         }}
+                                      />
+                                 </Col>
+                             </Row>
+                             <Row className="form-group">
+                                 <Label htmlFor="email" md={2}>Email</Label>
+                                 <Col md={10}>
+                                     <Control.text model=".email" id="email" name="email"
+                                         placeholder="Email"
+                                         className="form-control"
+                                         validators={{
+                                             required, validEmail
+                                         }}
+                                          />
+                                     <Errors
+                                         className="text-danger"
+                                         model=".email"
+                                         show="touched"
+                                         messages={{
+                                             required: 'Required',
+                                             validEmail: 'Invalid Email Address'
+                                         }}
+                                      />
+                                 </Col>
+                             </Row>
+
+ . . .
+ ```
 
  ### Additional Resources
+ - [React Redux Form Documentation](https://davidkpiano.github.io/react-redux-form/docs.html).
+ - [Should you store your form state in Redux?](https://goshakkk.name/should-i-put-form-state-into-redux/)
 
   
  </details>
@@ -2378,9 +2580,94 @@
  <details>
  <summary>Assignment 3</summary>
  
+ - In this assignment you will update the DishdetailComponent.js to include a form and do the form validation in code. At the end of this assignment, you should have completed the following tasks to update the page:
+
+   - Added a new class component named CommentForm to DishdetailComponent.js.
+   - Provide a form to enable users to submit their comments
+   - Validate the information entered by the users in the form
+  
+ </details>
+ 
+### week 4:
+ 
+ <details>
+ <summary>Redux Actions</summary>
+ 
+ ### Redux Actions
+ - Actions: payloads of information that send data from your application to the store
+
+ ### Exercise: Combining Reducers
+
+ ### Exercise: Redux Actions
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Redux Thunk</summary>
+ 
+ ### Redux Thunk
+
+ ### Exercise: Redux Thunk
+
+ ### Exercise: React-Redux-Form Revisited
+
+ ###  Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Client-Server Communication</summary>
+ 
+ ### Networking Essentials
+
+ ### Brief Representational State Transfer (REST)
+
+ ### Exercise: Setting up a Server using json-server
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Fetch</summary>
+ 
+ ### Promises
+
+ ### Fetch
+
+ ### Exercise: Fetch from Server
+
+ ### Exercise: Fetch Handling Errors
+
+ ### Exercise: Fetch Post Comment
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>React Animations</summary>
+ 
+ ### React Animations
+
+ ### Exercise: React Animations
+
+ ### Exercise: React Animation Components
+
+ ### Additional Resources
+
+  
+ </details>
+ 
+ <details>
+ <summary>Assignment 4</summary>
+ 
  ### here
   
  </details>
+ 
  
  
 ## Course 3: Multiplatform Mobile App Development with React Native
