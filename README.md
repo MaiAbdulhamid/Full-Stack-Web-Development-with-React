@@ -2593,38 +2593,150 @@
  <details>
  <summary>Redux Actions</summary>
  
- ### Redux Actions
- - Actions: payloads of information that send data from your application to the store
+ ### 1. Redux Actions
+ - Actions: payloads of information that send data from your application to the store.
+ - Based on the type property of the action, you will write typically that the Reducer function as a switch statement.
 
- ### Exercise: Combining Reducers
+ ### 2. Exercise: Combining Reducers
+ - In the `redux` folder, create a new file named `dishes.js` :
+ ```
+ import { DISHES } from '../shared/dishes';
 
- ### Exercise: Redux Actions
+ export const Dishes = (state = DISHES, action) => {
+     switch (action.type) {
+         default:
+           return state;
+       }
+ };
+ ```
+ - Do the same with `comments.js` , `promotions.js` , `leaders.js`.
+ - We have split the management of state into different reducers that manage partial state, we need to combine them together. 
+ - Open `configureStore.js` and update it:
+
+ ### 3. Exercise: Redux Actions
+ - In the redux folder create a new file named `ActionTypes.js` -> `export const ADD_COMMENT = 'ADD_COMMENT';`
+ - Then, create a file named `ActionCreators.js` :
+ ```
+ import * as ActionTypes from './ActionTypes';
+
+ export const addComment = (dishId, rating, author, comment) => ({
+     type: ActionTypes.ADD_COMMENT,
+     payload: {
+         dishId: dishId,
+         rating: rating,
+         author: author,
+         comment: comment
+     }
+ });
+ ```
+ - You send this to the store.
+ - Next, update `comments.js` to initiate action when the action is dispatched by the `ActionCreator` :
+
+ ```
+ import { COMMENTS } from '../shared/comments';
+ import * as ActionTypes from './ActionTypes';
+
+ export const Comments = (state = COMMENTS, action) => {
+     switch (action.type) {
+         case ActionTypes.ADD_COMMENT:
+             var comment = action.payload;
+             comment.id = state.length;
+             comment.date = new Date().toISOString();
+             console.log("Comment: ", comment);
+             return state.concat(comment);
+
+         default:
+           return state;
+       }
+ };
+ ```
+ - We will add it into the comments array, and then so the view will be able to show that comment.
+ - The concat is an immutable operation on the state, and that will create a new object and that object I can return from my function here.
+ - Now update `MainComponent.js` to make the action available for use within the `DishdetailComponent` :
+
+ ```
+ . . .
+
+ import { addComment } from '../redux/ActionCreators';
+
+ . . .
+
+   const mapDispatchToProps = dispatch => ({
+
+     addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+
+   });
+
+ . . .
+
+       <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+         comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+         addComment={this.props.addComment}
+       />
+
+ . . .
+
+ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
+ ```
+ - Finally, update `DishdetailComponent.js` :
+
+ ```
+ . . .
+
+   function RenderComments({comments, addComment, dishId}) {
+
+
+
+ . . .
+
+       <CommentForm dishId={dishId} addComment={addComment} />
+
+
+ . . .
+
+         this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+
+
+
+ . . .
+
+       <RenderComments comments={props.comments}
+         addComment={props.addComment}
+         dishId={props.dish.id}
+       />
+
+ . . .
+ ```
+ - So, when you submit the comment, you'll see that the submission of the comment will trigger action to be sent to your redux store, and then this action will result in the comment being added into the comments part of the state of your redux store, and then when the changes, then that will result in the store emitting a change, and that will result in your main component going and getting the updated state from the redux store, and then the main component passes the new state to all the chilled components, and then when you come down the RenderComments component realizes that the comments part has changed, so it will have to be rendered. So, react takes care of re rendering that with new the comment added into the list there. 
 
  ### Additional Resources
+ - [Redux Actions](https://redux.js.org/tutorials/fundamentals/part-2-concepts-data-flow).
+ - [Redux Reducers](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers).
+ - [Redux Usage with React](https://redux.js.org/tutorials/fundamentals/part-5-ui-react)
   
  </details>
  
  <details>
  <summary>Redux Thunk</summary>
  
- ### Redux Thunk
+ ### 4. Redux Thunk
 
- ### Exercise: Redux Thunk
+ ### 5. Exercise: Redux Thunk
 
- ### Exercise: React-Redux-Form Revisited
+ ### 6. Exercise: React-Redux-Form Revisited
 
- ###  Additional Resources
+ ### Additional Resources
   
  </details>
  
  <details>
  <summary>Client-Server Communication</summary>
  
- ### Networking Essentials
+ ### 7. Networking Essentials
 
- ### Brief Representational State Transfer (REST)
+ ### 8. Brief Representational State Transfer (REST)
 
- ### Exercise: Setting up a Server using json-server
+ ### 9. Exercise: Setting up a Server using json-server
 
  ### Additional Resources
   
@@ -2633,15 +2745,15 @@
  <details>
  <summary>Fetch</summary>
  
- ### Promises
+ ### 10. Promises
 
- ### Fetch
+ ### 11. Fetch
 
- ### Exercise: Fetch from Server
+ ### 12. Exercise: Fetch from Server
 
- ### Exercise: Fetch Handling Errors
+ ### 13. Exercise: Fetch Handling Errors
 
- ### Exercise: Fetch Post Comment
+ ### 14. Exercise: Fetch Post Comment
 
  ### Additional Resources
   
@@ -2650,11 +2762,11 @@
  <details>
  <summary>React Animations</summary>
  
- ### React Animations
+ ### 15. React Animations
 
- ### Exercise: React Animations
+ ### 16. Exercise: React Animations
 
- ### Exercise: React Animation Components
+ ### 17. Exercise: React Animation Components
 
  ### Additional Resources
 
