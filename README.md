@@ -2743,35 +2743,67 @@
  - Then open `configureStore.js` and update it to use the Thunk and Logger :
 
  ```
- import {createStore, combineReducers, applyMiddleware } from 'redux';
+  import {createStore, combineReducers, applyMiddleware } from 'redux';
 
- . . .
+  . . .
 
- import thunk from 'redux-thunk';
- import logger from 'redux-logger';
+  import thunk from 'redux-thunk';
+  import logger from 'redux-logger';
 
- . . .
+  . . .
 
-         combineReducers({
-             dishes: Dishes,
-             comments: Comments,
-             promotions: Promotions,
-             leaders: Leaders
-         }),
-         applyMiddleware(thunk, logger)
+          combineReducers({
+              dishes: Dishes,
+              comments: Comments,
+              promotions: Promotions,
+              leaders: Leaders
+          }),
+          applyMiddleware(thunk, logger)
 
- . . .
- ```
- 
- - Next, open `ActionTypes.js` :
+  . . .
+  ```
+
+  - Next, open `ActionTypes.js` :
 
  ```
  export const DISHES_LOADING = 'DISHES_LOADING';
  export const DISHES_FAILED = 'DISHES_FAILED';
  export const ADD_DISHES = 'ADD_DISHES';
  ```
- 
+
  - Then open `ActionCreators.js` and add new actions:
+
+ ```
+ . . .
+
+ import { DISHES } from '../shared/dishes';
+
+ . . .
+
+
+ export const fetchDishes = () => (dispatch) => {
+
+     dispatch(dishesLoading(true));
+
+     setTimeout(() => {
+         dispatch(addDishes(DISHES));
+     }, 2000);
+ }
+
+ export const dishesLoading = () => ({
+     type: ActionTypes.DISHES_LOADING
+ });
+
+ export const dishesFailed = (errmess) => ({
+     type: ActionTypes.DISHES_FAILED,
+     payload: errmess
+ });
+
+ export const addDishes = (dishes) => ({
+     type: ActionTypes.ADD_DISHES,
+     payload: dishes
+ });
+ ```
 
  ### 6. Exercise: React-Redux-Form Revisited
 
