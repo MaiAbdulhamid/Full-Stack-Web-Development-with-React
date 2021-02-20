@@ -2630,6 +2630,7 @@
  });
  ```
  - You send this to the store.
+ - The payload contains whatever needs to be carried in so the data that is sent back by the addComment.
  - Next, update `comments.js` to initiate action when the action is dispatched by the `ActionCreator` :
 
  ```
@@ -2652,6 +2653,7 @@
  ```
  - We will add it into the comments array, and then so the view will be able to show that comment.
  - The concat is an immutable operation on the state, and that will create a new object and that object I can return from my function here.
+ - what we're doing here is we're only adding it in memory. So, when you restart your application, any comments that you add by filling in the forms will be lost completely. We are not persisting the changes in any way.
  - Now update `MainComponent.js` to make the action available for use within the `DishdetailComponent` :
 
  ```
@@ -2720,8 +2722,56 @@
  <summary>Redux Thunk</summary>
  
  ### 4. Redux Thunk
+ - Provides the capability to run code after an action is dispatched, but before it reaches the reducer.
+ - This is a place which enables third party extensions to be injected into your Redux application.
+ - When you need to use the middleware in your Redux application then you use that applied middleware function that is available from Redux.
+ - In programming, a `thunk` is a subroutine used to inject an additional calculation in another subroutine:
+   – Delay a calculation until its result is needed,
+   – Insert operations at the beginning or end of the other subroutine.
+ - `Redux Thunk` is one kind of a middleware that allows you to write an action creator that will return a function instead of an action.
+ - Inner function receives the `dispatch()` and `getState()` store methods
+ - Useful for complex synchronous logic:
+   – Multiple dispatches
+   – Conditional dispatches
+   – Simple Async logic
+ - Redux Saga: Uses ES6 generators to control pausable functions
+   – Comples async logic
+   – Ongoing “background thread” like processing behavior
 
  ### 5. Exercise: Redux Thunk
+ - `$ yarn add redux-thunk redux-logger` -> Install Redux Thunk and Logger.
+ - Then open `configureStore.js` and update it to use the Thunk and Logger :
+
+ ```
+ import {createStore, combineReducers, applyMiddleware } from 'redux';
+
+ . . .
+
+ import thunk from 'redux-thunk';
+ import logger from 'redux-logger';
+
+ . . .
+
+         combineReducers({
+             dishes: Dishes,
+             comments: Comments,
+             promotions: Promotions,
+             leaders: Leaders
+         }),
+         applyMiddleware(thunk, logger)
+
+ . . .
+ ```
+ 
+ - Next, open `ActionTypes.js` :
+
+ ```
+ export const DISHES_LOADING = 'DISHES_LOADING';
+ export const DISHES_FAILED = 'DISHES_FAILED';
+ export const ADD_DISHES = 'ADD_DISHES';
+ ```
+ 
+ - Then open `ActionCreators.js` and add new actions:
 
  ### 6. Exercise: React-Redux-Form Revisited
 
