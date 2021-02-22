@@ -2763,14 +2763,16 @@
   . . .
   ```
 
-  - Next, open `ActionTypes.js` :
+ - Next, open `ActionTypes.js` :
 
  ```
  export const DISHES_LOADING = 'DISHES_LOADING';
  export const DISHES_FAILED = 'DISHES_FAILED';
  export const ADD_DISHES = 'ADD_DISHES';
  ```
-
+ - The `DISHES_LOADING` means that the dishes are currently being fetched, perhaps from a server. The dishes information has been fetched from a server. 
+ - The `DISHES_FAILED` means that you failed to fetch the dishes information from a server.
+ - Then `ADD_DISHES` means that you want to add the dishes into your store.
  - Then open `ActionCreators.js` and add new actions:
 
  ```
@@ -2804,10 +2806,143 @@
      payload: dishes
  });
  ```
+ - Next, open `dishes.js` and add the code to respond to actions :
+
+ ```
+ import * as ActionTypes from './ActionTypes';
+
+ export const Dishes = (state = { isLoading: true,
+     errMess: null,
+     dishes:[]}, action) => {
+     switch (action.type) {
+         case ActionTypes.ADD_DISHES:
+             return {...state, isLoading: false, errMess: null, dishes: action.payload};
+
+         case ActionTypes.DISHES_LOADING:
+             return {...state, isLoading: true, errMess: null, dishes: []}
+
+         case ActionTypes.DISHES_FAILED:
+             return {...state, isLoading: false, errMess: action.payload};
+
+         default:
+             return state;
+     }
+ };
+ ```
+ - If the `isLoading` is set to true, I may just want to display a loading spinner on the screen.
+ - Add a new component named `LoadingComponent.js` to display a loading message:
+
+ ```
+ import React from 'react';
+
+ export const Loading = () => {
+     return(
+         <div className="col-12">
+             <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
+             <p>Loading . . .</p>
+         </div>
+     );
+ };
+ ```
+ - Now we will update the remaining components to use the actions.
+ - To see the logger middleware's operation in your browser, open your JavaScript console of your browser.
 
  ### 6. Exercise: React-Redux-Form Revisited
+ - If we want to make use of the full power of the React-Redux-Form whereby the form state is persisted in the Redux store instead of in the components state, then we need to update our form to make use of the regular form rather than the local form from the React-Redux-Form.
+ - Add a new file named `forms.js` in the `redux` folder :
+
+ ```
+ export const InitialFeedback = {
+     firstname: '',
+     lastname: '',
+     telnum: '',
+     email: '',
+     agree: false,
+     contactType: 'Tel.',
+     message: ''
+ };
+ ```
+ - Then, open `configureStore.js` :
+
+ ```
+ . . .
+
+ import { createForms } from 'react-redux-form';
+
+ . . .
+
+ import { InitialFeedback } from './forms';
+
+ . . .
+
+         combineReducers({
+             dishes: Dishes,
+             comments: Comments,
+             promotions: Promotions,
+             leaders: Leaders,
+             ...createForms({
+                 feedback: InitialFeedback
+             })
+         }),
+
+ . . .
+ ```
+ - Once we import the initial feedback and so if we initialize it like this, this we'll add in the necessary reducer functions and also the state information into my create store.
+ - So we don't need to write our own reducers or our action creators and so on, React-Redux-Form fills in all the details by itself. 
+ - Next, open `MainComponent.js` :
+
+ ```
+ . . .
+
+ import { actions } from 'react-redux-form';
+
+ . . .
+
+   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))}
+
+ . . .
+
+               <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+
+ . . .
+ ```
+ - Open `ContactComponent.js` :
+
+ ```
+ . . .
+
+ import { Control, Form, Errors, actions } from 'react-redux-form';
+
+ . . .
+
+     handleSubmit(values) {
+         console.log('Current State is: ' + JSON.stringify(values));
+         alert('Current State is: ' + JSON.stringify(values));
+         this.props.resetFeedbackForm();
+         // event.preventDefault();
+     }
+
+ . . .
+
+                         <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
+
+                           . . .
+
+
+                         </Form>
+
+ . . .
+ ```
+ - So even though I have moved away from this view and then came back to the view, since this form state is preserved in the Redux store, I'm able to see that the form state is preserved even though I navigated away from this view. Now let's go ahead and submit this form.
+ - So that's the reset feedback from function to be implemented, initiating the action to reset the form after submitting. 
 
  ### Additional Resources
+ - [Middleware](https://redux.js.org/tutorials/fundamentals/part-4-store#middleware).
+ - [Redux Thunk](https://github.com/reduxjs/redux-thunk).
+ - [Logger for Redux](https://github.com/LogRocket/redux-logger).
+ - [React Redux Form](https://davidkpiano.github.io/react-redux-form/docs.html)
+ 
+ 
   
  </details>
  
@@ -2815,12 +2950,52 @@
  <summary>Client-Server Communication</summary>
  
  ### 7. Networking Essentials
+ - Many of Web applications have a “Cloud” backend.
+ - HTTP protocol, the protocol that is used for communicating between the client and the server.
+ - The HTTP protocol, for it to work, needs a URL to be supplied to it, the Uniform Resource Locator.
+ - URL: this is a string of characters separated by slashes with an http: or an https: attached in front of it.
+ - JSON: the JavaScript Object Notation is one way of encoding data that is being shipped from the server side to the client side or vice versa.
+ - SOAP as a protocol that allows communication between distributed entities within the network.
+ - When you are communicating with a server, the client server communication causes unexpected amount of delays or indeterminate amount of delay while the data is being either fetched or uploaded to the server from the client side.
+ - The Hypertext Transfer Protocol: this is a protocol that is used for encoding the messages that you exchange between your client application and a server side.
+ - In order to be able to talk to a server, you have the support from various HTTP actions or what we refer to as HTTP verbs, the head, get, post, put, delete, trace, options, and connect.
+ - In the HTTP protocol, you are sending a request from your client application to the server, and this is encoded in the form of an HTTP request message. The request message typically carries a URL in the request message indicating what is it that you want the server side to send it to you. And this is typically a get message if you want data to be downloaded from the server side, and you will also specify which particular server you are communicating with. When the server receives your request, the server will retrieve the data from its data storage, typically a database on the server side, and then package this data in an appropriate format and send the data back to you on your client side.
+ - A request message is typically sent from the client to the server and the request message consists of a request line plus a bunch of headers where you supply additional information to qualify the request.
 
  ### 8. Brief Representational State Transfer (REST)
+ - Web services are a way of designing systems to support interoperability among systems that are connected over a network, like the Internet as we see today.
+ - Representational State Transfer(REST): is a style of software architecture that is specially designed for distribution hypermedia over the World Wide Web.
+ - Four basic design principles:
+  – Use HTTP methods explicitly
+  – Be stateless
+  – Expose directory structure-like URIs
+  – Transfer using XML, JavaScript Object Notation (JSON), or both.
+ - Nouns specifically refer to resources, and these are resources are usually identified by their URLs and these are unconstrained.
+ - Verbs are constrained and these specify the actions to be done on the resources(CRUD operations).
+ - Representations, when the information needs to be conveyed from the server to the client or from the client or the server, how you encode the information, typically, either using JSON or using XML. 
 
  ### 9. Exercise: Setting up a Server using json-server
+ - we will make use of a simple node module called json-server, which helps us to quickly set up a simple server with several data that is given to it in the form of a JSON file.
+ - At any convenient location on your computer, create a new folder named `json-server`, and move to this folder.
+ - Download the `db.json` file provided above to this folder.
+ - `$ npm install json-server -g` -> json-server is a node module, and hence can be installed globally.
+ - Create a `public` folder in your json-server folder.
+ - Download the `images.zip` file that we provide above, unzip it and move the images folder containing the images to the public folder.
+ - `$ json-server --watch db.json -p 3001 -d 2000` -> To Start the server.
+ - `-d` flag -> specify the Delay, `-p` flag -> specify the Port.
+ - This should start up a server at port number 3001 on your machine. The data from this server can be accessed by typing the following addresses into your browser address bar:
+ ```
+ http://localhost:3001/dishes
+ http://localhost:3001/promotions
+ http://localhost:3001/leaders
+ http://localhost:3001/feedback
+ ```
+ - Restart the json-server as we did before. Now your server will serve up the images for our React app. You can view these images by typing the following into your browser address bar: `http://localhost:3001/images/<image name>.png`.
 
  ### Additional Resources
+ - [JSON Server](https://github.com/typicode/json-server).
+ - [Creating Demo APIs with json-server](https://egghead.io/lessons/javascript-creating-demo-apis-with-json-server).
+ - [JSON](https://www.json.org/json-en.html).
   
  </details>
  
@@ -2828,10 +3003,51 @@
  <summary>Fetch</summary>
  
  ### 10. Promises
+ - Promise is a mechanism that supports asynchronous computation.
+ - A promise will return a promise to you saying that when the result becomes available it'll come back and deliver the results to you.
+ - So, a promise returns a proxy object to you and you hold onto the proxy object and that proxy object will give you access to the results when they become available.
+ - Solves the callback hell (heavily nested callback
+code) problem
+ - Promises can be chained
+ - Can immediately return:
+  – Promise.resolve(result)
+  – Promise.reject(error)
 
  ### 11. Fetch
+ - The Fetch API is a modern replacement for XMLHttpRequest.
+ - Fetch Abstractions:
+ - Request: Represents a resource request
+  - Response: Represents the response to a request
+  - Headers: Represents response/request headers, allowingyou to query them and take different actions depending on the results
+  - Body: Provides methods relating to the body of the response/request, allowing you to declare what its content type is and how it should be handled.
+  - Cross-Fetch library provides support for Fetch both in Node applications and Browsers.
+ - Fetch Alternatives -> Axios, Superagent.
 
  ### 12. Exercise: Fetch from Server
+ - One of the most important things that you need to ensure when you're doing the exercise of communicating with the server, is that the server should be up and running.
+ - `$ yarn add cross-fetch` -> install Fetch into our project.
+ - Now that we have installed Fetch, let us configure your application to connect to the server. First, create a file named `baseUrl.js` in the `shared` folder:
+ ```
+ export const baseUrl = 'http://localhost:3001/';
+ ```
+ - Next, open ActionTypes.js and add the following:
+ ```
+ . . .
+
+ export const ADD_COMMENTS = 'ADD_COMMENTS';
+ export const COMMENTS_FAILED = 'COMMENTS_FAILED';
+ export const PROMOS_LOADING = 'PROMOS_LOADING';
+ export const ADD_PROMOS = 'ADD_PROMOS';
+ export const PROMOS_FAILED = 'PROMOS_FAILED';
+ ```
+ - Then, open `ActionCreators.js` and update it :
+
+```
+
+
+
+```
+ - 
 
  ### 13. Exercise: Fetch Handling Errors
 
