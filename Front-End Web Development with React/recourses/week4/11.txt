@@ -1,0 +1,214 @@
+[MUSIC] In the previous lesson, we have already briefly learned
+about client server communication, the HTTP protocol that is used for
+clients over communication, and REST API. We have also set up a simple server,
+using JSON server, which we can then connect to
+from our React application and fetch data or post data to. Now, how do we actually
+communicate with the server? This is where we make us of fetch. Now what is fetch, how is it useful for
+communicating with the server, and how do we actually make use of
+it within our React application? Let's examine that in a little
+more detail, in this lecture, and the exercises that follow this lecture. Now, if you are familiar with how
+a browser application communicates with a server,
+earlier we had access to XMLHttpRequest, that was implemented in most browsers that
+enabled us to communicate to the server. Now this is quite cumbersome and outdated
+already for modern day web applications. And hence we would rather
+prefer in more modern or newer implementation of the communication
+protocols within our browser so that it can communicate with the servers. Now, XMLHttpRequest has been
+successfully made use of by many JavaScript frameworks and libraries
+for communicating with the server. And indeed that is still
+the go to approach for communicating between your browser and
+the server. But there is a newer kid on the block,
+the Fetch API is proposed as a modern replacement for
+XMLHttpRequest. Now, it is quite new and
+so some of the older or legacy browsers do not support it yet. But the newer browsers
+are all beginning to support the Fetch API as part
+of the browser itself. Now this provides an interface for fetching resources including
+from across the network. That's indeed the purpose of Fetch. And Fetch provides a more
+powerful feature set and more flexible feature set than
+what XMLHttpRequest provides. Now, many of the JavaScript framework
+earlier wrapped the XMLHttpRequest in their own code and made it more palatable
+for use within those JavaScript framework. So for example, with an Angular, React or Backbone jQuery of the AJAX method for example is all wrapping
+of the XMLHttpRequest. Now Fetch API inherently supports promised
+based approach for communication. Now we have already learned about
+promises, in the previous lecture. And we have seen how
+promises provide a way for implementing synchronous competition. So Fetch supports promises inherently and that is what makes it valuable for
+use in communicating with a server. Let's look at some of the salient
+features of Fetch and how we can make use of it in this lecture. Now when you talk about Fetch there
+are some abstractions that we need to be aware of. In Fetch,
+a request represents a resource request. And similarly, a response represents the response to
+the request that you send to the server. Now the request and response
+are objects that you have access to and can manipulate it. Similarly, the headers object represents
+the request/response headers. Now you can query the headers,
+extract information, you can add headers to
+an outgoing request. You can extract headers from
+the incoming response and make use of them within
+your JavaScript code. In addition, the body itself is another
+object that is part of the Fetch API and it provides methods relating to the body
+of the response or the request message. Now, you can declare the content type of
+the body, how the body should be handled. You can even put
+information into the body. You can extract the information
+of the body and so on, and that is all supported through Fetch API. Now, how do we make use of the Fetch API? A simple usage of the Fetch API
+is within your JavaScript code, you'll simply say fetch and
+then supply the URL of the server that you want to access. So in this case representing
+the URL as a baseURL +, an extra part of the URL. This is exactly what I will use in
+the code in the exerciser slot. The baseURL is configured
+with the HTTP://, URL address for the server, and then the extension is the specific resource
+on the server that we are accessing. Now once you issue this will
+return a promise object. Now when it returns a promise object, then on the promise object you can
+apply it then to the promise object. So as you can see you apply the then, and within the then you'll get
+access to the response object. Now once you get the access
+to the response object, this response object is a raw
+body in the response message. You can convert it if you know
+that the response body contains data in JSON format. You can simply can work that
+by saying response.json and then that will give you the body in
+JSON format and so it is more easy for you to process that within
+your JavaScript code. So that's one way,
+then when you obtain that, the response.json will return
+the response in JSON format and then that will be passed into the next then that
+you can chain into the previous then. So as you saw,
+they can chain promises together and that information returns in the form
+of a parameter called data here. Data is just, you can use any
+parameter name there, but I'm using data as the parameter name because that's
+the data that I obtain from the sever. And them I'm simply logging the data to
+the console just to show what has been retrieved from the server. You can do additional processing in this
+data that you obtain from the server. Indeed in the exercises
+that is exactly what we will be doing with the incoming
+data in the response message. Now, sometimes, when you encounter errors then you provide
+the catch for catching the errors. In that case, you can catch the error and
+then deal with the error appropriately. In this example, I'm simply login
+the error to that console and then leaving it there. I'm not going beyond that point, but if you want to handle error in a more
+elaborate manner then this is a place where you can implement the code
+to handle the error appropriately. Now, any request that you
+initiate like this will result in a get request being
+sent to that URL endpoint. If you want to perform any
+other kind of HTTP request, other than get,
+then you can explicitly specify the method in a second parameter that
+you will supply to the fetch. The second parameter will be
+a JavaScript object with properties where you specify the details
+of what goes into the message. So, for example, if you are posting
+some data to a REST API endpoint, in order to create a new
+object on the server side. Then you could simply say, fetch and then
+supply the REST API end point following that within a JavaScript object you can
+specify the method as POST for example. Then you can even specify the body
+of the outgoing request message. So in this case, I am taking a newComment,
+which is a JavaScript object, I'm stringifying,
+I'm converting that into JSON and then putting it into the body
+of the outgoing request message. In addition, I can even configure
+the headers for this message by specifying the headers property
+in the JavaScript object there. And so here, I'm specifying
+the content type as application/json. And also I can specify
+credentials same-origin. Meaning that you include credentials only
+when it is being sent to the same origin as specified in the URL about
+to the same server as specified. Now credentials part, cross-origin and
+same-origin and so on, I will deal with that in the Node.js course which
+is the last course in the specialization. For the moment just accept that you
+have a parameter like that in there. There are more properties
+that you can include in this object that you supply as the second
+parameter to the fetch call here. Now, when you send the POST request
+the server will then respond with a response message. And that response message can then
+get processed appropriately by using then and then catch, as we see. When the data is posted
+to the server side, the server will respond back with a reply. The reply might actually contain
+a copy of the data that is posted. Now this depends upon how you
+arrange your server side and what the server will send back
+in response to a post request. Now, if you're implementing the server
+you have the full flexibility of implementing what the server will
+return in response to a post request. Typically, the post request will result
+in the server sent it back a copy of the resource that has been created on the
+server side if it is successfully done. If there is an error, then obviously an error message will
+be returned to the client side. How do you deal with errors? Now with fetch you have a specific
+way of dealing with errors. Now when you send the fetch request,
+then in the then part of the message. Now earlier we saw that in the then part
+of the message you got the response and then you dealt with the response. Now the response from the server
+side could be a true response with a status code between 200 and 299 which means that everything
+went very well on the server side. But if the status code is in 400 to
+500 range or something outside the 200 to 300 range then your server will simply
+send back the response message as such. But with fetch, you have to explicitly
+check the response message to see whether the status code is
+acceptable status code or the status code is indicating some error from the
+server side and handle it appropriately. Now fetch provides you with
+a method of doing this. What fetch does is if
+the status code in the response message is within the normal
+limits 200 to 299 then it will set a property
+call as OK on the response. And so you can check this response,
+start OK to see if it is true or false. If it is true, then the response
+that you get is a valid response. And so you can simply return that response
+over to the next then that you chain into the sequence of then there. Otherwise, so this is the otherwise part,
+if it is not then you recognize that your status code is outside the normal
+range that you would consider a normal response from the server side, in that
+case we will handle it with the else part. Here you have to explicitly
+create an error like this here, so you are extracting from the response. You're saying response.status,
+response.status contains the status code. So for example, if you receive 404,
+the else part should be executed because the response.OK will be set to
+false, so the else part will be executed. And there you will construct
+an error object as shown here. So you can extract the status text
+from the response and the status code from the response and construct
+an error message string as shown here. And then you can put that
+into the error object. You can even put the response into
+the error object if you want and then throw the error there. When you throw the error,
+the catch that you'll implement later on will catch this error and
+then deal with it appropriately. So that's how you would handle
+the response from the server side. Now if the server explicitly or if in communicating with the server
+you experience an error. So which means that you never even
+managed to communicate with the server. In that case,
+fetch will generate an error response and that is handled by giving a second
+callback function to the then. Promises allow you to give two callback
+functions as parameters to the then. The first callback function will be used
+when the promise resolves correctly. The second callback function will be
+used when the promise is rejected. So the error part is where the rejection
+of the promise is handled. So if it is rejected,
+then you will create an error message from the error message and
+then throw an error at that point. That's another way of handling
+errors that are caused. So this is fully your responsibility, this part of the code is something
+that you implement when you use fetch. Now some people that use other libraries,
+I'll talk about them a little bit later. Some of the other libraries have a much
+better way of dealing with this. And so some people prefer not to use
+fetch, but instead use some of the other libraries like axel I'll briefly mention
+that at the end of this lecture. Now, and then after that you can carry on
+with the chain of thens which will handle the response accordingly as per what
+you choose to do with the data. And then of course you have the catch that
+deals with the error message accordingly. If you are using fetch on browsers that
+don't have fetch already built in, then you can use a fetch
+polyfill that will be inserted. Now cross-fetch is a an npm package
+that makes use of a fetch polyfill in situations where fetch is not inherently
+part of the browser implementation. So, Cross-Fetch provides support for
+Fetch. Now, you can use Cross-Fetch even
+on the server side for doing Fetch. So even within your Node GS application,
+if you want to contact another server, you can use Fetch also, and
+Cross-Fetch supports that. So that's why in our application
+we may install Cross-Fetch. And then, this Cross-Fetch, if your browser doesn't have
+the Fetch built into it, then it will resort to using
+the whatwg-fetch polyfill. The whatwg-fetch polyfill is
+a Implementation of the Fetch protocol, or the Fetch API, that can be put into browsers that
+don't have native support for Fetch. And similarly, the Cross-Fetch will
+result using another implant package called Node-Fetch, which is used if
+you're using this in a Node application. Now in our case, we are using
+it in our React application, and the Create-React app automatically
+includes Cross-Fetch into our React application, so you don't need to
+explicitly do anything for using that. But, if you are using Cross-Fetch,
+then within your application, when you use Fetch, you may simply
+import Fetch from Cross-Fetch into that JavaScript module, and
+then make use of Fetch just like you use Fetch otherwise as we
+have seen in the previous slides. Now, as I briefly mentioned earlier,
+some people dislike Fetch and feel that fetch is too low
+level alternative for them. When you look at XMLHttpRequest, Fetch
+seems like a significant improvement for XMLHttpRequest way of doing things. But then, people had already figured
+out by wrapping XMLHttpRequest in their own code, so that they give
+it better API for app developers. So if you search the Internet, people will often complain that
+Fetch is too low level for them. And then, they prefer to use
+other libraries like Axios, or even another one called Superagent. So if you search for React and
+communicating with a server, you will also hear people talking
+about Axios and Superagent. Axios also uses wraps, XMLHttpRequest, and exports a better API for
+use within your React application. Now the Axios API seems
+better than Fetch API, or rather at least Axios gives a much
+higher level API than what Fetch gives. And so, some people prefer to
+use that instead of Fetch. If you choose to do so, you can do so. Axios also supports things like
+automatically adding credentials and also adding interceptors. We'll talk about interceptors
+in the Node.js course, where we will see the reason for
+using them. And so, I will differ that
+discussion to that point. So if you don't like Fetch, you can
+then go and fetch Axios or Superagent, and use them in place of Fetch,
+so whatever satisfies your needs. Now in my course, I will use Fetch
+as the approach because Fetch also works very well with React native,
+as you will see in the next course. So that's why I deferred to using fetch
+for communicating with the server. With this quick understanding of Fetch, let's move on to the exercises where we
+will see how we can make use of Fetch to communicate with the JSON server that
+we have set up in the previous lesson. [MUSIC]

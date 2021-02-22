@@ -1,0 +1,32 @@
+[MUSIC] In the previous lesson, we have seen
+controlled components and React, and how controlled components can be used to set
+up controlled forms within the component, and their form information being
+reflected to the state of the component. Sometimes you will wish to have
+a very simple form with a very limited amount of interaction of
+that with your React component. In that case an uncontrolled form
+is a much easier way of setting up forms within your React application. Now, as we illustrated
+in the previous lesson, ideally whenever you implement forms
+within your react application, you should implement them
+inside controlled components. But there are many situations where
+you may not wish to go through all the expensive set up that you did for the
+control forms in the control components. And also there may be situations where
+you may wish to just let the form information be handled by the DOM itself. As we realize any HTML form elements
+state is already tracked by the DOM. So maybe in simple setup,
+you would be happy with letting the DOM track the form state, and
+then retrieve that directly from the form. So how do we retrieve this information? Now every, DOM form element
+has a ref associated with it, from which you can easily
+use thatch to extract their HTML form data into your application. And that is what we will do in
+the exercise that follows this lecture. So we need to tie in a function there to
+enable us to retrieve that information into our application. Now this approach of using uncontrolled
+forms is a lot more easier in situations when you are mixing your React
+application code with non-React code. So maybe you have a project that is
+already setup with some non-React part, and then you're adding
+in React components or React elements to that project to
+set up some parts of the project. In that case, setting up uncontrolled
+forms where it interacts with the rest of your non-React code is more easier. Then this is an easier approach for
+us to use for setting up forms in our
+React applications. And that's the reason why uncontrolled
+forms are also considered. With this quick understanding
+of uncontrolled forms, let's move on to the excercise where
+we will set up a simple login form for the user as an uncontrolled form
+within our React component. [MUSIC]

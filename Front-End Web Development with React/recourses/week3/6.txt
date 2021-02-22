@@ -1,0 +1,143 @@
+[MUSIC] When we look back at the simple React
+application that we have developing in this course. It's family straightforward,
+it has a dozen or more components that we have
+organized into a hierarchy. And then we have the main component
+that is acting as the repository for the state of our application. And any of the other components
+are purely presentational components, and any changes that they want to make is
+reflected back to the main component, which then modifies the state. Now, this approach works very well for
+very simple React applications, I mean tie React applications
+that are useful for teaching. But, when you go out into the real world,
+you might end up with React applications that could consist of
+hundreds of components. And organized into multiple hierarchies,
+and not necessarily connected
+with one root component. They could be organized
+into multiple groups and each group with a central component
+that is managing the state for that group of components and so on. But, in such a situation,
+maybe you make a change, or you initiate some change in one
+particular component by say, for example, responding to the user
+clicking on a button or the user inputting some
+information into an input box. And then you propagate that up to the root
+component of that branch of the tree. Then, the change that has been
+cause might actually affect or may result in the need for
+re-rendering the component which is get another part of this
+whole structure there. And if the two don't
+share a common ancestor, then it is very hard to pas this
+information back and forth between them. Now, the simple React approach that we have taken with one root
+component that is holding the entire state of the application will
+not scale in that situation. So it is better to move that
+skate off your application into its own separate unit in some way. And this is where the model view
+controller approaches it that we just talked about might come to our help. Because in the MVC approach we see that
+the model has captured the entire state of your application and any changes that
+you want to make to the model from the view will have to go through
+the controller to the model. And then changes to the model
+may result in the views or some parts of the views being re-rendered. Now, the MVC of course is
+a wonderful approach and has been very effectively used for
+many web applications. But when it comes to React, does it work? And the other question that comes about
+is what is this Flux Architecture that we are talking about? And how is this relevant to the MVC
+that we have just discussed? Let's talk about these in this lecture. Now when React started out,
+React was touted as the V in the MVC. And that was the way it was
+being approached earlier. But nowadays, we no longer hear that
+kind of cot and cot view about React. So it has gone beyond being
+a simple rendering of the view and you see a complete React
+application being developed. And indeed, the simple example
+that we have seen so far, you have a full fledged React
+application already in place. And all that you'll need to do
+is connect it to do a server through using a HTTP protocol
+support using something like fetch, which we will examine a bit
+more in the next module. But if you do so, you can easily have
+a fully functional React application. But that doesn't scale very well. And this is where you want to move
+to a full fledged MVC approach, where you capture the entire state of your
+application, move it into a model, and then let that dictate how
+the views are being rendered. Now, the MVC approach
+when used by Facebook, they encountered certain
+issues with the MVC approach. Now, there is a very well
+presented discussion in a talk given by Facebook on why
+they faced issues with using the MVC architecture in
+some of their applications. And I have given a link to
+that in the flex documentation that is given in the additional
+resources of this lesson. You'd see a video where one
+of the Facebook engineers explains why the MVC caused problems for
+them. With the issues like cascading
+updates where change in one model may result in that causing
+a change in another model and which causing a change in another
+part of the model and so on. And this cascading updates
+of the model state pretty soon becomes very difficult to handle. And so they found that this
+approach of the MVC approach doesn't work very well with
+their kind of applications, especially things that
+they developed with React. And that is where they came up with their
+own approach called the Flux architecture. What exactly is The Flux Architecture? Again, just like MVC,
+it is a software engineering pattern. It is a suggestion idea or a pattern for
+you to organize your code, and not necessarily the only
+way of doing things. But, they found that the Flux
+approach works very well for applications like what
+you developed with React. Now, what is the salient feature
+of this Flux architecture or the Flux approach for
+developing applications? In this, one of the salient features
+is unidirectional data flow. The problems that they encountered with
+MVC was the fact that the updates, as we see lead to a cascading flow
+of updates within the models, and becomes a tangled web, which becomes
+untenable after a period of time. And so this is where they decided that
+all updates have a unidirectional flow, and the way they suggest is
+as shown in this picture. So here the central unit for
+your architecture is the store. In the Flux architecture you could have
+multiple stores, what is the store? The store becomes the storehouse for
+your application state, and any business logic that
+modifies the application state. So the store encompasses this whole thing,
+and the only way you can modify your application state within
+the store is by requesting the store. You don't have any setters that
+the store make available to you. So modifications to the state is
+completely controlled within that store itself and that dictates how
+the modifications need to be done. You can only request for
+changes to be done to the state through actions which
+are synced to the dispatcher. So the dispatcher becomes
+a controlling unit for serializing any actions that you request for
+changing the store. Now, the store itself can
+be subscribed by views within React or
+in general controller views. So like the main component that
+we saw in our application. The main component was the store
+house of the state there, now this main component will
+get its state from the store of your Flux architecture that you implement. Now the controller views
+subscribe to the store, and they will have access to
+getters on the store. When the store updates its state, the store will emit a change which
+the controller views will watch for. Whenever a change is emitted,
+then the controller views will go back and be able to get the updated state. And this, in turn, may result in
+re-rendering of parts of your views or parts of your components
+within your React application. So that is how the data flows. But again,
+it is a unidirectional data flow. Now the views cannot
+directly change the store. If a view needs to change
+anything in the store, then, this is the approach that
+they expect you to take. So any change that you want to
+make in your store because of user's interaction with any particular
+view within your application, will have to be reflected back to
+the dispatcher in the form of an action. Now the actions themselves support
+what I call action creators. Now people talk about some of these
+things in a bit more detailed in the context of Redux which we'll
+discuss in the next lecturer. And we will adopt Redux as the approach
+for designing the support for a React application or the overall
+architecture for our React application. We'll talk about that in the next store. Redux is somehow related to Flux, and
+so many of these concepts, the action, the action creator, the dispatcher, the
+store and all that will come back again. And I will discuss more about this when
+I talk about Redux in the next lecture. But that's the approach, that the Flux
+architecture suggests for you. So new actions that are initiated will
+propagate through the system in response to the user interactions. And this will be delivered
+to the dispatcher, and the dispatcher becomes the center unit
+that controls all the changes and mediates to ensure that changes
+to the store are sent through it. There is no other way for you to
+change the state of your application. So this approach where there
+is a unidirectional data flow, any changes have to go through the
+dispatcher, and then be sent to the store. And changes to the store will reflect
+into your controller views are by the store emitting the change and
+then the controller view's then pulling in their changed state through
+getter operations on the store. Center operations as you see is not
+available on the store at all, and so the only way you can do any changes is by
+sending actions into the dispatcher and the dispatcher then serializes
+these changes to your store. Now again, this may seem very, very abstract to you at this point and
+may not make much sense to you. But when we discuss Redux in the next
+lecture and then go on to the exercise where we are apply Redux to
+enhance our React application. It will become even more clearer on
+this unidirectional data flow, and the store, and what role it plays in
+storing the state of your application. And how we modify the state through
+actions which are supported through action creators, and
+action types, and so on. Again, I have thrown
+a lot of terms at you. Hold on, we'll come back to them
+in the next lecture on Redux. [MUSIC]

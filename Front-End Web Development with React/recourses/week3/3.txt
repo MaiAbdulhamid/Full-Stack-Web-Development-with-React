@@ -1,0 +1,157 @@
+[MUSIC] Let's look at how we can introduce
+simple form validation into our form that we included
+in the contact component. This is pure client side form
+validation to check to see if the user has input their
+values in a suitable map. To continue with this exercise, going into
+the contact component, let me also import that form feedback
+component from react track. And that will help us to show any error
+messages to the user within the form. Now for the form itself,
+I will use another property here called touched, which will keep track of whether a
+particular field has been touched or not. Now only four fields from my form
+will be validated in this exercise. I'm just using just to illustrate to
+you how you can set up form validation. So I'm going to demonstrate only for
+four fields here, firstname, lastname, telnum and email. Now in the touched,
+we will install a Boolean value to indicate whether that particular
+input value has been touched or not. The reason for tracking this is
+that if the form value has not even been touched by the user, the user
+has made no changes to that form value, then you should not be
+validating it at all. Only after the user makes the first
+change to any of the input boxes, then you can validate that
+particular input box. So here we are tracking the state for
+each of the input boxes. So for the firstname initially is false,
+lastname, false. Telnum, So all these four are false. Whenever for the first time the user
+modifies the input box corresponding to each of them, then the corresponding
+value will be set to true. So how do we handle that part? To handle that part, we will introduce one more
+method here called as handleBlur. The handleBlur, Will indicate which particular
+field has been, Modified. So, This will also receive
+the corresponding event in here. So when that happens, all that we'll do is
+we'll set the corresponding touched value. So see the use of dot dot dot,
+so to say, all those. So whatever is the current state to that, I am going to modify only
+that particular field so, And set that to true. So whichever particular
+input box has been modified, that I am going to set it to true. So that way, they will be able to track
+which [COUGH] input box has been modified. So the blog, each input box has
+the on blog which will be invoked whenever the first time, or whenever
+anything changes in that input box. So the handleBlur will ensure that for
+the particular field, the touched value of the field in here, in
+the state here, will be set to true here. So that's the handleBlur
+that we implement. Furthermore, we will validate the form
+each time the form is written, so we'll implement
+a function called validate which will take in the Current values of, Their four fields, firstname, lastname, telnum and
+email, and then they will. Construct a JavaScript
+object called errors, Which will contain the message
+corresponding to the four values. So let me just copy the firstname, lastname, telnum, and
+email from here, these four. We'll construct a errors object,
+in which those four fields, initially will be in the strings. But then, if there is an error, that particular value will be set to
+the corresponding error message there. So in here let's do some validation. Let me show you some
+validation that I can do. So for the first one, we'll say, if this state.touched.firstname, so either the firstname has been touched and firstname.length is less than 3. So if the user has typed in a value with less than three characters into the firstname, then we'll say, errors.firstname = 'First Name should be >= 3 characters'. So now you see how you are setting
+an error message there. If the firstname length field is less than
+3 then we'll set that to 3 characters. Else, we are checking to see the length of the firstname and lastname field. Else, if first name.length is greater than 10. So you see that we want our firstname
+field to be between 3 and 10 characters. So, of course, these are configurable. So you can always change
+that value in the validation field to whatever value
+you want to set it to. So we'll say firstname should be,
+less than or equal to. 10 characters. So that is how we'll
+validate the firstname. So the firstname should be between
+three and ten characters for this particular form. Now, you can choose whatever
+numbers that you want for your particular form, but
+this is just an illustration. Similarly for the lastname,
+I'm going to copy that part. And then we'll see, lastname. Lastname.length, errors.lastname. Lastname should be, and then, Make sure that you change
+everything correctly, otherwise you will see
+problems in your code. And if you forget to change on of these
+first names to last name by copying that, then you'll end up changing
+the wrong fields there. [COUGH] So this is how we check
+the first name and the last name. So we are ensuring the first name and the
+last name is between 3 and 10 characters. For the telephone number,
+what kind of check do I want to do? For the telephone number,
+I will check to see if the telephone number
+is a set of numbers only, and does not include any other characters. So here,
+I am using a regular expression here. So we'll say, hat d plus dollar. Now if you know how to reg express work,
+you understand what I'm doing here. So that is a regular expression, so
+this regular expression says that all the characters, the string of characters
+should be all numbers nothing else. So that is what we are specifying here. So how do we test this? So we'll say, if (this.state.touched.telnum && !reg.test). So the reg.test is a built in method for
+the regular expression there. And so reg.test says if you
+give it a string there, it will return a Boolean value
+which performs the search and indicates whether the pattern
+exists in the string or not. So that's what we are doing here. Reg dot, so if you define
+a regular expression like that then you can perform such test on that. So you'll test to see if
+this particular string follows what you specified in
+the regular expression or not. In this case, this string should
+be all numbers between zero and nine nothing else. So that's the validation test
+that I'm doing on there. Telephone number, so we'll say, Tel.Number should contain only numbers. That's a meaningful test for
+telephone number, right? So again, you can create many such tests. You can do a lot more validation,
+you can even check to see that the telephone number is exactly
+a certain number of numbers by using the previous kind of test to
+check the length of the string. So those can be done too. But I'm leaving that as an exercise for
+you to try on your own. So you can set up to say the telephone
+number should be exactly 8 numbers or 12 numbers depending on what is followed
+in your country as the standard for telephone numbers. For the email, what am I going to test? So for the email I'll say, if(this.state.touched.email &&
+email.split (' ')). So this is again a way of checking to see, So, here I am checking to see if there
+is an @ character in your email or not. So, I'm checking bit by bit every
+part of your string to check if each of the characters, at least one of
+the characters is an @ sign or not. If it not, then that is not a valid email. So that's what we are checking
+to make sure, okay? So, not equal to one then we'll say, errors.email('Email should contain a @ sign'). So this is the simple validation that I'm
+doing on my four fields in my form there. That's about it, and then after I do this, then from this function I'll
+return the errors field. So if this validate function record
+is invoked with the firstname, lastname, telnum, and email,
+we'll test those, and then tell me whether there
+are any errors or not. Now where do we invoke this? We will invoke this in
+the render function here, because every time there is
+a change in your input fields, your form will be rerendered. And so that will be the appropriate
+time for you to carry out the check. So in the render we'll say const errors = this.validate (this.state.firstname, this.lastname, this.telnum, this.email) in that order. So we'll supply the current values
+of the firstname, lastname, telnum, and
+email to the validate() function. And if there is an error in any
+one of them, the errors string or errors object that is returned
+from here will contain the error message in
+the corresponding strings image. Okay so, how do we make use of this? Now with our other form,
+for each of these, so going down to the form here, for each of these inputs,
+I can also include another, Field here called FormFeedback. Now, this FormFeedback will display
+whatever I am supplying there, right at the bottom,
+just below that field there. So here I'll say FormFeedback
+errors.firstname Let me just put it on the same line there. So that is how we will
+display that first name. So this is Bootstrap's way of doing things
+and so react strap also supports that. So this will be displayed as a string
+right below this input box here. So FormFeedback. Similarly for the last name. We'll say this errors.lastname, and then for the telephone number, errors.telnum. And then finally, for the emails. Now you're saying, what about the rest? Why don't you introduce validation? You can do that, no doubt. But I'm just illustrating some
+examples of how to do that. You can extend this exercise further to do
+validation for the remaining ones based on what is it that you want that
+field to be validated to. But I have just shown you
+how you can achieve that. So that is the form feedback. Now, also, remember that we want to check
+to ensure that a field has been touched. So where a field is touched,
+we will be invoking the handleBlur, so how do we invoke the handleBlur? So going into each of
+the fields in the form there, just like we did the onChange,
+we will also invoke the onBlur. And within the onBlur, we'll say this.handleBlur. And then we will indicate
+the corresponding field that we are validating, okay? So, we will say
+onBlur={this.handleBlur('firstname')}. So that will invoke
+the corresponding onBlur method. Now, the same thing I'm going to do
+this for the remaining ones also. So for the lastname, so this will ensure that
+the handleBlur is invoked. So this is the handleBlur that we
+have just implemented up here. The handleBlur function that
+we have implemented here, and remember to tie this handleBlur, this.handleBlur.bind(this). Don't forget to do that here. So we need to tie in this handleBlur also. So we have now, again,
+going back to the form, I have invoked the handleBlur for
+the firstname, the lastname. Then we'll invoke that for the, telnum, and also for the email. Not only that, for each of these four
+fields, I will also set the valid flag for each of these, so
+that if this field is not valid, then the corresponding error
+will be set appropriately. So for doing this, we'll say valid. So this field is a valid field if, Errors.firstname is an empty string. Otherwise, this is an invalid field. So we'll set the invalid,
+firstname not equal to empty string. So these two also,
+this will ensure that the valid or the invalid attribute for the input field
+will be set based upon this error here. For the first name,
+similarly, for the last name, you see how much effort
+goes into setting up all the fields here. So for the last name, similarly
+coming down to the telephone number, And then also for the email. That is it. Now, my form has been set up for
+doing all that validation. Let's save the changes and
+go and take a look at our form. Going to our form and contact page, now you see that all
+these are green in color. Let me just type. Now, the moment I, So, first time, I will have to click outside
+the box in order to invoke that. And then you immediately
+see the error there. But the moment I type the third character,
+that error is gone. Now you see how the long string name error is being invoked like that, and similarly, if I go down below zero, you will see the error name. So that's how the first
+name is being invoked. Same thing with the last name also. You would see that when I
+type in just two characters, that error field will be displayed. And then if I type in a meaningful name,
+it'll not show an error. Now, for the contact telephone number, you see that if I type in any
+character other than numbers, then it shows an error. So, If I type in numbers,
+then there's no error. So the regular expression's been
+verified correctly for the email. You see the error immediately. But the moment I type in, I mean, you can have an even more complex
+validation for the email. You could even check to see that it should
+have dot and then characters after that, but I will leave that as an exercise for
+you to pursue further. I'm showing you the basic
+way of doing validation. With this, we complete this
+exercise where we have seen simple form validation being introduced
+into our controlled form. This is a good time for you to do a Git commit with
+the message control form validation. [MUSIC]

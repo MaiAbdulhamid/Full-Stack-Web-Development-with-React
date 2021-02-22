@@ -1,0 +1,296 @@
+[MUSIC] Now that we have learned
+about react router and how it enables us to navigate radius
+views within our application. It's time to move on to working on
+our react application to integrate react router into our application and then make use of it to navigate to
+radius views in our application. To get started on this exercise, the very
+first tip is to install the React Router. So at the prompt, type yarn add react-router-dom@4.2.2. Or npm install
+react-router-dom@4.2.2 --save. And then go ahead and
+install the react router into our project. Once the router is installed, it's time
+to go and configure our application. To make use of react router,
+going to our application, in the app.js file we will first import. Browser Router from react router dom, and then, go ahead and surround this main with the BrowserRouter here. Now once we do this, then our application is now configured
+to make use of the react router. Having completed configuring app.js file, let's add in one more component
+into our application. So we will add in a home
+component into our application. And then we will use the react router to let us navigate from the home
+component to the menu component. In a later exercise, we will
+integrate this detail component also as a separate view into our application. So then, as a next step to
+add in the home component, let's go to the components folder,
+and then add a new file and name it as HomeComponent.js. And in this file, I will configure a very
+simple one component to start with. In the next exercise we will go heard and configure this one component
+with more details. So for the moment,
+let me just import react from react, and then we'll define function Home. So we, I'm defining this whole
+component as a function component. And then we'll return a simple div with a className container, as you would expect. With an A component's view,
+so we'll return back and then just return a H4 with Home for
+the moment. So this would just render
+home in the view there, and then export Home from the home component. And once we have done this,
+let's go to the main component and then configure the main component
+to make use of the react router. To enable us to navigate between
+the home and the menu component. So lets go ahead and save the changes,
+and then go into the main component. Within the main component let
+me import the home component. And then, we'll go ahead and
+configure the main component to enable us to
+navigate between the two. So going in here, I'm going to import. Switch. Route and
+redirect components from react-router-dom. We've already briefly
+talked about these three, react-router components in the lecture. And then go ahead and
+configure the main component and within the main component, I'm going
+to remove this selected dish from here. Later on, we will find a new way of
+navigating and supplying selected dish to the dish detail components,
+so I'm going to remove their on. Dish detail method also from here, because we will not be
+needing that any more, and then going into the render. So I'm going to remove
+this detail component, and also I will remove
+the menu component from here. Now, within this render function, I'm going to now use the switch component to enclose a couple of routes into my main component. So we will route to the two
+views that we have just created. The home component that we just created
+and then also, to the menu component. We will add a couple more
+components in the next exercise and also in the assignment that follows. So the first route, that I'm going to
+introduce is with the URL path name, Home. When you have a URL ending with /home,
+then this will route me to this particular component
+that is going to act as the view here. And the components name would be HomePage. Now, I'm going to show you how we
+created this HomePage component. And why I create a separate home
+page component in a short while, function component in a short while. The second route I'm going to
+introduce is the exact path. So as you see, when I say exact, that means that the path should
+match this exact path name. Now it'll become more clear why are using
+exact here, because when we route to the dish detail component also we will
+use a path that starts with /menu. So that's why then I say exact here
+that means that the path should exactly match this with nothing else,
+beyond menu only then we will. Route to this particular component,
+the menu component. So, how do I specify the menu component. If it is just a component
+which doesn't require any additional attributes
+are props to be passed to it. Then I can just simply specify
+the name of the computer component. So, I could have just said Menu here. And then it will work fine but then this
+approach of specifying the component will not allow me to pass in any
+props to the menu component. If I need to pass in props to
+a component through the specification of the route here, then I will have to
+pass that in as a function component. So I'm creating a function component
+in line here by specifying this here. So we'll say function component menu and then I'll say dishes, this.state.dishes. And then we will close
+off the menu component. So notice how I've specified
+the menu component here. So the component specification here
+as you see being specified here. The reason they specify it
+like this here is because this way I can pass in a props
+to the menu component. Now in this case, my menu component
+will only receive dishes. It won't receive
+the OnClick method anymore because we will have a different way of, Showing the video's dishes,
+which we'll implement in a later exercise. And then let me close off the route here,
+so we have two routes that
+we have defined here. One to the home, and one to the menu, and both of these are enclosed
+inside the switch component. So this will switch between
+the routes based upon how we specify the URL in
+the browser address bar here. Now also, in addition, I will make use of the redirect to specify a default route,
+so it'll say if,
+The route does not match any one of these, either home or menu,
+then I will redirect to home. So anything that doesn't match home or menu will be redirect to home for
+the moment. So this is the default path. In addition,
+I haven't defined this HomePage here. So let me define a function component for
+the HomePage here. So one way you can supply
+a component is this, there I have defined
+the function component in line. The other variable before explicitly
+declare the function component. So here I will say const HomePage = to, as you can see,
+I am using an arrow function here to define my function component. I've written this. I will return, Home. Now later on, I will pass in
+additional attributes to the Home or props to the Home component. Then we configure the home component in
+more detail in one of the later exercise. Let's save the changes. Going to the browser,
+you now see what the browser is rendering. It is rendering the whole component. So as you realize,
+if I simply specify the URL as that, so just the default server address. Then that will automatically get
+redirected to the home component. Because I specified that if the URL
+part does not match anything then you will redirect it
+to the home component. So if I try to load that, you will see that it automatically
+redirect me to the Home component here. And so that is how, so
+this part of the URL here is used to help navigate
+between the various fields. So if I navigate to the menu component,
+I would have to type in menu here. And then I will be able to
+navigate to the menu component. So as you can see, this is how I will
+navigate between the two components. But of course as you realize,
+this is a dumb way of navigating by typing things into the address bar but
+you see that the router is wanting. So if I type in menu,
+I'd be able to go to the menu component. Now, if I type in home, I'll be
+able to go to the home comportment. If I just type in just the address, you'll see that I'll be redirected
+to the home component automatically. So my router is already working. They're allowing me to navigate between
+the radius views by simply changing the URL here. But ideally I would want to have
+the navigation built into my nav bar here and
+also to activate these links. So that if I click on them, I will be able to navigate to
+the various views of my application. So how do we do that? We'll go into the head of component and
+configure our nav bar to contain the links that will help me to navigate between
+the various views of the application. Going back to the application,
+let's now go into the header component. And in the header component, along with the Navbar and NavbarBrand, I am also going to import Nav,
+NavbarToggler, which you will see me
+using in a short while, and then Collapse and NavItem. All these I will be needing in order
+to construct the links in my Navbar, the various navigation
+elements in my Navbar. So after having imported these,
+I will also import, NavLink. Recall I talked about NavLink
+in the previous lecture. So we'll import NavLink
+from react-router-dom. And then we apply NavLink,
+it will add an a tag to that link and also automatically add
+the active if the URL matches what is being specified
+in the NavLink there. So that's the reason for
+introducing that NavLink. Now, going into my header components code, now I'm going to fix up this
+part to add my Navbar further. Now, for the Navbar itself,
+I will specify that the Navbar, Will be shown in its full form only for
+medium to extra large screen size. So this is Bootstrap we are specifying. So from Bootstrap, you realize that
+we were able to collapse the Navbar. For responsive website layout, we will collapsing the Navbar for
+extra small and small screen sizes. The same thing that we specified
+in the abstract by simply adding this attribute here, expand="md". If you say expand is equal to sm, so
+for small to extra large screen sizes, the Navbar will be shown in its full form. So that's the reason for adding this here. Now, going into the code here, for the NavbarBrand, I am going to add in a ClassName as mr-auto. So the mr-auto from Bootstrap's course, you realize that this will add a right
+margin as much as necessary there. And also, instead of using the name
+of the restaurant like we do here, I'm going to replace
+that with an image here. So within the NavbarBrand, I'm going to use an image to represent
+that name of the restaurant, so I'll introduce a logo for
+the restaurant. So, I'll say img src is assets/images/logo.png. And then for this image, I will specify that height as 30, and width as 41. Now this is something that I
+figured out by adjusting these numbers until I got a logo
+that is reasonable looking. And the alternative, I will, Specify the name of the restaurant. So that's the image that I'm
+going to add into the navbar. Now in addition,
+let's add in the links that will enable us to navigate to the various
+views of our application. To do that, I'm going to take the help
+of the nav class in reactstrap, which is also mapping to
+the Nav class in Bootstrap. And then, The nav class in here, I am gong to use the NavItem to define each of the navigational items that I'm going to include in my navbar. So navbar, NavItem. So what are the various nav items
+that I'm going to include here? Now this is where I will use the NavLink. Recall the imported NavLink from
+react [INAUDIBLE] for the NavLink. How do you specify the NavLink? We'll give it a className as nav-link. The nav-link class is
+from Bootstrap which ties the link appropriately to
+fit it in to the navbar. And then, here, for the nav-link,
+I can specify the URL to which it should navigate by saying to, and then
+the first one would be to the home page. So, I'll say to, home. And close off the NavLink. So that is how I will define my
+first nav link in my nav bar there. Now inside this NavLink, I can specify, I'm going to use Font Awesome icons here,
+so we'll say span, ClassName="fa fa-home fa-lg". If you recall from your
+Bootstrap course earlier, we saw how we introduce the Font Awesome
+icons into our nav bar. And then this would be the Home link here. So this arrangement here with
+the NavItem will add a home link into my nav bar there. Let me copy that, and
+create three more of these here. The second one would be in nav-link to,
+aboutus. So we'll introduce an about us page, for which the corresponding
+icon would be info. And then we'll say About Us here. The next one would be a link to menu, so we'll say, nav-link to, /menu. And so now you see that when
+you click on this nav-link, this should take you to the menu view, or
+the menu component's view in your page. And for this,
+the Font Awesome icon is fa-list here. And this would be Menu. And then one more NavItem
+that I'm going to add here. And this last NavItem is to
+this link called contactus. And then the Font Awesome
+icon is fa-address-card. And the name of the link
+will be Contact Us here. So now,
+I have introduced inside this nav here. I've introduced four links into the nav
+bar, to home, aboutus, menu and contact. Now we want to show this
+navbar completely, only for medium to extra large screen sizes. For extra small, and small screen sizes,
+we want to collapse this. So to collapse this for
+extra small to small screen sizes, I'm going to make use of the Collapse,
+Reactstrap component. And so we will apply the Collapse
+reactstrap component to that navbar. In addition,
+I need to add some more things to that. I'll come back to do that in a minute,
+and then we'll close off the Collapse. So this Collapse encloses this entire navigation links that I have
+in this Nav navbar here. Now, in order to toggle
+this collapse on and off, I'm going to introduce a button
+here into my navigation bar. And this is where I will
+use the NavbarToggler. So the NavbarToggler reactstrap component
+adds in a button to the Navbar, and this button will be shown only on
+extra small to small screen sizes. For medium to extra large screen sizes,
+this button will be hidden. So for the NavbarToggler,
+we'll say onClick. So when this toggler is
+clicked then we will call, this.toggleNav. So this would be a function
+that I'm going to implement, a onClick handler, that I'm going to
+implement in a short while. So, when this NavbarToggler is shown,
+when you click on this, these NavLinks will be expanded and shown. This navbar will be expanded and shown. When you click on that, it'll be hidden
+for extra small to small screen sizes. Now, for this Collapse to work,
+the Collapse also requires another attribute called isOpen. Now this isOpen will
+be a Boolean attribute which I will define in my state
+called this.state.isOpen. So this Boolean attribute is what
+we will specify to this Collapse. If this is false, then whatever is
+inside this Collapse will be hidden. If this is true then whatever is inside
+this Collapse will be shown here. Now this, we will toggle
+this from true to false, and false to true by clicking the navbar. Toggle button that we have included here. So that also suggest what this
+toggleNav should be doing. So having understood this, let's go
+back up into our Header component. And we realize that I need this state for
+this Header component. So where do we store the state? In the Header Component,
+we store state by using the constructor. Recall how we use the constructor for
+a class component. Now in the previous exercise,
+when I create the Header Component, I created it as a class component. And I told you that I
+will explain in the next exercise why we created
+it as a class component. Now you see why I created
+that as a class component. Because I need to store some
+state information here. So that's the reason why I
+created it as a class component. Now how do we store state? We say this.state =, and
+within the link here, we'll store this as isNavOpen. False. So I'm going to use isNavOpen
+rather than isOpen. So this would be, this state isNavOpen. because this is the state property that is going to store
+whether this is open or not. But the attribute itself
+should be named isOpen, or the props that you're parsing
+should still be named isOpen, okay? And then this is the toggleNav
+record that we are implementing. So in the state, I am introducing this
+new property here called isNavOpen. Now, whenever this NavbarToggler
+is clicked, I want to toggle this to true and
+false, or toggle it's value. Whatever the value is,
+I want to toggle it to the opposite. So it means that I need to implement
+this method called this.toggleNav. So where do we implement this? We'll implement this as A method
+inside this class here, toggleNav. What should I do inside
+this toggleNav method? I need to toggle this value. So to toggle that value, recall that that
+means that I need to change the state. To change the state, we need to use
+this.setState method for doing this. So that's why we'll say this.setState. And then we'll say isNavOpen, this.state.isNavOpen. So what we are doing is whatever is
+it's value, we are negating that value. So if it is false, it will become true,
+if it is true, it will become false. So whenever this is executed,
+that value will be swapped. Now, when you have a method
+like this in here, in React, in order to make this method available for
+use within your JSX, you need to bind this in your code. So to do this, right up here in the
+constructor, we would say this.toggleNav this.toggleNav.bind(this). So by doing this here, we are specifying that this.toggleNav will
+now become available as this.toggleNav. This JavaScript variable toggleNav will be pointing to this
+function that is bound to this. So that's why in the code, I can simply
+specify the onClick as this.toggleNav. Earlier, you recall that we used to do
+that as a function as an arrow function. That's one way of doing it. This is another way of doing it. We'll bind it here in
+the constructor of the component. And this is how you bind it. So we'll say, this.toggleNav,
+whatever is the name of the function, and then we'll say, this.toggleNav.bind(this). So when you bind this,
+then we will be able to, as you can see for a given function, creates a bound function that has
+the same body as the original function. That this object of this bound
+function is associated with a specific object and so on. So that is how we bind this. Thereby, in my JSX code, I can specify this.toggleNav wherever
+I want to invoke this function here. Now, of course,
+we can't parse in any parameter to this. And we do not need any parameter
+to this method anyway. So it works just fine for us. So with this change to
+my header component, now my header component is ready. Let's go and
+take a look at our application. Going to our application,
+you now see that in that nav bar, we have replaced the name of the
+restaurant with its corresponding logo, which is shown in a small size here. And then we have now links here,
+which when we click, will help us to navigate to
+the various views of our application. So when I click on the Menu,
+so the menu Is shown here. When I click on Home,
+I can go back to the home component. Now if I click on About Us, since About Us
+and Contact Us pages don't exist, so when those links
+are sent into the route, the switch realizes that there's nothing
+corresponding to those particular links. Because we haven't specified the routes
+for them, so it will redirect it to Home. So that's why when you click on About or
+Contact, you're back to the Home component. You are not going anywhere else. But when you click the Menu,
+you'll go to the Menu component and back to the Home component. So now we have completed
+implementing our application to make use of even the nav bar links,
+and then show this in the nav bar. Now let's go back and fix up the links in the footer also to enable us to
+do the same thing as the header. Going back to our application,
+then, we open the Footer component. And in the Footer component,
+I will go in and modify this. So to each one of these,
+we will not use the a href. Instead, we will import. Link, from 'react-router-dom'. Recall that I introduced
+you to the link class. We don't need nav link here,
+but we can just use link here. And so in here, we'll modify each one of
+these into a corresponding link here. So we'll say, Link. And then when I use a link,
+I will need to specify that as to. And then we'll say home,
+because home is the corresponding URL path to their own component. So we'll say Link, note how this
+is specified, Link to="/ home". And then this has to be changed to Link. Let me go ahead and apply the same
+thing to the remaining ones. So for the About Us page, This would be linked to
+aboutus while I am here, let me fix that to About Us,
+and then change that to Link. The third one, the menu would be Link to menu, And similarly, the last one would be, Link to, Contactus, let me fix that to Contact Us there, And so we have updated these four links. So with this change now,
+my four links here are set up also to help me to navigate to the various
+pages in the Footer component. Let's save the changes and
+take one final look at the application. Going back to the application,
+we now see that we are on the Home page. When you click on the Menu, we will be taken to the Menu
+page in the Footer component. Similarly, when you click on About Us,
+we are brought back to the Home page, or Contact Us,
+we are brought back to the Home page and similarly the Home page here. Now, we had introduced the collapse for
+this. Now this is a medium screen size, so that's why my entire navbar with
+the links is shown completely. Now if you want to see
+the same thing in a, Extra small or small screen size,
+we'll take this down to, Open the Developer Tools in, so
+to open the Developer Tools, View > Developer > Developer Tools. In Chrome, you would have something similar to
+this in the other browsers also. Safari also has
+Developer Tools in a different menu link there and
+similarly for the other browsers. But I prefer to use Chrome for
+illustrating things, so I am showing you how we do this in Chrome. So in here, when you turn on the Developer
+Tools, we can turn and click on this, and then this will enable us to see the
+rendering of the page in various devices. So for example, I can go to
+a Pixel 2 device, so this is how the page will render on a Pixel
+2's screen in portrait mode. So you can see that my navbar is collapsed with this navbar
+toggle button shown here. And then of course the logo is shown here. When I click on this button, you can see
+that the navbar is revealed and closed. So that is the difference that we
+have introduced into the Pixel 2. Now the same thing in,
+this is in portrait, sorry in landscape mode
+on a Pixel 2 device. It's slightly a larger screen, so
+this will be a small screen size. Again, this is probably more clear for
+you to see how the navbar is being toggled by
+clicking on this button here. And the footer is appropriately
+styled down below it. With this, we complete this exercise. In this exercise,
+we have seen how we can configure our react application to
+make use of the react route. This is a good time for you to do a git
+commit with the message react route. [MUSIC]

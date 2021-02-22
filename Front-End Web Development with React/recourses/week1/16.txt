@@ -1,0 +1,40 @@
+[MUSIC] We have already informally encountered
+React components in the previous lesson. When we scaffolded out our React
+application using the Create React App, we created our very first component,
+which was an app.js. Now, in this lesson, we'll explore
+components in a bit more detail, and understand how components can be created, how we can add our own components
+to a React application, and how we make use of components
+within the React application. In the first lesson of the next module,
+we'll explore various kinds of components that can be
+created and used in a React application. We can look at a component as
+a unit that returns a group of React elements that together
+render it part of the screen. So the components acts as a unit for gathering together a bunch of React
+elements with a common purpose. Now the use of react components
+enables us to split the user interface into multiple independent,
+reusable pieces. So when you define a component,
+which renders a particular kind of user interface part,
+then that component can easily be reused in your UI wherever you require
+similar kind of behavior or similar kind of rendering of
+the part of the user interface. So components enable us to break down the
+entire UI in to smaller reusable pieces. Furthermore, you can easily control what a component renders by
+supplying inputs to the component. We'll explore this issue a little more
+in the next lecture after the exercise. And also, components in React
+can be of different kinds. A few things that you need to note
+when you create components in React is that when you define your own
+components and add them to React, you should always start the name of
+the component with a capital letter. This way the React compiler
+recognizes that that should be mapped into a corresponding
+React.createElement. So as you re-explore GSX
+in the previous lesson, we saw how the component defined
+in HTML syntax is mapped into a React.createElement function call. And tags that usually start
+with a small letter, or lower case letter,
+is typically integrated as a DOM tag. And then this triggers React to use
+some of the built in components corresponding to these
+HTML tags within React. With this quick overview of components, we
+will move onto the next exercise where we will create our own component and
+add it to the React application. We will also see how we can use some
+of the React strap components to design the UI for our specific React
+component that we are adding in. And we will also explore the concept
+of state in the exercise. I will come back to
+explain about state and props in the lecture that
+follows the exercise. [MUSIC]

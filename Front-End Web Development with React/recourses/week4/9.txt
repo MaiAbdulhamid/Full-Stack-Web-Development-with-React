@@ -1,0 +1,66 @@
+[MUSIC] In order to further develop our
+application, we want to set up a simple server that will serve up our data
+that is required by our application. So far we haven't learned enough about how we can set up a server
+that will serve up a Rest API. Instead we will make use of a simple
+node module called json-server, which helps us to quickly set up
+a simple server with several data that is given to it in
+the form of a JSON file. And also sum up images that might
+be required by our application. So to get started, let's proceed forward
+to install the json-server node module. And then after,
+set up our json-server in this exercise. To get started, go to a convenient
+location on your computer and create a folder named json-server. The reason why I created this folder
+is that I can store all the files that are required by my json-server
+into this particular folder? Thereafter we will
+install the json-server. NPM module as a global NPM module. So to do that,
+at the prompt in your terminal, type npm install -g json-server and then let that complete the installation of the json-server
+npm module, as a global module. Now in case you're doing
+this on a Linux or a Mac. Make sure to use server in front of it. Once the installation is complete,
+go to the instructions for setting up the json-server. And there,
+they provide a file named db.json. Download this file and name it as db.json
+and move this file to the json-server folder that you have created
+in the previous step. You now see that I have already
+downloaded that db.json file and then moved that db.json file
+into the json-server folder. In addition, I have also created another folder inside
+the json-server folder named public. Now whatever we put in this public folder
+will be made available by our json- server as a resource that can be
+downloaded from our server. Thus our json-server
+acts as a simple static web server that can help us to serve up. Any resources like images, or
+even a whole website if you want to. You can copy that into the public
+folder and make it available to be served up by the json-server and
+viewed in a browser. Next, again go to the instructions and the
+download the Zip file named images.zip. And then unzip this file, and
+then you'll obtain a folder named images, which contains a set of PNG images that we
+will make use of within our application. So once the images folder is ready. Move the divisions folder to the public
+folder that we have just created in that json-server folder. Going to our folder you'll see that inside
+the public folder I have already moved the images sub-folder into
+the public folder here. And this contains all of the images
+that will be used for my application. To startup your json-server. Go to the json-server
+folder in your terminal and at the prompt type
+json-sever -- watch db.json. The reason for
+using this watch flag is that? This json-server will keep
+a watch on the db.jason file and anytime the db.jason file is modified. It'll reload the db.jason file and start serving up that modified
+data from the server. In addition, we can also give it -d flag,
+with a value, say for example, 2000. Which means that when
+the server receives a request, it will serve the data back to
+the requester after a two second delay. Now this would be used to simulate delay
+in accessing a server over the Internet. So that's the reason why I would
+also suggest to use the -d 2000 flag for that json-server. And another flag, -p 3001, though specify that the json-server
+should run at both number 3001. The default port number is 3000 for
+the json-server. But since our application is
+running at port number 3000, so I chose to run the json-server
+at port number 3001. So let's start up our json-server and
+then you will notice that the json-server starts up and declares all the resources
+that are available from the json-server. So you can see that it has
+a set of resources that are available at all these URL's. In addition, the public static
+server that serves up static data, is available at this URL, local host:3000. Now you can go to any browser,
+and then if you type in, Localhost:3000/dishes you
+will see that this starts serving up our data in
+the form of JSON array here. So this would be useful for
+our application. Similarly, you can type, Leaders, and you will see again the data
+being served up, and so on. Now if you want to access the images
+that are available from the server, I can just type images, and then,
+And type in the name of a PNG file, and then you will see that it'll
+serve up that correspondent image. Now, this is very useful for us, as we
+develop our application in this course. With this, we complete this exercise. There we have set up a simple
+server called the json-server, to serve up data and support a rest API
+that we can access from our application. [MUSIC]
