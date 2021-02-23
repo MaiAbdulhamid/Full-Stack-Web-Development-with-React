@@ -201,6 +201,14 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 0,
+      "rating": "2",
+      "author": "Mai",
+      "comment": "Test server comment added by me \n",
+      "date": "2021-02-23T14:54:20.483Z",
+      "id": 20
     }
   ],
   "promotions": [
@@ -263,6 +271,134 @@
       "message": "afadsfds",
       "date": "2017-12-04T09:41:49.890Z",
       "id": 1
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "dffff",
+      "id": 2
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "hhhhhhhhhhhh",
+      "id": 3
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "hhhhhhhhhhhhhh",
+      "id": 4
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "Some feedback",
+      "id": 5
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "Test",
+      "id": 6
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "test",
+      "id": 7
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "Test",
+      "id": 8
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "Test",
+      "id": 9
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "",
+      "id": 10
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "",
+      "id": 11
+    },
+    {
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "",
+      "id": 12
+    },
+    {
+      "0": "M",
+      "1": "a",
+      "2": "i",
+      "date": "2021-02-23T20:41:35.298Z",
+      "id": 13
+    },
+    {
+      "date": "2021-02-23T20:44:39.010Z",
+      "firstname": "Mai",
+      "lastname": "Abdulhamid",
+      "telnum": "001062265233",
+      "email": "mai.abdelhameed95@gmail.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "",
+      "id": 14
     }
   ]
 }

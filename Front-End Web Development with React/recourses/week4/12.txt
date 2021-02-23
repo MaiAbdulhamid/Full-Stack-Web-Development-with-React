@@ -1,0 +1,263 @@
+[MUSIC] Now that we have setup our JSON server and
+have also learned about fetch. And how we can make use of fetch
+to communicate with the server. Let's go ahead and update our React
+application to make use of fetch to communicate with our JSON
+server to fetch the data. One of the most important things that
+you need to ensure when you're doing the exercise of communicating
+with the server, is that the server should be up and
+running. So if your server is not up and running, then in your server folder, add the prompt type json-server--watch db.json -d 2000 -p 3001. And let the JSON server be up and running. And you'll need to leave
+this JSON server up and running so that our React application
+can communicate with this server. To make use of fetch, let's add cross-fetch to
+our React application. So at the prompt type yarn add cross-fetch@2.1.0. And once cross-fetch is
+installed into our application, let's go ahead and
+begin updating our application. Go into your application, in the shared folder, let's create a new file and name it as baseUrl.js. Now this is a configuration file where
+I will set up whatever I require for communicating with the server. So here let me configure a constant call as baseUrl which refers to, My server's address. So this way if my server is
+running at a different location. I would have a single place where I
+need to update the server address and don't need to go to change
+the rest of my application. So after configuring this then we will go
+ahead and then set up our application. So we'll configure our
+application tool fetch dishes, comments, and promos from the server. The leader's part, I believe that doesn't
+exercise for you in the final assignment. To set that up,
+let's go into ActionTypes.js file. And in the ActionTypes.js file let's
+set up a few more ActionTypes. The next one I will set up is called ADD_,
+COMMENTS. And this, Would be configured as ADD_COMMENTS, then, COMMENTS_FAILED, And COMMENTS_FAILED. PROMOS_LOADING. So this is for the promotions. As you can see, The structure of how we, Set up our application is similar for anything
+that we are fetching from the server here. So for the promos, we'll do first
+PROMOS_LOADING, ADD_PROMOS, and PROMOS_FAILED. You may be wondering why we
+don't have a COMMENTS_LOADING, the comments will be
+loaded behind the scenes. When we render our application,
+we'll first render the home component. By the time the home
+component is rendered, the comments will also be fetched in. So, by the time we navigate to
+the dish details component, the comments would have
+already been fetched in. So that's why I don't have
+a specific comments loading part setup in my application. Now once we have done this, then we'll
+go into ActionCreators.js file, and then setup a few more action creators. Now in Actioncreators.js file, we realize that we need to
+communicate with the servers. So I'm going to import the baseUrl from shared/baseUrl so that we can make use of it while configuring our server. Now that we have fetched or
+included the baseUrl, then the first thing that we
+will do is to use fetch in the fetchDishes part of our application. So in the fetchDishes part, remove this. Now this was originally put
+in place in other to simulate the communication with the server. Now, I'm going to replace that by
+the actual communication with the server. So, this is where we're going to make use
+of fetch to communicate with the server. So, how do we communicate with the server? So, I we'll say return
+fetch(baseUrl + 'dishes'). So recall the dishes are accessible
+at a localhost:3001/dishes. So when we set up fetch we need to
+give the full URL of the location where we are able to fetch
+the dishes information. And then after that we
+realize that we will setup the .then to handle
+the promise that is returned. So in the then when the promise resolves,
+We'll first convert the incoming response
+into JSON by calling response.json. So this would convert that into JSON so
+that it can be processed there after. Now once we have done that, then we need to, Take that JSON. So once the JSON, so this response.json
+will convert that to response.json and then it will become available here. And then we'll call that as the parameter
+as a dish, dishes parameter. So this is the callback function
+that we have setup here, and then similarly this is
+the callback function. Now you see me using
+the arrow function here. So we'll say dishes and
+when the dishes is obtained, they will dispatch this to addDishes
+method that we have set up. And then simply pass the dishes
+into the ADD_DISHES method. That is it, so
+my fetchDishes is now set up to go and fetch the dishes and then,
+Once the dishes are obtained, then it'll push the dishes into the redux store here by
+dispatching that to the dishes. Now, similarly we'll set up fetchComments. To set up fetchComments
+I'm going to copy this and then simply go down here and
+then set up fetchComments here. And so we'll edit this as fetchComments. Now again, when you are copying
+make sure that you do the edits correctly otherwise you will end
+up chasing after errors that will consume all your time. So when you say fetchComments, here for the comments we're not going to set up
+something like the comments loading. So we don't need that, we will simply
+directly go and fetch from the comments. And so the comments will be
+fetched from baseUrl + comments. And so this would be response.json. And then we obtain comments, we'll dispatch it to
+a function called addComments that we'll obviously
+implement in a short while. And then so
+we'll say dispatch to addComments. Now, just like we had dishesFailed and addDishes, we will have to add
+the commentsFail and addComments. Now if you're wondering where
+will we use the dishesFailed and commentsFailed, and so
+on we'll do that in the next exercise. We'll see how we make use of
+that in the next exercise, so this one would be commentsFailed. And so the corresponding action
+type would be COMMENTS_FAILED, and the payload is error message. And then the next one, is addComments, and this will receive
+comments as the parameter and then the action type
+would be ADD_COMMENTS. And the payload will be comments. So you'll see that the structure
+is exactly the same as the dishes. So if we set up our code
+to be very very structured, then it becomes more easy to make
+modifications and then add new types. Now, for the promos I would require
+exactly what I did with the dishes also. So I'm just going to copy the fetchDishes,
+dishesLoading, and so on. And then edit that code
+to set up the code for the promos or
+the action creator for the promos. So, here we'll say fetch, Promos,
+I'm not using promotions, the complete word here just to save myself
+the trouble of typing the whole thing. So here we'll say promosLoading, and this would be fetched from promotions. And then here we'll obtain promos and dispatch addPromos and then promos. Again, make sure that you
+are editing the code carefully to ensure that everything
+is properly updated. So this will be the promosLoading, so that's why this should
+also be PROMOS_LOADING. And then promosFailed and then ActionType PROMOS_FAILED. And then the last would be addPromos. AddPromos, and so
+what are all our action creators for? Fetching the comments, the promos,
+and also the dishes allow us setup. Wonderful, now we need
+to update our reducers. So since our comments and
+promotions need to be updated, so I'll go into the dishes and
+you would see that in the ADD_DISHES, we have everything set up accordingly,
+right? So this is a good structure for us to
+follow for comments as well as for promos. So going into comments,
+the comments state would be of the type. So in here, I'm not having comments or
+isLoading for the comments. So for this one,
+the state would just contain, ErrMessage:null, and
+then comments initially would be an empty array
+as you would expect here. And then this one, the addComments,
+so here we have the ADD_COMMENT. The ADD_COMMENT is for
+running a new comment, but then now we need addComments and
+comments fields. Now the addComments and
+comments field would be very similar to the way we have done for
+dishes. So let me open dishes, and then I'm just going to copy
+ADD_DISHES thing from dishes.js. And then I'll come in here and
+then add that in, so this would be, ADD_COMMENTS. And so, we'll say state, isLoading false, errMess is null. And then the last one to be
+comments is action.payload. So that is for ADD_COMMENTS. Now for COMMENTS_FAILED, it'll be
+exactly the same as the DISHES_FAILED. So I'm just going to copy that,
+and then for the COMMENTS_FAILED, let me just paste that in here and
+then edit that. For COMMENTS_FAILED,
+the state would be state, isLoading: false, errMess: action.payload, and then this would be
+comments is an empty string, so COMMENT_FAILED would be that. Now for the ADD_COMMENT, we'll receive the comment
+as action.payload, and we'll say comment.id,
+we'll set up as state. So here you notice that this should
+be updated as state.comments.length. So comments.comments is the place
+where we store the array of comment, so this should be state.comments.length. Now This one, we will have to remember
+that this state shape has changed here, so that's why this should say ...state. So whatever was in the state and then, comments will be updated as state.comments.concat. So they will concatenate
+the comments into state.comments and then we'll set comments to be that. And so that is the change that you
+need to make for the ADD_COMMENT. And the default remains as such. So that is how we will set up and
+update the comments reducer here. Now for the promotions reducer,
+so in the promotions reducer. Again, we'll look at dishes and then the update to the promotions would be
+exactly the same structure as the dishes. So I'm just going to copy this
+part from the add dishes and then go into the add promotions. And then just paste it in there and
+then iterate that part. So for here we'll say ADD_PROMOS and so here it will state,
+isLoading, errMess: null. And then the last one would be
+promotions is action.payload. And then for tecond part, PROMOS_LOADING, state, isLoading is true,
+errMess: null and then this will be promotions
+is an empty string. And then the last one
+would be PROMOS_FAILED, state, isLoading is false and then error message is action.payload. And then promotions is an empty string. Now, the state shape has to be changed,
+just like the dishes here. So I'm just going to go into the dishes
+and then just copy that part. because my promotions
+state structure would be very similar to the dishes
+state structure. So for promotions we'll be saying
+isLoading true error message null, and then this one would be, promotions int. So that's how we will update
+the promotions reducer here. Also, in the comments file
+we no longer make this comments there, because that is all
+going to be fetched from the server. And similarly in the promotions, I will also need to import the action
+types into their promotions. So let me paste that and I don't need this promotions also
+in my promotion start tails file. So now that our reduces are all updated, we will go into the components and
+then update them. In the Components,
+now I will go into the MainComponent. In the MainComponent, recall that we had the fetchDishes that we
+have set up already here. Now just like the fetchDishes, I need to also set up the fetch
+comments and the fetch promos. So let me just copy this line there. And the two things that I'm going to set up here is for fetch. Comments and then this would be dispatch, fetchComments and then the next one would be fetchPromos and dispatch, fetchPromos. Now, so just like they fetchDishes,
+we need to fetch the comments and the promos also, and
+where do we do this fetching? In the componentDidMount. So, we'll go ahead and do, fetchComments and then fetchPromos. So this will ensure that when
+my mainComponent is mounted, then I'll go and
+fetch all these from that server. Now this also means that I need to go and
+update the home component. So here in the home component my promotion would be this.props.promotions.promotions, and then, Let me go ahead and, Send in the remaining two that is
+loading in the error message also. So this would be promosLoading. So this props, promotions is loading and then, promosErrMess to this props.promotion.errMess. So the home component now needs to pass in
+for the promos also, just like we did for the dishes. And similarly,
+coming down to the comments here, that comments now are going to be
+in this props.comments.comments. And then we will also have to pass
+in the comments error message. So, let me copy the errMess here, go to the next line and
+then paste the thing in there. And then so we'll see, commentsErrMess, so this would be for
+this props.comments.errMess. And one minor update
+here to the line here, it says import {addComment, fetchDishes}. We also need to update
+import fetchComments, and fetchPromos from redux/ActionCreators. We have just created them in
+the action creators there. So with this,
+my main component is now updated to fetch the dishes comments and promos. And then passing any loading and
+error message attributes to both the home component and
+the DishdetailComponent. Now, we need to update the MenuComponent,
+the HomeComponent and the DIshdetailComponent also,
+appropriately. So, let's start with the Menu component. So going into the menu component,
+now, in here we were fetching the image
+by saying src dish.image. Now what we're going to do is to
+fetch this image from the server. So let me import, { baseURL } from, Shared/baseUrl. And then, we will fetch the image from, BaseUrl + dish. So this CardImg, the source,
+when you specify that to be a server and
+the location of the image on the server. Then this will ensure that you will go and
+fetch the image directly from the server. So we'll be fetching the image from the
+server before rendering the items here, Instead of using the images that
+are configured in our application. Because that is how we want it to be,
+because if the dishes in the server is updated,
+then I don't want to suddenly realize that the corresponding image
+doesn't exist in my application and so I wouldn't know how
+to render the image. So all the images required for
+the dishes, the promotions and also the leaders,
+will also be fetched from the server site. So the only images that I will use
+from locally is that logo that obviously is not going to
+keep changing all the time. So that would be, the only local image that I will use from
+the assets folder in the public folder. So in the assets folder,
+assets images folder, I will no longer be needing all
+these other ones, except logo. All the remaining ones, I'm going to
+fetch directly from the sever. So, in principle, you could go ahead and remove all the images except the logo.png
+from the assets images folder. And your application would still
+be able to work correcttly. So that is the change that we
+will make in the menu component. Now going into the HomeComponent. In the HomeComponent also we
+will make the same change. So I will paste the base URL
+just I did in the MenuComponent. And then, when I am rendering the,
+Card here. So we'll say src= { baseUrl + item.image}. And then down below here, when I'm rendering the promotions. Notice that I'm also going to
+be receiving the isLoading and the error message for the promotions, so
+I need to update that exactly like this. I'm just going to copy that part and
+then paste it in here. And then just go ahead and update this to props.promosLoading and then props.promosErrMess. So that way my HomeComponent will
+also render an error message if that is encountered. Now similarly,
+going into the DishdetailComponent, so you see that we need to do the updates for
+all of these accordingly. So let me copy the baseUrl
+configuration from the menu component. Come into this DishDetailComponent and
+then paste it in here, so that I will be importing
+that appropriately. And then in the render dish also,
+where I have the image, well say baseUrl + dish.image there. Now with all these changes,
+let's save all the changes. And then go and take a look at
+our application in the browser. Going to my browser,
+you will now see that in the browser, the dishes and
+the promotions information including the image is going to be
+fetched from the server. But the leaders part,
+I haven't fixed that. So that is going to break. So the leader image is not
+going to be shown here. Because we updated the rendered
+item in the HomeComponent, so that is going to break. But you'll be fixing this as
+part of your fourth assignment. Now, let me, again,
+reload my application, and then you can see that the loading
+messages are shown initially before the information gets
+loaded from the server. And then similarly, and I go to About Us,
+everything should look the same. And in the Menu, also all the menu items
+would be rendered just like before. And then I can go to
+any particular dish and the dish details would be rendered
+exactly the same as before. And all these information has
+been fetched from the server. So in the About Us also,
+we'll you'll be fixing up the About Us to fetch the leaders
+information on the server and then render that in
+that fourth assignment. Now, to convince you that
+indeed we are going and fetching information from
+the server let's bring up the Developer Tools in
+the JavaScript Console. In the JavaScript Console you
+would see that at the start you will have DISHES_LOADING,
+PROMOS_LOADING firing up, initially. So these two are fired up
+because I redo the fetch dishes, fetch comments and fetch promos. So these two actions
+are fired to the system. And then here,
+you will see that this is ADD_DISHES and then ADD_COMMENTS and ADD_PROMOS. So you'll see that these three have
+been fired into the Redux store. And so that will insert
+the information into the store. So to prove that to you,
+when you open the previous state and before the ad comments action takes place, you'll see that the comments
+is empty at this moment. But then, when you look at the action, the action is fetching all
+the comments in the payload. So this has been fetched from the server. And then the next to state,
+you can see that the 20 comments have been added
+into my ADD_COMMENTS here. You can see the same
+thing under ADD_PROMOS. Now, to further convince you, that indeed this information has
+been fetched from the server, let's go and take a look at what has
+been printed in our terminal window or the command window where
+our JSON server is running. Going to the command window or
+your terminal is running you'll notice
+all these GET requests that have been posted
+to your server there. And you also notice the places where
+the 404 has been posted there. So when you look for this particular
+item in the server with this URL. This doesn't exist on the server, so
+that's where you run into problems there because we are not fetching
+the right thing to do. But from the dishes, the comments and the promotions, everything has
+been fetched from the server. So then the server was access
+through a GET request. The server sent back the information. Now, why do we see each two times here? Because I reloaded my browser,
+so when I reloaded the browser it issued one more
+set of requests to the server. But the second time around you see a 304,
+saying not modified. So when you see a 304 that means that
+the data actually was not sent because it already sent earlier and
+that has been cashed by my browser, so it doesn't have to be sent again. The second time I try to access
+to download the same thing from the server site. So, you see that in deed our
+application has been updated to use fetch,
+to fetch the information from the JSON. So, with this, they complete the success. In this exercise, we have demonstrated
+how we can make use of fetch to go and fetch the information from our servers,
+and then make use of that information,
+within our application. And indeed, after the information is
+fetched off or the data is fetched from the server, the data was pushed into the
+Redux store to update the store's state and which then is used for
+rendering the views in our application. This is the good time for you to do a GET command with
+the message fetch from server. [MUSIC]
