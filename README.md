@@ -3025,6 +3025,7 @@ code) problem
 
  ### 12. Exercise: Fetch from Server
  - One of the most important things that you need to ensure when you're doing the exercise of communicating with the server, is that the server should be up and running.
+ - Open server in port `3001`, and react application in port `3000`
  - `$ yarn add cross-fetch` -> install Fetch into our project.
  - Now that we have installed Fetch, let us configure your application to connect to the server. First, create a file named `baseUrl.js` in the `shared` folder:
  ```
@@ -3042,18 +3043,279 @@ code) problem
  ```
  - Then, open `ActionCreators.js` and update it :
 
-```
+ ```
+ . . .
+
+ import { baseUrl } from '../shared/baseUrl';
+
+ . . .
+
+     return fetch(baseUrl + 'dishes')
+     .then(response => response.json())
+     .then(dishes => dispatch(addDishes(dishes)));
+
+ . . .
 
 
+ export const fetchComments = () => (dispatch) => {    
+     return fetch(baseUrl + 'comments')
+     .then(response => response.json())
+     .then(comments => dispatch(addComments(comments)));
+ };
 
-```
- - 
+ export const commentsFailed = (errmess) => ({
+     type: ActionTypes.COMMENTS_FAILED,
+     payload: errmess
+ });
+
+ export const addComments = (comments) => ({
+     type: ActionTypes.ADD_COMMENTS,
+     payload: comments
+ });
+
+ export const fetchPromos = () => (dispatch) => {
+
+     dispatch(promosLoading());
+
+     return fetch(baseUrl + 'promotions')
+     .then(response => response.json())
+     .then(promos => dispatch(addPromos(promos)));
+ }
+
+ export const promosLoading = () => ({
+     type: ActionTypes.PROMOS_LOADING
+ });
+
+ export const promosFailed = (errmess) => ({
+     type: ActionTypes.PROMOS_FAILED,
+     payload: errmess
+ });
+
+ export const addPromos = (promos) => ({
+     type: ActionTypes.ADD_PROMOS,
+     payload: promos
+ });
+ ```
+ 
+ - Next, open `comments.js` :
+
+ ```
+
+ import * as ActionTypes from './ActionTypes';
+
+ export const Comments = (state = { errMess: null, comments:[]}, action) => {
+   switch (action.type) {
+     case ActionTypes.ADD_COMMENTS:
+       return {...state, errMess: null, comments: action.payload};
+
+     case ActionTypes.COMMENTS_FAILED:
+       return {...state, errMess: action.payload};
+
+     case ActionTypes.ADD_COMMENT:
+         var comment = action.payload;
+         comment.id = state.comments.length;
+         comment.date = new Date().toISOString();
+         return { ...state, comments: state.comments.concat(comment)};
+
+     default:
+       return state;
+   }
+ };
+ ```
+ - Similarly, open `promotions.js` and update it.
+ - Now that the Redux actions are all updated, it's time to update the components.
+ - Open `MainComponent.js` and update it :
+ ```
+ . . .
+
+ import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+
+ . . .
+
+
+ const mapDispatchToProps = dispatch => ({
+   addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+   fetchDishes: () => { dispatch(fetchDishes())},
+   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+   fetchComments: () => dispatch(fetchComments()),
+   fetchPromos: () => dispatch(fetchPromos())
+ });
+
+ . . .
+
+   componentDidMount() {
+     this.props.fetchDishes();
+     this.props.fetchComments();
+     this.props.fetchPromos();
+   }
+
+ . . .
+
+           <Home 
+               dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
+               dishesLoading={this.props.dishes.isLoading}
+               dishErrMess={this.props.dishes.errMess}
+               promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
+               promoLoading={this.props.promotions.isLoading}
+               promoErrMess={this.props.promotions.errMess}
+               leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+           />
+
+ . . .
+
+           <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+             isLoading={this.props.dishes.isLoading}
+             errMess={this.props.dishes.errMess}
+             comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+             commentsErrMess={this.props.comments.errMess}
+             addComment={this.props.addComment}
+           />
+
+ . . .
+ ```
+ - Then, open `MenuComponent.js` :
+ ```
+ . . .
+
+ import { baseUrl } from '../shared/baseUrl';
+
+ . . .
+
+                     <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+
+ . . .
+ ```
+ - Instead of using the images that are configured in our application. Because that is how we want it to be, because if the dishes in the server is updated, then I don't want to suddenly realize that the corresponding image doesn't exist in my application and so I wouldn't know how to render the image.
 
  ### 13. Exercise: Fetch Handling Errors
+ - When you throw the error in a promise handler, we can then implement a catch at the bottom which will catch the error and then handle the error appropriately.
+ - Open `ActionCreators.js` and update it:
+
+ ```
+ export const fetchDishes = () => (dispatch) => {
+
+     dispatch(dishesLoading(true));
+
+     return fetch(baseUrl + 'dishes')
+     .then(response => {
+         if (response.ok) {
+           return response;
+         } else {
+           var error = new Error('Error ' + response.status + ': ' + response.statusText);
+           error.response = response;
+           throw error;
+         }
+       },
+       error => {
+             var errmess = new Error(error.message);
+             throw errmess;
+       })
+     .then(response => response.json())
+     .then(dishes => dispatch(addDishes(dishes)))
+     .catch(error => dispatch(dishesFailed(error.message)));
+ }
+ ```
+ - Do the same with `fetchComments` and `fetchPromos`.
 
  ### 14. Exercise: Fetch Post Comment
+ - when you post a comment, you will first send the comment over to the server, and if the comment is successfully added on the server site and the server sends back a success of the posting of the comment, only then you will add it to the redux store.
+ - Open ActionCreators.js and update it:
+
+ ```
+ . . .
+
+ export const addComment = (comment) => ({
+     type: ActionTypes.ADD_COMMENT,
+     payload: comment
+ });
+
+ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+
+     const newComment = {
+         dishId: dishId,
+         rating: rating,
+         author: author,
+         comment: comment
+     };
+     newComment.date = new Date().toISOString();
+
+     return fetch(baseUrl + 'comments', {
+         method: "POST",
+         body: JSON.stringify(newComment),
+         headers: {
+           "Content-Type": "application/json"
+         },
+         credentials: "same-origin"
+     })
+     .then(response => {
+         if (response.ok) {
+           return response;
+         } else {
+           var error = new Error('Error ' + response.status + ': ' + response.statusText);
+           error.response = response;
+           throw error;
+         }
+       },
+       error => {
+             throw error;
+       })
+     .then(response => response.json())
+     .then(response => dispatch(addComment(response)))
+     .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+ };
+
+ . . .
+ ```
+ - Open `comment.js` and remove the following two lines from it:
+ ```
+ . . .
+
+        comment.id = state.comments.length;
+        comment.date = new Date().toISOString();
+
+  . . .
+ ```
+ - Open `MainComponent.js` and update it:
+ ```
+ . . .
+
+ import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+
+ . . .
+
+   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
+
+ . . .
+
+             postComment={this.props.postComment}
+
+ . . .
+ ```
+ - Finally, open `DishdetailComponent.js` :
+ ```
+ . . .
+
+     function RenderComments({comments, postComment, dishId}) {
+
+ . . .
+
+                     <CommentForm dishId={dishId} postComment={postComment} />
+
+ . . .
+
+             this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+
+ . . .
+
+                             postComment={props.postComment}
+
+ . . .
+ ```
 
  ### Additional Resources
+ - [Cross fetch](https://github.com/lquixada/cross-fetch)
+ - [Introduction to fetch](https://developers.google.com/web/updates/2015/03/introduction-to-fetch).
+ - [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
   
  </details>
  
@@ -3061,13 +3323,145 @@ code) problem
  <summary>React Animations</summary>
  
  ### 15. React Animations
-
+ - Animations in React can be supported through several React animation libraries
+ - Two that we will explore in this course:
+  – React-transition-group
+  – React-animation-components
+ 
  ### 16. Exercise: React Animations
+ - `$ yarn add react-transition-group` -> Install react-transition-group in your React project.
+ - Configure CSS classes for use in animation. Open App.css and add the following classes:
+ ```
+ . . .
+
+ .page-enter {
+     opacity: 0.01;
+     transform: translateX(-100%);
+ }
+
+ .page-enter-active {
+     opacity: 1;
+     transform: translateX(0%);
+     transition: all 300ms ease-in;
+ }
+
+ .page-exit {
+     opacity: 1;
+     transform: translateX(0%);
+ }
+
+ .page-exit-active {
+     opacity: 0.01;
+     transform: translateX(100%);
+     transition: all 300ms ease-out;
+ }
+
+ ```
+ - Then, open MainComponent.js and add in the following to configure the animation:
+ ```
+ . . .
+
+ import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+ . . .
+
+           <TransitionGroup>
+             <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+               <Switch location={this.props.location}>
+                   <Route path='/home' component={HomePage} />
+                   <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} />} />} />
+                   <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
+                   <Route path='/menu/:dishId' component={DishWithId} />
+                   <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                   <Redirect to="/home" />
+               </Switch>
+             </CSSTransition>
+           </TransitionGroup>
+
+ . . .
+ ```
+ - whenever you want to apply the animation, we'll surround that by the transition group.
+ -  recall that term every component receives ( match, location and history). So that's what we're using, location key. 
 
  ### 17. Exercise: React Animation Components
+ - Install `react-animation-components` into your React app as follows:
+
+ ```
+ $ yarn add react-animation-components@3.0.0
+ $ yarn add prop-types@15.6.0
+ ```
+ - Open `HomeComponents.js` and update as follows:
+
+ ```
+ . . .
+
+ import { FadeTransform } from 'react-animation-components';
+
+ . . .
+
+             <FadeTransform
+                 in
+                 transformProps={{
+                     exitTransform: 'scale(0.5) translateY(-50%)'
+                 }}>
+                 <Card>
+                     <CardImg src={baseUrl + item.image} alt={item.name} />
+                     <CardBody>
+                     <CardTitle>{item.name}</CardTitle>
+                     {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                     <CardText>{item.description}</CardText>
+                     </CardBody>
+                 </Card>
+             </FadeTransform>
+
+ . . .
+ ```
+ - Open `DishdetailComponents.js` and update it as follows:
+
+ ```
+ . . .
+
+ import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+
+ . . .
+
+             <FadeTransform
+                 in
+                 transformProps={{
+                     exitTransform: 'scale(0.5) translateY(-50%)'
+                 }}>
+             <Card>
+                 <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                 <CardBody>
+                     <CardTitle>{dish.name}</CardTitle>
+                     <CardText>{dish.description}</CardText>
+                 </CardBody>
+             </Card>
+             </FadeTransform>
+
+ . . .
+
+                     <Stagger in>
+                         {comments.map((comment) => {
+                             return (
+                                 <Fade in>
+                                 <li key={comment.id}>
+                                 <p>{comment.comment}</p>
+                                 <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                 </li>
+                                 </Fade>
+                             );
+                         })}
+                         </Stagger>
+
+ . . .
+ ```
 
  ### Additional Resources
-
+ - [React Transition Group](https://reactcommunity.org/react-transition-group/)
+ - [react-animation-components](https://github.com/chrisjcodes/react-animation-components).
+ - [Animation Add-Ons](https://reactjs.org/docs/animation.html).
+ - [How to build animated microinteractions in React](https://www.freecodecamp.org/news/how-to-build-animated-microinteractions-in-react-aab1cb9fe7c8/).
   
  </details>
  
