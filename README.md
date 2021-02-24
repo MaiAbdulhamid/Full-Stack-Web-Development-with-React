@@ -3468,11 +3468,33 @@ code) problem
  <details>
  <summary>Assignment 4</summary>
  
- ### here
+ - In this assignment, you will update the web application to get data from the server to render the information corresponding to the leadership team of the company. In addition, you will handle the submission of the feedback form by posting the feedback to the server.
   
  </details>
  
+ <details>
+ <summary>Building and Deployment</summary>
  
+ ### 18. Introduction to Webpack
+ - webpack is a module bundler for modern JavaScript applications.
+ - Bundle: a JavaScript file that incorporates assetsز 
+
+ ### 19. Exercise: Building and Deploying the React Application
+ - `$ npm run build` -> This should build a distribution folder named `build` containing all your application files.
+ - Our next step is to just copy the contents of the `build` folder into our web server and then the web server will be up and serving up our react application.
+ - copy all the files from this `build` folder, and then I will go to the `json-server` folder and then into the `public` folder.
+ - Now if we go to web server port we can see our application works exactly the same our react application.
+ - Now your React application can be accessed at the link `http://localhost:3001/`.
+ - If you are setting up a server on the cloud or anywhere, all that you need to do is copy the contents of the build folder to the server side to deploy your React application. The exact procedure depends on the cloud service provider that you choose to use. Please consult their documentation to see the procedure to set up the server.
+
+ ### Additional Resources
+ - [Webpack: An Introduction](https://v5.angular.io/guide/webpack).
+ - [create-react-app Build](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#npm-run-build).
+ - [Webpack](https://webpack.js.org/concepts/).
+ - [Webpack on Github](https://webpack.github.io/).
+
+  
+ </details>
  
 ## Course 3: Multiplatform Mobile App Development with React Native
 
