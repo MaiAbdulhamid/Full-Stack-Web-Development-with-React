@@ -3530,12 +3530,6 @@ code) problem
   
  </details>
  
- <details>
- <summary>Welcome to Front-End Web Development with React</summary>
- 
- ### here
-  
- </details>
  
  <details>
  <summary>Title</summary>
@@ -3581,13 +3575,6 @@ code) problem
  </details>
  
  <details>
- <summary>Welcome to Front-End Web Development with React</summary>
- 
- ### here
-  
- </details>
- 
- <details>
  <summary>Title</summary>
  
  ### here
@@ -3625,13 +3612,6 @@ code) problem
  </details>
  
  <details>
- <summary>Welcome to Front-End Web Development with React</summary>
- 
- ### here
-  
- </details>
- 
- <details>
  <summary>Title</summary>
  
  ### here
@@ -3663,13 +3643,6 @@ code) problem
  
  <details>
  <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Welcome to Front-End Web Development with React</summary>
  
  ### here
   
