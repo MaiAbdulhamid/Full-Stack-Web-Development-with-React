@@ -3357,7 +3357,7 @@ code) problem
  }
 
  ```
- - Then, open MainComponent.js and add in the following to configure the animation:
+ - Then, open `MainComponent.js` and add in the following to configure the animation:
  ```
  . . .
 
@@ -3496,109 +3496,196 @@ code) problem
   
  </details>
  
-## Course 3: Multiplatform Mobile App Development with React Native
+
+ ## Course 3: Server-side Development with NodeJS, Express and MongoDB
 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
  ### week 1 :
  
  <details>
- <summary>Title</summary>
+ <summary>Welcome to Server-Side Development with NodeJS, Express and MongoDB</summary>
  
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- 
- 
- ## Course 4: Server-side Development with NodeJS, Express and MongoDB
+ ### 1. Welcome to Server-Side Development with NodeJS, Express and MongoDB
+ - Course Overview 
 
- ### This course is divided into 4 modules, Each module takes 1 week.
- 
- ### week 1 :
- 
- <details>
- <summary>Title</summary>
- 
- ### here
+ ### 2. How to Use the Learning Resources
+ - This course is divided into 4 modules, Each module takes 1 week.
+
+ ### Additional Resources
+ - [NodeJS](https://nodejs.org/en/).
+ - [NPM](https://www.npmjs.com/).
+ - [ExpressJS](http://expressjs.com/).
+ - [MongoDB](https://www.mongodb.com/).
+ - [Mongoose](https://mongoosejs.com/).
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Node Modules</summary>
  
- ### here
-  
- </details>
+ ### 3. Node Modules
+ - Each file in a Node application becomes its own Node module.
+ -Node modules can be of three categories. 
+  - File-based	Modules
+  - Core	Modules
+  - External	Node	modules
+
+ ### 4. Exercise (Video): Understanding Node Modules
+ - Create a folder named node-examples and then move into this folder.
+ - `$ npm init -y` -> initialize a `package.json` file.
+ - Add `"start": "node index"` to `package.json` file into scripts.
+ - Create a file named `index.js` and add the following code:
+
+ ```
+ var rect = {
+  perimeter: (x, y) => (2*(x+y)),
+  area: (x, y) => (x*y)
+ };
+
+ function solveRect(l,b) {
+     console.log("Solving for rectangle with l = " + l + " and b = " + b);
+
+     if (l <= 0 || b <= 0) {
+         console.log("Rectangle dimensions should be greater than zero:  l = "
+                + l + ",  and b = " + b);
+     }
+     else {
+      console.log("The area of the rectangle is " + rect.area(l,b));
+      console.log("The perimeter of the rectangle is " + rect.perimeter(l,b));
+     }
+ }
+
+ solveRect(2,4);
+ solveRect(3,5);
+ solveRect(0,5);
+ solveRect(-3,5);
+ ```
+ - Now with node, we have the option of using JavaScript or Typescript.
+ - `$ npm start` -> To run the Node application.
+ - Now, create a file named `rectangle.js`:
+
+ ```
+ exports.perimeter =  (x, y) => (2*(x+y));
+
+ exports.area = (x, y) => (x*y);
+ ```
  
- <details>
- <summary>Title</summary>
+ - Then, update `index.js` : 
+ ```
+ var rect = require('./rectangle');
+
+ . . .
+ ```
+ - Run the Node application like before.
+
+ ### 5. Node Modules: Callbacks and Error Handling
+ -  First-class	functions:	A	function	can	be	treated	the	same	way	as	any	other	variable(callback).
+ -  Closures:
+  - A	function	defined	inside	another	function	has	access	to	all	the	variables	declared	in	the	outer	function	(outer	scope)
+  – The	inner	function	will	continue	to	have	access	to	the	variables	from	the	outer	scope	even	after	the	outer	function	has	returned
+ - Node.js is organized into a single threaded event loop. This single threaded event loop basically, picks up requests as they come in and execute it one after another.
+ - The event loop is a continuously running loop which basically picks up requests from the request queue, and then services them one at a time.
+ - Event	Loop:
+  - timers:	this	phase	executes	
+  - callbacks	scheduled	by setTimeout() and setInterval().
+  - I/O	callbacks:	executes	almost	all	callbacks	with	the	exception	of	close	callbacks,	the	ones	scheduled	by	timers,	and setImmediate().
+  - idle,	prepare:	only	used	internally.
+  - poll:	retrieve	new	I/O	events;	node	will	block	here	when	appropriate.
+  - check: setImmediate() callbacks	are	invoked	here.
+  - close	callbacks:	e.g. socket.on('close',	...). 
+
+ ### Exercise (Video):Node Modules: Callbacks and Error Handling
+ - Update  `rectangle.js` :
+
+ ```
+ module.exports = (x,y,callback) => {
+     if (x <= 0 || y <= 0)
+         setTimeout(() => 
+             callback(new Error("Rectangle dimensions should be greater than zero: l = "
+                 + x + ", and b = " + y), 
+             null),
+             2000);
+     else
+         setTimeout(() => 
+             callback(null, {
+                 perimeter: () => (2*(x+y)),
+                 area:() => (x*y)
+             }), 
+             2000);
+ }
+
+ ```
+ - Then,  update `index.js` :
+
+ ```
+
+ . . .
+
+ function solveRect(l,b) {
+     console.log("Solving for rectangle with l = "
+                 + l + " and b = " + b);
+     rect(l,b, (err,rectangle) => {
+         if (err) {
+          console.log("ERROR: ", err.message);
+      }
+         else {
+             console.log("The area of the rectangle of dimensions l = "
+                 + l + " and b = " + b + " is " + rectangle.area());
+             console.log("The perimeter of the rectangle of dimensions l = "
+                 + l + " and b = " + b + " is " + rectangle.perimeter());
+         }
+     });
+     console.log("This statement after the call to rect()");
+ };
+
+ . . .
+ ```
+
+ ### Additional Resources
  
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
+ - [The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+ - [Node Modules](https://nodejs.org/api/modules.html)
+ - [RequireJS](https://requirejs.org/)
+
  </details>
  
  ### week 2 :
  
  <details>
- <summary>Title</summary>
+ <summary>Node and HTTP</summary>
  
- ### here
+ ### Node and HTTP: Objectives and Outcomes
+
+ ### Networking Essentials
+
+ ### Node and the HTTP Module
+
+ ### Exercise (Video): Node and the HTTP Module
+
+ ### Additional Resources
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Introduction to Express</summary>
  
- ### here
-  
+ ### Introduction to Express
+
+ ### Exercise (Video): Introduction to Express
+
+ ### Brief Representational State Transfer (REST)
+
+ ### Express Router
+
+ ### Exercise (Video): Express Router
+
+ ### Additional Resources
+
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Assignment 1</summary>
  
  ### here
   
