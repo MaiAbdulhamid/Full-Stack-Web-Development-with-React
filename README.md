@@ -3595,7 +3595,7 @@ code) problem
   - check: setImmediate() callbacks	are	invoked	here.
   - close	callbacks:	e.g. socket.on('close',	...). 
 
- ### Exercise (Video):Node Modules: Callbacks and Error Handling
+ ### 6. Exercise (Video):Node Modules: Callbacks and Error Handling
  - Update  `rectangle.js` :
 
  ```
@@ -3654,23 +3654,103 @@ code) problem
  
  <details>
  <summary>Node and HTTP</summary>
+
+ ### 7. Networking Essentials
+  - Many of Web applications have a “Cloud” backend.
+ - HTTP protocol, the protocol that is used for communicating between the client and the server.
+ - The HTTP protocol, for it to work, needs a URL to be supplied to it, the Uniform Resource Locator.
+ - URL: this is a string of characters separated by slashes with an http: or an https: attached in front of it.
+ - JSON: the JavaScript Object Notation is one way of encoding data that is being shipped from the server side to the client side or vice versa.
+ - SOAP as a protocol that allows communication between distributed entities within the network.
+ - When you are communicating with a server, the client server communication causes unexpected amount of delays or indeterminate amount of delay while the data is being either fetched or uploaded to the server from the client side.
+ - The Hypertext Transfer Protocol: this is a protocol that is used for encoding the messages that you exchange between your client application and a server side.
+ - In order to be able to talk to a server, you have the support from various HTTP actions or what we refer to as HTTP verbs, the head, get, post, put, delete, trace, options, and connect.
+ - In the HTTP protocol, you are sending a request from your client application to the server, and this is encoded in the form of an HTTP request message. The request message typically carries a URL in the request message indicating what is it that you want the server side to send it to you. And this is typically a get message if you want data to be downloaded from the server side, and you will also specify which particular server you are communicating with. When the server receives your request, the server will retrieve the data from its data storage, typically a database on the server side, and then package this data in an appropriate format and send the data back to you on your client side.
+ - A request message is typically sent from the client to the server and the request message consists of a request line plus a bunch of headers where you supply additional information to qualify the request.
+
+ ### 8. Node and the HTTP Module
+ - Node	HTTP	Module: Core	networking	module	supporting	a	high-performance	foundation	for	a	HTTP	stack
+
+ ### 9. Exercise (Video): Node and the HTTP Module
+ ```
+ const http = require('http');
+
+ const hostname = 'localhost';
+ const port = 3000;
+
+ const server = http.createServer((req, res) => {
+     console.log(req.headers);
+     res.statusCode = 200;
+     res.setHeader('Content-Type', 'text/html');
+     res.end('<html><body><h1>Hello, World!</h1></body></html>');
+ })
+
+ server.listen(port, hostname, () => {
+   console.log(`Server running at http://${hostname}:${port}/`);
+ });
+ ```
+ - You can also use postman chrome extension to send requests to the server and see the response. Alternately, you can download the stand-alone Postman tool from `http://getpostman.com` and install it on your computer.
+ - In the `public` folder, create a file named `index.html` and `aboutus.html`.
+ - Then update `index.js` :
  
- ### Node and HTTP: Objectives and Outcomes
+ ```
+  . . .
 
- ### Networking Essentials
+ const server = http.createServer((req, res) => {
+   console.log('Request for ' + req.url + ' by method ' + req.method);
 
- ### Node and the HTTP Module
+   if (req.method == 'GET') {
+     var fileUrl;
+     if (req.url == '/') fileUrl = '/index.html';
+     else fileUrl = req.url;
 
- ### Exercise (Video): Node and the HTTP Module
+     var filePath = path.resolve('./public'+fileUrl);
+     const fileExt = path.extname(filePath);
+     if (fileExt == '.html') {
+       fs.exists(filePath, (exists) => {
+         if (!exists) {
+           res.statusCode = 404;
+           res.setHeader('Content-Type', 'text/html');
+           res.end('<html><body><h1>Error 404: ' + fileUrl + 
+                       ' not found</h1></body></html>');
+           return;
+         }
+         res.statusCode = 200;
+         res.setHeader('Content-Type', 'text/html');
+         fs.createReadStream(filePath).pipe(res);
+       });
+     }
+     else {
+       res.statusCode = 404;
+       res.setHeader('Content-Type', 'text/html');
+       res.end('<html><body><h1>Error 404: ' + fileUrl + 
+               ' not a HTML file</h1></body></html>');
+     }
+   }
+   else {
+       res.statusCode = 404;
+       res.setHeader('Content-Type', 'text/html');
+       res.end('<html><body><h1>Error 404: ' + req.method + 
+               ' not supported</h1></body></html>');
+   }
+ })
+
+ . . .
+ ```
 
  ### Additional Resources
-  
+ - [path](https://nodejs.org/api/path.html)
+ - [fs](https://nodejs.org/api/fs.html)
+ - [http](https://nodejs.org/api/http.html)
+ - [Anatomy of an HTTP Transaction](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/)
+ - [Hypertext Transfer Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+
  </details>
  
  <details>
  <summary>Introduction to Express</summary>
  
- ### Introduction to Express
+ ### 10. Introduction to Express
 
  ### Exercise (Video): Introduction to Express
 
