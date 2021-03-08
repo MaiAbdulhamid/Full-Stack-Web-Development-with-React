@@ -3822,6 +3822,10 @@ code) problem
   - HTTP	DELETE	-> DELETE
 
  ### 13. Express Router
+ - Express's support for various matters like app.all, app.get, put, post, and delete, and how these methods can be used to construct a REST API server.
+ - Express also supports defining the endpoints with parameters -> ` /dishes/:id`.
+ - Verb methods can all be chained together into the route in defining the code for our application.
+
 
  ### 14. Exercise (Video): Express Router
 
