@@ -3826,8 +3826,68 @@ code) problem
  - Express also supports defining the endpoints with parameters -> ` /dishes/:id`.
  - Verb methods can all be chained together into the route in defining the code for our application.
 
-
  ### 14. Exercise (Video): Express Router
+ - You will continue in the node-express folder and modify the server in this exercise.
+ - `$ npm install body-parser@1.18.3` -> Install body-parser.
+ - whenever you need to use a middleware, you'll say, `app.use()`.
+ - Update `index.js` :
+
+ ```
+ . . .
+
+ const bodyParser = require('body-parser');
+
+ . . .
+
+ app.use(bodyParser.json());
+
+ app.all('/dishes', (req,res,next) => {
+   res.statusCode = 200;
+   res.setHeader('Content-Type', 'text/plain');
+   next();
+ });
+
+ app.get('/dishes', (req,res,next) => {
+     res.end('Will send all the dishes to you!');
+ });
+
+ app.post('/dishes', (req, res, next) => {
+  res.end('Will add the dish: ' + req.body.name + ' with details: ' + req.body.description);
+ });
+
+ app.put('/dishes', (req, res, next) => {
+   res.statusCode = 403;
+   res.end('PUT operation not supported on /dishes');
+ });
+
+ app.delete('/dishes', (req, res, next) => {
+     res.end('Deleting all dishes');
+ });
+
+ app.get('/dishes/:dishId', (req,res,next) => {
+     res.end('Will send details of the dish: ' + req.params.dishId +' to you!');
+ });
+
+ app.post('/dishes/:dishId', (req, res, next) => {
+   res.statusCode = 403;
+   res.end('POST operation not supported on /dishes/'+ req.params.dishId);
+ });
+
+ app.put('/dishes/:dishId', (req, res, next) => {
+   res.write('Updating the dish: ' + req.params.dishId + '\n');
+   res.end('Will update the dish: ' + req.body.name + 
+         ' with details: ' + req.body.description);
+ });
+
+ app.delete('/dishes/:dishId', (req, res, next) => {
+     res.end('Deleting dish: ' + req.params.dishId);
+ });
+
+ . . .
+ ```
+
+ - `403` means their operation not supported.
+ - `res.write()` can be used to add a line to the reply message.
 
  ### Additional Resources
 
