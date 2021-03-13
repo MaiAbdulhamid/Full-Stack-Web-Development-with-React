@@ -3888,27 +3888,140 @@ code) problem
 
  - `403` means their operation not supported.
  - `res.write()` can be used to add a line to the reply message.
+ - Create a new folder named `routes` in the `node-express` folder.
+ - Create a new file named `dishRouter.js` in the routes folder and add the following code to it:
+
+ ```
+ const express = require('express');
+ const bodyParser = require('body-parser');
+
+ const dishRouter = express.Router();
+
+ dishRouter.use(bodyParser.json());
+
+ dishRouter.route('/')
+ .all((req,res,next) => {
+     res.statusCode = 200;
+     res.setHeader('Content-Type', 'text/plain');
+     next();
+ })
+ .get((req,res,next) => {
+     res.end('Will send all the dishes to you!');
+ })
+ .post((req, res, next) => {
+     res.end('Will add the dish: ' + req.body.name + ' with details: ' + req.body.description);
+ })
+ .put((req, res, next) => {
+     res.statusCode = 403;
+     res.end('PUT operation not supported on /dishes');
+ })
+ .delete((req, res, next) => {
+     res.end('Deleting all dishes');
+ });
+
+ module.exports = dishRouter;
+ ```
+ - Update `index.js` :
+
+ ```
+ . . .
+
+
+ const dishRouter = require('./routes/dishRouter');
+
+ app.use('/dishes', dishRouter);
+
+ . . .
+ ```
 
  ### Additional Resources
+ - [Express](http://expressjs.com/).
+ - [Connect](https://github.com/senchalabs/connect).
+ - [Understanding Express](http://evanhahn.com/understanding-express/).
+ - [A short guide to Connect Middleware](https://stephensugden.com/middleware_guide/)
 
  </details>
  
  <details>
  <summary>Assignment 1</summary>
  
- ### here
+ In this assignment you will continue the exploration of Node modules, Express and the REST API. You will design two new express routers to support REST API end points for promotions and leadership.
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Express Generator</summary>
  
- ### here
+ ### 1. Express Generator
+ - Express	Generator: Quick	scaffolding	tool	to	generate	an	Express	application	skeleton
+
+ ### Exercise (Video): Express Generator
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Introduction to MongoDB</summary>
+ 
+ ### Introduction to MongoDB
+
+ ### Exercise (Video): Introduction to MongoDB
+
+ ### Additional Resources
+
+  
+ </details>
+  
+ <details>
+ <summary>Node and MongoDB</summary>
+ 
+ ### Node and MongoDB
+
+ ### Exercise (Video): Node and MongoDB Part 1
+
+ ### Exercise (Video): Node and MongoDB Part 2
+
+ ### Callback Hell and Promises
+
+ ### Exercise (Video): Callback Hell and Promises
+
+ ### Additional Resources
+ 
+  
+ </details>
+   
+ <details>
+ <summary>Mongoose ODM</summary>
+ 
+ ### Mongoose ODM
+
+ ### Exercise (Video): Mongoose ODM Part 1
+
+ ### Exercise (Video): Mongoose ODM Part 2
+
+ ### Additional Resources
+
+  
+ </details>
+ 
+ <details>
+ <summary>REST API with Express, MongoDB and Mongoose</summary>
+ 
+ ### REST API with Express, MongoDB and Mongoose
+
+ ### Exercise (Video): REST API with Express, MongoDB and Mongoose Part 1
+
+ ### Exercise (Video): REST API with Express, MongoDB and Mongoose Part 2
+
+ ### Additional Resources
+
+
+ </details>
+  
+ <details>
+ <summary>Assignment 2</summary>
  
  ### here
   
