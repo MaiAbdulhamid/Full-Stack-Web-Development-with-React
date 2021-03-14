@@ -3497,7 +3497,7 @@ code) problem
  </details>
  
 
- ## Course 3: Server-side Development with NodeJS, Express and MongoDB
+ ## Course 3: [Server-side Development with NodeJS, Express and MongoDB](https://www.coursera.org/learn/server-side-nodejs)
 
  ### This course is divided into 4 modules, Each module takes 1 week.
  
@@ -3649,8 +3649,6 @@ code) problem
  - [RequireJS](https://requirejs.org/)
 
  </details>
- 
- ### week 2 :
  
  <details>
  <summary>Node and HTTP</summary>
@@ -4027,7 +4025,7 @@ code) problem
   
  </details>
  
- ### week  :
+ ### week 3:
  
  <details>
  <summary>Title</summary>
@@ -4064,3 +4062,39 @@ code) problem
   
  </details>
  
+  ### week 4:
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
+ 
+ <details>
+ <summary>Title</summary>
+ 
+ ### here
+  
+ </details>
