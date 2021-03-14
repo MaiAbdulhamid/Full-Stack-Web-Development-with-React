@@ -3946,6 +3946,8 @@ code) problem
  In this assignment you will continue the exploration of Node modules, Express and the REST API. You will design two new express routers to support REST API end points for promotions and leadership.
   
  </details>
+  
+ ### week 2 :
  
  <details>
  <summary>Express Generator</summary>
@@ -4025,7 +4027,7 @@ code) problem
   
  </details>
  
- ### week 3:
+ ### week  :
  
  <details>
  <summary>Title</summary>
@@ -4062,39 +4064,3 @@ code) problem
   
  </details>
  
-  ### week 4:
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
- 
- <details>
- <summary>Title</summary>
- 
- ### here
-  
- </details>
