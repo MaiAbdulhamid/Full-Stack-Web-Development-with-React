@@ -3955,7 +3955,11 @@ code) problem
  ### 1. Express Generator
  - Express	Generator: Quick	scaffolding	tool	to	generate	an	Express	application	skeleton
 
- ### Exercise (Video): Express Generator
+ ### 2. Exercise (Video): Express Generator
+ - `$ npm install express-generator@4.16.0 -g` -> Install express-generator.
+ - `$ express conFusionServer` -> To scaffold out an Express application.
+ - `$ cd conFusionServer` -> Move to the `conFusionServer` folder.
+ - `$ npm install` -> install all the Node modules.
 
  ### Additional Resources
 
