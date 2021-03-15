@@ -3969,30 +3969,304 @@ code) problem
  <details>
  <summary>Introduction to MongoDB</summary>
  
- ### Introduction to MongoDB
+ ### 3. Introduction to MongoDB
+ - Databases	are	used	to	store	structured	information.
+ - SQL	(structured	query	language)	based	relational	databases	have	been	very	popular	means	of	storing	data
+ - NoSQL	databases	are	increasingly	becoming	popular	to	address	some	challenges	encountered	with	SQL	databases.
+ - Four	broad	categories:
+  – Document	databases	(e.g.,	MongoDB)	
+  – Key-value	databases	(e.g.,	Redis)	
+  – Column-family	databases	(e.g.,	Cassandra)	
+  – Graph	databases	(e.g.,	Neo4J)
+ - Document	Databases:
+  - Document:	A	self-contained	piece	of	information
+  - Collection:	collection	of	documents
+  - Database:	A	set	of	collections
 
- ### Exercise (Video): Introduction to MongoDB
+ ### 4. Exercise (Video): Introduction to MongoDB
+ - Go to [mongodb](http://www.mongodb.org), then download and install MongoDB.
+ - After installing mongodb, Create a folder named `mongodb`.
+ - `$ mongod` -> start the MongoDB server.
+ - `$ mongo` -> start the mongo REPL shell.
+ - The Mongo REPL shell will start running and give you a prompt to issue commands to the MongoDB server:
+
+ ```
+  $ db
+  $ use conFusion
+  $ db
+  $ db.help()
+ ```
+ - `$ db.dishes.insert({ name: "Uthappizza", description: "Test" })` -> create a collection named dishes, and insert a new dish document in the collection.
+ - If this collection already exists, then this will access the dishes collection. If it doesn't exist, then it'll create the dishes collection at this point.
+ - `$ db.dishes.find().pretty();` -> Then to print out the dishes in the collection.
+ - Next, we will learn the information encoded into the ObjectId:
+ ```
+   var id = new ObjectId();
+   id.getTimestamp();
+ ```
 
  ### Additional Resources
-
+ - [MongoDB documentation](https://docs.mongodb.com/manual/).
+ - [MongoDB Installation](https://docs.mongodb.com/manual/installation/).
+ - [MongoDB Installing Community Edition](https://docs.mongodb.com/manual/administration/install-community/).
+ - [The mongo Shell](https://docs.mongodb.com/manual/mongo/).
   
  </details>
   
  <details>
  <summary>Node and MongoDB</summary>
  
- ### Node and MongoDB
+ ### 5. Node and MongoDB
+ - Provides	a	high-level	API	for	a	Node	application	to	interact	with	the	MongoDB Server
 
- ### Exercise (Video): Node and MongoDB Part 1
+ ### 6. Exercise (Video): Node and MongoDB Part 1
+ - Create a new folder named `node-mongo` and move into the folder.
+ - `$ npm init` -> initialize a `package.json` file.
+ - Create a new file named `index.js`:
 
- ### Exercise (Video): Node and MongoDB Part 2
+ ```
+ const MongoClient = require('mongodb').MongoClient;
+ const assert = require('assert');
 
- ### Callback Hell and Promises
+ const url = 'mongodb://localhost:27017/';
+ const dbname = 'conFusion';
 
- ### Exercise (Video): Callback Hell and Promises
+ MongoClient.connect(url, (err, client) => {
+
+     assert.equal(err,null);
+
+     console.log('Connected correctly to server');
+
+     const db = client.db(dbname);
+     const collection = db.collection("dishes");
+     collection.insertOne({"name": "Uthappizza", "description": "test"},
+     (err, result) => {
+         assert.equal(err,null);
+
+         console.log("After Insert:\n");
+         console.log(result.ops);
+
+         collection.find({}).toArray((err, docs) => {
+             assert.equal(err,null);
+
+             console.log("Found:\n");
+             console.log(docs);
+
+             db.dropCollection("dishes", (err, result) => {
+                 assert.equal(err,null);
+
+                 client.close();
+             });
+         });
+     });
+
+ });
+ ```
+ - Make sure that your MongoDB server is up and running.
+ - `$ npm start` -> Start the server and see the result.
+
+ ### 7. Exercise (Video): Node and MongoDB Part 2
+ - Create a new file named `operations.js` that contains a few MongoDB operations and add the following code:
+
+ ```
+ const assert = require('assert');
+
+ exports.insertDocument = (db, document, collection, callback) => {
+     const coll = db.collection(collection);
+     coll.insert(document, (err, result) => {
+         assert.equal(err, null);
+         console.log("Inserted " + result.result.n +
+             " documents into the collection " + collection);
+         callback(result);
+     });
+ };
+
+ exports.findDocuments = (db, collection, callback) => {
+     const coll = db.collection(collection);
+     coll.find({}).toArray((err, docs) => {
+         assert.equal(err, null);
+         callback(docs);        
+     });
+ };
+
+ exports.removeDocument = (db, document, collection, callback) => {
+     const coll = db.collection(collection);
+     coll.deleteOne(document, (err, result) => {
+         assert.equal(err, null);
+         console.log("Removed the document ", document);
+         callback(result);        
+     });
+ };
+
+ exports.updateDocument = (db, document, update, collection, callback) => {
+     const coll = db.collection(collection);
+     coll.updateOne(document, { $set: update }, null, (err, result) => {
+         assert.equal(err, null);
+         console.log("Updated the document with ", update);
+         callback(result);        
+     });
+ };
+ ```
+ - Update the file named index.js as follows:
+
+ ```
+ . . .
+
+ const dboper = require('./operations');
+
+ . . .
+
+     dboper.insertDocument(db, { name: "Vadonut", description: "Test"},
+         "dishes", (result) => {
+             console.log("Insert Document:\n", result.ops);
+
+             dboper.findDocuments(db, "dishes", (docs) => {
+                 console.log("Found Documents:\n", docs);
+
+                 dboper.updateDocument(db, { name: "Vadonut" },
+                     { description: "Updated Test" }, "dishes",
+                     (result) => {
+                         console.log("Updated Document:\n", result.result);
+
+                         dboper.findDocuments(db, "dishes", (docs) => {
+                             console.log("Found Updated Documents:\n", docs);
+
+                             db.dropCollection("dishes", (result) => {
+                                 console.log("Dropped Collection: ", result);
+
+                                 client.close();
+                             });
+                         });
+                     });
+             });
+     });
+
+ . . .
+ ```
+ - `$ npm start` -> Start the server and see the result.
+
+ ### 8. Callback Hell and Promises
+ - Heavily	nested	callback	code (callback hell):
+  – Results	from	our	tendency	to	write	code	top	to bottom
+  – Pyramid	of	doom
+ - Promise	is	a	mechanism	that	supports	asynchronous	computation
+
+ ### 9. Exercise (Video): Callback Hell and Promises
+ - Update `operations.js` as follows:
+
+ ```
+ const assert = require('assert');
+
+ exports.insertDocument = (db, document, collection, callback) => {
+     const coll = db.collection(collection);
+     return coll.insert(document);
+ };
+
+ exports.findDocuments = (db, collection, callback) => {
+     const coll = db.collection(collection);
+     return coll.find({}).toArray();
+ };
+
+ exports.removeDocument = (db, document, collection, callback) => {
+     const coll = db.collection(collection);
+     return coll.deleteOne(document);
+ };
+
+ exports.updateDocument = (db, document, update, collection, callback) => {
+     const coll = db.collection(collection);
+     return coll.updateOne(document, { $set: update }, null);
+ };
+ ```
+ - Next open `index.js` and update it as follows:
+
+ ```
+ . . .
+
+ MongoClient.connect(url).then((client) => {
+
+     console.log('Connected correctly to server');
+     const db = client.db(dbname);
+
+     dboper.insertDocument(db, { name: "Vadonut", description: "Test"},
+         "dishes")
+         .then((result) => {
+             console.log("Insert Document:\n", result.ops);
+
+             return dboper.findDocuments(db, "dishes");
+         })
+         .then((docs) => {
+             console.log("Found Documents:\n", docs);
+
+             return dboper.updateDocument(db, { name: "Vadonut" },
+                     { description: "Updated Test" }, "dishes");
+
+         })
+         .then((result) => {
+             console.log("Updated Document:\n", result.result);
+
+             return dboper.findDocuments(db, "dishes");
+         })
+         .then((docs) => {
+             console.log("Found Updated Documents:\n", docs);
+
+             return db.dropCollection("dishes");
+         })
+         .then((result) => {
+             console.log("Dropped Collection: ", result);
+
+             return client.close();
+         })
+         .catch((err) => console.log(err));
+
+ })
+ .catch((err) => console.log(err));
+ ```
 
  ### Additional Resources
- 
+<ul>
+  <li>
+    <a href="http://callbackhell.com/" target="_blank" rel="noopener nofollow">
+      Callback Hell
+    </a>
+  </li>
+  <li>
+    <a
+      href="http://bluebirdjs.com/docs/getting-started.html"
+      target="_blank"
+      rel="noopener nofollow"
+    >
+      Bluebird
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://alexperry.io/node/2015/03/25/promises-in-node.html"
+      target="_blank"
+      rel="noopener nofollow"
+    >
+      Bluebird – Promises in NodeJS
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://strongloop.com/strongblog/node-js-callback-hell-promises-generators/"
+      target="_blank"
+      rel="noopener nofollow"
+    >
+      Managing Node.js Callback Hell with Promises, Generators and Other
+      Approaches
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://medium.com/@js_tut/the-great-escape-from-callback-hell-3006fa2c82e"
+      target="_blank"
+      rel="noopener nofollow"
+    >
+      The Great Escape from Callback Hell
+    </a>
+  </li>
+</ul>
   
  </details>
    
