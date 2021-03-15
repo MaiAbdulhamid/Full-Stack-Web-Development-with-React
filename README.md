@@ -3962,7 +3962,7 @@ code) problem
  - `$ npm install` -> install all the Node modules.
 
  ### Additional Resources
-
+ - [Express application generator](http://expressjs.com/en/starter/generator.html)
   
  </details>
  
