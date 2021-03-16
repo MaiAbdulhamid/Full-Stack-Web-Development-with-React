@@ -4478,8 +4478,14 @@ code) problem
  <summary>REST API with Express, MongoDB and Mongoose</summary>
  
  ### 13. REST API with Express, MongoDB and Mongoose
+ - Every	incoming	request	needs	to	be	decoded	to	decide	the	nature	of	the	request:
+  – GET,	PUT,	POST,	DELETE
+  – Resource	affected
+  – Data	in	body	of	request
+ - Translate	request	to	an	equivalent	database	operation
 
  ### 14. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 1
+ - 
 
  ### 15. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 2
 
