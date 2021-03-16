@@ -4223,63 +4223,253 @@ code) problem
  ```
 
  ### Additional Resources
-<ul>
-  <li>
+ <ul>
+   <li>
     <a href="http://callbackhell.com/" target="_blank" rel="noopener nofollow">
-      Callback Hell
-    </a>
-  </li>
-  <li>
-    <a
-      href="http://bluebirdjs.com/docs/getting-started.html"
-      target="_blank"
-      rel="noopener nofollow"
-    >
-      Bluebird
-    </a>
-  </li>
-  <li>
-    <a
-      href="https://alexperry.io/node/2015/03/25/promises-in-node.html"
-      target="_blank"
-      rel="noopener nofollow"
-    >
-      Bluebird – Promises in NodeJS
-    </a>
-  </li>
-  <li>
-    <a
-      href="https://strongloop.com/strongblog/node-js-callback-hell-promises-generators/"
-      target="_blank"
-      rel="noopener nofollow"
-    >
-      Managing Node.js Callback Hell with Promises, Generators and Other
-      Approaches
-    </a>
-  </li>
-  <li>
-    <a
-      href="https://medium.com/@js_tut/the-great-escape-from-callback-hell-3006fa2c82e"
-      target="_blank"
-      rel="noopener nofollow"
-    >
-      The Great Escape from Callback Hell
-    </a>
-  </li>
-</ul>
+       Callback Hell
+     </a>
+   </li>
+   <li>
+     <a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank" rel="noopener nofollow" >
+       Bluebird
+     </a>
+   </li>
+   <li>
+     <a href="https://alexperry.io/node/2015/03/25/promises-in-node.html" target="_blank" rel="noopener nofollow">
+       Bluebird – Promises in NodeJS
+     </a>
+   </li>
+   <li>
+     <a href="https://strongloop.com/strongblog/node-js-callback-hell-promises-generators/" target="_blank" rel="noopener nofollow">
+       Managing Node.js Callback Hell with Promises, Generators and Other
+       Approaches
+     </a>
+   </li>
+   <li>
+     <a href="https://medium.com/@js_tut/the-great-escape-from-callback-hell-3006fa2c82e" target="_blank" rel="noopener nofollow" >
+       The Great Escape from Callback Hell
+     </a>
+   </li>
+ </ul>
   
  </details>
    
  <details>
  <summary>Mongoose ODM</summary>
  
- ### Mongoose ODM
+ ### 10. Mongoose ODM
+ - MongoDB driver: enables our node application to communicate with a MongoDB server.
+ - Mongoose node module: enables us to define a schema and a structure for our documents that are stored in MongoDB database, and strictly enforces the structure.
+ - MongoDB stores	data	in	the	form	of	documents.
+ - MongoDB relies on the developer to enforce the structure on the documents, and gives the complete responsibility to the developer to make sure that documents of the correct structure are added and maintained in the various collections.
+ - The Mongoose node module imposes a standardized structure for the documents that are stored in a particular collection.
+ - Mongoose	(ODM)
+  – Object	Data	Model	
+  – Object	Document	Mapping
+  – Object	relational	mapping	(ORM)
+ - Mongoose automatically has a built-in mechanism that enables it to construct the *plurals* of standard English words. So, if you say dish, it will construct dishes.
 
- ### Exercise (Video): Mongoose ODM Part 1
+ ### 11. Exercise (Video): Mongoose ODM Part 1
+ - Create a folder named `node-mongoose` and move into the folder.
+ - `$ npm init` -> initialize a `package.json` file in the `node-mongoose` folder.
+ - `"start": "node index"` -> Add this line into scripts object in `package.json` file.
+ - `$ npm install mongoose@5.1.7` -> Install Mongoose.
+ - Create a sub-folder named `models` in the `node-mongoose` folder. Move to this folder.
+ - Create a file named `dishes.js` and add the following code to create a Mongoose schema:
 
- ### Exercise (Video): Mongoose ODM Part 2
+ ```
+ const mongoose = require('mongoose');
+ const Schema = mongoose.Schema;
+
+ const dishSchema = new Schema({
+     name: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     description: {
+         type: String,
+         required: true
+     }
+ },{
+     timestamps: true
+ });
+
+ var Dishes = mongoose.model('Dish', dishSchema);
+
+ module.exports = Dishes;
+ ```
+ 
+ - `timestamps: true` -> will automatically add the created at and updated at, two timestamps into each document that is stored in our application and it'll automatically update these values.
+ - Move to the `node-mongoose` folder and create a file named `index.js` and add the following code:
+
+ ```
+ const mongoose = require('mongoose');
+
+ const Dishes = require('./models/dishes');
+
+ const url = 'mongodb://localhost:27017/conFusion';
+ const connect = mongoose.connect(url);
+
+ connect.then((db) => {
+
+     console.log('Connected correctly to server');
+
+     var newDish = Dishes({
+         name: 'Uthappizza',
+         description: 'test'
+     });
+
+     newDish.save()
+         .then((dish) => {
+             console.log(dish);
+
+             return Dishes.find({});
+         })
+         .then((dishes) => {
+             console.log(dishes);
+
+             return Dishes.remove({});
+         })
+         .then(() => {
+             return mongoose.connection.close();
+         })
+         .catch((err) => {
+             console.log(err);
+         });
+
+ });
+ ```
+ 
+ - Make sure that your MongoDB server is up and running. 
+ - `$ npm start` -> to start the server and see the result.
+ - Create a `.gitignore` file with the contents "node_modules"
+
+ ### 12. Exercise (Video): Mongoose ODM Part 2
+ - Now, update index.js as follows:
+
+ ```
+ . . .
+
+     Dishes.create({
+         name: 'Uthapizza',
+         description: 'Test'
+     })
+     .then((dish) => {
+         console.log(dish);
+
+         return Dishes.find({}).exec();
+     })
+     .then((dishes) => {
+         console.log(dishes);
+
+         return Dishes.remove({});
+     })
+     .then(() => {
+         return mongoose.connection.close();
+     })
+     .catch((err) => {
+         console.log(err);
+     });
+
+ . . .
+ ```
+ - Run the server and observe the result.
+ - Update `dishes.js` in the models folder as follows:
+
+ ```
+ . . .
+
+ var commentSchema = new Schema({
+     rating:  {
+         type: Number,
+         min: 1,
+         max: 5,
+         required: true
+     },
+     comment:  {
+         type: String,
+         required: true
+     },
+     author:  {
+         type: String,
+         required: true
+     }
+ }, {
+     timestamps: true
+ });
+
+ var dishSchema = new Schema({
+     name: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     description: {
+         type: String,
+         required: true
+     },
+     comments:[commentSchema]
+ }, {
+     timestamps: true
+ });
+
+ . . .
+ ```
+ - Update `index.js` as follows:
+
+ ```
+ . . .
+
+     Dishes.create({
+         name: 'Uthappizza',
+         description: 'test'
+     })
+     .then((dish) => {
+         console.log(dish);
+
+         return Dishes.findByIdAndUpdate(dish._id, {
+             $set: { description: 'Updated test'}
+         },{ 
+             new: true 
+         })
+         .exec();
+     })
+     .then((dish) => {
+         console.log(dish);
+
+         dish.comments.push({
+             rating: 5,
+             comment: 'I\'m getting a sinking feeling!',
+             author: 'Leonardo di Carpaccio'
+         });
+
+         return dish.save();
+     })
+     .then((dish) => {
+         console.log(dish);
+
+         return Dishes.remove({});
+     })
+     .then(() => {
+         return mongoose.connection.close();
+     })
+     .catch((err) => {
+         console.log(err);
+     });
+
+ . . .
+ ```
 
  ### Additional Resources
+ <ul>
+   <li><a href="http://mongoosejs.com/" target="_blank" rel="noopener nofollow">Mongoose</a></li>
+   <li><a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="noopener nofollow">Mongoose Documentation</a></li>
+   <li><a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="noopener nofollow">Mongoose Schemas</a></li>
+   <li><a href="http://mongoosejs.com/docs/models.html" target="_blank" rel="noopener nofollow">Mongoose Models</a></li>
+   <li><a href="http://mongoosejs.com/docs/subdocs.html" target="_blank" rel="noopener nofollow">Mongoose Sub-documents</a></li>
+   <li><a href="https://www.npmjs.com/package/mongoose-currency" target="_blank" rel="noopener nofollow">Mongoose-currency</a></li>
+ </ul>
 
   
  </details>
@@ -4287,11 +4477,11 @@ code) problem
  <details>
  <summary>REST API with Express, MongoDB and Mongoose</summary>
  
- ### REST API with Express, MongoDB and Mongoose
+ ### 13. REST API with Express, MongoDB and Mongoose
 
- ### Exercise (Video): REST API with Express, MongoDB and Mongoose Part 1
+ ### 14. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 1
 
- ### Exercise (Video): REST API with Express, MongoDB and Mongoose Part 2
+ ### 15. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 2
 
  ### Additional Resources
 
