@@ -4485,7 +4485,9 @@ code) problem
  - Translate	request	to	an	equivalent	database	operation
 
  ### 14. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 1
- - 
+ - Go to the conFusionServer folder where you had developed the REST API server using Express generator.
+ - Copy the models folder from the node-mongoose folder to the conFusionServer folder.
+ - `$ npm i mongoose mongoose-currency` ->  install bluebird, mongoose and mongoose-currency 
 
  ### 15. Exercise (Video): REST API with Express, MongoDB and Mongoose Part 2
 
