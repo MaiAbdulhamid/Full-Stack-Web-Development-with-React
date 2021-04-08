@@ -4815,9 +4815,9 @@ code) problem
  <details>
  <summary>Basic Authentication</summary>
  
- ### Basic Authentication
+ ### 1. Basic Authentication
 
- ### Exercise (Video): Basic Authentication
+ ### 2. Exercise (Video): Basic Authentication
 
  ### Additional Resources
 
@@ -4844,11 +4844,11 @@ code) problem
  
  ### Passport
 
- ### Exercise (Video): User Authentication with Passport
+ ### Exercise : User Authentication with Passport
 
  ### Token Based Authentication
 
- ### Exercise (Video): User Authentication with Passport and JSON Web Token
+ ### Exercise: User Authentication with Passport and JSON Web Token
 
  ### Additional Resources
   
