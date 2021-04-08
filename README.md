@@ -4816,24 +4816,314 @@ code) problem
  <summary>Basic Authentication</summary>
  
  ### 1. Basic Authentication
+ - Basic authentication in HTTP is a very simple mechanism, which will ask the user for a user name and password to be submitted with a request.
 
- ### 2. Exercise (Video): Basic Authentication
+ ### 2. Exercise: Basic Authentication
+ - Open the `app.js` file and update it: 
+ 
+ ```
+ . . .
+
+ function auth (req, res, next) {
+   console.log(req.headers);
+   var authHeader = req.headers.authorization;
+   if (!authHeader) {
+       var err = new Error('You are not authenticated!');
+       res.setHeader('WWW-Authenticate', 'Basic');
+       err.status = 401;
+       next(err);
+       return;
+   }
+
+   var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+   var user = auth[0];
+   var pass = auth[1];
+   if (user == 'admin' && pass == 'password') {
+       next(); // authorized
+   } else {
+       var err = new Error('You are not authenticated!');
+       res.setHeader('WWW-Authenticate', 'Basic');      
+       err.status = 401;
+       next(err);
+   }
+ }
+
+ app.use(auth);
+
+ . . .
+ ```
 
  ### Additional Resources
+ - [Basic Access Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
 
-  
+
  </details>
  
  <details>
  <summary>Cookies, Tea and err ... Express Sessions</summary>
  
- ### Cookies, Tea and err ... Express Sessions
+ ### 3. Cookies, Tea and err ... Express Sessions
+ - In basic authentication the client will have to explicitly keep adding in the authorization field containing the username and password for every request that the client sends to the server side.
+ - HTTP cookies are small piece of data that is sent from a web server and is stored on the client side. 
 
- ### Exercise (Video): Using Cookies
+ ### 4. Exercise: Using Cookies
+ - We're going to modify this authorization middleware to make use of cookies instead of the authorization header.
+ - `$ npm install cookie-parser@1.4.3 ` -> The cookie-parser Express middleware is already included in the Express REST API application. If you need to add Cookie parser middleware then you can install the NPM module.
+ - Update `app.js` :
 
- ### Exercise (Video): Express Sessions Part 1
+ ```
+ . . .
 
- ### Exercise (Video): Express Sessions Part 2
+ app.use(cookieParser('12345-67890-09876-54321'));
+
+ function auth (req, res, next) {
+
+   if (!req.signedCookies.user) {
+     var authHeader = req.headers.authorization;
+     if (!authHeader) {
+         var err = new Error('You are not authenticated!');
+         res.setHeader('WWW-Authenticate', 'Basic');              
+         err.status = 401;
+         next(err);
+         return;
+     }
+     var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+     var user = auth[0];
+     var pass = auth[1];
+     if (user == 'admin' && pass == 'password') {
+         res.cookie('user','admin',{signed: true});
+         next(); // authorized
+     } else {
+         var err = new Error('You are not authenticated!');
+         res.setHeader('WWW-Authenticate', 'Basic');              
+         err.status = 401;
+         next(err);
+     }
+   }
+   else {
+       if (req.signedCookies.user === 'admin') {
+           next();
+       }
+       else {
+           var err = new Error('You are not authenticated!');
+           err.status = 401;
+           next(err);
+       }
+   }
+ }
+
+ . . .
+ ```
+
+ ### 5. Exercise : Express Sessions Part 1
+ - `$ npm install express-session session-file-store` -> install express-session and session-file-store Node modules.
+ - Update `app.js` as:
+
+ ```
+ . . .
+
+ var session = require('express-session');
+ var FileStore = require('session-file-store')(session);
+
+ . . .
+
+ app.use(session({
+   name: 'session-id',
+   secret: '12345-67890-09876-54321',
+   saveUninitialized: false,
+   resave: false,
+   store: new FileStore()
+ }));
+
+ function auth (req, res, next) {
+     console.log(req.session);
+
+     if (!req.session.user) {
+         var authHeader = req.headers.authorization;
+         if (!authHeader) {
+             var err = new Error('You are not authenticated!');
+             res.setHeader('WWW-Authenticate', 'Basic');                        
+             err.status = 401;
+             next(err);
+             return;
+         }
+         var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+         var user = auth[0];
+         var pass = auth[1];
+         if (user == 'admin' && pass == 'password') {
+             req.session.user = 'admin';
+             next(); // authorized
+         } else {
+             var err = new Error('You are not authenticated!');
+             res.setHeader('WWW-Authenticate', 'Basic');
+             err.status = 401;
+             next(err);
+         }
+     }
+     else {
+         if (req.session.user === 'admin') {
+             console.log('req.session: ',req.session);
+             next();
+         }
+         else {
+             var err = new Error('You are not authenticated!');
+             err.status = 401;
+             next(err);
+         }
+     }
+ }
+
+ . . .
+ ```
+
+ ### 6. Exercise : Express Sessions Part 2
+ - Add a new Mongoose model for users in the file named `user.js` in the `models` folder:
+
+ ```
+ var mongoose = require('mongoose');
+ var Schema = mongoose.Schema;
+
+ var User = new Schema({
+     username: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     password:  {
+         type: String,
+         required: true
+     },
+     admin:   {
+         type: Boolean,
+         default: false
+     }
+ });
+
+ module.exports = mongoose.model('User', User);
+ ```
+ - Update `users.js` in the `routes` folder to support user registration, login and logout:
+
+ ```
+ . . .
+
+ const bodyParser = require('body-parser');
+ var User = require('../models/user');
+
+ router.use(bodyParser.json());
+
+ . . .
+
+ router.post('/signup', (req, res, next) => {
+   User.findOne({username: req.body.username})
+   .then((user) => {
+     if(user != null) {
+       var err = new Error('User ' + req.body.username + ' already exists!');
+       err.status = 403;
+       next(err);
+     }
+     else {
+       return User.create({
+         username: req.body.username,
+         password: req.body.password});
+     }
+   })
+   .then((user) => {
+     res.statusCode = 200;
+     res.setHeader('Content-Type', 'application/json');
+     res.json({status: 'Registration Successful!', user: user});
+   }, (err) => next(err))
+   .catch((err) => next(err));
+ });
+
+ router.post('/login', (req, res, next) => {
+
+   if(!req.session.user) {
+     var authHeader = req.headers.authorization;
+
+     if (!authHeader) {
+       var err = new Error('You are not authenticated!');
+       res.setHeader('WWW-Authenticate', 'Basic');
+       err.status = 401;
+       return next(err);
+     }
+
+     var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+     var username = auth[0];
+     var password = auth[1];
+
+     User.findOne({username: username})
+     .then((user) => {
+       if (user === null) {
+         var err = new Error('User ' + username + ' does not exist!');
+         err.status = 403;
+         return next(err);
+       }
+       else if (user.password !== password) {
+         var err = new Error('Your password is incorrect!');
+         err.status = 403;
+         return next(err);
+       }
+       else if (user.username === username && user.password === password) {
+         req.session.user = 'authenticated';
+         res.statusCode = 200;
+         res.setHeader('Content-Type', 'text/plain');
+         res.end('You are authenticated!')
+       }
+     })
+     .catch((err) => next(err));
+   }
+   else {
+     res.statusCode = 200;
+     res.setHeader('Content-Type', 'text/plain');
+     res.end('You are already authenticated!');
+   }
+ })
+
+ router.get('/logout', (req, res) => {
+   if (req.session) {
+     req.session.destroy();
+     res.clearCookie('session-id');
+     res.redirect('/');
+   }
+   else {
+     var err = new Error('You are not logged in!');
+     err.status = 403;
+     next(err);
+   }
+ });
+
+ . . .
+ ```
+ - Next, update `app.js` as follows to use the user authentication support:
+
+ ```
+ . . .
+
+ app.use('/', indexRouter);
+ app.use('/users', usersRouter);
+
+ function auth (req, res, next) {
+     console.log(req.session);
+
+   if(!req.session.user) {
+       var err = new Error('You are not authenticated!');
+       err.status = 403;
+       return next(err);
+   }
+   else {
+     if (req.session.user === 'authenticated') {
+       next();
+     }
+     else {
+       var err = new Error('You are not authenticated!');
+       err.status = 403;
+       return next(err);
+     }
+   }
+ }
+
+ . . .
+ ```
 
  ### Additional Resources
   
@@ -4842,13 +5132,13 @@ code) problem
  <details>
  <summary>User Authentication with Passport</summary>
  
- ### Passport
+ ### 7. Passport
 
- ### Exercise : User Authentication with Passport
+ ### 8. Exercise : User Authentication with Passport
 
- ### Token Based Authentication
+ ### 9. Token Based Authentication
 
- ### Exercise: User Authentication with Passport and JSON Web Token
+ ### 10. Exercise: User Authentication with Passport and JSON Web Token
 
  ### Additional Resources
   
@@ -4857,9 +5147,9 @@ code) problem
  <details>
  <summary>Mongoose Population</summary>
  
- ### Mongoose Population
+ ### 11. Mongoose Population
 
- ### Exercise (Video): Mongoose Population
+ ### 12. Exercise : Mongoose Population
 
  ### Additional Resources
 
