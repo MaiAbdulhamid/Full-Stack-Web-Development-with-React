@@ -4807,11 +4807,74 @@ code) problem
  
  - In this assignment, you will continue your journey with MongoDB and Mongoose. You will then create two new schemas for promotions and leadership, and then extend the Express REST API server to support the /promotions and the /leaders REST API end points.
  
+  
+ </details>
+ 
+ ### week 3:
+ 
+ <details>
+ <summary>Basic Authentication</summary>
+ 
+ ### Basic Authentication
+
+ ### Exercise (Video): Basic Authentication
+
+ ### Additional Resources
+
+  
+ </details>
+ 
+ <details>
+ <summary>Cookies, Tea and err ... Express Sessions</summary>
+ 
+ ### Cookies, Tea and err ... Express Sessions
+
+ ### Exercise (Video): Using Cookies
+
+ ### Exercise (Video): Express Sessions Part 1
+
+ ### Exercise (Video): Express Sessions Part 2
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>User Authentication with Passport</summary>
+ 
+ ### Passport
+
+ ### Exercise (Video): User Authentication with Passport
+
+ ### Token Based Authentication
+
+ ### Exercise (Video): User Authentication with Passport and JSON Web Token
+
+ ### Additional Resources
+  
+ </details>
+ 
+ <details>
+ <summary>Mongoose Population</summary>
+ 
+ ### Mongoose Population
+
+ ### Exercise (Video): Mongoose Population
+
+ ### Additional Resources
+
+  
+ </details>
+ 
+ <details>
+ <summary>Assignment 3</summary>
+ 
  ### here
   
  </details>
  
- ### week  :
+  
+ ### week 4:
  
  <details>
  <summary>Title</summary>
