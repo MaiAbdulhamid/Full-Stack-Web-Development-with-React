@@ -5126,6 +5126,8 @@ code) problem
  ```
 
  ### Additional Resources
+ - [express-session](https://github.com/expressjs/session)
+ - [session-file-store](https://www.npmjs.com/package/session-file-store)
   
  </details>
  
