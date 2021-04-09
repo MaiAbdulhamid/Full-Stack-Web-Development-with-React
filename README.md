@@ -5135,12 +5135,116 @@ code) problem
  <summary>User Authentication with Passport</summary>
  
  ### 7. Passport
+ - Passport: Authentication	middleware	for	Node.js.
+ - Passport-Local: Passport	strategy	for	authenticating	a	user	with	a	username	and	password.
+ - Passport-Local-Mongoose: Mongoose	plugin	to	simplify	building	username	and	password	login.
+ - In cryptography, the salt is a random string that is used for performing the hashing operation on the password for storing. 
 
  ### 8. Exercise : User Authentication with Passport
+ - `$ npm install passport passport-local passport-local-mongoose` -> Install the Passport and related Node modules.
+ - In the `models` folder, update `user.js` :
+
+ ```
+ . . .
+
+ var passportLocalMongoose = require('passport-local-mongoose');
+
+ var User = new Schema({
+     admin:   {
+         type: Boolean,
+         default: false
+     }
+ });
+
+ User.plugin(passportLocalMongoose);
+
+ . . .
+ ```
+ - Add a new file named `authenticate.js` to the project folder:
+
+ ```
+ var passport = require('passport');
+ var LocalStrategy = require('passport-local').Strategy;
+ var User = require('./models/user');
+
+ passport.use(new LocalStrategy(User.authenticate()));
+ passport.serializeUser(User.serializeUser());
+ passport.deserializeUser(User.deserializeUser());
+ ```
+ - Open `users.js` file in the `routes` folder:
+
+ ```
+ . . .
+
+ var passport = require('passport');
+
+ . . .
+
+
+ router.post('/signup', (req, res, next) => {
+   User.register(new User({username: req.body.username}), 
+     req.body.password, (err, user) => {
+     if(err) {
+       res.statusCode = 500;
+       res.setHeader('Content-Type', 'application/json');
+       res.json({err: err});
+     }
+     else {
+       passport.authenticate('local')(req, res, () => {
+         res.statusCode = 200;
+         res.setHeader('Content-Type', 'application/json');
+         res.json({success: true, status: 'Registration Successful!'});
+       });
+     }
+   });
+ });
+
+ router.post('/login', passport.authenticate('local'), (req, res) => {
+   res.statusCode = 200;
+   res.setHeader('Content-Type', 'application/json');
+   res.json({success: true, status: 'You are successfully logged in!'});
+ });
+
+ . . .
+ ```
+ - Finally, update `app.js` :
+
+ ```
+ . . .
+
+ var passport = require('passport');
+ var authenticate = require('./authenticate');
+
+ . . .
+
+ app.use(passport.initialize());
+ app.use(passport.session());
+
+ . . .
+
+ function auth (req, res, next) {
+     console.log(req.user);
+
+     if (!req.user) {
+       var err = new Error('You are not authenticated!');
+       err.status = 403;
+       next(err);
+     }
+     else {
+           next();
+     }
+ }
+
+ . . .
+ ```
 
  ### 9. Token Based Authentication
+ - Cookies	set	on	the	client	side	by	the	server.
+ - Session	authentication	becomes	a	problem	when	we	need	stateless	servers	and	scalability.
+ - JSON Web Token, is a very simple way of encoding information in a token then pass it to the client site.
 
  ### 10. Exercise: User Authentication with Passport and JSON Web Token
+ - 
 
  ### Additional Resources
   
