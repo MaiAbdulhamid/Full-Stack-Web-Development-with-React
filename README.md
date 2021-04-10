@@ -5294,6 +5294,140 @@ code) problem
 
  exports.verifyUser = passport.authenticate('jwt', {session: false});
  ```
+ - Open users.js file in the routes folder and update the code:
+
+ ```
+ . . .
+
+ var authenticate = require('../authenticate');
+
+ . . .
+
+ router.post('/login', passport.authenticate('local'), (req, res) => {
+
+   var token = authenticate.getToken({_id: req.user._id});
+   res.statusCode = 200;
+   res.setHeader('Content-Type', 'application/json');
+   res.json({success: true, token: token, status: 'You are successfully logged in!'});
+ });
+
+ . . .
+ ```
+ - Update app.js to remove the auth function and the app.use(auth), and update as follows:
+
+ ```
+ . . .
+
+ var config = require('./config');
+
+
+ . . .
+
+ const url = config.mongoUrl;
+
+ . . .
+ ```
+ - Open dishRouter.js and updated the code for the '/' route:
+
+ ```
+ . . .
+
+ var authenticate = require('../authenticate');
+
+ . . .
+
+
+ dishRouter.route('/')
+
+
+ .post(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .put(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .delete(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ });
+
+
+ dishRouter.route('/:dishId')
+
+
+ .post(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .put(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .delete(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ });
+
+
+ dishRouter.route('/:dishId/comments')
+
+
+ .post(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .put(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .delete(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ });
+
+
+ dishRouter.route('/:dishId/comments/:commentId')
+
+
+ .post(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .put(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ })
+
+ .delete(authenticate.verifyUser, (req, res, next) => {
+
+    . . .
+
+ });
+
+
+ . . .
+ ```
+ 
 
  ### Additional Resources
   
