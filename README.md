@@ -5428,8 +5428,12 @@ code) problem
  . . .
  ```
  
-
  ### Additional Resources
+ - [User Authentication With Passport and Express 4](https://mherman.org/blog/local-authentication-with-passport-and-express-4/)
+ - [Authenticate a Node ES6 API with JSON Web Tokens](https://scotch.io/tutorials/authenticate-a-node-es6-api-with-json-web-tokens)
+ - [Token Based Authentication for Single Page Apps (SPAs)](https://stormpath.com/blog/token-auth-spa)
+ - [The Ins and Outs of Token Based Authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication)
+ - [Express, Passport and JSON Web Token (jwt) Authentication for Beginners](https://jonathanmh.com/express-passport-json-web-token-jwt-authentication-beginners/)
   
  </details>
  
