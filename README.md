@@ -5722,9 +5722,9 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>HTTPS and Secure Communication</summary>
  
- ### HTTPS and Secure Communication
+ ### 1. HTTPS and Secure Communication
 
- ### HTTPS and Secure Communication
+ ### 2. HTTPS and Secure Communication
 
  ### Additional Resources
   
@@ -5733,9 +5733,9 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>Uploading Files</summary>
  
- ### Uploading Files
+ ### 3. Uploading Files
 
- ### Exercise : Uploading Files
+ ### 4. Exercise : Uploading Files
 
  ### Additional Resources
   
@@ -5744,9 +5744,9 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>Cross-Origin Resource Sharing</summary>
  
- ### Cross-Origin Resource Sharing
+ ### 5. Cross-Origin Resource Sharing
 
- ### Exercise : Cross-Origin Resource Sharing
+ ### 6. Exercise : Cross-Origin Resource Sharing
 
  ### Additional Resources
   
@@ -5755,9 +5755,9 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>OAuth and User Authentication</summary>
  
- ### OAuth and User Authentication
+ ### 7. OAuth and User Authentication
 
- ### Exercise : Using OAuth with Passport and Facebook
+ ### 8. Exercise : Using OAuth with Passport and Facebook
 
  ### Additional Resources
 
