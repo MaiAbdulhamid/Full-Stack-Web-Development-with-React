@@ -5703,6 +5703,8 @@ router.post('/signup', (req, res, next) => {
 ```
 
  ### Additional Resources
+ - [Mongoose Population](https://mongoosejs.com/docs/populate.html).
+ - [mongoose: Referencing schema in properties or arrays](https://alexanderzeitler.com/articles/mongoose-referencing-schema-in-properties-and-arrays/)
 
   
  </details>
@@ -5710,7 +5712,7 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>Assignment 3</summary>
  
- ### here
+ In this assignment you will continue the exploration of user authentication. We have already set up the REST API server to validate an ordinary user. Now, you will extend this to verify an Admin and grant appropriate privileges to an Admin. In addition you will allow only a registered user to update and delete his/her submitted comments. Neither another user, nor an Admin can edit these comments
   
  </details>
  
