@@ -5720,35 +5720,52 @@ router.post('/signup', (req, res, next) => {
  ### week 4:
  
  <details>
- <summary>Title</summary>
+ <summary>HTTPS and Secure Communication</summary>
  
- ### here
+ ### HTTPS and Secure Communication
+
+ ### HTTPS and Secure Communication
+
+ ### Additional Resources
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Uploading Files</summary>
  
- ### here
+ ### Uploading Files
+
+ ### Exercise : Uploading Files
+
+ ### Additional Resources
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Cross-Origin Resource Sharing</summary>
  
- ### here
+ ### Cross-Origin Resource Sharing
+
+ ### Exercise : Cross-Origin Resource Sharing
+
+ ### Additional Resources
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>OAuth and User Authentication</summary>
  
- ### here
+ ### OAuth and User Authentication
+
+ ### Exercise : Using OAuth with Passport and Facebook
+
+ ### Additional Resources
+
   
  </details>
  
  <details>
- <summary>Title</summary>
+ <summary>Assignment 4</summary>
  
  ### here
   
