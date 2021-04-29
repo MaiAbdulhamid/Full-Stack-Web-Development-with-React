@@ -5723,10 +5723,86 @@ router.post('/signup', (req, res, next) => {
  <summary>HTTPS and Secure Communication</summary>
  
  ### 1. HTTPS and Secure Communication
+ - Symmetric Encryption: Shared secret key between the two parties
+ - Asymmetric Encryption:
+  - Public key that can be widely distributed
+  - Private key that is only known to the receiver
+ 
 
- ### 2. HTTPS and Secure Communication
+ ### 2. Exercise : HTTPS and Secure Communication
+ - Go to the `bin` folder and then create the private key and certificate by typing the following at the prompt:
+
+ ```
+ openssl genrsa 1024 > private.key
+ openssl req -new -key private.key -out cert.csr
+ openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+ ```
+ 
+ - Open the `www` file in the `bin` directory and update its contents as follows:
+
+ ```
+ . . .
+
+ var https = require('https');
+ var fs = require('fs');
+
+ . . .
+
+ app.set('secPort',port+443);
+
+ . . .
+
+ /**
+  * Create HTTPS server.
+  */ 
+
+ var options = {
+   key: fs.readFileSync(__dirname+'/private.key'),
+   cert: fs.readFileSync(__dirname+'/certificate.pem')
+ };
+
+ var secureServer = https.createServer(options,app);
+
+ /**
+  * Listen on provided port, on all network interfaces.
+  */
+
+ secureServer.listen(app.get('secPort'), () => {
+    console.log('Server listening on port ',app.get('secPort'));
+ });
+ secureServer.on('error', onError);
+ secureServer.on('listening', onListening);
+
+ . . .
+ ```
+ - Open `app.js` and add the following code to the file:
+
+ ```
+ . . .
+
+ // Secure traffic only
+ app.all('*', (req, res, next) => {
+   if (req.secure) {
+     return next();
+   }
+   else {
+     res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+   }
+ });
+
+ . . .
+ ```
 
  ### Additional Resources
+ - HTTPS:
+  - [HTTPS (Wikipedia)](https://en.wikipedia.org/wiki/HTTPS).
+  - [Public Key Cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography).
+  - [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security).
+ - Node's HTTPS Server:
+  - [Node HTTPS Server](https://nodejs.org/api/https.html).
+ - Other:
+  - [How to Use SSL/TLS with Node.js](https://www.sitepoint.com/how-to-use-ssltls-with-node-js/)
+  - [How does HTTPS actually work?](https://robertheaton.com/2014/03/27/how-does-https-actually-work/)
   
  </details>
  
