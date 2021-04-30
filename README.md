@@ -5885,6 +5885,9 @@ router.post('/signup', (req, res, next) => {
  ```
 
  ### Additional Resources
+ - [Multer](https://github.com/expressjs/multer).
+ - [Form-based File Upload in HTML (IETF RFC 1867)](https://tools.ietf.org/html/rfc1867).
+ - [Node multipart/form-data Explained](https://www.derpturkey.com/node-multipart-form-data-explained/)
   
  </details>
  
