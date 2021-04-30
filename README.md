@@ -5895,8 +5895,124 @@ router.post('/signup', (req, res, next) => {
  <summary>Cross-Origin Resource Sharing</summary>
  
  ### 5. Cross-Origin Resource Sharing
+ - Same-Origin	Policy: Web	app	security	model	that	restricts	how	a	document	or	script	loaded	from	one	origin	can	interact	with	a	resource	from	another	origin.
+ - Cross-Origin	Resource	Sharing	(CORS): Mechanism	to	give	web	servers	cross-domain	access	controls.
 
  ### 6. Exercise : Cross-Origin Resource Sharing
+ - `npm install cors` -> install the cors module.
+ - In the `routes` folder, add a new file named `cors.js` and add the following code to it:
+
+ ```
+ const express = require('express');
+ const cors = require('cors');
+ const app = express();
+
+ const whitelist = ['http://localhost:3000', 'https://localhost:3443'];
+ var corsOptionsDelegate = (req, callback) => {
+     var corsOptions;
+     console.log(req.header('Origin'));
+     if(whitelist.indexOf(req.header('Origin')) !== -1) {
+         corsOptions = { origin: true };
+     }
+     else {
+         corsOptions = { origin: false };
+     }
+     callback(null, corsOptions);
+ };
+
+ exports.cors = cors();
+ exports.corsWithOptions = cors(corsOptionsDelegate);
+ ```
+ 
+ - Then, open `dishRouter.js` and update it as follows:
+ ```
+ . . .
+
+ const cors = require('./cors');
+
+ . . .
+
+ dishRouter.route('/')
+ .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+ .get(cors.cors, (req,res,next) => {
+
+ . . .
+
+ .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+ . . .
+
+ .put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ dishRouter.route('/:dishId')
+ .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+ .get(cors.cors, (req,res,next) => {
+
+ . . .
+
+ .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+ . . .
+
+ .put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ dishRouter.route('/:dishId/comments')
+ .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+ .get(cors.cors, (req,res,next) => {
+
+ . . .
+
+ .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+ . . .
+
+ .put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ dishRouter.route('/:dishId/comments/:commentId')
+ .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+ .get(cors.cors, (req,res,next) => {
+
+ . . .
+
+ .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+ . . .
+
+ .put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+
+ .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+
+
+ . . .
+ ```
+ - Do similar updates to promoRouter.js, leaderRouter.js, uploadRouter.js and users.js.
 
  ### Additional Resources
   
