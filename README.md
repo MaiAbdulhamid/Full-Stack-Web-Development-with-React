@@ -6015,6 +6015,8 @@ router.post('/signup', (req, res, next) => {
  - Do similar updates to promoRouter.js, leaderRouter.js, uploadRouter.js and users.js.
 
  ### Additional Resources
+ - [CORS NPM module](https://www.npmjs.com/package/cors).
+ - [Cross-Origin Resource Sharing (CORS)](https://web.dev/cross-origin-resource-sharing/).
   
  </details>
  
@@ -6022,6 +6024,8 @@ router.post('/signup', (req, res, next) => {
  <summary>OAuth and User Authentication</summary>
  
  ### 7. OAuth and User Authentication
+ - OAuth 1	and	OAuth 2: Authorization	framework	based	on	open	standards	for	Internet	users	to	log	into	third	party	websites/apps	using	their	Social	Network	accounts.
+ - 
 
  ### 8. Exercise : Using OAuth with Passport and Facebook
 
