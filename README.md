@@ -6028,6 +6028,89 @@ router.post('/signup', (req, res, next) => {
  - Access	token:	allows	access	to	user	data	by	the	client	application.
 
  ### 8. Exercise : Using OAuth with Passport and Facebook
+ - Go to [developers.facebook.com](https://developers.facebook.com/apps/) and register your app by following the instructions there and obtain your App ID and App Secret.
+ - `npm install passport-facebook-token` -> install passport-facebook-token module.
+ - Update `config.js` with the App ID and App Secret that you obtained earlier as follows:
+
+ ```
+ module.exports = {
+     'secretKey': '12345-67890-09876-54321',
+     'mongoUrl': 'mongodb://localhost:27017/conFusion',
+     'facebook': {
+         clientId: 'Your Client App ID',
+         clientSecret: 'Your Client App Secret'
+     }
+ }
+ ```
+ 
+ - Open `user.js` from the models folder and update the User schema as follows:
+
+ ```
+ var User = new Schema({
+   . . .
+
+     facebookId: String,
+
+   . . .
+ });
+ ```
+ 
+ - Open `authenticate.js` and add in the following line to add Facebook strategy:
+
+ ```
+ . . .
+
+ var FacebookTokenStrategy = require('passport-facebook-token');
+
+ . . .
+
+ exports.facebookPassport = passport.use(new FacebookTokenStrategy({
+         clientID: config.facebook.clientId,
+         clientSecret: config.facebook.clientSecret
+     }, (accessToken, refreshToken, profile, done) => {
+         User.findOne({facebookId: profile.id}, (err, user) => {
+             if (err) {
+                 return done(err, false);
+             }
+             if (!err && user !== null) {
+                 return done(null, user);
+             }
+             else {
+                 user = new User({ username: profile.displayName });
+                 user.facebookId = profile.id;
+                 user.firstname = profile.name.givenName;
+                 user.lastname = profile.name.familyName;
+                 user.save((err, user) => {
+                     if (err)
+                         return done(err, false);
+                     else
+                         return done(null, user);
+                 })
+             }
+         });
+     }
+ ));
+ ```
+ 
+ - Open `users.js` and add the following code to it:
+
+ ```
+ . . .
+
+ router.get('/facebook/token', passport.authenticate('facebook-token'), (req, res) => {
+   if (req.user) {
+     var token = authenticate.getToken({_id: req.user._id});
+     res.statusCode = 200;
+     res.setHeader('Content-Type', 'application/json');
+     res.json({success: true, token: token, status: 'You are successfully logged in!'});
+   }
+ });
+
+ . . .
+ ```
+ - Start your server and test your application. 
+ - In a browser, open https://localhost:3443/index.html to open the index.html file. Then click on the Facebook Login button to log into Facebook. At the end of the login process, open your browser's JavaScript console and then obtain the Access Token from there.
+ - Then you can use the access token to contact the server at https://localhost:3443/users/facebook/token and pass in the token using the Authorization header with the value as Bearer <Access Token> to obtain the JWT token from the server.
 
  ### Additional Resources
 
