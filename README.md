@@ -6025,7 +6025,7 @@ router.post('/signup', (req, res, next) => {
  
  ### 7. OAuth and User Authentication
  - OAuth 1	and	OAuth 2: Authorization	framework	based	on	open	standards	for	Internet	users	to	log	into	third	party	websites/apps	using	their	Social	Network	accounts.
- - 
+ - Access	token:	allows	access	to	user	data	by	the	client	application.
 
  ### 8. Exercise : Using OAuth with Passport and Facebook
 
