@@ -6113,6 +6113,7 @@ router.post('/signup', (req, res, next) => {
  - Then you can use the access token to contact the server at https://localhost:3443/users/facebook/token and pass in the token using the Authorization header with the value as Bearer <Access Token> to obtain the JWT token from the server.
 
  ### Additional Resources
+ - [Social Authentication with Passport.js](https://mherman.org/blog/social-authentication-with-passport-dot-js/)
 
   
  </details>
@@ -6120,7 +6121,7 @@ router.post('/signup', (req, res, next) => {
  <details>
  <summary>Assignment 4</summary>
  
- ### here
+ In this assignment, you will be extending the router to support the ability to save and retrieve a list of favorite dishes by each of the registered users. All registered users in the system should have the ability to save any dish as their favorite dish, retrieve all their favorite dishes and remove one or all their favorite dishes.
   
  </details>
  
