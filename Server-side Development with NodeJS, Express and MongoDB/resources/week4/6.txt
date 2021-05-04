@@ -1,0 +1,170 @@
+[MUSIC] Having understood some details
+about cors in the previous lecture, in this exercise we will use the cors Node
+Module and configure our express server. To enable the server to respond
+with the appropriate cors related headers to the request coming
+in from the client's site. To get started as you would expect, we
+will first install the cors Node Module. So at the prompt, type npm install. Make sure that you are in the conFusion
+server folder, and then cors -- save. And then install the cors Module. And as you can see,
+in this course I am using cors@2.8.4. Once you have installed the cors Module, let's go to our editor and
+then configure our express server. Going to our editor. Now in the routes folder, now that is
+where I would be primarily applying the cors Module because that is where all
+the various routes are being serviced. So in the routes folder,
+I will add in a new file named cors.js. And then in this file,
+we will configure the cors Module. Now this is my way of putting
+all the information related to cors in one separate file
+based node module here. So at the prompt, let me try const express = require('express'). And let's get, The cors module in. Const app = express(); and then let's say a whitelist
+of an array of strings. The whitelist contains all the origins that this server is willing to accept. Now I am going to include
+a couple of them here, localhost:3000 and then, Local host 3443. And if you need more origins to be added
+to your whitelist, you can simply add them to your whitelist because I am explicitly
+trying to configure my cors Module. So here, I will declare a A function here, With the request and
+call back being defined here. And inside this I'm going to
+figure that cors options here. So I will start out by saying corsOptions, var corsOptions; and then I'll say
+if(whitelist.indexOf(req.header('Origin'- ))). So you can see that here we
+are specifying in the code here, we are saying req.header. So if the incoming request
+header contains an origin feed, then we are going to check this whitelist. Looking for that particular origin,
+is it present in this whitelist? So that's why we are saying
+whitelist.indexOf. So this is an array
+operation being done here. And we will say in origin
+is not equal to -1. As you know the index of operation
+will return the index greater than or equal to zero if this is
+present in this array. It'll return -1 if this is
+not present in this array. So a very quick way of checking
+to see if the incoming requests origin in the whitelist. In that case, we will say corsOptions, corsOptions. CorsOptions = and this is where I will specify { origin: true} So by saying { origin: true},
+meaning that the original origin in the incoming
+request is in the whitelist. So I will allow it to be accepted. So when I set origin is equal to
+true here, then my cors Module will reply back saying access control allow
+origin, and then include that origin into the headers with the access
+control allow origin key there. So that way my client side will
+be informed saying it's okay for the server to accept this request for
+this particular origin. Otherwise, so if that is not the case, so if the req.header's(' Origin') is not in the whitelist,
+then you will see corsOptions. { origin: false}. So when you set origin to false,
+then the access controller allowOrigin will not be
+returned by my server site. And then once we have done that, then we'll say callback(null,
+corsOptions);. That's it.
+So by calling this function here, corsOptionsDelegate here,
+we will check to see if the incoming request belongs to one of
+the whitelisted origins. If it is,
+then you reply back with access control allowOrigin with the origin
+of the request set in there. Otherwise it'll not include that access
+control allowOrigin when it replies. Now, from this function,
+we will export cors as cors here. Now, if you configure the cors
+Module by simply saying cors without any options,
+then that means this will reply back with access control allowOrigin
+with the wild cards toll. There are certain rules on
+which this is acceptable to do, especially whenever we
+perform get operations. It's okay to accept that. Otherwise, we'll say,
+corsWithOptions = cors, and then we'll supply
+the )corsOptionsDelegate) function that we have
+just defined earlier. So that way, if you need to apply A cors with specific options to a particular
+route, we will use this function. Otherwise, we'll simply
+use the standard cors. Now that we have defined
+the cors-related code in cors.js, let's start applying this
+to the various routes. So we will start with the dishRouter. So let's open the dishRouter, and in the dishRouter, we will first [NOISE] import [NOISE] ./cors. Note that the cors.js file
+is in the same folder, so we can just import that
+by saying ./cors.js. File-based node module. Now, for the GET request,
+once we have imported that. Now, for the dishRouter,
+I am going to set up the options field. So as you saw, whenever you need
+to preflight your requests, the client will first send the HTTP
+OPTIONS request message and then obtain the reply from the server side before
+it actually sends the actual request. So, for options, if the options message
+is received on this particular route, then we will respond as
+cors.corsWithOptions, and, With the callback function here,
+which says, res.sendStatus, 200. We don't need to send anything more
+than just the status from here. And so,
+when an options message is received, when this will respond, we will see what
+results when we send an option request from the client side to the server
+side in a short flight. Now, this options,
+I'm going to apply to every route. So, for the dishId, for the dishId/comments, and also for the dishId/comments start, /:commentId. So, all the cases,
+I'm going to apply the same options there. Now, going back up, for the GET, I'm going to simply apply cors. So, for the GET request,
+I'll say, Cors.cors, so notice that this is the first
+middleware that we'll apply, and after that it will pass
+on to this message here. So the cors middleware
+is introduced there. For the POST,
+they will apply cors.corsWithOptions. Same thing for that, PUT, DELETE. Same thing for
+the remaining POST, PUT, and DELETE on all the other routes here. For the GET, we'll just only use the cors, so let me just apply
+the corsWithOptions to POST, PUT, and DELETE in all the routes here, so POST, PUT, and DELETE. Now, for the GET operation as we saw for the version of dishRouter
+I just applied cors.cors, so I'm going to copy that and
+then apply it to all the GETs. So, for this GET,
+then scrolling down for this GET, and then also for the last,
+also I'll apply the same option. So my dishRouter is now updated. Now, I'm going to do the same
+thing with the promoRouter, the leaderRouter, the uploadRouter,
+and also the users.js. So, let's open the leaderRouter next. In the leaderRouter,
+the first thing of course is to include the cors file-based node module,
+so let me copy that and
+then paste it into the leaderRouter. Then the options, I'm going to apply
+the same thing to the leaderRouter also. So for the leaderRouter,
+I will apply the corsWithOptions, and then same thing with
+the leaderRouter or leaderId. You have only two routes here, so
+I will apply the options for both. For the GET operations, I need to apply the cors.cors, so
+copying this from the dishRouter. This GET, I will apply the same thing, and then also this GET,
+I'll apply the same thing. Now, for the POST, PUT, and DELETE, as you
+saw, we'll apply cors.corsWithOptions, For the POST, then PUT, and DELETE. And same thing for the POST, PUT, and DELETE of the leaderId also. So now my leaderRouter is updated,
+let's go to promoRouter. And in the promoRouter also,
+let's start at the bottom here for the DELETE, corsWithOptions, PUT, POST. Then to this DELETE, PUT, POST. And for the GET, of course, the cors.cors follow this GET and
+the other GET down below here. And then, let's import that cors, so copying this from my leaderRouter. Then we import cors here,
+and then the options. So, I'm going to copy
+the options from here and then going into the promoRouter,
+I will apply the options here. And also to the other promoRouter,
+same options. Now, uploadRouter. So go into the uploadRouter, again, import, Cors, Then after that, for
+the uploadRouter.route, let me apply the options there. And for the GET, we'll say cors.cors. The POST would be cors.corsWithOptions. Same for the, PUT. And delete, so
+my upload router is updated. The last one is users. So, in the users, let me, Import cars, And then, in this case because we're doing
+router.get, router.post, and so on. So for each of them,
+I'm going to go in and explicitly apply, cars.carsWithOptions, even for
+the GET here. Because the GET is performed
+by the admin here, no other user may be
+allowed to perform that. But the signup, also carsWithOptions for the login also I'll apply, That's it. Let's save all the changes so we have updates all
+the various routes to use cars. Let's now get go and start our server and
+then see how this cars helps us. Going to the terminal, let me start the server site here. And when the server is started, let's go to our Postman and
+then send a GET request. So when you send a GET request
+to a localhost:3000dishes, you will immediately get
+a response from the server side. Of course right now my database is
+empty so I get a empty array here, but let's in particular look at
+the headers because that is where the point of interest for
+us is in this exercise. So in here, you can see that
+we have an additional header here called Access-Control-Allow-Origin. So the Access-Control-Allow-Origin
+as you see provides the wild car, which is the star here. So meaning that, any origin to
+access this particular resource, so the server says that okay, any origin
+will be allowed to access this resource. For the GET request we
+are happy with that. Let us now log ourselves into the system,
+and then once we obtain the token,
+let me copy the token here. And then we'll perform a delete
+operation on our server site. So we'll delete the dishes here, so let me include the,
+Token into the authorization header here. And also notice that for the delete
+operation I am setting the origin. So another field here called origin
+to httpslocalhost:3343 here. So indicating that this
+delete operation is actually trying to delete at this
+particular origin here. And so when we perform this operation so,
+if you are doing this from a browser, the origin will be automatically
+set by the browser based upon the web page from which
+the request is originating. But here, since we are using Postman,
+I have to explicitly set the origin here. So let me send in the request
+with this origin field set here. And then you would notice that
+the header field now contains Access-Control-Allow-Origin with
+the localhost:3443 specified here. And as you'll notice that this
+origin is in the white list. So that's why this
+Access-Control-Allow-Origin is set to the same origin that we specified there. If you specify a different origin for
+example, if you specify,
+Say localhost:2000 for example. You will notice that this will not have,
+in the reply coming from the server, this will not have
+the Access-Control-Allow-Origin set here. Because, this particular address is not
+in the whitelist on the server site. Let's now look at an example
+of preflighting a request. So to do that, in the Postman,
+select Options here, and then let's send a preflighting request to localhost:3443dishes. And in the header we will, Put the origin as https:localhost3443. And then this send this
+request to the server. And in reply to this options request
+that you sent to the server, you'll notice that in the reply
+message we'll say 204 No Content. There is no content to be returned here. But, when you look at the headers of the
+reply message that comes in, notice that we have the Access-Control-Allow-Origin
+to be set to that value. Also note that it sets
+the Access-Control-Allow methods. And here it specifies those
+methods that the server will be willing to accept at this end point. So thereby you are informing
+the client saying that, all these methods are acceptable for
+the server at the corresponding end point. So, this is how we can do
+preflighting of a request. By sending the options
+request message first, and then getting back the information
+from the server here. And as you recall,
+this is what we configured in the options part of each of the router end points. So this is how we can configure
+our cars node module and then configure our server to respond
+with various header messages. With this we complete this exercise. In this exercise we have seen how we can
+configure our server to be able to send back various course related
+headers in the reply message using the course node module. With this, we complete this exercise. This is a good time for you to do
+a GIT comment with the message course. [MUSIC]

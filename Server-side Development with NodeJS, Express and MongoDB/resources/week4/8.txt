@@ -1,0 +1,328 @@
+[MUSIC] Now that we have understood about OAuth
+2 and how Facebook supports OAuth 2, let's move onto this exercise where
+we will configure our express server application to make use of Facebook as
+the OAuth 2 provider for our server. And at the same time for
+our client application. In this exercise we're going to
+be relying on the passport that we have already configured
+in our express application. We will configure a new strategy for
+authenticating with Facebook using that passport
+Facebook token node module. To get started on this exercise, go to https//developers.facebook.com/apps. Now, this is where you will register
+the client application, which is basically your server, the extra server, acting
+as the client application for Facebook. And then we will register
+a client application there. And then get hold of an app ID and
+an app secret from Facebook. Now obviously it goes without saying
+that you need to have a Facebook account in order to be able to configure this. If you don't have a Facebook account and
+you do not wish to do this exercise, then there is no harm in
+not doing this exercise. But of course for
+doing this OAuth 2 exercise, you need a Facebook account to configure
+your OAuth provider on Facebook. So going to this site, developers.Facebook.com/apps, you
+will notice that you will need to login in order to continue if you
+are not logged in from your browser. Now you can see that I have already
+configured a few apps here and tested them out. Now, to create a new app
+click on the Add New App. And then you can provide the name for
+your app. So I can say Confusion3, and
+then we can provide the contact email. And then follow the procedure
+to create your new app here. And once the app is created,
+you will immediately notice that there is an app ID that has
+been created for your app. And then for this particular app. So if you're going to the dashboard,
+you will see two pieces of information that you really
+require in order to proceed further. One is the App ID, so make sure
+that you make a copy of the App ID. And the second one is the app secret. So, you can type on the show button
+here and then you'll get the app secret. Secret here so as you can see these
+two are nothing but ASCII strings. So make a copy of this because you need
+to configure your expert server and also your client application with
+these two pieces of information. And once you get hold of that then we can proceed ahead with
+the rest of the exercise. You'll need to go to your
+dashboard of your application. And in the settings, as you can see,
+in the basic settings here you just add a website platform here. And then supply the URL
+as https//localhost3443. And save the changes here
+to your application here. After adding in the website here
+go to the advanced settings. And then click on Yes to say native or desktop app here and say yes to that and
+then save the changes. And in the basic setting
+in the app domains, type in https://localhost:3443 and
+save the changes. Next, go to the exercise instructions for
+this exercise. And you would see that there
+is an index.html file that I have provided in the exercise resources. Download this index.html file, and
+then move it into your public folder. So let's download this index.html file. Next, going to the conFusionServer
+folder in the public folder, you see that I already
+have an index.html file. I'm going to replace this with
+the downloaded index.html file that I just obtained. I have saved this on my desktop. So I'm just going to
+pull this index.html and then replace the index.html file in
+the public folder of my conFusionServer. Next, going to the editor,
+let's open the index.html file. And if you open it you will see that I
+have already configured some JavaScript code here. This JavaScript code I got hold
+of from Facebook where they specify how you can configure
+a Dev application using this. So, I have copied this from
+the Facebook instructions. In particular you will notice
+that in this index.html file, there is this appId field here. You're going to be replacing
+this appId field with the client Id that you obtained by
+registering your app on Facebook. So, here, I am replacing this client's Id with the Id of my app that I have
+registered on Facebook here. And you need to do
+the same step with the app that you register on Facebook, with
+the app ID that you get from Facebook. And then save the changes to index.html. This index.html page that
+I have here will create a login button on the index.html page,
+which when clicked will Help us to login to Facebook and
+then obtain an access token from Facebook. Next, going to the conFusionServer folder, we will install the passport
+Facebook token node module. So at the prompt type npm install Passport-facebook-token and install this node module. And as you can see I am using
+the 3.3.0 version in this course. Going back to the editor, open config.js. And in config.js I'm going to add in a Property called 'facebook'
+into my config.js file. And inside here, I will configure my clientId and the clientSecret. Now, the clientId will be exactly
+what you obtain from Facebook. Here, and the client's secret as you saw
+when you registered your application. You get a second string there so
+copy that string and then paste it into the ClientSecret here. Now make sure that this is
+pasted as a string here. Similarly, pasting in the ClientSecret
+into my config.js file. So, configuring this here will help me to
+use these two where I need in my code. Next, as we realized, whenever the user logs in and then obtains the access token
+and passes it on to our express server. The express server is going to
+use that access token and go and fetch the file information from
+the Facebook 0 ought server. And then, once it attains the profile
+information, then our express server will create a new user account
+into our application. And use the Facebook ID as
+the index into this use account. So to accommodate this, we will go into the user.js file
+where we have define our model. So in addition to the first name and
+the last name, I will also add in a field
+here called facebookId, which is of the type String here. The facebookId will
+store the facebookId of the user that has passed
+in the access token. In the next step I will show
+you how to configure this. Then we configure our Facebook strategy
+using the passport Facebook token.. When a user passes in the access token, then you're going to be fetching the
+profile and then setting up an account for that user in our local server here,
+in our express server here. We will be initializing the first name and
+the last name and the facebookId. But of course this particular
+account will not have a password or rather the hash installed
+associated with this. Because, if a user makes login using this
+account then they will have to use their Facebook login part in order
+to login to our application. Next we will go to
+authenticate dark.js file. So this where we have been setting
+up all our different passport authentication strategies. So here in addition to
+the jwt strategy and the local strategy that
+I have configured here, let me create
+a FacebookTokenStrategy here. And then set the require
+password-facebook-token. And this will give us
+a new strategy that we can configure in our passport module here. So, going down into the code here,
+right there, at the end of this file, I will create, facebookPassport as passsport.use(). And so this is where I would specify
+new FacebookTokenStrategy here. And then we will specify
+the details of this FacebookTokenStrategy, right
+at this point here. So, in this FacebookTokenStrategy,
+how do we approach this problem? Let me just wrap around the word wrap so
+that you can see the complete code. So for the FacebookTokenStrategy,
+we will start up by saying first. The first part of the
+FacebookTokenStrategy takes the clientId. Which we have config at
+config.facebook.clientId here, and client, Secret, which also we have configured in,
+Our config file here. So we're going to be supplying this as
+the first parameter to this strategy here. And then the second parameter,
+is where the defying the callback function that
+comes in at this point. So the callback function
+here gets three values. So it gets accessToken, refreshToken, profile, and callback called as done here. So these are the four parameters that come
+into the callback function that we will configure at this point. So let me indent that code in so
+that it's a bit more clearer to see. And inside this callback
+function that I configure here, I'm going to first say User.findOne. So we'll try to see if this
+particular Facebook user has logged in earlier so
+the account would already be configured, With the facebookId. Now where do we obtain the facebookId? Notice that we're getting that profile for
+the user, coming in here, so you can see that this
+profile is coming in as a parameter. This profile will carry a lot of
+information coming from Facebook that we can use within our application. The accessToken, of course,
+is supplied to the server by the user. So, once we try and find at least
+one user with a Facebook profile id. So if this user exists then we have
+already found that the user has previously logged into our account
+using the Facebook approach. So, in this case we can proceed forward
+otherwise we will create a new user. So, the callback function here
+there will have two parameters, the err and the user here. And this callback function as we will see, well inside here we will
+check to see if (err). So if this causes an error, then of course what we need to do is return done(err,
+false). So this done as you can see is
+the callback function that is coming in as the parameter to this function here, so we'll call the done with the err and
+false. If it is not an error then we'll say if (!err && user !== null). So if the user is not null, so that means
+that we have found a user in the system that has not been earlier with that
+particular facebookId, So for the user, all that we need to do is
+return done(null, ) since there is no error here, and then we'll
+return the user value for this down here. So which means that if the user has
+already logged in earlier using the Facebook approach, then the user
+would have already been created. And so, that user will be found and
+then we just pass back that user. If not, see the if not part is the more
+interesting part of this exercise. If the user doesn't exist,
+then we need to create a new user. Now to create the new user,
+we will say user, = new User, and when we create a new user, recall that we need to
+pass in the username. The username would be obtained from
+the profile, and the Facebook profile that has returned will have a field
+called as a displayName. And so that is the field that I'm going
+to use to create a new user here. So we will create a new
+user with the username set equal to the displayName, and
+after the user is created, then we will say user.facebookId,
+= profile.id. So we're going to be saving
+the Facebook ID of the user. So return in this profile object here, and then put the user's
+Facebook ID to the profile ID. So that subsequently,
+if the same user logs in, this search will be able to
+find this user in our database. And then we will say user.firstname = profile.name.givenName So the profile has this name object on it, which has a given name and
+a family name associated with this. This is returned from
+the user's Facebook profile. And also the user.lastname we will set it to profile.name.familyName. And then, once we have set up all
+of these we will say user.save. So we're saving the changes
+to the user and then this will return err and the user. So, it will return an error if
+the user could not be created, otherwise it will return
+the created user here. So in this case we'll say, if (err), then will return done (err, false) because we didn't
+manage to create the user. else, the user was successfully created, so we'll return done(null, user). So no matter what the case is, if the user exists then you will
+find that user and return the value. If the user doesn't exist you're going to
+be creating a new user based upon the user's Facebook
+profile that we obtained. And then add in the new user into
+our server site, into the database. So this is the strategy
+that we configure for our passport,
+the new FacebookTokenStrategy. So this will enable us to find the user. So now that we have configured
+our application to either create a user or
+find the user based on the Facebook ID. The last step is of course to introduce a new route into the users.js file. So in the users.js file you'll recall
+that we had the sign up route which allows the user to sign up for local
+account with the user name and password. And then you have the login which allows
+the user to log in using the username and password. But now, we're going to be using
+Facebook for logging in the user. So in this case we will say, router.get, and the endpoint will be /facebook/token. So if the user sends a get
+request to users/facebook/token, then we're going to be
+authenticating the user using the Facebook OAuth 2 based authentication. So here,
+we will say passport.authenticate, and we're going to be authenticating
+using the facebook-token strategy. Recall that we had already configured
+this in our authenticate.js file, so we'll configure the passport
+authenticate facebook-token strategy and then that callback function
+which gets req, res here. So let me, Toggle the word wrap here, so you can see that this is
+the router.get on this endpoint here. And then in here,
+I will configure this application. So, at this point, we would say, if
+(req.user), now notice that when we call passport.authenticate with
+the facebook-token strategy. This, if it is successful, it would have loaded in the user
+into the request object. So by the time we come to this point
+here after the passport.authenticate facebook-token middle ware is executed, you would have the user already
+loaded into the request object. So if this is the case, Then,
+we'll say, we'll create a token. We will create a JSON web token here,
+just like the way we created the JSON web token
+when the user logged in here. So, we're going to be copying that here. Authenticate.getToken, so
+this will get us the JSON web token. So essentially, the user is sending
+the access token to the express server, the express server uses
+the accessToken to go to Facebook and then fetch the profile of the user. And if the user doesn't exist, we'll
+create a new user with that Facebook ID. And then after that,
+then our express server will generate a JSON web token and then return
+the JSON web token to our client. All subsequent accesses from our
+user will have to include this JSON web token that we have just
+returned by using this approach. So at this point you no longer need
+the Facebook access token anymore. You can discard the Facebook
+access token at this point because the JSON web token is the one that keeps
+the users authentication active for whatever duration that this
+JSON web token is active. Now in addition to this, of course
+we also need to do these steps here. So I'm just going to copy that part here. because I'm going to do exactly
+the same thing in this case also, so we will paste in that code here. So we'll say statusCode = 200,
+content header type, and then we'll say res.json you're
+successfully logged in, and that's it. So with this approach, as you can see,
+now using a call to this endpoint. The user application,
+the client in this case, will pass in the Facebook access token
+that it has just obtained from Facebook. And then our express server will then
+use the Facebook access token to verify the user on Facebook. And then if the user is acknowledged
+by Facebook to be a legitimate user, then our express server will return
+a JSON wed token to our client. And then our client is authenticated and then can proceed forward with
+carrying out the other operations using the JSON wed token in the header
+of all the request messages. Subsequently, just like we did with the
+local authentication strategy, that's it. So we have completed all the updates to
+our application, let's save the changes. Going to our terminal,
+let's start up the server here, so we'll say npm start, and
+the server is up and running. And I noticed that I had
+typed in P-A-S-S-S port, and so this caused an error here. So notice that how easy
+it is to make errors. So let me go and correct that and
+then come back and restart my server. So, when you encounter errors like these,
+don't panic. Look around to see where
+the problem is and very often, it will be a simple problem like
+this that will cause errors for you. Again, going back to the users.js and you see that in the authenticate.js file, I have configured this
+saying P-A-S-S-S port. So in the authenticate.js file,
+let me fix that to passsport and then save the changes and
+then restart my server. Now, restarting my server, So
+my server is now up and running. At this point, go to a browser. And in the browser,
+type https://localhost3443. If you happen to have this page cached
+here, you may wish to remove the cache. Or just type localhost:3343/index.html,
+and then you will immediately
+notice that in this index.html, you will see this button
+called Log In button. So we're going to click on this
+login button to login to Facebook. Let's log in and then you will
+come up with this message here. Which if you have already
+logged in to Facebook earlier, it'll ask for
+the permission to continue as the user. If not, then it'll ask you to
+log in to Facebook with and then allow you to continue. Since I had just logged in to
+Facebook a little bit earlier, so I can just click on Continue. Now, open the developers JavaScript
+console at the bottom here. And in the JavaScript console, you see
+a bunch of messages printed in here. And then in particular, open this object that you will
+see in the JavaScript console. And inside this object,
+you will see this alt response here. And in there,
+you will see an access tool present there. Now, this is a reply that is
+obtained from Facebook or out to authentication server
+by our application here. And I'm going to simply copy this, because this is the access token
+that Facebook has supplied to us. Now, I need to give this access token
+to my express server in order for it to go and verify my profile, and then
+allow me to log in to that application. So I am doing this in a clenched way here simply because I wanted to show
+you how the access token comes in here. And we copy the access token,
+then I'm going to take this and use Postman to send this access
+token to my Express server. Now, when you design a web
+app like Angular, or the Ionic app, or the NativeScript app,
+you don't need to do all these steps. Now, basically when the access
+token is returned to your web app, the Angular app, or the Ionic app,
+or the NativeScript app, you'll simply capture this
+access token in there. And then you will pass this
+access token on to the Express server using the XMLHttpRequest
+to obtain the information. But since I wanted to manually
+illustrate the steps. So, I set up this index.html
+with a simple JavaScript code that Facebook provides for me. So that I will be able to retrieve this
+authorization token that we obtained from Facebook. So let me copy this authorization token. Now, we will go to Postman,
+and then try and see how we can obtain the JSON web
+token from our Express server. Now, going to Postman, from Postman, let me now do a GET request to localhost:3443User'sFacebooktoken. And when I send this
+request to that point, the other configuration that
+I need to do here is that, I need to pass in this access
+token that I have just obtained. Now, to pass an access
+token in the header, I can pass it in as an authorization
+header by typing authorization. But note that the value should be typed
+as Beta with a capital B in this case, and then paste that access token that
+we obtained from Facebook in here. Note the capital B here, and then you can pass in this to our server. And then upon reply from our server, you would see that you would have obtained
+the JSON web token from our server site. So this is one way that you obtain
+the JSON web token by exchanging your access token from Facebook that you have
+just obtained with your Express server. And your Express server
+in turn will go and obtain your profile
+information from Facebook, and then create an account specifically for
+you, and then return you the JSON web token
+if everything is successful. Another way of passing in this
+information is in the header, you type access_token as the key. And in the value,
+you just type in the access token like this here, and then you can
+send the request And the same thing. It'll again return the JSON web token for
+you. And then you'd capture the JSON web token,
+and then carry on with the rest of the accesses to your express
+server using this JSON web token. A third approach is to include this into your URL itself as a query parameter. The third approach is to
+say token?access_token= and then paste the JSON web token
+into that query parameter. Don't use the quotes here,
+just the JSON web token itself. And then send the request to your server. And then even then your server will
+return the corresponding JSON web token. So you see three different ways that you
+can parse in your Facebook Access Token to your server, and then obtain
+the JSON web token from your server. And after this, the rest of these
+steps proceed just like before. Now to convince you that actually a new
+account has been created with the Facebook profile for this particular user,
+let's go to the terminal. In the terminal, in a new terminal window,
+I will start the mongo ripple here. So in the mongo ripple,
+let me say, use conFusion. And then I'll say,
+db.users.find().pretty(), and then print out all the users
+that are registered in my system. You notice that the three users that we
+had configured in the previous exercises are all there. Notice in addition a fourth user
+that has just been added in. And note that for this particular user,
+we don't have the hash in source yet, but instead the facebookId
+of that user is set up, and the username is set up to be that value,
+and the firstname is set up there. And also the last name should
+have been set up here but I think there's a small error in my code. So I will go and
+check the lastname part of it there. Going to authenticate.js. Let me see if I made mistake here. There we go. I typed in F-A-M-I-L-Y Name. So you see,
+even I am not about making mistakes. So this should be familyName here, user.lastname profile.name.familyName
+here. So let me save the changes, and
+now the code should work correctly. Again going back to the terminal, you now see that a new user has been
+created with the Facebook profile here. Now any subsequent time I tried to
+authenticate myself using Facebook is the same process. I obtained the access
+token from Facebook and then parse in the access
+token to my express server. My express server will then go to
+Facebook, fetch the profile and then check to see if
+the user already exists. And in the subsequent login
+that I do using Facebook, I would find that this particular user
+is already existing in the system. So, it'll simply proceed forward and
+the user will be authenticated and then the extra server will
+issue a JSON web token to their client and we can proceed forward from
+that point onwards just like before. So you see, setting up OAuth 2
+based authentication using a OAuth 2 service provider like Facebook is not
+that difficult provided we get hold of the appropriate passport Facebook
+authentication strategy based module. Like passport Facebook token which
+already takes care of much of the work on our behalf and then enables
+us to set up our express server to handle third party authentication
+based on OAuth 2 from Facebook. With this, we complete this exercise. In this exercise, we have learned
+how to do all OAuth 2 authentication using Facebook as the OAuth
+2 authentication provided. This is a good time for you to save
+the changes that you've made to your Git Repository with
+the message passport Facebook. [MUSIC]

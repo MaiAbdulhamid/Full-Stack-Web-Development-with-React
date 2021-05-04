@@ -1,0 +1,102 @@
+[MUSIC] In this exercise, we will look
+at the use of Express sessions. We'll set up the express-sessions
+middleware, and then the express-sessions
+file store middleware. And then set up our application to
+use express-sessions rather than using their assign cookies as
+we did in the previous exercise. We will also see how the session
+information itself tracked under server-side. To get started with this exercise, go to the conFusionServer
+folder in your terminal or command window, and
+then let's install express-session. So to do that,
+type npm install express-session, and then session file store. Because we'll be using the file store for
+persisting the session information. So will install the session-store
+in here module for the purpose. Once both of these are installed,
+and as you can see right now, I'm using express-session 1.15.6 and session-file-storage 1.2.0 in this course. Once both of them are installed, let's
+go to our conFusionServer application. Going to the conFusionServer application, up here,
+let's now import the express-session. So we'll say, var session require,
+express session. And var FileStore = require session -file-store. And this takes the session
+as its parameters, this session referring to this
+that we've just imported on here. Now once we do this,
+then we go down into our code here, and then we'll see instead
+of the cookieParser. So I'm going to comment out
+the cookieParser from there, and then I will now use, Session here. And then, we'll set up the session with the various options, we'll say name, I'm just using a random session-id here,
+and then, Secret. I will use the secret that I used earlier. So let me just copy that string there. And then, Save, On, Uninitialized save false. Resave, false. Theses won't make much different to the
+simple application that we are writing at this moment. And then we'll say store is new, FileStore that we declared earlier. That's it. Now my session middleware is all set
+up to make use of our application. Now, as I mentioned,
+this session middleware will add this req.session to the request message, so I'm going to do a console log of
+req.session just to see what it contains. And then, down below here, instead of
+checking for req assign cookies user, I'm going to check for
+req.session.user here. And then, we'll look at
+the authorization header, and so on. All this part will remain
+exactly the same as before. But here, instead of setting up
+the cookie, what I will set up here is, instead of setting up the cookie, so
+instead of using res.cookie here, we'll say, req.session.user = to 'admin'. So we are going to be setting
+up the user property on the req-session to admin here, and
+then proceed forward from this point. So the rest of the code here will
+remain exactly the same as before, there won't be any change here. And accept right there,
+we're going to be checking req.session, user, is admin or not? So that is the check that
+we're going to be doing here. That's it. Those are the changes
+that we need to do to our application in order to use sessions
+in the place of signed cookies. Let's save the changes and then look
+at this version of our express server. Going back to our terminal or
+command window, let's restart our server, if you're server has been running,
+just stop it and restart the server. And then once the server is up and
+running, we'll go to postman and
+do if you requests. Going to postman,
+let me clear out all these things, we'll clear out the headers,
+we'll clear out the authorization. And then I will go to cookies, and I'm going to delete this user cookie,
+because that cookie is no longer valid. And then, let's send a get request to,
+The local host dishes. And then as we expect, it comes back
+saying, You are not authenticated. Now, so let's authenticate ourselves
+using basic authentication. So we'll say, admin, Password. And then we'll update the request and then we'll send a GET
+request to the same point. And then, we get the reply
+back from our server-side. Now, note that in the headers,
+now you'll see again it said cookie here. Now this has been caused
+by the session store here. And, when you look at the cookies, you see
+that there has been another cookie that is set up here and the name is session-id. So this is the name that we give for
+our session there, so that's the session-id
+that we are using here. And if you click on cookies, you will
+notice that session-id is right there. And then, this are the details of
+what is inside that cookie there. So you can notice a whole bunch of
+information and the expiry date for the cookie, and so on. This may not make much sense to you
+at this moment, but it exists there. Now, let me clear out the authorization. And also from the header,
+let me remove this authorization header. And then I will resend the request, and you will notice that this request
+will be correctly serviced even now. Because of the fact that
+this cookie exists, and this cookie will be included
+in the outgoing request. And the server-side will map
+this to the appropriate session. And so, the server realizes that
+this is an authorized user and will send back the reply. Now going to our server console in
+the terminal or the command window, you notice that the, Information
+being printed on the server-side. So see, you recall that I was
+logging the req.session here. So this is where the req.session
+contains initially. And then it says,
+GET dishes for one not valid. At this point, you are sending in the
+appropriate authorization header there. And so your request success properly. But the note, what is being put out
+in the session in the next request. Recall that I removed the authorizations
+header and then send the request. But note what the rec.session
+contains here. In particular note that, it now contains this user field
+with the admin in place there. So this is what the server receives
+from our client-side in the cookie. And the cookie itself contains
+all this information here. And so, the server is recognizing
+that this is a valid user, and then sends back the results
+from that server-side. Going to postman, let's again take a look at the details
+of what is inside the cookie. So when you open the cookie here, you again see all the details of
+the information inside the cookie here. If you look at your editor,
+you now see that in your editor, there is a new folder here called
+sessions that has been created here. Now this is because we
+were using file store to keep track of all of our sessions. Now that's one of the reasons why I use
+the file store so that I can show you what is stored in a session
+file on my server-side. So if you open this file here
+with the long name there, you would see inside there,
+the session information being stored here. So if you browse this session information,
+note in particular, this initial field that
+is in the server-side. So this is where your server is tracking
+all this information on the server-side. Now this cookie itself is
+recognized by the server, since the client includes this
+cookie in the incoming request. Now it is able to go into the sessions
+store and then retrieve the information, and then load up this
+onto the req.sessions. And hence, the req.session contains
+this particular information in there which my server is using to
+cross-check to make sure that my client is an authorized client. That is it about sessions. With this, we complete this exercise. In this exercise, we have seen how we can set up our
+express application to use sessions. And we also saw how we are using the file
+store to keep track of our sessions. This is a good time for
+you to do a GET comment with the message express sessions part one. [MUSIC]

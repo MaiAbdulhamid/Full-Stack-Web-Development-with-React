@@ -1,0 +1,239 @@
+[MUSIC] In this exercise, we will explore
+some of the code Node modules. In particular, we will look at the HTTP
+module that is built into Node and use the HTTP module to configure and
+start up a simple web server. We will also look at how we can serve up
+static files from our Node HTTP server. We will also look at that file system
+module and the path module and how they can help us to serve static
+files in our Node-based HTTP server. So let's explore some of the code
+Node modules in this exercise. To get started with this exercise, go to
+a convenient location on your computer. So we will go to the NodeJS folder
+that we have already created in one of the previous exercises. And in the NodeJS folder, I'm going to
+create a new folder named node-http. And then,
+we will set this up as a Node application. Also, moving into the node-http folder, let's create a sub folder there
+named public which will continue some of the html files that we will
+server from our Node HTTP application. Now moving to a terminal,
+navigate to the node, -http folder. And let's initialize this folder
+to be in our application. So we'll start with npm init and initialize that package
+to our JSON file here. And then we'll give the package
+name as node-http and accept the standard version, and the description is
+Node HTTP Module Example. And the starting point is index.js,
+no test command, no git repository for
+the moment, and author, type in your name, and
+accept the rest as is. And that should create the package for
+a JSON manifest file. Now let's open this project
+in our favorite editor. So let me start up my
+Visual Studio code at this folder. And in the Visual Studio code,
+let's go to the package to our JSON file. And then we will add in
+another script to the package, to our JSON file called start and which would execute node index. And remember to put a comma
+after the test hitch. And save the changes to
+the package.json file. Now in where Project, create a new file called index.js. We're going to configure this
+index.js to use the Node HTTP module. So in this file, let's type in const http = require ("http"). So you can see that we are using
+the HTTP code module, and we are requiring it by simply specifying
+the HTTP code module's name there. In addition, let's declare, A couple of constants here and then, We'll call hostname and the port number as 3000 by default. Now let's set up the server. To set up the server,
+we'll say const server = http. The HTTP module supports
+a method called createServer, so they going to use
+the createServer method on that. This createServer method will take
+a function as a parameter and this function takes two values as parameters,
+request and response. And as you can see,
+I am writing an arrow function here. So the request and response are the two
+parameters to the function that we supply as a parameter to
+the createServer method here. And inside this, we will say console.log (req.headers). So here, the req and res are the incoming
+HTTP request to the server. And they kind of spawning
+response object that is going to be constructed by this server and
+returned to the client that connects to this HTTP server
+that we are creating here. So the request is the incoming
+request from any browser or from anywhere that is trying to access
+this server that we're going to start up using this HTTP Node application
+that we are developing here. So from the request, the request object gives us access to
+the headers in the incoming HTTP request. So I'm going to log the incoming headers of the HTTP request
+coming in using this console.log. Just for my information, just to know
+where this request is coming from. Thereafter, we can construct
+the response by using the res and this will provide us
+a method called statusCode. The statusCode will enable us to set up
+the statusCode for the response message. So in this case,
+I will set up the statusCode as 200. If you recall from the earlier
+discussion on networking essentials, you will know that statusCode of
+200 means that everything is okay. And so, we set up the status code here for
+the response message and then we will also set up the header for
+the response message. And one of the header
+fears that we are going to set up is called Content-Type. And the Content-Type, we will specify this to be 'text/html'. So the response body will contain
+the data in the form of html here. So the header is setup to inform
+the client that you are sending in the response and
+the body is formatted in html format. And then finally,
+we will say res.end(' '). So this ends the response here,
+and when this is done, this information will be
+sent back to the client. So in here, let me just construct
+an in-line html page here, so I'll say <html><body><h1><Hello, World!</h1>. And close off the h1 tag, the body tag, and the html tag, right there. And that's a valid HTML response that can be sent back from our server here. So this server, as you expect to simply
+going send a hello world to the client. So now that we have set up the server,
+we need to start this server. To start this server in note, we need to say server.listen. And this will start the listening port
+on which the server will listen for incoming requests. And this would be started at
+the port number given my port, which we have set up already
+here in the const port. And the second parameter is the hostname
+which we already set up earlier. And the third parameter is
+a function that will be executed when the server starts up. In this function we just go to print
+out the information about the server. So in here I'm just going
+to say console.log. And in the console.log, I'm going to print out the information so
+I will use a back quote. So note the use of back
+quote not the normal quote. The reason why we are using that
+is because we're going to be using some variables inside the string
+that we are going to construct here. So we'll say server running at http://. And then we will say $ and then Host name. Recall that this host name,
+you have already declared earlier. And then the second part, we'll say :$ and port. So these two values will be substituted
+for the corresponding values. And since we are enclosing
+this in back quotes. And if you include something
+inside dollar raises, that will be replaced by its
+value in this string here. That's it. We have a simple HTTP server up and
+running. So let's save the changes to this. And we'll go and start up our
+application and see what it serves up. Going to the terminal,
+let's type npm start, and this should start up our application. And we notice that it prints
+our saying that server running at http://localhost:3000. Now you can access this URL by typing
+it into the address bar of any browser. So let me start of a Chrome browser
+window and then type this and see what the server will return. Starting a new window. Let me just type in http:// localhost:3000. And that should return
+a Hello World as we expect. Now when we go to the console you
+see that on the console there details of the incoming requests
+header is printed out here. Some things are very easy to locate here. So this is host, localhost:3000, and
+you also see that the "user-agent" is set to "Chrome" here,
+the Chrome version that I am using here. So that is an interesting illustration
+of the HTTP request message. And what is contained in the header of
+the request message that came in here. So interesting to observe
+what your sever is printing out onto the screen here. With this, we complete the first
+half of this exercise. Now we can initialize this
+application into a Git repository, and then save the changes
+to the Git repository. So let's go ahead and do that next. At the prompt type, get init, and
+that initialized the repository. And then we'll say git status and
+you see that these two files are new. So we'll say git add. And do git commit -m "Node HTTP Example 1". And then check this into
+our Git repository. Now yet another tool that is very useful when we are looking at server side
+applications is called Postman. Now Postman comes in the form of
+either a Chrome browser extension or a standalone tool that you can
+download and install on your computer. So to do that,
+in our browser let's type http. getpostman.com. And then this is where you
+can obtain the Postman tool for your specific OS and install it. The Postman tool allows you to create
+HTTP requests and then send them. And it also gives you the flexibility
+of setting up the headers for your HTTP request before you send it in. And then when the response comes back,
+you're able to examine the response including the headers of the response
+that comes back from the server side. So I find Postman to be very useful. There are a few other tools like this, but Postman seems to be the best
+in the market at the moment. So I'm going to make use of Postman
+through the rest of this course. If you don't want to install it, you can also install the Chrome browser
+extension of Postman and then use it. I'm going to download the MacOS
+version of Postman and then install it on my machine and
+then make use of it. Once you have the Postman,
+either the standalone version or the Chrome browser extension installed,
+you can start it up. And you will see that the user
+interface is more or less the same for both the standard version and
+also the Chrome browser extension. And once you have the Postman up and
+running, then type in in the Request URL box, localhost:3000. And send the request to yourself. Make sure that your Node HTTP
+server is up and running. So when you send the request, you would immediately get a response
+from the server with the HTML code here. Now the advantage, as you see, with using Postman is that you can
+see the actual body of the message. You can also look at the headers to see
+what has been sent back from the server. You can also setup a lot of details
+in Postman when you're sending. Request from the server. Now many of these may not be very easy
+to do using a standard browser window. So that's the reason why I
+prefer to use [INAUDIBLE] for generating the HTTP requests to my server. And then observing the response that
+comes back from the server side. Also notice that it shows the status code
+here and some other information about the request and
+the response time from the server side. Now that we have created its
+simple-node based HTTP server, let's extend it further, let's create
+a couple HTML files in the public folder. We'll call it this as index.html. And then also aboutus.html, and then just include some bare
+bones information in here. So we'll say html, and title as This is index.html. And then we'll type in
+body of the html page. Say h1 Index.html and the body and then this is the contents of this file. Some basic html code here,
+let me copy this and then paste also into
+the aboutus.html page. And contents of the aboutus.html file,
+that's it. We just created two HTML pages, and these are static HTML pages that we
+have created in the public folder. Now, can we set up our node HTTP server
+to be able to serve up static pages? So this is what we're going to configure
+in the second part of this exercise. So going back to index.js file, in addition to the HTTP code module, I'm going to also import
+the file system code module. And that path code module. The path allows you to specify the part
+of a file in your local file system. The file system module
+allows you to read and write files from your local file system. So with this, they will say
+constant server, http.createServer. For the console log, instead of
+typing in entire request headers, I will simply type in just
+sufficient information, so I will say, Request for, Just the URL of that request. By method. So the method would be either
+get port post or delete methods. So this will log this information. Now, what we're going to
+do is instead of sending this response,
+the standard hello world response. Here, we are going to
+examine the method and then we will say if
+req.method is equal to GET. So we will only service GET
+requests in this example. Otherwise, we will say
+that there is an if. So if there is a GET
+request that comes in, then we'll examine, The URL that comes in, so we'll say if req.url is /, we'll say fileUrl equal to html. So if you do not get
+a specific file name but you just send request to
+local host code 3000. It will default to the index.html, otherwise it'll say fileUrl
+is equal to req.url. So this way,
+you have constructed which file to server. Now, we'll say We'll find
+the path of the file, we'll say path, Resolve, so the path module supports this
+resolve method, so this will Translate this into the full
+fledged path folders file, the file that we have just constructed, the fileUrl that we have just constructed. So this will give us the full path for
+the file, and then we'll say constant fileExtension. So if you want to make sure that the file name extension is HTML. So from the filePath, we will examine the filename extension and then we'll say if fileExt ==. So if it is an HTML file, then we know
+how to serve it from this particular relation of the node HTTP server. So we'll say if file extension is HTML,
+then we know that the file is an HTML file and we have
+the two files, index and aboutus.html. So we will check to see
+if this file exists, so we'll say if file exists, filePath. So the exists method will check
+to see if the file exists, so we'll say fs.exists(filePath), and this one will take as a second parameter,
+a call back function. So notice the use of the first
+call back function in our example. So this callback function will be called
+with this parameter exists in there. So inside this callback parameter,
+this exists will be either true or false. So this is the return parameter for
+this callback function. So in here, We will check, and we'll say if(!exists), so which means that the file doesn't exist, then we will say res.statusCode = 404. Recall that if the file doesn't exist,
+you will send a status code of 404 saying, you cannot find the file. And then we'll say res.setHeader, and we'll set the header
+to 'Content-Type', 'text/html'. And then we need to send the,
+HTML file here, or the HTML code. So I will do the basic HTML code,
+html body h1. Error 404, we'll say, + fileUrl + ' not found'. And close off, The HTML page. So in here, as you notice,
+you're using the exists function of the file system module to
+check if the file exists. So you give the file path
+as the first parameter, and the second is the callback function. Inside this callback function, if it says
+the exists is false, then you're going to send back standard 404 error message,
+saying that you cannot find the file. And after we do this, we'll simply, return, otherwise, We'll say res.statusCode = 200, res.setHeader, ('Content-Type', 'text/html'). Now, we need to read in the file and
+then send the file out. So this is where,
+from the file system module, we will use the createReadStream, which will take the filePath
+as a parameter. So this createReadStream method will
+read in the file from this filePath. And then convert that
+into stream of bytes, and then they will pipe this
+through to the response. So that will be included into
+the response, in the body of the response. So that way we have
+just taken the file and then constructed it
+into the response here. And that's it,
+the file is ready to be sent out, okay? So this is if the file extension is html, we are checking to make sure
+that you handle this correctly. So this is where you will read in
+the file and then send it out. If the file extension is not html, then of
+course, we need to send an error message. So right there we will see,
+we will copy this particular, Code from here. And then paste it in there. We'll say, else statusCode = 404,
+Context text/html, and the error message says,
+Error 404, fileUrl. It's not found, but it is not an HTML file. So that is the error that we're
+going to send back in this case. And finally, for the last else case, so here we are saying the method. So this else corresponds
+to the request method. So if the request method is not GET,
+but some other request method, then we won't handle that in this
+version our Node application. So we'll send back statusCode 404, Content html, and we will say Error 404. And we'll say, req method, Not, Supported, not supported by this Node HTML
+server here, that's it. With these changes,
+we are now ready to restart our browser. And then let it serve
+up the HTML files here. So let's save the changes, And
+then go and restart our server, and then examine what it sends when we
+send various requests to server. Going to the terminal,
+if your server is running, stop it by typing Ctrl+C,
+and then restart the server. And when the server is up and running,
+let's send some requests to it. First, from a browser, and
+thereafter from Postman. Go into your browser window,
+let's type localhost:3000, and see that this returns
+the index.html file as we expect. And then we'll say
+localhost:3000/index.html, and this will also return
+the index.html file. Now if we send aboutus.html, it says
+Aboutus.html, and it returns it correctly. Let's now send a request for
+aboutus.txt, and see what it does. So it says /aboutus.txt
+is Is not an HTML file. Then let's send a request to test.html. And we know that test.html doesn't exist,
+so it says /test.html not found. So we see that by using the browser,
+we are able to fetch those files that exist, and the server is
+able to send up the files to the browser. Let's now go to Postman and
+try to generate the same requests, and see the response from the server. Next, going to Postman, let's send
+a GET request to localhost:3000/. And you see that this
+returns the index.html file. Let's send a request to aboutus.html. And then you see that it
+returns the aboutus.html file. And then we'll send
+a request to the text file, and then it says error 404,
+not an HTML file. And you will see that the status
+here says, 404 not found. And then we'll,
+instead of sending a GET request, see this is the advantage of using
+Postman, I'll send a PUT request. And you'll notice that this says,
+Error: PUT not supported, and so with the Status 404 here, and so on. So this is how you can
+configure a Node HTTP server to be able to serve up files,
+HTTP files in this particular case. Now you can easily imagine extending this HTTP server to handle many
+different kinds of files and so on. But of course, correspondingly, the code will also get more complicated
+than what we have at this moment. With this, we complete this exercise. In this exercise,
+we have seen how we can set up a simple Node-based HTTP server that serves
+up files from our server site. [MUSIC]

@@ -1,0 +1,188 @@
+[MUSIC] Let's talk in some CORS language now. Now what exactly is cross
+origin results sharing, and why is it relevant when we
+look at web applications and hyper-mobile applications as we have
+been doing in this specialization? As you understand,
+most webpages now pull in data from many different sites in order
+to construct a webpage. Now, in order to impose a strict policy of
+access to resources from different sites, the same origin policy has
+been imposed by many browsers. We'll talk a little bit about that in
+more detail in the next few slides, but in the context of the frameworks that we
+have been discussing in this particular specialization, like Angular,
+Ionic, and NativeScript, many of these will involve scripts,
+JavaScript code, that might have to access
+resources from different sites. And this is where the CORS
+problem crops up very easily. Let's see how we will address this issue
+in more detail in this lecture and the exercise that follows. I briefly alluded to the same-origin
+policy that I started this lecture. Now, the same-origin policy
+is a web app security model which restricts how a document or a script loaded from one origin will interact
+with resources from another origin. The purpose of this is to isolate
+potentially malicious documents. Now obviously, when you have
+a webpage that involves script, JavaScript code, that might access
+resources from another location, potentially malicious code could
+be injected into your webpage and whereby access a different origin than
+from where your webpage is obtained. Now, that is the reason many browsers
+impose this same-origin policy. Now, when we talk about same-origin,
+how do we specify an origin? Now in this context, an origin for
+any resource is defined by three tuples. First, the protocol that is
+used to access the resource. Secondly, the host name of the resource,
+or the domain of that resource. And thirdly, the port number at which
+that resource is being accessed. So this is how we identify
+the origin of any resource. Resource in this case could
+be a html page, an image, JSON data being obtained from
+a REST API endpoint, and many more. To further elaborate on the same-origin
+policy, let's look at an example. Suppose we have a webpage that is
+loaded in from this site listed here, www.abc.com, and in a folder xyz, and the page.html being loaded in here. This page may involve links or
+even JavaScript code that might issue XMLHttpRequest to other
+resources on the webpage. Now, in this case,
+if we try to access another URL, for example, the first one listed here,
+which obviously you see is from the same site but
+from a different folder. This is acceptable,
+because the origin, in this case, the protocol being used and
+the port number, remains the same. So, this is acceptable
+to access this resource. Similarly in the second case,
+we might have under several levels of subfolders
+a resource that is being accessed. But again, since their origin remains
+the same, which is acceptable. But let's look at the third example here. In this example, we see that we
+are trying to access a resource here with the https protocol, which obviously
+violates the same-origin principal because we are using a different protocol
+to access that resource at this point. So that would be considered
+a failure in this case. The fourth case is where we are accessing
+a resource with a different port number. And the fifth case is where we are
+accessing a resource at a different host. Now, all of these three would
+be marked as not valid or cannot be accessed under
+that same-origin policy. So if you impose the same-origin
+policy for access from, for example, your XMLHttpRequest, then the last three
+would not be allowed in this case. But of course, there are many
+situations where that site designer may actually host resources on different
+sites, maybe on different domains, and still be able to pull in the data
+in order to construct the webpage or to make the web application run or
+to make the hybrid mobile application run. So to accommodate these situations,
+the cross-origin request handling is a method that allows
+us to access these resources. So we consider a request
+to be a cross-origin request if you are trying to access
+a resource from a different domain, or at a different port number,
+or with a different protocol. So how do we accommodate situations where
+this is a legitimate access to a resource, but because of the same-origin policy, your browser will refuse
+to load this resource? Now this is where, as I mentioned, many browsers will restrict
+cross-origin http requests, especially those that
+are initiated by XMLHttpRequest or the Fetch protocol for fetching data. These are relevant when we access
+these from within our JavaScript code. So, in those circumstances, it makes
+sense to impose the same-origin policy, but then we should have a way of
+working around the situation where a legitimate request can be issued. This is where the CORS approach, the cross-origin resource sharing
+approach, comes to our aid. So this CORS is a mechanism that
+enables web servers to perform cross-domain requests, or
+cross-origin requests. So here the browser and the server from where you're trying to fix the
+resource will interact with each other and then come to an agreement saying that
+this access is acceptable and allowed. So once the agreement is reached, then this request can be
+allowed by your browser. So the browser and the server will
+interact with each other in order to determine if this access to this
+resource is an acceptable situation. So this is where a new set of
+HTTP headers were introduced into the HTTP reply messages
+coming from the server side. These headers allow the servers
+to describe the set of origins that are permitted by the server
+to be accessed by the browser. And in turn the browser realizes
+that these resource accesses are acceptable to be allowed,
+even though they are violating that same-origin policy that
+we have seen earlier. So in this case,
+we have headers like, for example, Access-Control-Allow-Origin,
+Access-Control-Allow-Credentials, Access-Control-Allow-Headers,
+Access-Control-Allow-Methods, and a few others that the server uses
+to inform the browser, saying that this is an acceptable way of accessing
+the resource from the browser side. And when the browser sees these incoming
+reply message from the server side, the browser accepts and allows this
+cross-origin request to be performed. Now, this also means that the server
+should be set up to be able to respond with these header fields and the header information included in the
+reply message coming from the server side. Now, this is where we divide all
+the cross-origin requests into several categories. We have the first one being
+the simple cross-site request. In simple cross-site requests,
+you might be using either the GET or the POST with the request body. But when you are using the POST,
+your request body should contain either application/x-www-URLencoded, or multipart/form-data, or text/plain. Then it is treated as a simple
+cross-site request and no custom headers will
+be allowed in this case. So in this case, it is acceptable for
+the server to inform the client, saying this is allowed and
+the browser should allow such requests. So, for example, for widely accessed
+resources, like, for example, if you perform a GET request to a server
+in order to fetch the data in order to construct the UI,
+then maybe the GET request is acceptable no matter which origin that
+request is originating from. So in that case,
+your server will reply to the client, saying Access-Conrol-Allow-Origin,
+with that wildcard star here, meaning that any origin that originates
+the request is acceptable, and the browser should allow the request
+to be performed to that server. And now, you can also restrict
+the access to the origin. In this case, you can specifically
+say that if the origin is a particular site, then it is
+acceptable to service this request. So the browser sees that sending requests with this particular origin site
+in the request is acceptable and we'll allow the cross-origin request. So you can control the way the origin is specified in the request message
+coming from the client side. So the server is able to
+accept such requests. Certain other requests would be under
+the category of preflighted requests. In the preflighted request,
+you expect that before the client sends the actual request,
+the client will send a preflight request, meaning that it contacts
+the server to obtain information from the server before
+the actual request is issued. This is specifically the case where
+you issue PUT and DELETE requests because PUT and DELETE requests might
+cause changes on the server side. And so any method that causes side effects
+on the server's data, like the PUT and the DELETE request, are specially mandated
+to follow the preflight approach. In the preflight approach,
+the idea is that the client will first send an HTTP OPTIONS
+request to the server side, and in reply to that OPTIONS request message
+from the client side, the server will respond with the corresponding
+Access-Control-Allow-Headers, Access-Control-Allow-Origin, and
+Access-Control-Allow-Credentials header information in the reply
+to an OPTIONS message. Thereafter, the client will decide whether
+it can issue the cross-origin request or not based upon the response to the OPTIONS
+preflight request that the client sent. So this is where you have to go
+through two steps before your request can be allowed and
+serviced by the server side. A third category of CORS requests would
+be what are called credentialed requests, where you expect the client to
+include credentials in the header of the request message. So the requests that are accompanied
+by cookies, for example, for recognizing the session on the server
+side, or some kind of HTTP Authentication information in the authorization
+header in the request message. So in this case,
+the server needs to respond with Access-Control-Allow-Credentials: true
+to the client side. So in this case,
+the server will respond with this and then the client will be
+allowed to send their credentials information in the incoming
+request from the client side. Now, in this case, the
+Access-Control-Allow-Origin is not allowed to have the wild card,
+the star, in the reply message. It is expected to explicitly
+specify the origin to which the request can be initiated. Now, obviously,
+we can implement much of the work, what we need to do on the server side, by
+implementing our own middleware if we so choose to to handle the CORS-related
+replies from the server side. It's very straightforward, as we have seen
+in the code that we have implemented. Of course, that is one way of handling
+CORS-related replies from the server side, but fortunately,
+we have a specific CORS NodeModule that is designed to
+handle this very kind of work that the server needs to do
+to meet the CORS requirements. So the CORS NodeModule allows us to
+configure the CORS on the server side, including specifying origin information
+where the credentials would be accepted and many other piece of information
+such that you can configure the server to be able to handle CORS-related
+replies that it needs to give to the browser in response
+to the request message. To install the CORS NodeModule,
+obviously you see npm install cors, and then configure the CORS middleware
+within your express application. The CORS module itself provides
+a very simple way of enabling CORS. You can simply include app use
+CORS with empty brackets, and that essentially means that you're opening
+up your server, and it'll reply with the Access-Control-Allow-Origin with the
+wild card star to every incoming request. But when you are configuring your server,
+you may want more control over that, so that is where we can specify
+additional options for the CORS. And not only that,
+you can impose CORS handling differently for
+different routes within your server side. So as we will see in the exercise,
+we will impose different CORS requirements on the different routes on our server
+side, and this is all configured by using various configuration options that
+the CORS NodeModule supports for us. So, using the CORS NodeModule, it is
+very easy to setup your server to handle any cross-origin requests coming
+in from your client side and then respond with appropriate header
+information to the client side with appropriate CORS headers in
+the reply message from the server side. With this quick understanding of CORS, I'm sure you have more questions at this
+point than answers from this lecture. But if you would like to read
+a lot more details about CORS, I have provided you additional
+resources in the end of this lesson, which enable you to read
+more about CORS itself. But from the perspective of this course,
+we would like to configure our express application that
+we have been developing so far to handle CORS-related
+matters on the server side. So moving on to the exercise,
+we will install the CORS npm module and then configure it on various
+routes within our extra server. [MUSIC]

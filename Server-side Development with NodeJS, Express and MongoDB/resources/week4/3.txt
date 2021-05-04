@@ -1,0 +1,125 @@
+[MUSIC] File uploads are a common feature
+supported by many servers. So, when you fill out a form for
+example, you might have a field there where you fill out a file name and
+then upload that file to the server-side. As an example, suppose you are uploading the information
+about a dish to the server-side. Then you will wish to also upload
+the corresponding image of the dish to the server-side. So in the process, you will first upload
+the image of the dish to the server-side, obtain a URL for that image from the server-side
+wherever it is uploaded and stored, and then use that image in the JSON document
+that describes the dish in detail. So that subsequently, when clients
+retrieve the JSON document describing the dish in order to render the UI, then,
+from within the JSON document, they'll be able to obtain the URL of the dish image
+that has been uploaded to the server-side. And then use it in constructing the UI. So in the examples that we have seen so
+far, when we looked at the details of a dish, we have seen that there is an
+image filled in there, which is a string, which is nothing but the URL for that
+image corresponding to that specific dish. Or the promotion or the reader as we
+have constructed in our REST API server. Now in this lecture, we're going to
+learn more about uploading files. How is it supported in a server? And then how we can leverage a node module that enables us to support
+uploading of files. File uploads are typically
+supported through a form input. So in an input,
+if you specify the type as file and the name as the name of the field there, then you would be able to supply
+the file that will be uploaded when you click on that submit button for
+this particular form here. Now, when the file information
+is uploaded to the server-side, the form data itself is
+typically encoded as either application/x-www-form-urlencoded or
+multipart/form-data. So then you design your form, for
+example, you will design your form with action set to /imageUpload
+at REST API incline, which will be acting as the end point
+to which you do the post of the image. So that corresponding method would
+be post, and the encoding type, you would set it to
+multipart/form-data within your form. So this means that the form elements
+will be encoded into the encoding type, and then uploaded to the server-side. File upload is more efficient
+with multipart/form-data. And hence, that is the preferred approach
+that we use for uploading files. Now, if you want to know more
+details about file upload and form upload and application
+application/x-www-form-urlencoded or the multipart/form-data,
+then you can read the HTML5 (W3C Recommendation) where
+the details are given, and also the corresponding IETF Request for
+Commented documents. I have links to these in the additional
+resources in case you wish to read more about the actual details of how these
+form encoding types are supported. From our perspective,
+when we use the multipart/form-data, when this is included into a HTTP request message that is going to the server-side,
+then in the header of the request message, you will have a content type
+set to multipart/form-data. And then also a boundary
+value set up like that. The boundary separates the multiple
+parts of the request body. So the request body itself of the outgoing
+request message will be divided into multiple parts. And each part will be delineated
+from the previous part by by using this boundary here. Now, in order to further illustrate
+to you the details, I have rigged up the server to print out this information
+from the incoming request message. So that we can examine
+this in a bit more detail. Taking a look at the details for a specific message that I have sent
+from my postman to the server-side, you can notice that here,
+I have printed the request headers here. And in particular, in the request header,
+let me draw your attention to this header here, called content type,
+which is set to multipart/form-data. And then note in particular
+the boundary defined here with this long number in here. So that is the request header for the incoming request message that I
+have posted by using post method. In fact, this is exactly the request
+message that I will be using in the exercise that follows this
+lecture in order to upload the file. So when we upload that file there,
+all right, you will notice that in the request body, so this is where I print
+out the request body down below here. And in the request body, you will notice that it prints
+out this particular line here. And this corresponds to the boundary
+that is specified here. So this boundary essentially specifies the
+separation between the various parts of the multipart body that is
+part of this request message. So in the request body,
+you'll see this being defined here. In addition, you will also specify
+the same Content-Disposition as form-data, so which means they'll
+interpret this as form data and the corresponding name a s imageFile. And the file name itself from
+the client side that has been uploaded, the file name itself is given here. And then down below it says
+Content-Type: image/png. So I am uploading this
+PNG image file here. So this is the details
+that is described here. And as you scroll down into
+the request body itself, you will see the details of what
+is included in the request body. So this inside the PNG file here, you will
+see this information in the PNG file. So if you open the PNG file,
+this is what you would see in here. So this contains a whole
+bunch of characters here, which obviously on the screen
+cannot be printed. So as you scroll down,
+you will this whole set of information, which is actually what is contained
+in the request body of the request message that is uploading this
+particular file to the server-side. So you see that that body actually
+contains the encoded version of the image there. And this is the end of the boundary for
+that request body. So in our request message,
+we just have one file included in here. You could also upload multiple
+files if you still wish to. But then, you need to configure
+the npm module appropriately to accept multiple files. So, this is how your request body
+itself contains the encoded version of the image, from which your
+server will extract the image, and then save it into the file with
+the same file name on the server-side. So this is how we will configure our
+application, the server-side application, to do in the exercise that
+follows this lecture. So I thought that it'll be an interesting step to illustrate to you exactly
+what my server is receiving. And so this will tell why we
+are are specifying this boundary here. And how, within the request body itself, we are using the boundary to delineate
+the various parts of the request body. So the server-side, when it processes, will be able to extract the image data
+from the request body appropriately, and then save the image
+file on the server-side. So just as I have
+illustrated in the terminal there that boundary separates
+the multipass request part. And so
+you saw the boundary specified there. In order to work with the multipart
+form data contained in the request body, we're going to use an NPR module
+that supports the processing of multipart form data included
+inside the request body. It'll automatically extract everything for
+you, and then load it onto two objects on
+the request object on the server-side. So this npm module called Multer,
+which when installed on your server-side application and configure your express
+server to use Multer. Then you will be able to process
+the incoming request message that contains this multipart/form-data
+in the request message. So Multer is the node
+module where that will help the server handle
+multipart/form-data. This is written on top of another
+npm module called busboy. Busboy is a module that processes incoming
+HTML form data, general HTML form data. And a particular,
+Multer brings upon busboy to enable you to process multipart /form-data
+on your server-side. Now when it parses this information,
+Multer will upload the incoming form data and
+it adds a body object to the req. So you will have a req.body object and
+also a req.file object. If you upload a single file,
+then it'll continue req.file object. Then if you set up your Multer
+to accept multiple file uploads, then you can set up the req.files object. The files object will be an array
+which contains all the information for each particular file that is
+uploaded on the server-side. The file object itself contains
+information that summarizes the way the file is saved on
+the server-side by Multer. With this quick understanding
+of how file upload works, let's move onto the exercise where we will
+actually configure the Multer module. And then use it within our express
+application to handle file uploads from the client side. [MUSIC]

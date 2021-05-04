@@ -1,0 +1,209 @@
+[MUSIC] In the previous lecture we learned
+about HTTPS and how they can carry out secure communication between
+the client and the server. We also learned a little
+bit about cryptography, enough to understand how HTTPS works. For us to configure our HTTP server, we need to obtain a public key and
+certificate. We will now configure our conFusion
+server to use HTTPS in this exercise. So, let's proceed forward,
+first to generate the key and the certificate that we can use for
+our server and then thereafter modify our express
+application to support HTTPS. To get started on this exercise go
+to the conFusion server folder. And then in your terminal or
+command window and then go into the bin folder inside
+the conFusion server folder. And in the bin folder you
+will see a file named www. This is the folder where we are going to
+generate our private key and then also generate the certificate for our HTTPS server using a command
+line tool called as OpenSSL. Now OpenSSL is typically installed
+on Mac OS machines by default. For Windows machines you may need to
+download and install OpenSSL explicitely. Now I've provided a couple of links
+in the instructions for you to go and fetch OpenSSL. I have also provided you with a website
+where you can generate self-signed private key and certificate. So let's go and take a quick look at that. If you are running a Windows machine and if you don't have OpenSSL
+already installed. Then this link provides binaries for OpenSSL that you can download and
+install on your Windows machine. So this link is provided in
+the instructions for this exercise. So going in there, you will find several downloads
+of third-party OpenSSL related distributions that you can
+download and install on your computer. So install one of these
+in order to proceed ahead with this exercise if you don't have
+OpenSSL already on your machine. Now, also if you want another way of generating your private key and
+certificate. Here is a blog article, a link to which
+I've already provided in the instructions, which explains also how to set
+up your Windows machine with OpenSSL and also generate
+the private key and certificate. So walk through this steps to
+configure your Windows machine for generating the private key and
+certificate. Now, if you don't want to install OpenSSL,
+then here is a link to a site which allows you to generate there self-signed SSL certificate and
+key as you see here. So a link to this site is also
+provided in the instruction. So you can use the server to
+generate the SSL certificate and key for your Windows machine. So anyone of this
+approaches can be used for generating the private key and
+the certificate for your Windows machine. Since I am running on an OSX machine, I'm going to generate my private key and
+certificate using OpenSSL. So going to the terminal,
+let me type openssl genrsa 1024, meaning that I'm going to
+generate a private key of size 1024. So I'm going to put this in to
+a file named private key, and once this is generated, then we will
+generate the corresponding cert.csr file so it will say openssl req request. So we are requesting for
+a new certificate, with the key private.key,
+and it'll generate that. Cert.csr here. Now, when you generate the cert.csr,
+it will come up with a few questions for you to fill in. You can accept the default values or you can fill in your own values if you so
+chose to. It doesn't really matter because this
+certificate we are using only within our computer to test our HTTPS server. So, let me fill in some details. I'm going to leave a few
+of the things empty there. And that would work just fine, it doesn't really matter whether you
+fill in this information or not. So once you do that your
+cert.csr is generated and from that they will generate
+the distribution certificate so for that we'll type at the command prompt openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem. So this will generate the certificate for us, and so once you complete these steps, when you look at your folder, you will see that you
+have the private.key, the cert.csr, and
+certificate.pem in there. This will be required for
+configuring our HTTPS server. So, now to configure HTTPS server,
+let's go to our editor. In the editor,
+we will go to this bin folder here. And in the bin folder,
+you'll see this file called www. We briefly looked at this file
+in one of the earlier exercises. Now going into this file we're now going to also import the HTTPS core module so we'll say HTTPS require HTTPS And we'll also require the file system module. You have already encountered
+the file system module earlier in one of the exercises. So we'll import both of these. And then, going down here, we will
+configure the port number at which our HTTPS server will be running,
+so we'll say app.set and we'll say secPort. So we're going to set up a variable
+here called secure port and then I will initialize this to port+443. Now, why do I use this port+443? In a standard server,
+if your server is acting as a web server, your HTTP protocol will be running
+at port number 80 on your server. And the secure HTTP will
+run on port number 443. Now you would normally not want
+to use those reserved ports in a development application but
+we are doing in this course. Instead, as you saw earlier, we had configured our port number to
+3000 where our HTTP server is running. So I'm going to be running the HTTPS
+server, at port number 3443. So 3000 plus 443. So that's the reason why I am
+declaring this secure port. As port+443, so our HTTPS server
+will be running at port number 443. I will still be running
+the HTTP server at port 3000, we have already created the HTTP
+server here in the WWW, or rather, this is automatically generated
+by the express generator. Now, since the HTTP server
+is already configured, we are now going to
+configure the HTTPS server. So to configure the HTTPS server,
+right after we configure the HTTP server. Now the reason why I'm going to
+still run the HTTP server is that, if I get a request on
+the HTTP server's port then, that request will be redirected
+to the HTTPS server. So my server will only service
+request coming in on the HTTPS ports. But if by chance anybody accesses
+the server at the HTTP port, I will redirect that
+request to the HTTPS port. We will do that a little bit later. First, let's configure out HTTPS server. So to configure the HTTPS server,
+right here, I will declare a few options here for
+my HTTPS server. Now recall that for an HTTPS server,
+we need to configure the private key and the certificate that my HTTPS
+server is going to use. So in the options,
+I'm going to specify key and then I will use the file system and
+then I'll say, readFileSync. So I will read this file synchronously so
+that I will complete reading in the file before I can configure my HTTPS server. So I'm going to reading
+this file from __dirname. You already know why I use
+__dirname from the previous exercises where we saw the five
+system module being used. And then, so I will say __dirname+. So here,
+we supply the path to the private.key. Now, recall that this www
+is in the bin folder. And the private.key is
+also in the bin folder, so that's why I'm going to say dirname+ this,
+so this will specify to the file system read module
+that the file should be read from this bin directory,
+from that private.key file here. Now also,
+we will read in the certificate here. So we'll say, cert fs.readFileSync. So it will synchronously
+read file which means that, the file will be read completely before
+you proceed on to that next step here. And the file that we need
+to read is also __dirname+. And we'll say, /certificate.pem,
+which we have generated earlier. And that should be a comma, and
+I should not put a semicolon there, because this is a JavaScript object
+that we have defined has the options. So once we define the JavaScript object,
+then let's configure the secure server. So we'll say var secureServer https. Recall that, now, we're going to be using
+https, and then we'll say createServer. So recall that for HTTP,
+we configured our server like this here. For the secure server,
+we're going to create that by saying, var secureServer https.createServer,
+and then we will supply the options that we have just configured
+and then the second part is app here. So my secureServer is well, also going to be available for
+my app to access. Now down below here,
+I'm going to configure the secureServer.listen on port number, secPort. Recall that here we had
+done an app.set secPort, so we set this value here to
+the secure port number. And then down below here,
+we are saying app.get. So this means that this value that we have configured earlier will be available to us to configure our listening port for our server, app.get secPort, and then supply the, Callback function here. And inside this callback function,
+we'll say, console.log Server listening on port. Let's do secure server listening on port And then,
+once we configure the secureServer, then we need to, See, secureServer on. So if the secureServer
+receives an error event, then we will like the onError, which is
+configured down below, to handle that. And then we'll say, secureServer.on. Listening, so
+if you receive the listening event, then we will call the onListening. Now where are these onError and
+onListening configured? If you go down into the code here,
+down below here. You're specifying these two functions
+that onError function here, and then the onListening function here. So we're going to be using these two
+functions for configuring our server here. So with these changes, my server is now configured to also run
+the secureServer at port number 443. We have already configured
+the standard HTTP server here already. So once we have done these two, then, our
+next update will be in the app.js file. So going to app.js file What I'm
+going to do is to configure this server such that it will redirect any
+traffic coming to the unsecure port. That is port number 3,000, it'll redirect
+that request to the secure port. So to do that, let me set up a middleware
+right after we declare the app.express. So here we'll say, app.all,
+so which means, for all requests no matter what
+the path in the request is. Own request coming in,
+I'm going to redirect that to, So we'll say rec, res, next, and the call back function being defined here. And so we'll,
+Declare the function inside here. And we'll say, if req.secure. So meaning that, if the incoming
+request is already a secure request, so how do we know that? If the incoming request is already
+a secure request, then the request object will carry this flag called secure
+which will be already set to true. If the incoming request is
+not at all secure port but instead is coming to the insecure port,
+then the write.secure will not be set. So, that is what I'm taking care of. If it is coming to the secure port
+already, I'm just going to go forward without doing anything because it's
+already coming to the secure port. So I can simple say, next. Otherwise, so we'll say, return next. Otherwise, so the otherwise will occur, When it is coming to the insecure port. So in this case, I will say res.redirect. So the redirect method is available, which redirects the incoming
+request to another URL. So, I will redirect this
+insecure request to https://. So I am redirecting this request to the,
+req.host name. So the request will already
+carry the hostname. So, because this is coming
+to the same server, so I'm redirecting to the same server. And then we'll say +, ; + app.get. Now recall that we had already configured
+the secure port in the app.get there. So we'll say app.get secPort + req.url. Now this req.url will
+contain the rest of the path except the hostname, and the port number. So if you say a localhost:3000, that localhost:3000 will be
+covered by the first part and this will be redirected to localhost:3443
+by this configuration here. And then, the rest of it, the req.url will
+contain the actual path on the server. So, we just add it to the redirect path,
+and this is the path to which I'm going to
+redirect the incoming request message. So once I redirect
+the incoming request message, then my request message will be
+redirected to the secured port. And one last change could res.redirect, we will add the written
+status code as 307. 307 here represents that the target
+resource resides temporarily under different URL. And the user agent must not
+change the request method if it reforms in automatic
+redirection to that URL. So, I'll be expecting user agent to retry with the same method that they have
+used for the original end point. That's it, that the change that
+I need to make in app.js file. So, having changed the app.js,
+and the www, and also generated the key and
+the certificate, we can now save the changes,
+and go and start our server. Going to the terminal or
+the command window, make sure that you're back in your conFusionServer folder,
+and then start the server. So I'm at the terminal typing npm start. And your server will be up and running,
+and you also notice that we are printing out here saying, Secure Server
+listening on port number 3443 here. To accent the secure server,
+go to a browser like Chrome here. And then,
+let me first access the secure server at localhost:3443 which is where
+my secure server is running. And notice that when I try
+the https://localhost3443 in the browser, it'll come up with this message here
+saying, Your connection is not private. Obviously, because the certificate
+what we are using right now is a self-signed certificate. And this is not recognized by
+Chrome as a valid certificate. But since we know what we are doing,
+it's okay for us to accept that we're going to be allowing to
+proceed to this particular server. Now, I will strongly advise
+you never to do this on any site that comes up
+with the suggestion. We are doing this specifically
+in this exercise because we know exactly where the server is, and we know that we have explicitly
+configured the server ourselves. But if any other website comes up
+with this message, I would strongly advise you not to accept the suggestion
+and proceed to access the server. So you should jump back to safety if you
+ever see this or on any other website. But since we know that this is our
+own server, I'm going to proceed to the localhost here, and then you would see
+that we are accessing the Express server. And also you would notice up here that your browser is showing you that
+you're accessing an insecure server. When you click on that,
+you would see that message here saying that your connection
+to the site is not secure. But we know that since we are running the
+server ourselves, this is okay to do so. So this is how you would be
+accessing the HTTPS server. Now, let me try to access the same
+HTTP server but, let me access the, Standard localhost:3000. This is where our insecure server are to
+the normal HTTP server is running. So when I try to access
+that HTTP localhost:3000, then you immediately see that my server
+will redirect me to the secure server. So this way,
+your server that we have just configure ensure that you will always access
+the server on its secure port. This also guarantees the fact that,
+when you are exchanging, when you're sending in your credentials,
+and so on, all the exchange of the credentials
+in the header of the message. And also when you log in with the local
+authentication, all that is done in a secure manner in an encrypted channel
+between your client and the server. So, now, we have configured our
+server to be a secure HTTPS server. With this, we complete this exercise. In this exercise, we have learned how
+to configure a secure HTTP server or using the HTTPS protocol. With this, we complete this exercise. This is a good time for you to do
+a git commit with the message, HTTPS. [MUSIC]
